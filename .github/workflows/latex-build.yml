@@ -1,0 +1,23 @@
+name: Build LaTeX document
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - run: echo `ls`
+      - run: mv memoria/* .
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          args: -pdf
+          root_file: main.tex
+      - name: Upload PDF document
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: main.pdf
