@@ -1,0 +1,144 @@
+\documentclass[twoside,openright,11pt]{report}
+\usepackage{import}
+\usepackage{preamble}
+
+%%%%%
+% pdflatex  -synctex=1 -interaction=nonstopmode -file-line-error -recorder -output-directory="/home/usuario/Documentos/Universidad/TFG/Geometria-Fractal/memoria"  "/home/usuario/Documentos/Universidad/TFG/Geometria-Fractal/memoria/main.tex"
+%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Cambiar 'Figura' por 'Imagen'
+\renewcommand{\figurename}{Imagen}
+\renewcommand{\listfigurename}{Lista de Imágenes}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% PORTADA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+\import{tex/}{titlepage.tex}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AGRADECIMIENTOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Agradecimientos}
+
+\import{tex/}{agradecimientos.tex}
+
+\chapter*{Declaración de autoría}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AUTORÍA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\import{tex/}{autoria.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESUMEN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Resumen}
+
+\import{tex/}{resumen.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Abstract}
+
+\import{tex/}{abstract.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ÍNDICE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\thispagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LISTA DE ABREVIATURAS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Lista de Abreviaturas}
+
+\import{tex/}{lista-abreviaturas.tex}
+\addcontentsline{toc}{chapter}{Lista de Abreviaturas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LISTA DE IMÁGENES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listoffigures
+\thispagestyle{plain}
+\addcontentsline{toc}{chapter}{Lista de Imágenes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LISTA DE TABLAS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \listoftables
+% \thispagestyle{plain}
+% \addcontentsline{toc}{chapter}{Lista de Tablas}
+% \addtocontents{toc}{\bigskip}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INICIO DEL TRABAJO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Introducción}
+\addcontentsline{toc}{chapter}{Introducción}
+
+\import{tex/capitulos/}{introduccion.tex}
+
+\chapter*{Objetivos}
+\addcontentsline{toc}{chapter}{Objetivos}
+\label{chap:Objetivos}
+
+\import{tex/}{objetivos.tex}
+
+\chapter{Introducción a los Polinomios Ortogonales}
+\label{chap:introduccionPO}
+
+\import{tex/capitulos/}{capitulo-1.tex}
+
+\chapter*{Conclusiones}
+\addcontentsline{toc}{chapter}{Conclusiones}
+\label{chap:conclusiones}
+
+\import{tex/}{conclusiones.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCIAS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{chapter}{Bibliografía}
+%\import{tex/}{bibliography.tex}
+\nocite{*}
+\bibliography{references.bib}{}
+\bibliographystyle{apalike}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+\cleardoublepage
+\addtocontents{toc}{\bigskip}
+\addcontentsline{toc}{part}{Apéndices}
+
+%% OPTIONAL - Max 10-15 pages in total
+
+\chapter{Apéndice 1}
+\label{appendix:apendice1}
+
+\import{tex/apendices/}{apendice1.tex}
+
+\end{document}
