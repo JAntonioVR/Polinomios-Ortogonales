@@ -64,6 +64,8 @@ En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente co
 
 Sea $\alpha$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\lim_{x\rightarrow-\infty}\alpha(x)>-\infty$ y si $b=\infty$ entonces $\lim_{x\rightarrow\infty}\alpha(x)<\infty$. Se define el espacio de funciones $L_\alpha^p[a,b]$ como el conjunto de funciones tales que
 
+\textcolor{Blue}{REVIEW ¿Cambiar la notación $d\alpha(x)$ por $d\mu$ que es una notación más estándar?}
+
 $$
 \int_a^b |f(x)|^p d\alpha(x) < +\infty
 $$
@@ -83,9 +85,10 @@ A partir del espacio $L_\alpha^2[a,b]$ podemos dar una definición de ortogonali
 \begin{definicion}[Ortogonalidad]
 
     Fijada una función $\alpha$ no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\lim_{x\rightarrow-\infty}\alpha(x)>-\infty$ y si $b=\infty$ entonces $\lim_{x\rightarrow\infty}\alpha(x)<\infty$ y dadas $f,g\in L_\alpha^2[a,b]$, se dice que las funciones $\mathbf f$ \textbf y $\mathbf g$ \textbf{son ortogonales} o que $\mathbf f$ \textbf{es ortogonal a} $\mathbf{g}$ respecto a la distribución $d\alpha$ si
-    $$
-    \left\langle f,g\right\rangle = 0.
-    $$
+    \begin{equation}
+        \label{eq:defortogonalidad}
+        \left\langle f,g\right\rangle = 0.
+    \end{equation}
 \end{definicion}
 
 No obstante, en la mayoría de los casos y por simplicidad en lugar de utilizar una función $\alpha$ y su medida inducida, si $\alpha$ es absolutamente continua podemos reescribir (\ref{eq:prodescLpalpha}) como una integral de Lebesgue
@@ -96,10 +99,349 @@ No obstante, en la mayoría de los casos y por simplicidad en lugar de utilizar 
 \end{equation}
 siendo $\rho$ una función medible no negativa tal que $0<\int_a^b\rho(x)dx<\infty$ denominada \textbf{función peso}.
 
-\begin{definicion}[Sucesión de Polinomios Ortogonales]
+\begin{definicion}[Sucesión de Polinomios Ortogonales respecto a una función peso]
+    \label{def:SPOpeso}
     Dada una función peso $\rho$, si existe una sucesión de polinomios $\{P_n\}$ con $P_n$ de grado $n$ tal que 
     $$
     \left\langle P_n,P_m \right\rangle=\int_a^b P_n(x)P_m(x)\rho(x)dx=0 \ \ \ \ (n\not=m)
     $$
-    entonces decimos que $\mathbf{\{P_n\}}$ \textbf{es una Sucesión de Polinomios Ortogonales} (SPO) respecto a la función peso $\rho(x)$ en el intervalo $(a,b)$.  
+    entonces decimos que $\mathbf{\{P_n\}}$ \textbf{es una Sucesión de Polinomios Ortogonales (SPO) respecto a la función peso} $\rho(x)$ en el intervalo $(a,b)$.  
 \end{definicion}
+
+\section{Funcional de momentos}
+
+Tenemos ya por tanto una definición rigurosa de lo que es la ortogonalidad de funciones de $L^2_\alpha[a,b]$. Podemos reescribir esta propiedad mediante el uso de funcionales lineales aprovechando la linealidad de la integral. Se define el funcional $\mathcal{L}$ como 
+
+\begin{equation}
+    \label{eq:funcionalLineal}
+    \begin{split}
+        \mathcal{L}:L_\alpha^2[a,b]&\longrightarrow \C \\
+        f&\longmapsto \mathcal{L}[f]=\int_a^b f(x)d\alpha(x).
+    \end{split}
+\end{equation}
+
+Por tanto, vemos que la propiedad de ortogonalidad (\ref{eq:defortogonalidad}) es equivalente a $\mathcal{L}[f\cdot g]=0$.
+
+\begin{observacion}
+    El funcional $\mathcal{L}$ es lineal, pues por la linealidad del operador integral se tiene que
+    \begin{equation}
+        \label{eq:linealidadfuncional}
+        \mathcal{L}[a f + b g]=a\mathcal{L}[f] + b\mathcal{L}[g],
+    \end{equation}
+    para cualesquiera $a,b\in\C$ y $f,g\in L_\alpha^2[a,b]$.
+\end{observacion}
+
+\begin{ejemplo}
+    $\{T_n\}$, la sucesión de polinomios de Tchebichef de tipo I, es una Sucesión de Polinomios Ortogonales respecto de la función peso $\rho(x)=(1-x^2)^{-\frac{1}{2}}$ en el intervalo $(-1,1)$. También podemos establecer la ortogonalidad de los respectivos $\{T_n\}$ no mediante un producto escalar sino a través del funcional
+    $$
+    \mathcal{L}[f]:= \int_{-1}^1 f(x)(1-x^2)^{-\frac{1}{2}}dx
+    $$
+\end{ejemplo}
+
+Por lo que podemos definir ortogonalidad indistintamente mediante un producto escalar $\left\langle\cdot,\cdot\right\rangle$ o mediante un funcional integral $\mathcal{L}$.
+
+A partir de este momento consideraremos el espacio vectorial de los polinomios $\mathbb{P}$. Denotaremos como $\mathbb{P}_n$ al subespacio de $\mathbb{P}$ formado por los polinomios de grado menor o igual que $n$.
+
+
+\begin{definicion}[Momentos de un funcional]
+    Dado un funcional $\mathcal{L}$, definimos los \textbf{momentos} del funcional, y los denotamos con $\mu_n$, como
+    \begin{equation}
+        \label{eq:defmomentos}
+        \mu_k = \mathcal{L}[x^k], \ \ \ \ k\in\N_0.
+    \end{equation}    
+\end{definicion}
+
+Gracias a los momentos de un funcional y considerando que cualquier polinomio de grado $n$ puede escribirse como $p(x)=\sum_{k=0}^n c_k x^k$ podemos entonces combinar (\ref{eq:linealidadfuncional}) y (\ref{eq:defmomentos}) para  escribir la acción de un funcional $\mathcal{L}$ sobre $p(x)$ como
+
+$$
+\mathcal{L}[p] = \mathcal{L}\left[ \sum_{k=0}^n c_k x^k \right] = \sum_{k=0}^n c_k \mu_k
+$$
+
+Por lo que, de esta forma, únicamente conociendo la sucesión de momentos $\{\mu_n\}$ podríamos conocer el resultado de aplicar $\mathcal{L}$ a cualquier polinomio. Por tanto, es posible dar una nueva definición de ortogonalidad respecto a funcionales lineales que en este caso estén definidos no mediante una integral como en el caso de (\ref{eq:funcionalLineal}), sino a partir de una sucesión de momentos $\{\mu_n\}$.
+
+\begin{definicion}[Funcional de momentos]
+    Dada una sucesión de números complejos $\{\mu_n\}$, diremos que $\mathcal{L}$ es un \textbf{funcional de momentos} determinado por la sucesión $\{\mu_n\}$, donde $\mu_n$ se denomina \textbf{momento de orden }$\mathbf n$, si $\mathcal{L}$ es lineal en $\mathbb P$ y $\mathcal{L}[x^n]=\mu_n$, $n\in\N_0$
+\end{definicion}
+
+Daremos ahora una nueva definición de SPO, en este caso con respecto a un funcional lineal y no respecto a una función peso como hicimos en la definición \ref{def:SPOpeso}.
+
+\begin{definicion}[Sucesión de Polinomios Ortogonales respecto a un funcional lineal]
+    \label{def:SPOfuncional}
+    Dado un funcional lineal $\mathcal{L}$ definido como en (\ref{eq:funcionalLineal}), una sucesión de polinomios $\{P_n\}$ es una \textbf{Sucesión de Polinomios Ortogonales (SPO) respecto al funcional }$\mathcal{L}$ si:
+    \begin{enumerate}
+        \item $P_n$ es de grado $n$.
+        \item $\mathcal{L}[P_n P_m]=0$ si $n\not=m$, $n,m\in\N_0$.
+        \item $\mathcal{L}[P_n^2]\not=0 \ \ \ \forall n\in\N_0$.
+    \end{enumerate} 
+
+    La sucesión $\{P_n\}$ se llamará \textbf{ortonormal} si $\mathcal{L}[P_n^2]=1 \ \ \ \forall n\in\N_0$.
+
+    La sucesión $\{P_n\}$ se llamará \textbf{Sucesión de Polinomios Ortogonales Mónicos (SPOM)} si $P_n$ es mónico para cada $n$, es decir, si $P_n(x)=x^n + a_{n-1}x^{n-1}+\dots + a_0$.
+
+
+\end{definicion}
+
+En general, las condiciones (2) y (3) se suelen abreviar como 
+$$
+\mathcal{L}[P_n P_m]=K_n\delta_{mn}, \ \ \ \ K_n\not=0,
+$$
+donde $\delta_{mn}$ denota la función delta de Kronecker. 
+
+En el caso de que $d\alpha(x)=\rho(x)dx$, es decir, en el caso de trabajar con funciones peso, la condición (3) se satisface de manera automática.
+
+\begin{ejemplo}
+    Extraído de \cite[Capítulo 1, sección 1]{chihara}
+    Consideramos 
+    $$
+    P_n(x) = \sum_{k=0}^n\binom{x}{k}\dfrac{(-a)^{n-k}}{(n-k)!}.
+    $$
+    $\{P_n\}$ son los llamados \textit{Polinomios de Charlier}. Como
+    $$\binom{x}{n} = \dfrac 1 {n!} x(x-1)\cdots (x-k+1) 
+    $$
+    tenemos que $P_n(x)$ es un polinomio de grado $n$. En \cite{chihara} pueden encontrarse los cálculos rigurosos mediante los cuales, si definimos
+    $$
+    \mathcal{L}[x^n]=\sum_{k=0}^\infty k^n \dfrac{a^k}{k!}, \ \ \ \ n\in\N_0.
+    $$
+    y extendemos $\mathcal{L}$ a $\mathbb{P}$ por linealidad, tenemos que 
+    $$
+    \mathcal{L}[P_m(x)P_n(x)] = \dfrac{e^a a^n}{n!}\delta_{mn}, \ \ \ \ m,n\in\N_0.
+    $$
+
+    Al estar definido el funcional mediante sumatorias y no mediante integrales podría parecer que, aunque $\{P_n\}$ satisfaga la definición \ref{def:SPOfuncional} mediante un funcional de momentos, no satisface la ortogonalidad respecto a (\ref{eq:funcionalLineal}). Sin embargo, si denotamos como $\phi$ a una función escalonada que es constante en cada intervalo $(-\infty,0)$ y $(k,k+1)$ con $k\in\N_0$ y tiene saltos de magnitud $\frac{a^k}{k!}$ en cada $k$, entonces utilizando la integral de Riemann-Stieltjes los polinomios $\{P_n\}$ verifican
+    \begin{equation}
+        \label{eq:charlier}
+        \int_{-\infty}^\infty P_m(x)P_n(x) d\phi(x) = \dfrac{e^a a^n}{n!}\delta_{mn}, \ \ \ \ m,n\in\N_0.        
+    \end{equation}
+    Evidentemente $\phi$ no es una función absolutamente continua, por lo que no se puede escribir (\ref{eq:charlier}) en términos de (\ref{eq:deffuncionpeso}).
+\end{ejemplo}
+
+\begin{observacion}
+    \label{observacion:existencia}
+    No cualquier sucesión $\{\mu_n\}$ da lugar a una SPO. Por ejemplo, si $\mu_0=\mu_1=\mu_2=1$, tendríamos que
+    \begin{align*}
+        P_0(x)&=a\not=0, & P_1(x)&=bx+c, \ \ \ b\not=0.
+    \end{align*}
+    Por la propiedad (2) de la definición \ref{def:SPOfuncional}
+    $$
+    \mathcal{L}[P_0(x)P_1(x)] = a(b\mu_1 + c\mu_0)=a(b+c),
+    $$
+    luego $b=-c$, y en este caso
+    $$
+    \mathcal{L}[P_1(x)^2] = b^2(\mu_2-2\mu_1+\mu_0)=0,
+    $$
+    lo cual contradice la propiedad (3).
+\end{observacion}
+
+Gracias a la observación \ref{observacion:existencia} sabemos que no es válida cualquier sucesión de momentos para encontrar una SPO, por lo que necesitamos además probar y dar condiciones para la existencia de la susodicha SPO. 
+
+Previamente, introduciremos un resultado para la caracterización de SPO respecto a un funcional $\mathcal{L}$.
+
+\begin{teorema}
+    \label{th:caracterizacion}
+Sea $\mathcal{L}$ un funcional de momentos y $\{P_n\}$ una sucesión de polinomios. Las siguientes afirmaciones son equivalentes.
+\begin{enumerate}
+    \item $\{P_n\}$ es una SPO respecto al funcional $\mathcal{L}$.
+    \item $\mathcal{L}[\pi(x)P_n(x)]=0$ para cualquier polinomio $\pi(x)$ de grado $m<n$ y $\mathcal{L}[\pi(x)P_n(x)]\not=0$ si $\pi(x)$ tiene grado $n$.
+    \item $\mathcal{L}[x^m P_n(x)]=K_n \delta_{nm}$, con $K_n\not=0, \ \ \ \ m=0,1,\dots,n$
+\end{enumerate}
+\end{teorema}
+\begin{proof}
+    Probaremos $(1)\Rightarrow(2)\Rightarrow(3)\Rightarrow(1)$.
+
+    \begin{itemize}
+        \item $(1)\Rightarrow(2)$
+        
+        Supongamos que $\{P_n\}$ es una SPO respecto al funcional $\mathcal{L}$. Como $P_k$ tiene grado $k$, entonces $\{P_0,\dots,P_m\}$ forma una base de $\mathbb P_m$. Por lo que si $\pi(x)$ es un polinomio de grado $m$, existen constantes $c_1,\dots,c_m$, con $c_m\not=0$ tales que $\pi(x)=c_k P_k(x)$. Como $\mathcal{L}$ es lineal,
+        $$
+        \mathcal{L}[\pi(x)P_n(x)]=\sum_{k=0}^m c_k \mathcal{L}[P_k(x) P_n(x)]=\left\lbrace\begin{array}{ccl}
+            0 & \text{ si } & m<n \\
+            c_n\mathcal{L}[P_n^2(x)] & \text{ si } & m=n \\             
+        \end{array}\right.
+        $$
+        \item $(2)\Rightarrow(3)$ es trivial, basta con utilizar $\pi(x)=x^m$ y aplicar (2).
+        \item $(3)\Rightarrow(1)$ también es trivial, pudiendo reconstruir $P_m(x)$ por linealidad. 
+    \end{itemize}
+\end{proof}
+
+En la prueba de este último teorema, hemos hecho uso de que mediante una SPO podemos obtener bases de $\mathbb P_n$. Sacaremos provecho de este hecho en el siguiente resultado.
+
+\begin{teorema}
+    \label{th:coeficientes}
+    Sea $\{P_n\}$ una SPO respecto a un funcional lineal $\mathcal{L}$. Entonces, cualquier polinomio $\pi(x)$ de grado $n$ es posible expresarlo en la base $\{P_0,\dots,P_n\}$ de forma que
+    \begin{align*}
+        \pi(x)&=\sum_{k=0}^n c_k P_k(x), & \text{con } c_k&= \dfrac{\mathcal{L}[\pi(x)P_k(x)]}{\mathcal{L}[P_k^2(x)]}. 
+    \end{align*}
+\end{teorema}
+\begin{proof}
+    Ya es claro que si $\pi(x)$ es un polinomio de grado $n$, entonces $\pi(x)=\sum_{k=0}^n c_k P_k(x)$. Por tanto, multiplicando ambos miembros de la igualdad por $P_m(x)$ y aplicando el funcional $\mathcal{L}$ se obtiene
+    $$
+    \mathcal{L}[\pi(x)P_m(x)]=\sum_{k=0}^n c_k \mathcal{L}[P_k(x)P_m(x)]=c_m \mathcal{L}[P_m^2(x)], 
+    $$
+    donde hemos aplicado la ortogonalidad. De esta igualdad se deduce claramente la expresión de $c_k$.
+
+\end{proof}
+
+Este resultado nos proporciona una consecuencia muy importante: la unicidad salvo constante multiplicativa de las SPO respecto a un funcional.
+
+\begin{corolario}
+    Sea $\{P_n\}$ una SPO respecto a un funcional lineal $\mathcal{L}$. Entonces cada $P_n$ está unívocamente determinado salvo constante multiplicativa no nula. Esto es, si $\{Q_n\}$ es otra SPO respecto a $\mathcal{L}$, entonces existen constantes $c_n\not=0$ tales que
+    $$
+    Q_n(x)=c_n P_n(x), \ \ \ n\in\N_0.
+    $$
+\end{corolario}
+\begin{proof}
+    Utilizaremos el teorema \ref{th:coeficientes} con $\pi(x)=Q_n(x)$, de modo que
+    \begin{equation*}
+        Q_n(x) = \sum_{k=0}^n \dfrac{\mathcal{L}[Q_n(x)P_k(x)]}{\mathcal{L}[P_k^2(x)]} P_k(x)
+    \end{equation*}
+    Por el teorema \ref{th:caracterizacion}, $\mathcal{L}[Q_n(x)P_k(x)]=0$ siempre que $k<n$ y $\mathcal{L}[Q_n(x)P_k(x)]=r_n\not=0$ si $k=n$, por lo que, tomando $c_n = \frac{r_n}{\mathcal{L}[P^2_n(x)]}$, se tiene $Q_n(x) = c_n P_n(x)$, como queríamos probar.
+\end{proof}
+
+Este resultado nos afirma que si tenemos una SPO $\{P_n\}$ respecto a un funcional $\mathcal L$, entonces $\{c_n P_n\}$ también es una SPO para cualquier sucesión $\{c_n\}$ de constantes no nulas. Una forma de estandarizar una SPO de forma que esta esté unívocamente determinada es exigiendo que todos los polinomios que la conforman sean mónicos. De esta forma, podemos afirmar que si tenemos una SPO $\{P_n\}$ para un funcional $\mathcal L$, entonces existe una única sucesión de polinomios ortogonales mónicos (SPOM) respecto a $\mathcal L$. De hecho, si denotamos como $a_n$ al coeficiente líder de $P_n$, entonces los polinomios
+$$
+\hat P_n=a_n^{-1} P_n
+$$
+forman una SPOM respecto a $\mathcal{L}$.
+
+Otra forma de estandarizar una SPO $\{P_n\}$ respecto a un funcional $\mathcal L$ es tomando los polinomios 
+$$
+p_n = (-1)^{\sgn(a_n)}\left(\mathcal L[P_n^2]\right)^{-1/2} P_n,
+$$
+donde $\sgn(a_n)$ denota el signo de $a_n$, el coeficiente líder de $P_n$. Con esta operación conseguimos que $\mathcal L[p_n^2] = 1, \ \ \forall n\in\N_0$, es decir, la sucesión $\{p_n\}$ es una SPO ortonormal. Por tanto, dada una SPO $\{P_n\}$ para un funcional $\mathcal L$, entonces existe una única SPO ortonormal $\{p_n\}$ respecto a $\mathcal{L}$.
+
+\textcolor{Blue}{
+REVIEW Preguntar a Lidia si debo incluir la parte de existencia de una SPO antes de la RR3T, ya que en el Chihara se explica de forma diferente incluyendo el caso en que el funcional sea cuasi-definido y definido positivo. Además, antes se ha hablado de que se deben dar condiciones para la existencia de una SPO.}
+
+Por último, introducimos la definición de una importante propiedad que pueden cumplir los funcionales lineales.
+
+\begin{definicion}[Funcional definido positivo]
+
+    Un funcional de momentos $\mathcal{L}$ se dice que es \textbf{definido positivo} si $\mathcal{L}[\pi] > 0$ para cualquier polinomio $\pi$ no negativo y no estrictamente positivo en todo el eje real.
+    
+\end{definicion}
+
+Acompañamos esta definición con una consecuencia que cumplen estos funcionales.
+
+\begin{teorema}
+    Todo funcional de momentos $\mathcal{L}$ tiene momentos $\mu_n$ reales y admite una SPOM $\{P_n\}$ compuesta por polinomios reales.
+\end{teorema}
+\begin{proof}
+    La prueba de este resultado puede encontrarse en \cite{renato}[Teorema 2.3.2].
+\end{proof}
+
+\section{La relación de recurrencia a tres términos}
+\label{section:RRTT}
+
+Las SPO respecto a un funcional siempre cumplen una ecuación que es la denominada `relación de recurrencia a tres términos', en adelante también referida como `RRTT'.
+
+\begin{teorema}[Relación de Recurrencia a Tres Términos] 
+    \label{th:RRTT}
+    Sea $\{P_n\}$ una SPO respecto a un funcional lineal $\mathcal L$. Entonces, $\{P_n\}$ satisface la relación de recurrencia
+
+    \begin{equation}
+        \label{eq:RRTT}
+        xP_n(x) = \alpha_n P_{n+1}(x) + \beta_n P_n(x) + \gamma_n P_{n-1}(x) \ \ \ \forall n\in\N_0.
+    \end{equation}
+    Normalmente se impone que $P_{-1}=0, P_0 = 1$, por lo que una SPO queda determinada unívocamente a partir de las sucesiones $\{\alpha_n\},\{\beta_n\},\{\gamma_n\}$.
+
+    Además, si la SPO es mónica, verifican la ecuación equivalente
+    \begin{equation}
+        \label{eq:RRTT2}
+        P_{n+1}(x) = (x-\beta_n) P_n - \gamma_n P_{n-1} \ \ \ \forall n\in\N_0.
+    \end{equation}
+    
+\end{teorema}
+\begin{proof}
+    Como $xP_n(x)$ es un polinomio de grado $n+1$, este puede ser expresado como 
+    \begin{align*}
+        xP_n(x) &= \sum_{k=0}^{n+1} a_{k,n} P_k(x), & \text{con } a_{k,n}&= \dfrac{\mathcal{L}[xP_n(x)P_k(x)]}{\mathcal{L}[P_k^2(x)]}. 
+    \end{align*}
+    Pero $\mathcal{L}[xP_n(x)P_k(x)]$ para $k=0,\dots,n-2$, por lo que necesariamente debe cumplirse
+    $$
+    xP_n(x)  = \underbrace{a_{n-1,n}}_{\gamma_n} P_{n-1}(x) + \underbrace{a_{n,n}}_{\beta_n} P_n(x) + \underbrace{a_{n+1,n}}_{\alpha_n} P_{n+1}(x),
+    $$
+    de donde se deduce (\ref{eq:RRTT}). Si además $P_n(x)$ es mónico, $xP_n(x)$ también lo es, por lo que $a_{n+1,n}=1$, luego se tiene que 
+    $$ xP_n(x)  = P_{n+1}(x) + \beta_n P_n(x) + \gamma_n P_{n-1}, $$ que es equivalente a (\ref{eq:RRTT2}).
+\end{proof}
+
+De esta demostración podemos deducir además la expresión de las constantes $\alpha_n, \beta_n$ y $\gamma_n$:
+\begin{align}
+    \label{eq:ctes-RRTT}
+    \alpha_n &= \dfrac{\mathcal{L}[xP_n P_{n+1}]}{\mathcal{L}[P_{n+1}^2]}, & \beta_n &= \dfrac{\mathcal{L}[xP_n^2]}{\mathcal{L}[P_n^2]}, & \gamma_n &= \dfrac{\mathcal{L}[xP_n P_{n-1}]}{\mathcal{L}[P_{n-1}^2]}.
+\end{align}
+
+Sin embargo, este cálculo puede complicarse bastante, por lo que presentaremos un algoritmo alternativo. Para ello, desarrollaremos los polinomios como
+$$
+P_n(x) = a_n x^n + b_n x^{n-1} + c_n x^{n-2} + \cdots.
+$$
+Si sustituimos esta expresión en la RRTT (\ref{eq:RRTT}) e igualamos los coeficientes de los monomios $x^{n+1}, x^n$ y $x^{n-1}$ llegamos a las expresiones
+\begin{align}
+    \label{eq:ctes-RRTT2}
+    \alpha_n &= \dfrac{a_n}{a_{n+1}}, & \beta_n &= \dfrac{b_n}{a_n}-\dfrac{b_{n+1}}{a_{n+1}}, & \gamma_n &= \dfrac{1}{a_{n-1}}\left(c_n - \alpha_n c_{n+1} - \beta_n b_n\right).
+\end{align}
+
+\textcolor{Blue}{REVIEW ¿Pongo un ejemplo con alguna familia de polinomios?} 
+
+Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este resultado es el conocido como teorema de Favard.
+
+\begin{teorema}[Favard]
+    \label{th:favard}
+    Sean $\{\beta_n\}$ y $\{\gamma_n\}$ dos sucesiones de números reales con $\gamma_n \not= 0$ $\forall n\in \N_0$ y sea $\{P_n\}$ una sucesión de polinomios mónicos definida mediante la relación (\ref{eq:RRTT2}):
+    $$
+    P_{n+1}(x) = (x-\beta_n) P_n - \gamma_n P_{n-1} \ \ \ \forall n\in\N_0.
+    $$
+    con $P_{-1}=0$ y $P_0=1$. Entonces existe un único funcional de momentos $\mathcal L$ tal que 
+    \begin{align*}
+        \mathcal{L}[1]&=\gamma_0, & \mathcal L[P_n P_m]=\delta_{n,m}K_n, \ \ K_n\not=0.
+    \end{align*}
+    Además, $\mathcal{L}$ es definido positivo si y solo $\gamma_n >0$ $\forall n\in \N_0$. 
+\end{teorema}
+\begin{proof}
+    Definamos el funcional $\mathcal{L}$ por inducción en $\mathbb{P}$. Sea 
+    $$
+    \mathcal{L}[1]=\mathcal{L}[P_0] = \mu_0 := \gamma_0,
+    $$ $$
+    \mathcal{L}[P_n] = \mathcal{L}[1 \cdot P_n] = \mathcal{L}[P_0 P_n] := 0 \ \ \ \forall n = 1,2,\dots 
+    $$
+    Así, aplicando (\ref{eq:RRTT2}) podemos calcular los momentos del funcional.
+    Si tomamos $n=0$ en (\ref{eq:RRTT2}) obtenemos 
+    $$
+    P_1(x) = x-\beta_0, 
+    $$
+    luego, como $\mathcal{L}[P_1]=0$:
+    \begin{equation*}
+        \begin{split}
+            0 = \mathcal{L}[P_1] &= \mathcal{L}[x-\beta_0] \\
+            &= \mu_1 - \beta_0 \mathcal{L}[1] \\
+            &= \mu_1 -\beta_0 \gamma_0,
+        \end{split}
+    \end{equation*}
+    de donde $\mu_1 = \beta_0 \gamma_0$. Si $n=1$ en (\ref{eq:RRTT2}) obtenemos 
+    $$
+    P_2(x) = (x-\beta_1)P_1 - \gamma_1,
+    $$
+    por tanto,
+    \begin{equation*}
+        \begin{split}
+            0 = \mathcal{L}[P_2] &= \mathcal{L}[(x-\beta_1)P_1 - \gamma_1] \\
+            &= \mathcal{L}[(x-\beta_1)(x-\beta_0) - \gamma_1] \\
+            &= \mu_2 - (\beta_0 + \beta_1)\mu_1 + (\beta_1\beta_0 -\gamma_1)\gamma_0,
+        \end{split}
+    \end{equation*}
+    de donde $\mu_2 = (\beta_0 + \beta_1)\mu_1 - (\beta_1\beta_0 -\gamma_1)\gamma_0$. Continuando este proceso se pueden obtener todos los momentos $\mu_n$, y una vez se tienen todos los momentos podemos extender el funcional por linealidad.
+
+    Utilizando (\ref{eq:RRTT}) sucesivamente obtenemos que
+    $$
+    x^k P_n = \sum_{i=n-k}^{n+k} d_{n,i} P_i(x),
+    $$
+    y aplicando que $\mathcal{L}[P_n]=0$ se deduce que $\mathcal{L}[x^k P_n] = 0$ para todo $k=1,\dots, n-1$, que por el teorema \ref{th:caracterizacion} tenemos que $\{P_n\}$ es una SPO según el funcional $\mathcal{L}$.
+
+    Finalmente, véamos que $\mathcal{L}$ es definido positivo si y solo $\gamma_n >0$ $\forall n\in \N_0$. De nuevo, por (\ref{eq:RRTT}):
+    $$
+    \mathcal{L}[x^n P_n] = \mathcal{L}[x^{n-1}(P_{n+1} + \beta_n P_n + \gamma_n P_{n})] = \mathcal{L}[\gamma_n P_{n}].
+    $$
+    Aplicando este razonamiento sucesivamente llegamos a que $\mathcal{L}[x^n P_n] = \gamma_n\gamma_{n-1}\cdots\gamma_0 \not= 0$. De esta expresión se deduce que $\mathcal{L}$ es definido positivo si y solo si $\gamma_n > 0$ $\forall n\in\N_0$.
+
+\end{proof}
+
+\textcolor{Blue}{REVIEW Soy consciente de que hay muchas lagunas en esta demostración.}
