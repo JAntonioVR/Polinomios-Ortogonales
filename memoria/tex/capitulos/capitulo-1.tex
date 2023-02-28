@@ -62,36 +62,38 @@ De acuerdo a este ejemplo, decimos que los polinomios $T_n$ son \textit{ortogona
 
 En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente conocido de ortogonalidad, restringido a espacios como $\R^d$, a otros tipos de espacios. Además, introdujimos la primera familia de polinomios ortogonales: los polinomios de Tchebichef de tipo I. En esta sección daremos definiciones más formales y genéricas sobre la ortogonalidad.
 
-Sea $\alpha$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\lim_{x\rightarrow-\infty}\alpha(x)>-\infty$ y si $b=\infty$ entonces $\lim_{x\rightarrow\infty}\alpha(x)<\infty$. Se define el espacio de funciones $L_\alpha^p[a,b]$ como el conjunto de funciones tales que
+Sea $\mu$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\lim_{x\rightarrow\infty}\mu(x)<\infty$. Se define el espacio de funciones $L_\mu^p[a,b]$ como el conjunto de funciones tales que
 
-\textcolor{Blue}{REVIEW ¿Cambiar la notación $d\alpha(x)$ por $d\mu$ que es una notación más estándar?}
+
+\cb{REVIEW Cambiada la notación $d\alpha(x)$ por $d\mu$, pero ahora $\mu$ puede confundirse con los momentos $\{\mu_n\}$??}
+
 
 $$
-\int_a^b |f(x)|^p d\alpha(x) < +\infty
+\int_a^b |f(x)|^p d\mu(x) < +\infty
 $$
 
-En $L_\alpha^2[a,b]$, se define un producto escalar:
+En $L_\mu^2[a,b]$, se define un producto escalar:
 
 \begin{equation}
     \label{eq:prodescLpalpha}
     \begin{split}
-        \left\langle\cdot,\cdot\right\rangle:L_\alpha^2[a,b]\times L_\alpha^2[a,b] &\longrightarrow \R \\
-        (f,g)&\longmapsto \left\langle f,g \right\rangle=\int_a^b f(x)g(x)d\alpha(x).
+        \left\langle\cdot,\cdot\right\rangle:L_\mu^2[a,b]\times L_\mu^2[a,b] &\longrightarrow \R \\
+        (f,g)&\longmapsto \left\langle f,g \right\rangle=\int_a^b f(x)g(x)d\mu(x).
     \end{split}
 \end{equation}
 
-A partir del espacio $L_\alpha^2[a,b]$ podemos dar una definición de ortogonalidad.
+A partir del espacio $L_\mu^2[a,b]$ podemos dar una definición de ortogonalidad.
 
 \begin{definicion}[Ortogonalidad]
 
-    Fijada una función $\alpha$ no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\lim_{x\rightarrow-\infty}\alpha(x)>-\infty$ y si $b=\infty$ entonces $\lim_{x\rightarrow\infty}\alpha(x)<\infty$ y dadas $f,g\in L_\alpha^2[a,b]$, se dice que las funciones $\mathbf f$ \textbf y $\mathbf g$ \textbf{son ortogonales} o que $\mathbf f$ \textbf{es ortogonal a} $\mathbf{g}$ respecto a la distribución $d\alpha$ si
+    Fijada una función $\mu$ no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\lim_{x\rightarrow\infty}\mu(x)<\infty$ y dadas $f,g\in L_\mu^2[a,b]$, se dice que las funciones $\mathbf f$ \textbf y $\mathbf g$ \textbf{son ortogonales} o que $\mathbf f$ \textbf{es ortogonal a} $\mathbf{g}$ respecto a la distribución $d\mu$ si
     \begin{equation}
         \label{eq:defortogonalidad}
         \left\langle f,g\right\rangle = 0.
     \end{equation}
 \end{definicion}
 
-No obstante, en la mayoría de los casos y por simplicidad en lugar de utilizar una función $\alpha$ y su medida inducida, si $\alpha$ es absolutamente continua podemos reescribir (\ref{eq:prodescLpalpha}) como una integral de Lebesgue
+No obstante, en la mayoría de los casos y por simplicidad en lugar de utilizar una función $\mu$ y su medida inducida, si $\mu$ es absolutamente continua podemos reescribir (\ref{eq:prodescLpalpha}) como una integral de Lebesgue
 
 \begin{equation}
     \label{eq:deffuncionpeso}
@@ -110,13 +112,13 @@ siendo $\rho$ una función medible no negativa tal que $0<\int_a^b\rho(x)dx<\inf
 
 \section{Funcional de momentos}
 
-Tenemos ya por tanto una definición rigurosa de lo que es la ortogonalidad de funciones de $L^2_\alpha[a,b]$. Podemos reescribir esta propiedad mediante el uso de funcionales lineales aprovechando la linealidad de la integral. Se define el funcional $\mathcal{L}$ como 
+Tenemos ya por tanto una definición rigurosa de lo que es la ortogonalidad de funciones de $L^2_\mu[a,b]$. Podemos reescribir esta propiedad mediante el uso de funcionales lineales aprovechando la linealidad de la integral. Se define el funcional $\mathcal{L}$ como 
 
 \begin{equation}
     \label{eq:funcionalLineal}
     \begin{split}
-        \mathcal{L}:L_\alpha^2[a,b]&\longrightarrow \C \\
-        f&\longmapsto \mathcal{L}[f]=\int_a^b f(x)d\alpha(x).
+        \mathcal{L}:L_\mu^2[a,b]&\longrightarrow \C \\
+        f&\longmapsto \mathcal{L}[f]=\int_a^b f(x)d\mu(x).
     \end{split}
 \end{equation}
 
@@ -128,7 +130,7 @@ Por tanto, vemos que la propiedad de ortogonalidad (\ref{eq:defortogonalidad}) e
         \label{eq:linealidadfuncional}
         \mathcal{L}[a f + b g]=a\mathcal{L}[f] + b\mathcal{L}[g],
     \end{equation}
-    para cualesquiera $a,b\in\C$ y $f,g\in L_\alpha^2[a,b]$.
+    para cualesquiera $a,b\in\C$ y $f,g\in L_\mu^2[a,b]$.
 \end{observacion}
 
 \begin{ejemplo}
@@ -187,7 +189,7 @@ $$
 $$
 donde $\delta_{mn}$ denota la función delta de Kronecker. 
 
-En el caso de que $d\alpha(x)=\rho(x)dx$, es decir, en el caso de trabajar con funciones peso, la condición (3) se satisface de manera automática.
+En el caso de que $d\mu(x)=\rho(x)dx$, es decir, en el caso de trabajar con funciones peso, la condición (3) se satisface de manera automática.
 
 \begin{ejemplo}
     Extraído de \cite[Capítulo 1, sección 1]{chihara}
@@ -196,7 +198,7 @@ En el caso de que $d\alpha(x)=\rho(x)dx$, es decir, en el caso de trabajar con f
     P_n(x) = \sum_{k=0}^n\binom{x}{k}\dfrac{(-a)^{n-k}}{(n-k)!}.
     $$
     $\{P_n\}$ son los llamados \textit{Polinomios de Charlier}. Como
-    $$\binom{x}{n} = \dfrac 1 {n!} x(x-1)\cdots (x-k+1) 
+    $$\binom{x}{n} = \dfrac 1 {n!} x(x-1)\cdots (x-n+1) 
     $$
     tenemos que $P_n(x)$ es un polinomio de grado $n$. En \cite{chihara} pueden encontrarse los cálculos rigurosos mediante los cuales, si definimos
     $$
@@ -251,7 +253,7 @@ Sea $\mathcal{L}$ un funcional de momentos y $\{P_n\}$ una sucesión de polinomi
     \begin{itemize}
         \item $(1)\Rightarrow(2)$
         
-        Supongamos que $\{P_n\}$ es una SPO respecto al funcional $\mathcal{L}$. Como $P_k$ tiene grado $k$, entonces $\{P_0,\dots,P_m\}$ forma una base de $\mathbb P_m$. Por lo que si $\pi(x)$ es un polinomio de grado $m$, existen constantes $c_1,\dots,c_m$, con $c_m\not=0$ tales que $\pi(x)=c_k P_k(x)$. Como $\mathcal{L}$ es lineal,
+        Supongamos que $\{P_n\}$ es una SPO respecto al funcional $\mathcal{L}$. Como $P_k$ tiene grado $k$, entonces $\{P_0,\dots,P_m\}$ forma una base de $\mathbb P_m$. Por lo que si $\pi(x)$ es un polinomio de grado $m$, existen constantes $c_1,\dots,c_m$, con $c_m\not=0$ tales que $\pi(x)=\sum_{i=0}^m c_k P_k(x)$. Como $\mathcal{L}$ es lineal,
         $$
         \mathcal{L}[\pi(x)P_n(x)]=\sum_{k=0}^m c_k \mathcal{L}[P_k(x) P_n(x)]=\left\lbrace\begin{array}{ccl}
             0 & \text{ si } & m<n \\
@@ -284,6 +286,7 @@ En la prueba de este último teorema, hemos hecho uso de que mediante una SPO po
 Este resultado nos proporciona una consecuencia muy importante: la unicidad salvo constante multiplicativa de las SPO respecto a un funcional.
 
 \begin{corolario}
+    \label{cor:unicidad-salvo-cte}
     Sea $\{P_n\}$ una SPO respecto a un funcional lineal $\mathcal{L}$. Entonces cada $P_n$ está unívocamente determinado salvo constante multiplicativa no nula. Esto es, si $\{Q_n\}$ es otra SPO respecto a $\mathcal{L}$, entonces existen constantes $c_n\not=0$ tales que
     $$
     Q_n(x)=c_n P_n(x), \ \ \ n\in\N_0.
@@ -297,7 +300,12 @@ Este resultado nos proporciona una consecuencia muy importante: la unicidad salv
     Por el teorema \ref{th:caracterizacion}, $\mathcal{L}[Q_n(x)P_k(x)]=0$ siempre que $k<n$ y $\mathcal{L}[Q_n(x)P_k(x)]=r_n\not=0$ si $k=n$, por lo que, tomando $c_n = \frac{r_n}{\mathcal{L}[P^2_n(x)]}$, se tiene $Q_n(x) = c_n P_n(x)$, como queríamos probar.
 \end{proof}
 
-Este resultado nos afirma que si tenemos una SPO $\{P_n\}$ respecto a un funcional $\mathcal L$, entonces $\{c_n P_n\}$ también es una SPO para cualquier sucesión $\{c_n\}$ de constantes no nulas. Una forma de estandarizar una SPO de forma que esta esté unívocamente determinada es exigiendo que todos los polinomios que la conforman sean mónicos. De esta forma, podemos afirmar que si tenemos una SPO $\{P_n\}$ para un funcional $\mathcal L$, entonces existe una única sucesión de polinomios ortogonales mónicos (SPOM) respecto a $\mathcal L$. De hecho, si denotamos como $a_n$ al coeficiente líder de $P_n$, entonces los polinomios
+
+\section{Estandarizaciones de las SPO}
+
+El corolario \ref{cor:unicidad-salvo-cte} nos afirma que si tenemos una SPO $\{P_n\}$ respecto a un funcional $\mathcal L$, entonces $\{c_n P_n\}$ también es una SPO para cualquier sucesión $\{c_n\}$ de constantes no nulas. Existen varias formas de estandarizar una SPO de forma que esta esté unívocamente determinada a partir de un funcional. En esta sección presentaremos algunas de las más comunes.
+
+Una primera posibilidad es exigir que todos los polinomios que conforman la SPO sean mónicos. De esta forma, podemos afirmar que si tenemos una SPO $\{P_n\}$ para un funcional $\mathcal L$, entonces existe una única sucesión de polinomios ortogonales mónicos (SPOM) respecto a $\mathcal L$. De hecho, si denotamos como $a_n$ al coeficiente líder de $P_n$, entonces los polinomios
 $$
 \hat P_n=a_n^{-1} P_n
 $$
@@ -309,25 +317,129 @@ p_n = (-1)^{\sgn(a_n)}\left(\mathcal L[P_n^2]\right)^{-1/2} P_n,
 $$
 donde $\sgn(a_n)$ denota el signo de $a_n$, el coeficiente líder de $P_n$. Con esta operación conseguimos que $\mathcal L[p_n^2] = 1, \ \ \forall n\in\N_0$, es decir, la sucesión $\{p_n\}$ es una SPO ortonormal. Por tanto, dada una SPO $\{P_n\}$ para un funcional $\mathcal L$, entonces existe una única SPO ortonormal $\{p_n\}$ respecto a $\mathcal{L}$.
 
-\textcolor{Blue}{
-REVIEW Preguntar a Lidia si debo incluir la parte de existencia de una SPO antes de la RR3T, ya que en el Chihara se explica de forma diferente incluyendo el caso en que el funcional sea cuasi-definido y definido positivo. Además, antes se ha hablado de que se deben dar condiciones para la existencia de una SPO.}
+Por último, es común exigirle a cada polinomio $P_n$ de la sucesión que verifique $P(1)=1$. Por lo que, sin más que definir
+$$
+\tilde{P}_n(x) = (P(1))^{-1}P_n(x),
+$$
+cada funcional $\mathcal{L}$ admite una única SPO $\{\tilde{P}_n(x)\}$ tales que $\tilde{P}_n(1)=1$ $\forall n\in\N_0$.
 
-Por último, introducimos la definición de una importante propiedad que pueden cumplir los funcionales lineales.
+\cb{TODO Preguntar a Lidia por bibliografía sobre esto o que me diga qué ventajas tiene esta estandarización. También si tiene algún nombre concreto (que me suena que sí).}
 
-\begin{definicion}[Funcional definido positivo]
 
-    Un funcional de momentos $\mathcal{L}$ se dice que es \textbf{definido positivo} si $\mathcal{L}[\pi] > 0$ para cualquier polinomio $\pi$ no negativo y no estrictamente positivo en todo el eje real.
+
+\section{Existencia de SPO}
+\label{section:existencia-SPO}
+
+Recordemos que con anterioridad hemos comentado en la observación \ref{observacion:existencia} que no cualquier sucesión de números complejos $\{\mu_n\}$ da lugar a una SPO. Es necesario por tanto exigir alguna condición sobre dicha sucesión si realmente queremos asegurar la existencia la correspondiente SPO.
+
+Para ello, introducimos el siguiente concepto.
+
+\begin{definicion}[\cb{REVIEW ¿esto no tiene algún nombre técnico?}]
+    Definimos el determinante 
+    \begin{equation}
+        \label{eq:determinante}
+        \Delta_n = \det(\mu_{i+j})_{i,j=0}^n = \left|\begin{array}{cccc}
+            \mu_0 & \mu_1 & \cdots & \mu_n \\
+            \mu_1 & \mu_2 & \cdots & \mu_{n+1} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \mu_n & \mu_{n+1} & \cdots & \mu_{2n} \\
+        \end{array}\right|.
+    \end{equation}
     
 \end{definicion}
 
-Acompañamos esta definición con una consecuencia que cumplen estos funcionales.
+Este determinante está directamente relacionado con la existencia de una SPO.
 
 \begin{teorema}
-    Todo funcional de momentos $\mathcal{L}$ tiene momentos $\mu_n$ reales y admite una SPOM $\{P_n\}$ compuesta por polinomios reales.
+    Sea $\{\mu_n\}$ una sucesión de números complejos y sea $\mathcal{L}$ un funcional de momentos cuya sucesión de momentos es $\{\mu_n\}$. $\mathcal L$ admite una sucesión de polinomios ortogonales si, y solo si $\Delta_n\neq 0\ \ \ \forall n\in\N_0$. 
+\end{teorema}
+\begin{proof} Comprobamos la doble implicación.
+
+    \begin{itemize}
+        \item[\fbox{$\Rightarrow$}] Supongamos que los polinomios $P_n(x) = \sum_{k=0}^n c_{nk}x^k$ conforman una SPO para $\mathcal L$. Fijemos ahora $n\in\N_0$ arbitario. Por el teorema \ref{th:caracterizacion} (caracterización de una SPO), obsérvese que la condición de ortogonalidad 
+        \begin{equation}
+            \label{eq:cond-ort}
+            \mathcal{L}[x^m P_n(x)]= \sum_{k=0}^n c_{nk} \mu_{k+m} = K_n\delta_{nm}, \ \ \ K_n\neq 0, m\leq n
+        \end{equation}
+        equivale al sistema
+        \begin{equation}
+            \label{eq:sistema-existencia}
+            \begin{pmatrix}
+                \mu_0 & \mu_1 & \cdots & \mu_n \\
+                \mu_1 & \mu_2 & \cdots & \mu_{n+1} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                \mu_n & \mu_{n+1} & \cdots & \mu_{2n}
+            \end{pmatrix} \begin{pmatrix}
+                c_{n0} \\ c_{n1} \\ \vdots \\ c_{nn}
+            \end{pmatrix} = \begin{pmatrix}
+                0 \\ 0 \\ \vdots \\ K_n
+            \end{pmatrix}.
+        \end{equation}
+        Por tanto, si esta sucesión existe, necesariamente este sistema debe tener solución única determinada por $K_n$. Para ello ha de verificarse que $\Delta_n\neq 0, \ \ \forall n\in\N_0$.
+        \item[\fbox{$\Leftarrow$}] Recíprocamente, supongamos ahora que $\Delta_n\neq 0, \ \ \forall n\in\N_0$. En ese caso el sistema (\ref{eq:sistema-existencia}) tiene solución única para cualquier $K_n\neq 0$, por lo que podemos crear polinomios $P_n(x)$ que cumplan (\ref{eq:cond-ort}) para cualquier $n\in\N_0$. Por otro lado, aplicando la regla de Cramer, tenemos que
+        \begin{equation}
+            \label{eq:cnn}
+            c_{nn} = \dfrac{K_n \Delta_{n-1}}{\Delta_n} \neq 0, \ \ \ n\geq 1,
+        \end{equation}
+        expresión que también es válida para $n=0$ sin más que tomar $\Delta_{-1}=1$. Por tanto, el polinomio $P_n(x)$ tiene coeficiente líder no nulo, es decir, es de grado $n$, por lo que $\{P_n(x)\}$ es una SPO para $\mathcal L$. 
+    \end{itemize}
+
+\end{proof}
+
+Con esta notación, podemos ponerle nombre a aquellos funcionales para los cuales existe una SPO.
+
+\begin{definicion}[Funcional cuasi-definido]
+    Un funcional $\mathcal L$ es \textbf{cuasi-definido} si, y solo si admite una sucesión de polinomios ortogonales. Equivalentemente, si $\Delta_n > 0, \ \ \forall n\in \N_0$.
+    
+\end{definicion}
+
+Un concepto muy relacionado con el de funcional cuasi-definido es el de definido positivo, que introducimos a continuación.
+
+\begin{definicion}[Funcional definido positivo]
+
+    Un funcional de momentos $\mathcal{L}$ se dice que es \textbf{definido positivo} si $\mathcal{L}[\pi] > 0$ para cualquier polinomio $\pi$ no nulo y no negativo en todo el eje real.
+    
+\end{definicion}
+
+Presentamos ahora un sencillo lema que nos ayudará a encontrar una definición alternativa utilizada con bastante frecuencia. 
+
+\begin{lema}
+Sea $\pi(x)$ un polinomio no negativo en todo el eje real. Entonces existen polinomios $p(x)$ y $q(x)$ tales que 
+$$
+\pi(x) = p^2(x) + q^2(x).
+$$
+\end{lema}
+\begin{proof}
+    Si $\pi(x) \geq 0 \ \ \forall x\in\R$, entonces $\pi(x)$ es un polinomio cuyos ceros reales tienen multiplicidad par y cuyos ceros complejos son pares conjugados. Por lo que podemos escribir
+    $$
+    \pi(x) = r^2(x) \prod_{k=1}^m(x-a_k-b_k i)(x-a_k+b_k i),
+    $$
+    donde $r(x)$ es un polinomio real y $a_k,b_k\in\R$. Si ahora denotamos
+    $$
+    \prod_{k=1}^m(x-a_k-b_k i) = A(x) + i B(x),
+    $$
+    siendo $A(x)$ y $B(x)$ polinomios reales, podemos expresar $\pi(x)$ como
+    $$
+    \pi(x) = r^2(x)(A^2(x) + B^2(x)) = \underbrace{(r(x)A(x))^2}_{p^2(x)} + \underbrace{(r(x)B(x))^2}_{q^2(x)}.
+    $$
+\end{proof}
+
+Una consecuencia directa de este lema es una definición alternativa y equivalente de funcional definido positivo.
+
+\begin{corolario}
+    Un funcional de momentos $\mathcal{L}$ es definido positivo si, y solo si $\mathcal{L}[\pi^2(x)]>0$ para cualquier polinomio $\pi(x)$.
+\end{corolario}
+
+Finalmente, introducimos la relación entre el concepto de funcional definido positivo y los determinantes (\ref{eq:determinante}).
+
+\begin{teorema}
+    Un funcional $\mathcal{L}$ es definido positivo si, y solo si sus momentos $\{\mu_n\}$ son todos reales y $\Delta_n>0 \ \ \forall n\in\N_0$
 \end{teorema}
 \begin{proof}
-    La prueba de este resultado puede encontrarse en \cite{renato}[Teorema 2.3.2].
+    La prueba de este resultado puede encontrarse en \cite[Teorema 3.4]{chihara}.
 \end{proof}
+
+Obsérvese que gracias a este teorema podemos entonces afirmar que los funcionales definidos positivos son, en particular, funcionales cuasi-definidos. Esto es, admiten una SPO.
 
 \section{La relación de recurrencia a tres términos}
 \label{section:RRTT}
@@ -356,7 +468,7 @@ Las SPO respecto a un funcional siempre cumplen una ecuación que es la denomina
     \begin{align*}
         xP_n(x) &= \sum_{k=0}^{n+1} a_{k,n} P_k(x), & \text{con } a_{k,n}&= \dfrac{\mathcal{L}[xP_n(x)P_k(x)]}{\mathcal{L}[P_k^2(x)]}. 
     \end{align*}
-    Pero $\mathcal{L}[xP_n(x)P_k(x)]$ para $k=0,\dots,n-2$, por lo que necesariamente debe cumplirse
+    Pero $\mathcal{L}[xP_n(x)P_k(x)]=0$ para $k=0,\dots,n-2$, por lo que necesariamente debe cumplirse
     $$
     xP_n(x)  = \underbrace{a_{n-1,n}}_{\gamma_n} P_{n-1}(x) + \underbrace{a_{n,n}}_{\beta_n} P_n(x) + \underbrace{a_{n+1,n}}_{\alpha_n} P_{n+1}(x),
     $$
@@ -380,13 +492,13 @@ Si sustituimos esta expresión en la RRTT (\ref{eq:RRTT}) e igualamos los coefic
     \alpha_n &= \dfrac{a_n}{a_{n+1}}, & \beta_n &= \dfrac{b_n}{a_n}-\dfrac{b_{n+1}}{a_{n+1}}, & \gamma_n &= \dfrac{1}{a_{n-1}}\left(c_n - \alpha_n c_{n+1} - \beta_n b_n\right).
 \end{align}
 
-\textcolor{Blue}{REVIEW ¿Pongo un ejemplo con alguna familia de polinomios?} 
+\cb{TODO Incluir algún ejemplo con alguna familia de polinomios.}
 
 Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este resultado es el conocido como teorema de Favard.
 
 \begin{teorema}[Favard]
     \label{th:favard}
-    Sean $\{\beta_n\}$ y $\{\gamma_n\}$ dos sucesiones de números reales con $\gamma_n \not= 0$ $\forall n\in \N_0$ y sea $\{P_n\}$ una sucesión de polinomios mónicos definida mediante la relación (\ref{eq:RRTT2}):
+    Sean $\{\beta_n\}$ y $\{\gamma_n\}$ dos sucesiones de números reales  y sea $\{P_n\}$ una sucesión de polinomios mónicos definida mediante la relación (\ref{eq:RRTT2}):
     $$
     P_{n+1}(x) = (x-\beta_n) P_n - \gamma_n P_{n-1} \ \ \ \forall n\in\N_0.
     $$
@@ -394,7 +506,7 @@ Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este res
     \begin{align*}
         \mathcal{L}[1]&=\gamma_0, & \mathcal L[P_n P_m]=\delta_{n,m}K_n, \ \ K_n\not=0.
     \end{align*}
-    Además, $\mathcal{L}$ es definido positivo si y solo $\gamma_n >0$ $\forall n\in \N_0$. 
+    Este funcional es cuasi-definido y $\{P_n\}$ es su correspondiente SPOM si, y solo si $\gamma_n\neq 0$ $\forall n\in \N_0$. Además, $\mathcal{L}$ es definido positivo si y solo si $\gamma_n >0$ $\forall n\in \N_0$. 
 \end{teorema}
 \begin{proof}
     Definamos el funcional $\mathcal{L}$ por inducción en $\mathbb{P}$. Sea 
@@ -434,14 +546,25 @@ Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este res
     $$
     x^k P_n = \sum_{i=n-k}^{n+k} d_{n,i} P_i(x),
     $$
-    y aplicando que $\mathcal{L}[P_n]=0$ se deduce que $\mathcal{L}[x^k P_n] = 0$ para todo $k=1,\dots, n-1$, que por el teorema \ref{th:caracterizacion} tenemos que $\{P_n\}$ es una SPO según el funcional $\mathcal{L}$.
+    y aplicando que $\mathcal{L}[P_n]=0$ se deduce que $\mathcal{L}[x^k P_n] = 0$ para todo $k=1,\dots, n-1$. Comprobemos qué ocurre cuando $k=n$. De nuevo, por (\ref{eq:RRTT}):
+    $$
+    \mathcal{L}[x^n P_n] = \mathcal{L}[x^{n-1}(P_{n+1} + \beta_n P_n + \gamma_n P_{n-1})] = \mathcal{L}[\gamma_n x^{n-1} P_{n-1}] = \gamma_n \mathcal{L}[x^{n-1} P_{n-1}].
+    $$
+    Aplicando este razonamiento sucesivamente llegamos a que 
+    \begin{equation}
+        \label{eq:LxnPn}
+        \mathcal{L}[x^n P_n] = \gamma_n\gamma_{n-1}\cdots\gamma_0 \ \ \ \forall n \in\N_0.
+    \end{equation}
+    Por tanto, el funcional es cuasi-definido y $\{P_n\}$ es su SPOM si, y solo si $\gamma_n\neq 0$ $\forall n\in\N_0$.
+    
+    Finalmente, pensemos que $\{P_0, xP_1, x^2P_2,\dots,x^nP_n\}$ forman una base del espacio de polinomios de grado par menor o igual que $2n$. Por lo que, volviendo a aplicar (\ref{eq:LxnPn}), para cualquier polinomio $\pi$ tendríamos que $\mathcal L[\pi^2] > 0$, esto es, $\mathcal{L}$ es definido positivo, si y solo si $\gamma_n > 0$ $\forall n\in\N_0$.
 
-    Finalmente, véamos que $\mathcal{L}$ es definido positivo si y solo $\gamma_n >0$ $\forall n\in \N_0$. De nuevo, por (\ref{eq:RRTT}):
-    $$
-    \mathcal{L}[x^n P_n] = \mathcal{L}[x^{n-1}(P_{n+1} + \beta_n P_n + \gamma_n P_{n})] = \mathcal{L}[\gamma_n P_{n}].
-    $$
-    Aplicando este razonamiento sucesivamente llegamos a que $\mathcal{L}[x^n P_n] = \gamma_n\gamma_{n-1}\cdots\gamma_0 \not= 0$. De esta expresión se deduce que $\mathcal{L}$ es definido positivo si y solo si $\gamma_n > 0$ $\forall n\in\N_0$.
+    \cb{REVIEW Este último párrafo es de mi cosecha}
 
 \end{proof}
 
-\textcolor{Blue}{REVIEW Soy consciente de que hay muchas lagunas en esta demostración.}
+\begin{observacion}
+    Nótese que el teorema de Favard está descrito partiendo de una sucesión de polinomios ortogonales \textit{mónicos}. Sin embargo, una vez es calculado el funcional, se puede utilizar cualquier otra estandarización. 
+
+    \cb{TODO Pedirle a Lidia que me recuerde cómo}
+\end{observacion}
