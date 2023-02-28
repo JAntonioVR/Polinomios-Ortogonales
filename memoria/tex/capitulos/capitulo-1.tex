@@ -482,6 +482,8 @@ De esta demostración podemos deducir además la expresión de las constantes $\
     \alpha_n &= \dfrac{\mathcal{L}[xP_n P_{n+1}]}{\mathcal{L}[P_{n+1}^2]}, & \beta_n &= \dfrac{\mathcal{L}[xP_n^2]}{\mathcal{L}[P_n^2]}, & \gamma_n &= \dfrac{\mathcal{L}[xP_n P_{n-1}]}{\mathcal{L}[P_{n-1}^2]}.
 \end{align}
 
+\cb{REVIEW $\gamma_n$ se calcula para $n\geq 1$ no? Porque si se calcula para $n=0$ queda un 0 en el denominador.}
+
 Sin embargo, este cálculo puede complicarse bastante, por lo que presentaremos un algoritmo alternativo. Para ello, desarrollaremos los polinomios como
 $$
 P_n(x) = a_n x^n + b_n x^{n-1} + c_n x^{n-2} + \cdots.
@@ -492,7 +494,41 @@ Si sustituimos esta expresión en la RRTT (\ref{eq:RRTT}) e igualamos los coefic
     \alpha_n &= \dfrac{a_n}{a_{n+1}}, & \beta_n &= \dfrac{b_n}{a_n}-\dfrac{b_{n+1}}{a_{n+1}}, & \gamma_n &= \dfrac{1}{a_{n-1}}\left(c_n - \alpha_n c_{n+1} - \beta_n b_n\right).
 \end{align}
 
-\cb{TODO Incluir algún ejemplo con alguna familia de polinomios.}
+\cb{REVIEW Pero como calculo $\beta_n$ si no conozco $b_{n+1}$?}
+
+\begin{ejemplo}
+    Vamos a trabajar un ejemplo práctico. En el archivo \texttt{software/Hermite.ipynb} se ha implementado, utilizando software matemático, el cálculo de una SPO mediante la RR3T. También se ha realizado una estimación de los tiempos de ejecución para distintos valores de $n$. En este ejemplo únicamente se recogen los resultados arrojados por el software, pero en dicho archivo se puede consultar e incluso modificar el código fuente.
+    
+    En particular, se ha trabajado con los polinomios de Hermite, (\cb{TODO Incluir referencia cuando hable de los polinomios de Hermite}) que son aquellos que conforman la SPO con respecto a la función peso $\rho(x)=e^{-x^2}$ en todo $\R$. Por tanto, tenemos el funcional
+    $$
+    \mathcal{L}[f] = \int_{-\infty}^{+\infty} f(x) e^{-x^2}dx.
+    $$
+    Calculemos la SPOM correspondiente al funcional $\mathcal L$. Si tomamos $P_{-1}=0, P_0=1$, podemos calcular a partir de (\ref{eq:ctes-RRTT}) las constantes $\beta_n,\gamma_n$ para $n\leq 1$ y mediante (\ref{eq:RRTT2}) obtenemos los polinomios $P_n$ para $n\geq 1$, véase la tabla \ref{tab:pol-Hermite}.
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{ccc}
+        \hline
+        $n$  & $P_n(x)$                                                                                              & Tiempo de cálculo ($s$)   \\ \hline
+        $0$  & $1$                                                                                                   & $1.1897 \times 10^{-5}$ \\ \hline
+        $1$  & $x$                                                                                                   & $0.0133$                \\ \hline
+        $2$  & $x^2 - \frac 1 2$                                                                                     & $0.0449$                \\ \hline
+        $3$  & $x^3 - \frac 3 2 x$                                                                                   & $0.1073$                \\ \hline
+        $4$  & $x^4 - 3 x^2 + \frac 3 4$                                                                             & $0.2161$                \\ \hline
+        $5$  & $x^5 - 5x^3 + \frac {15} 4 x$                                                                         & $0.4162$                \\ \hline
+        $6$  & $x^6 - \frac{15} 2 x^4 + \frac {45} 4 x^2 - \frac{15} 8$                                              & $0.6752$                \\ \hline
+        $7$  & $x^7 - \frac {21} 2 x^5 + \frac{105} 4 x^3 - \frac{105} 8 x$                                          & $1.2009$                \\ \hline
+        $8$  & $x^8 - 14*x^6 + \frac{105}2 x^4 - \frac{105}2 x^2 + \frac{105}{16}$                                   & $2.0665$                \\ \hline
+        $9$  & $x^9 - 18 x^7 + \frac{189} 2 x^5 - \frac{315}2 x^3 + \frac{945}{16} x$                                & $3.5725$                \\ \hline
+        $10$ & $x^{10} - \frac{45} 2 x^8 + \frac{315}2 x^6 - \frac{1575} 4 x^4 + \frac{4725}{16} x^2 - \frac{945}{32}$ & $5.5059$                \\ \hline
+        \end{tabular}
+        \caption{10 primeros polinomios de Hermite mónicos}
+        \label{tab:pol-Hermite}
+        \end{table}
+
+        Sin embargo, comprobamos que este método es lento, pues los tiempos de cálculo\footnote{Estos tiempos han sido obtenidos mediante la media de los tiempos de ejecución de 10 ejecuciones independientes.} se incrementan considerablemente con $n$. De hecho, para $n=15$, que es un valor aún bajo y cercano a $10$, el tiempo de ejecución ya es de $58.9024$ segundos, casi un minuto.
+    
+\end{ejemplo}
 
 Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este resultado es el conocido como teorema de Favard.
 
