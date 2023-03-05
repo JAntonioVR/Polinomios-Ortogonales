@@ -1,0 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Capítulo 4: Relación entre los PO y los PNM           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{ejemplo}[Procesos de nacimiento y muerte lineales]
+    Sea el proceso de nacimiento y muerte dado por los parámetros
+    \begin{align*}
+        \lambda_n &=(n+\beta)\kappa & \mu_n = n\kappa, 
+    \end{align*}
+    donde $\beta,\kappa > 0$. Comprobaremos que los polinomios asociados a este proceso guardan una estrecha relación con los polinomios de Laguerre (TODO referencia a Laguerre).
+
+    Con estos parámetros, los polinomios de nacimiento y muerte $Q_n(x)$ siguen la relación de recurrencia
+    \begin{equation*}
+        \begin{array}{c}
+            -xQ_n(x) = \lambda_n Q_{n+1}(x) - (\lambda_n+\mu_n)Q_n(x) +\mu_n Q_{n-1}(x) \Leftrightarrow \\
+            -x Q_n(x) = (n+\beta)\kappa Q_{n+1}(x) -(2n+\beta)\kappa Q_n(x) + n\kappa Q_{n-1}(x)
+        \end{array}
+    \end{equation*}
+    Si dividimos la ecuación entre $\kappa$, obtenemos
+    \begin{equation}
+        \label{eq:ejemplo-laguerre1}
+        -\frac{x}{\kappa} Q_n(x) = (n+\beta)Q_{n+1}(x) -(2n+\beta)Q_n(x) + n Q_{n-1}(x)
+    \end{equation}
+    
+
+    Recordemos que los polinomios de Laguerre $L_n^\alpha(x)$ obedecen a una relación de recurrencia a tres términos dada por
+    \begin{equation}
+        \label{eq:ejemplo-laguerre2}
+        -x L_n^\alpha = (n+1) L_{n+1}^\alpha(x) - (2n+\alpha+1)L_n^\alpha(x) + (n+\alpha)L_n^\alpha(x),
+    \end{equation}
+    con $\alpha > -1$. Tomamos entonces 
+    \begin{equation}
+        \label{eq:polinomiosQejemplo}
+        Q_n(x) = \dfrac{n!}{(\beta)_n} L_n^{\beta-1}\left(\frac x \kappa\right),    
+    \end{equation}
+    
+    Si tomamos $\alpha = \beta-1$, evaluamos (\ref{eq:ejemplo-laguerre2}) en $x/\kappa$ y multiplicamos ambos miembros de la igualdad por $\dfrac{n!}{(\beta)_n}$, podemos aplicar las siguientes igualdades en los términos en $n+1$ y en $n-1$:
+    $$
+    (n+1)\left[\dfrac{n!}{(\beta)_n}\right]L_{n+1}^{\beta-1} \left(\frac x \kappa\right) = (n+\beta)\dfrac{(n+1)!}{(\beta)_{n+1}} L_{n+1}^{\beta-1} \left(\frac x \kappa\right) = (n+\beta)Q_{n+1}(x),
+    $$
+    y
+    $$
+    (\beta+n-1)\left[\dfrac{n!}{(\beta)_n}\right]L_{n-1}^{\beta-1} \left(\frac x \kappa\right) = n\dfrac{(n-1)!}{(\beta)_{n-1}} L_{n-1}^{\beta-1} \left(\frac x \kappa\right) =n Q_{n-1}(x).
+    $$
+    
+    Aplicando estas igualdades, tenemos que (\ref{eq:ejemplo-laguerre2}) es equivalente a (\ref{eq:ejemplo-laguerre1}).
+
+    Por tanto, los polinomios asociados al proceso de nacimiento y muerte de este ejemplo son los presentados en (\ref{eq:polinomiosQejemplo}). Por tanto, $Q_i(x)$ son ortogonales en $[0,+\infty)$ con respecto a la función peso 
+    $$
+    \rho(x) = ce^{-x/\kappa} x^{\beta-1},
+    $$
+    donde $c$ es una constante de estandarización.
+
+    Por tanto, podemos calcular las probabilidades de transición aplicando la ecuación (TODO referencia) y teniendo en cuenta que
+    $$
+        \pi_i = \dfrac{\lambda_0\cdots \lambda_{i-1}}{\mu_1\cdots \mu_i} = \dfrac{\beta(\beta+1)\cdots (\beta+i-1)}{i!} = \dfrac{(\beta)_i}{i!}.
+    $$
+    Tenemos entonces
+
+    \begin{equation*}
+        \begin{split}
+            P_{ij}(t) &= P[X_t = j/X_0=i] \\
+            &= \pi_j\int_0^\infty e^{-xt}Q_i(x)Q_j(x)\rho(x)dx \\
+            &= c\, \dfrac{(\beta)_j}{j!}\int_0^\infty e^{-xt}\left[\dfrac{i!}{(\beta)_i} L_i^{\beta-1}\left(\dfrac{x}{\kappa}\right)\right]\left[\dfrac{j!}{(\beta)_j} L_j^{\beta-1}\left(\dfrac{x}{\kappa}\right)\right]e^{-\frac x \kappa}x^{\beta-1}dx \\
+            &= c\, \dfrac{(\beta)_i}{i!}\int_0^\infty e^{-x(t+\frac 1 \kappa)} x^{\beta-1} L_i^{\beta-1}\left(\frac x \kappa\right) L_j^{\beta-1}\left(\frac x \kappa\right) dx. 
+        \end{split}
+    \end{equation*}
+
+\end{ejemplo}
