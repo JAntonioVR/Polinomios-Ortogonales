@@ -698,6 +698,7 @@ Esta desigualdad es una consecuencia de la conocida \textit{Identidad de Christo
 Este teorema tiene una consecuencia inmediata
 
 \begin{corolario}
+    \label{cor:sucesiones-ceros}
     Para cada $k\geq 1$, la sucesión $\{x_{nk}\}$ es estrictamente decreciente y la sucesión $\{x_{n,n-k+1}\}$ es estrictamente creciente. 
 
     De hecho, los límites
@@ -717,5 +718,24 @@ Estos límites nos llevan a la siguiente definición
 Este intervalo recién presentado es el intervalo cerrado más pequeño que contiene todos los ceros de todos los polinomios de la SPO $\{P_n\}$. Es posible probar que el conjunto de todos los ceros de todos los $P_n$ es un soporte de $\mathcal{L}$, por lo que el verdadero intervalo de ortogonalidad es además el intervalo cerrado más pequeño que es un soporte de $\mathcal{L}$.
 
 \cb{TODO Lidia como demuestro que el conjunto de todos los ceros de todos los $P_n$ es un soporte de $\mathcal{L}$??}
+
+\begin{ejemplo}
+    Como ejemplo, véamos los ceros de los polinomios de Tchebichef de tipo I, que están todos situados en el intervalo $[-1,1]$. En la imagen \ref{img:ejemplo-ceros} hemos representado\footnote{En el archivo \texttt{software/ceros.ipynb}, también disponible en la URL \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ceros.ipynb}, puede encontrarse el código con el cual se han generado las imágenes, pudiendo ser ejecutado o incluso modificado para visualizar las gráficas con grados superiores a $5$ u otras familias de polinomios.} gráficamente los polinomios de Tchebichef para $n=2,3,4,5$, asignando los colores rojo, verde, azul y negro respectivamente, señalando los ceros de cada polinomio con su color correspondiente. 
+
+    Obsérvese que en efecto estos ceros están entrelazados, de forma que un cero rojo está entre dos ceros verdes; uno verde entre dos azules y uno azul entre dos negros.
+
+    Además, el primer cero de cada polinomio es cada vez menor, de forma que el primer cero negro es el más pequeño. Análogamente, el último cero es cada vez mayor, siendo el negro el más pequeño de todos. Este hecho ejemplifica el corolario \ref{cor:sucesiones-ceros} con $k=1$.
+    
+    \begin{figure}
+        \centering
+        \includegraphics[width=9cm]{img/C1/ceros.png}
+        \caption{Polinomios de Tchebichef de tipo I y sus ceros}
+        \label{img:ejemplo-ceros}
+    \end{figure}
+
+    \newpage
+
+    
+\end{ejemplo}
 
 Los ceros de los polinomios ortogonales tienen un papel importante, por ejemplo, en fórmulas de integración numérica, ya que tomar los nodos en los ceros de los polinomios ortogonales reduce considerablemente el error en la integración. Una aplicación bastante directa podrían ser las fórmulas de cuadratura gaussiana (véase \cite[Ch. I, Sección 6]{chihara}). También serán relevantes en los próximos capítulos al jugar $\xi_1$ un papel importante en el soporte de la medida. Incluso tienen una interpretación en el campo del equilibrio electrostático (véase \cite{Steinerberger}).
