@@ -135,9 +135,10 @@ Por tanto, vemos que la propiedad de ortogonalidad (\ref{eq:defortogonalidad}) e
 
 \begin{ejemplo}
     $\{T_n\}$, la sucesión de polinomios de Tchebichef de tipo I, es una Sucesión de Polinomios Ortogonales respecto de la función peso $\rho(x)=(1-x^2)^{-\frac{1}{2}}$ en el intervalo $(-1,1)$. También podemos establecer la ortogonalidad de los respectivos $\{T_n\}$ no mediante un producto escalar sino a través del funcional
-    $$
-    \mathcal{L}[f]:= \int_{-1}^1 f(x)(1-x^2)^{-\frac{1}{2}}dx
-    $$
+    \begin{equation}
+        \label{eq:funcional-tchebichef}
+        \mathcal{L}[f]:= \int_{-1}^1 f(x)(1-x^2)^{-\frac{1}{2}}dx
+    \end{equation}
 \end{ejemplo}
 
 Por lo que podemos definir ortogonalidad indistintamente mediante un producto escalar $\left\langle\cdot,\cdot\right\rangle$ o mediante un funcional integral $\mathcal{L}$.
@@ -396,6 +397,7 @@ Con esta notación, podemos ponerle nombre a aquellos funcionales para los cuale
 Un concepto muy relacionado con el de funcional cuasi-definido es el de definido positivo, que introducimos a continuación.
 
 \begin{definicion}[Funcional definido positivo]
+    \label{def:func-def-pos}
 
     Un funcional de momentos $\mathcal{L}$ se dice que es \textbf{definido positivo} si $\mathcal{L}[\pi] > 0$ para cualquier polinomio $\pi$ no nulo y no negativo en todo el eje real.
     
@@ -604,3 +606,114 @@ Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este res
 
     \cb{TODO Pedirle a Lidia que me recuerde cómo}
 \end{observacion}
+
+\section{Propiedades de los ceros}
+
+Los ceros o raíces de los polinomios ortogonales tienen propiedades y comportamientos que guardan cierta regularidad cuando el funcional que los define es definido positivo. En esta sección conoceremos estas peculiaridades de los ceros. Comencemos con una definición que refina en cierto modo la definición de funcional definido positivo.
+
+\begin{definicion}[Funcional definido positivo en un conjunto]
+    Sea $E\subseteq \R$. Decimos que un funcional $\mathcal{L}$ es \textbf{definido positivo en} $\mathbf E$ si $\mathcal{L}[\pi]>0$ para cualquier polinomio $\pi(x)$ real, no negativo y no idénticamente nulo en $E$. En este contexto, se dice que $E$ es un \textbf{soporte} de $\mathcal{L}$.
+    
+\end{definicion}
+
+Por ejemplo, el funcional de momentos (\ref{eq:funcional-tchebichef}) de los polinomios de Tchebichef de tipo I es definido positivo en $(-1,1)$, el de los polinomios de Charlier lo es en $\N$ y el de los polinomios de Hermite en $\R$. Respecto a este último caso, es claro que ser `definido positivo en $\R$' equivale a ser `definido positivo' según la definición \ref{def:func-def-pos}.
+
+\begin{comment}
+\begin{teorema}
+    Sea $E\subseteq \R$. Si $E$ es un conjunto infinito y $\mathcal{L}$ es un funcional definido positivo en $E$, entonces 
+    \begin{itemize}
+        \item[(i)] $\mathcal{L}$ es definido positivo en cualquier conjunto que contenga a $E$.
+        \item[(ii)] $\mathcal{L}$ es definido positivo en cualquier subconjunto denso de $E$. 
+    \end{itemize}
+\end{teorema}
+\begin{proof}
+    Sea $\pi(x)$ un polinomio real no negativo y no idénticamente nulo en un conjunto $S$. 
+    Si $E\subseteq S$, entonces 
+\end{proof}
+\end{comment}
+
+A partir de este concepto y los siguientes teoremas podremos conocer la dinámica que siguen los ceros de los polinomios ortogonales. En adelante, $\mathcal{L}$ es un funcional definido positivo y $\{P_n(x)\}$ su correspondiente SPO.
+
+\begin{teorema}
+    Sea $I$ un intervalo que es un soporte de $\mathcal{L}$. Entonces los ceros de $P_n$ $(n\geq 1)$ son todos simples, reales y se encuentran en el interior de $I$ (denotado en adelante como $\mathring{I}$).
+\end{teorema}
+\begin{proof}
+    Supongamos que $P_0 = 1$, entonces $\mathcal{L}[P_n] = \mathcal{L}[P_0 P_n] = 0$, $n\geq 1$. Por tanto, $P_n$ tiene que cambiar de signo al menos una vez en $\mathring I$. Esto es, $P_n$ tiene al menos un cero con multiplicidad impar en $\mathring I$. Sean $x_1, \dots, x_k\in \mathring I$ los ceros de multiplicidad impar de $P_n$ que están en $\mathring{I}$. Consideramos entonces el polinomio 
+    $$
+    q(x) = (x-x_1)\cdots(x-x_k).
+    $$
+    Entonces $q(x)P_n(x)$ es un polinomio que no tiene ceros de multiplicidad impar en $\mathring{I}$, por lo que $q(x)P_n(x)\geq 0$ $\forall x\in I$. Por tanto, $\mathcal L[q(x)P_n(x)]>0$, pero esto contradice el teorema \ref{th:caracterizacion} salvo que $k=n$, luego necesariamente $P_n(x)$ tiene $n$ ceros simples en $\mathring I$.
+\end{proof}
+
+A partir de este teorema, podemos denotar los ceros del polinomio $P_n(x)$ como
+$$
+x_{n1} < x_{n2} < \cdots < x_{nn}, \ \ n\geq 1.
+$$
+
+\begin{observacion}
+    Si tomamos $P_n$ con coeficiente líder positivo, entonces tenemos que 
+    \begin{enumerate}
+        \item $P_n(x) > 0 \ \ \forall x>x_{nn}$ y 
+        \item $\sgn P_n(x) = (-1)^{n}  \ \ \forall x<x_{n1}$.
+    \end{enumerate}
+\end{observacion}
+
+\begin{observacion}
+    $P'_n$ tiene exactamente un cero en cada intervalo $(x_{n,k},x_{n,k+1})$, por lo que $P'_n(x_{nk})$ alterna su signo con $k=1,\dots ,n$. Como el signo de $P'_n(x)$ también es positivo, concluimos que
+    \begin{equation}
+        \label{eq:signo-derivada}
+        \sgn P'_n(x_{nk}) =(-1)^{n-k}, \ \ k = 1,\dots, n.
+    \end{equation}
+    
+
+\end{observacion}
+
+Estas dos observaciones relacionan en cierto modo los ceros de $P_n$ con el comportamiento de $P'_n$. El siguiente lema relaciona directamente la SPO $\{P_n\}$ con la sucesión de las derivadas de los polinomios ortogonales $\{P'_n\}$. 
+
+\begin{lema}
+    Si $\mathcal{L}$ es un funcional definido positivo y $\{P_n\}$ es su SPO, entonces se verifica la desigualdad
+    \begin{equation}
+        \label{eq:desigualdad-cd}
+        P'_{n+1}(x)P_n(x) -P'_n(x)P_{n+1} > 0, \ \ \forall x\in\R.
+    \end{equation}
+\end{lema}
+
+Esta desigualdad es una consecuencia de la conocida \textit{Identidad de Christoffel-Darboux} (véase \cite[Theorem 4.5]{chihara}), y nos será de gran utilidad para probar el siguiente teorema.
+
+\begin{teorema}[Serparación de los ceros]
+    Los ceros de $P_n$ y de $P_{n+1}$ están mutuamente separados. Es decir,
+    $$
+    x_{n+1,i} < x_{n,i} < x_{n+1,i+1}, \ \ \ i=1,\dots, n.
+    $$
+\end{teorema}
+\begin{proof}
+    A partir de la desigualdad (\ref{eq:desigualdad-cd}) obtenemos que $P'_{n+1}(x)P_n(x)>0$, y si evaluamos en $x=x_{n+1,k}$ se tiene que
+    $$
+    P'_{n+1}(x_{n+1,k})P_n(x_{n+1,k})>0, \ \ k=1,\dots n+1
+    $$
+    Si aplicamos (\ref{eq:signo-derivada}), tenemos que $\sgn  P'_{n+1}(x_{n+1,k}) = (-1)^{n+1-k}$, por lo que para que se cumpla la desigualdad necesariamente $\sgn P_n(x_{n+1,k}) = (-1)^{n+1-k}$.
+    Esto es, $P_n(x)$ tiene que cambiar de signo un número de impar de veces en el intervalo $(x_{n+1,k},x_{n+1,k+1})$, y como esto ocurre para todo $k$, necesariamente $P_n$ tiene un único cero en cada uno de los $n$ intervalos $(x_{n+1,k},x_{n+1,k+1})$, $k=1,\dots, n$.
+\end{proof}
+
+Este teorema tiene una consecuencia inmediata
+
+\begin{corolario}
+    Para cada $k\geq 1$, la sucesión $\{x_{nk}\}$ es estrictamente decreciente y la sucesión $\{x_{n,n-k+1}\}$ es estrictamente creciente. 
+
+    De hecho, los límites
+    \begin{align*}
+        \xi_k &= \lim_{n\rightarrow\infty} x_{nk}, &  \eta_k &= \lim_{n\rightarrow\infty} x_{n,n-k+1}
+    \end{align*}
+    existen para todo $k=1,\dots,n$.
+\end{corolario}
+\cb{TODO Preguntar a Lidia por que existen estos límites}
+
+Estos límites nos llevan a la siguiente definición
+
+\begin{definicion}[Verdadero Intervalo de Ortogonalidad]
+    El intervalo cerrado $[\xi_1,\eta_1]$ es conocido como el \textbf{Verdadero Intervalo de Ortogonalidad} de la SPO asociada al funcional $\mathcal{L}$.
+\end{definicion}
+
+Este intervalo recién presentado es el intervalo cerrado más pequeño que contiene todos los ceros de todos los polinomios de la SPO $\{P_n\}$. Es posible probar que el conjunto de todos los ceros de todos los $P_n$ es un soporte de $\mathcal{L}$, por lo que el verdadero intervalo de ortogonalidad es además el intervalo cerrado más pequeño que es un soporte de $\mathcal{L}$.
+
+\cb{TODO Lidia como demuestro que el conjunto de todos los ceros de todos los $P_n$ es un soporte de $\mathcal{L}$??}
