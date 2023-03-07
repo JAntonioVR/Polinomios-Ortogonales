@@ -193,6 +193,7 @@ donde $\delta_{mn}$ denota la función delta de Kronecker.
 En el caso de que $d\mu(x)=\rho(x)dx$, es decir, en el caso de trabajar con funciones peso, la condición (3) se satisface de manera automática.
 
 \begin{ejemplo}
+    \label{ej:charlier}
     Extraído de \cite[Capítulo 1, sección 1]{chihara}
     Consideramos 
     $$
@@ -202,12 +203,13 @@ En el caso de que $d\mu(x)=\rho(x)dx$, es decir, en el caso de trabajar con func
     $$\binom{x}{n} = \dfrac 1 {n!} x(x-1)\cdots (x-n+1) 
     $$
     tenemos que $P_n(x)$ es un polinomio de grado $n$. En \cite{chihara} pueden encontrarse los cálculos rigurosos mediante los cuales, si definimos
-    $$
+    \begin{equation*}
+        \label{eq:funcional-charlier}
     \mathcal{L}[x^n]=\sum_{k=0}^\infty k^n \dfrac{a^k}{k!}, \ \ \ \ n\in\N_0.
-    $$
+    \end{equation*}
     y extendemos $\mathcal{L}$ a $\mathbb{P}$ por linealidad, tenemos que 
     $$
-    \mathcal{L}[P_m(x)P_n(x)] = \dfrac{e^a a^n}{n!}\delta_{mn}, \ \ \ \ m,n\in\N_0.
+        \mathcal{L}[P_m(x)P_n(x)] = \dfrac{e^a a^n}{n!}\delta_{mn}, \ \ \ \ m,n\in\N_0.
     $$
 
     Al estar definido el funcional mediante sumatorias y no mediante integrales podría parecer que, aunque $\{P_n\}$ satisfaga la definición \ref{def:SPOfuncional} mediante un funcional de momentos, no satisface la ortogonalidad respecto a (\ref{eq:funcionalLineal}). Sin embargo, si denotamos como $\phi$ a una función escalonada que es constante en cada intervalo $(-\infty,0)$ y $(k,k+1)$ con $k\in\N_0$ y tiene saltos de magnitud $\frac{a^k}{k!}$ en cada $k$, entonces utilizando la integral de Riemann-Stieltjes los polinomios $\{P_n\}$ verifican
@@ -616,7 +618,7 @@ Los ceros o raíces de los polinomios ortogonales tienen propiedades y comportam
     
 \end{definicion}
 
-Por ejemplo, el funcional de momentos (\ref{eq:funcional-tchebichef}) de los polinomios de Tchebichef de tipo I es definido positivo en $(-1,1)$, el de los polinomios de Charlier lo es en $\N$ y el de los polinomios de Hermite en $\R$. Respecto a este último caso, es claro que ser `definido positivo en $\R$' equivale a ser `definido positivo' según la definición \ref{def:func-def-pos}.
+Por ejemplo, el funcional de momentos (\ref{eq:funcional-tchebichef}) de los polinomios de Tchebichef de tipo I es definido positivo en $(-1,1)$, el de los polinomios de Charlier definido en el ejemplo \ref{ej:charlier} lo es en $\N$ y el de los polinomios de Hermite en $\R$. Respecto a este último caso, es claro que ser `definido positivo en $\R$' equivale a ser `definido positivo' según la definición \ref{def:func-def-pos}.
 
 \begin{comment}
 \begin{teorema}
