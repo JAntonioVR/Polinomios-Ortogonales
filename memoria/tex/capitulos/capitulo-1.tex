@@ -62,7 +62,7 @@ De acuerdo a este ejemplo, decimos que los polinomios $T_n$ son \textit{ortogona
 
 En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente conocido de ortogonalidad, restringido a espacios como $\R^d$, a otros tipos de espacios. Además, introdujimos la primera familia de polinomios ortogonales: los polinomios de Tchebichef de tipo I. En esta sección daremos definiciones más formales y genéricas sobre la ortogonalidad.
 
-Sea $\mu$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\lim_{x\rightarrow\infty}\mu(x)<\infty$. Se define el espacio de funciones $L_\mu^p[a,b]$ como el conjunto de funciones tales que
+Sea $\mu$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\mu(x)<\infty$. Se define el espacio de funciones $L_\mu^p[a,b]$ como el conjunto de funciones tales que
 
 
 \cb{REVIEW Cambiada la notación $d\alpha(x)$ por $d\mu$, pero ahora $\mu$ puede confundirse con los momentos $\{\mu_n\}$??}
@@ -86,7 +86,7 @@ A partir del espacio $L_\mu^2[a,b]$ podemos dar una definición de ortogonalidad
 
 \begin{definicion}[Ortogonalidad]
 
-    Fijada una función $\mu$ no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\lim_{x\rightarrow\infty}\mu(x)<\infty$ y dadas $f,g\in L_\mu^2[a,b]$, se dice que las funciones $\mathbf f$ \textbf y $\mathbf g$ \textbf{son ortogonales} o que $\mathbf f$ \textbf{es ortogonal a} $\mathbf{g}$ respecto a la distribución $d\mu$ si
+    Fijada una función $\mu$ no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\mu(x)<\infty$ y dadas $f,g\in L_\mu^2[a,b]$, se dice que las funciones $\mathbf f$ \textbf y $\mathbf g$ \textbf{son ortogonales} o que $\mathbf f$ \textbf{es ortogonal a} $\mathbf{g}$ respecto a la distribución $d\mu$ si
     \begin{equation}
         \label{eq:defortogonalidad}
         \left\langle f,g\right\rangle = 0.
@@ -150,7 +150,7 @@ A partir de este momento consideraremos el espacio vectorial de los polinomios $
     Dado un funcional $\mathcal{L}$, definimos los \textbf{momentos} del funcional, y los denotamos con $\mu_n$, como
     \begin{equation}
         \label{eq:defmomentos}
-        \mu_k = \mathcal{L}[x^k], \ \ \ \ k\in\N_0.
+        \mu_n = \mathcal{L}[x^n], \ \ \ \ n\in\N_0.
     \end{equation}    
 \end{definicion}
 
@@ -243,7 +243,7 @@ Previamente, introduciremos un resultado para la caracterización de SPO respect
 
 \begin{teorema}
     \label{th:caracterizacion}
-Sea $\mathcal{L}$ un funcional de momentos y $\{P_n\}$ una sucesión de polinomios. Las siguientes afirmaciones son equivalentes.
+Sea $\mathcal{L}$ un funcional de momentos y $\{P_n\}$ una sucesión de polinomios. Las siguientes afirmaciones son equivalentes:
 \begin{enumerate}
     \item $\{P_n\}$ es una SPO respecto al funcional $\mathcal{L}$.
     \item $\mathcal{L}[\pi(x)P_n(x)]=0$ para cualquier polinomio $\pi(x)$ de grado $m<n$ y $\mathcal{L}[\pi(x)P_n(x)]\not=0$ si $\pi(x)$ tiene grado $n$.
@@ -272,7 +272,7 @@ En la prueba de este último teorema, hemos hecho uso de que mediante una SPO po
 
 \begin{teorema}
     \label{th:coeficientes}
-    Sea $\{P_n\}$ una SPO respecto a un funcional lineal $\mathcal{L}$. Entonces, cualquier polinomio $\pi(x)$ de grado $n$ es posible expresarlo en la base $\{P_0,\dots,P_n\}$ de forma que
+    Sea $\{P_n\}$ una SPO respecto a un funcional lineal $\mathcal{L}$. Entonces, cualquier polinomio $\pi(x)$ de grado $n$ se puede expresar en la base $\{P_0,\dots,P_n\}$ de la forma
     \begin{align*}
         \pi(x)&=\sum_{k=0}^n c_k P_k(x), & \text{con } c_k&= \dfrac{\mathcal{L}[\pi(x)P_k(x)]}{\mathcal{L}[P_k^2(x)]}. 
     \end{align*}
@@ -308,7 +308,9 @@ Este resultado nos proporciona una consecuencia muy importante: la unicidad salv
 
 El corolario \ref{cor:unicidad-salvo-cte} nos afirma que si tenemos una SPO $\{P_n\}$ respecto a un funcional $\mathcal L$, entonces $\{c_n P_n\}$ también es una SPO para cualquier sucesión $\{c_n\}$ de constantes no nulas. Existen varias formas de estandarizar una SPO de forma que esta esté unívocamente determinada a partir de un funcional. En esta sección presentaremos algunas de las más comunes.
 
-Una primera posibilidad es exigir que todos los polinomios que conforman la SPO sean mónicos. De esta forma, podemos afirmar que si tenemos una SPO $\{P_n\}$ para un funcional $\mathcal L$, entonces existe una única sucesión de polinomios ortogonales mónicos (SPOM) respecto a $\mathcal L$. De hecho, si denotamos como $a_n$ al coeficiente líder de $P_n$, entonces los polinomios
+Una primera posibilidad es imponer el valor del coeficiente líder de cada polinomio de la sucesión. Por ejemplo, la estandarización más común de los polinomios de Laguerre $L_n^{(\alpha)}$ consiste en obligar a que el término líder $a_n$ verifique $a_n =\dfrac{(-1)^n}{n!}$.
+
+En particular, podemos exigir que todos los polinomios que conforman la SPO sean mónicos. De esta forma, podemos afirmar que si tenemos una SPO $\{P_n\}$ para un funcional $\mathcal L$, entonces existe una única sucesión de polinomios ortogonales mónicos (SPOM) respecto a $\mathcal L$. De hecho, si denotamos como $a_n$ al coeficiente líder de $P_n$, entonces los polinomios
 $$
 \hat P_n=a_n^{-1} P_n
 $$
@@ -318,17 +320,15 @@ Otra forma de estandarizar una SPO $\{P_n\}$ respecto a un funcional $\mathcal L
 $$
 p_n = (-1)^{\sgn(a_n)}\left(\mathcal L[P_n^2]\right)^{-1/2} P_n,
 $$
-donde $\sgn(a_n)$ denota el signo de $a_n$, el coeficiente líder de $P_n$. Con esta operación conseguimos que $\mathcal L[p_n^2] = 1, \ \ \forall n\in\N_0$, es decir, la sucesión $\{p_n\}$ es una SPO ortonormal. Por tanto, dada una SPO $\{P_n\}$ para un funcional $\mathcal L$, entonces existe una única SPO ortonormal $\{p_n\}$ respecto a $\mathcal{L}$.
+siempre que $\mathcal L[P_n^2]>0$ y donde $\sgn(a_n)$ denota el signo de $a_n$. Esta normalización no siempre es posible de aplicar, ya que no todos los funcionales lineales verifican $\mathcal L[P_n^2]>0$, aunque existe una clase de funcionales, los definidos positivos (ver definición \ref{def:func-def-pos}), que aseguran esta condición.
 
-Por último, es común exigirle a cada polinomio $P_n$ de la sucesión que verifique $P(1)=1$. Por lo que, sin más que definir
-$$
-\tilde{P}_n(x) = (P(1))^{-1}P_n(x),
-$$
-cada funcional $\mathcal{L}$ admite una única SPO $\{\tilde{P}_n(x)\}$ tales que $\tilde{P}_n(1)=1$ $\forall n\in\N_0$.
+Con esta operación conseguimos que $\mathcal L[p_n^2] = 1, \ \ \forall n\in\N_0$, es decir, la sucesión $\{p_n\}$ es una SPO ortonormal. Por tanto, dada una SPO $\{P_n\}$ para un funcional $\mathcal L$ tal que $\mathcal{L}[P_n^2]>0\ \ \forall n\in\N_0$, existe una única SPO ortonormal $\{p_n\}$ respecto a $\mathcal{L}$.
 
-\cb{TODO Preguntar a Lidia por bibliografía sobre esto o que me diga qué ventajas tiene esta estandarización. También si tiene algún nombre concreto (que me suena que sí).}
+Por último, es común exigirle a cada polinomio $P_n$ de la sucesión que verifique $P_n(x_0)=K_n$ para cierto $x_0\in[a,b]$. Es decir, se exige un valor concreto al evaluar $P_n$ en un punto del intervalo $[a,b]$, que en ocasiones coincide con alguno de los extremos $a,b$ cuando estos son finitos.
 
+Por ejemplo, los polinomios de Tchebichef de tipo I, ortogonales en $(-1,1)$ suelen ser presentados verificando $T_n(1)=1$. Por su parte, los polinomios de Jacobi $P_n^{(\alpha,\beta)}$, que también son ortogonales en $(-1,1)$, se busca que verifiquen $P_n^{(\alpha,\beta)}=\binom{n+\alpha}{n}$.
 
+En conclusión, no existe una única forma de estandarizar una SPO, sino que en realidad cada familia de polinomios ortogonales acepta una, o en ocasiones varias, estandarizaciones concretas dependiendo de la aplicación que se le dé y del contexto del problema.
 
 \section{Existencia de SPO}
 \label{section:existencia-SPO}
@@ -337,8 +337,8 @@ Recordemos que con anterioridad hemos comentado en la observación \ref{observac
 
 Para ello, introducimos el siguiente concepto.
 
-\begin{definicion}[\cb{REVIEW ¿esto no tiene algún nombre técnico?}]
-    Definimos el determinante 
+\begin{definicion}[Matriz de momentos]
+    Llamaremos \textbf{matriz de momentos} a la matriz $(\mu_{i+j})_{i,j=0}^n$, y \textbf{determimante de momentos} a su determinante
     \begin{equation}
         \label{eq:determinante}
         \Delta_n = \det(\mu_{i+j})_{i,j=0}^n = \left|\begin{array}{cccc}
@@ -348,13 +348,12 @@ Para ello, introducimos el siguiente concepto.
             \mu_n & \mu_{n+1} & \cdots & \mu_{2n} \\
         \end{array}\right|.
     \end{equation}
-    
 \end{definicion}
 
 Este determinante está directamente relacionado con la existencia de una SPO.
 
 \begin{teorema}
-    Sea $\{\mu_n\}$ una sucesión de números complejos y sea $\mathcal{L}$ un funcional de momentos cuya sucesión de momentos es $\{\mu_n\}$. $\mathcal L$ admite una sucesión de polinomios ortogonales si, y solo si $\Delta_n\neq 0\ \ \ \forall n\in\N_0$. 
+    Sea $\{\mu_n\}$ una sucesión de números complejos y sea $\mathcal{L}$ un funcional de momentos cuya sucesión de momentos es $\{\mu_n\}$. $\mathcal L$ admite una sucesión de polinomios ortogonales si, y solo si el determinante de momentos $\Delta_n\neq 0\ \ \ \forall n\in\N_0$. 
 \end{teorema}
 \begin{proof} Comprobamos la doble implicación.
 
@@ -460,7 +459,7 @@ Las SPO respecto a un funcional siempre cumplen una ecuación que es la denomina
     \end{equation}
     Normalmente se impone que $P_{-1}=0, P_0 = 1$, por lo que una SPO queda determinada unívocamente a partir de las sucesiones $\{\alpha_n\},\{\beta_n\},\{\gamma_n\}$.
 
-    Además, si la SPO es mónica, verifican la ecuación equivalente
+    Además, si la SPO es mónica, los polinomios $\{P_n\}$ verifican la ecuación equivalente
     \begin{equation}
         \label{eq:RRTT2}
         P_{n+1}(x) = (x-\beta_n) P_n - \gamma_n P_{n-1} \ \ \ \forall n\in\N_0.
@@ -483,10 +482,9 @@ Las SPO respecto a un funcional siempre cumplen una ecuación que es la denomina
 De esta demostración podemos deducir además la expresión de las constantes $\alpha_n, \beta_n$ y $\gamma_n$:
 \begin{align}
     \label{eq:ctes-RRTT}
-    \alpha_n &= \dfrac{\mathcal{L}[xP_n P_{n+1}]}{\mathcal{L}[P_{n+1}^2]}, & \beta_n &= \dfrac{\mathcal{L}[xP_n^2]}{\mathcal{L}[P_n^2]}, & \gamma_n &= \dfrac{\mathcal{L}[xP_n P_{n-1}]}{\mathcal{L}[P_{n-1}^2]}.
+    \alpha_n &= \dfrac{\mathcal{L}[xP_n P_{n+1}]}{\mathcal{L}[P_{n+1}^2]}, & \beta_n &= \dfrac{\mathcal{L}[xP_n^2]}{\mathcal{L}[P_n^2]}, & \gamma_n &= \dfrac{\mathcal{L}[xP_n P_{n-1}]}{\mathcal{L}[P_{n-1}^2]},
 \end{align}
-
-\cb{REVIEW $\gamma_n$ se calcula para $n\geq 1$ no? Porque si se calcula para $n=0$ queda un 0 en el denominador.}
+donde la expresión de $\alpha_n$ y la de $\beta_n$ son válidas para $n\geq 0$ y la de $\gamma_n$ para $n\geq 1$.
 
 Sin embargo, este cálculo puede complicarse bastante, por lo que presentaremos un algoritmo alternativo. Para ello, desarrollaremos los polinomios como
 $$
@@ -497,8 +495,9 @@ Si sustituimos esta expresión en la RRTT (\ref{eq:RRTT}) e igualamos los coefic
     \label{eq:ctes-RRTT2}
     \alpha_n &= \dfrac{a_n}{a_{n+1}}, & \beta_n &= \dfrac{b_n}{a_n}-\dfrac{b_{n+1}}{a_{n+1}}, & \gamma_n &= \dfrac{1}{a_{n-1}}\left(c_n - \alpha_n c_{n+1} - \beta_n b_n\right).
 \end{align}
+donde de nuevo la expresión de $\alpha_n$ y la de $\beta_n$ son válidas para $n\geq 0$ y la de $\gamma_n$ para $n\geq 1$.
 
-\cb{REVIEW Pero como calculo $\beta_n$ si no conozco $b_{n+1}$?}
+Con las ecuaciones (\ref{eq:ctes-RRTT}) podemos construir la SPO utilizando la RR3T si conocemos el funcional, deduciendo simultáneamente los coeficientes de la RR3T y los polinomios que conforman la sucesión. Por su parte, utilizando (\ref{eq:ctes-RRTT2}) podemos calcular de una manera sencilla los coeficientes de la RR3T sin utilizar el funcional ni integrales, en ocasiones complejas. Sin embargo, en este último caso necesitamos conocer los polinomios $P_{n-1}, P_n$ y $P_{n+1}$ para obtener dichos coeficientes, no pudiendo construir la SPO como sí podíamos hacer si aplicábamos (\ref{eq:ctes-RRTT}). Comprobemos este hecho con el siguiente ejemplo.
 
 \begin{ejemplo}
     Vamos a clarificar estas ideas con un ejemplo práctico. En el archivo \texttt{software/Hermite.ipynb}\footnote{Puede ser consultado en la URL \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/Hermite.ipynb}} se ha implementado, utilizando el software matemático `\href{https://www.sagemath.org/}{SageMath}', el cálculo de una SPO mediante la RR3T. También se ha realizado una estimación de los tiempos de ejecución para distintos valores de $n$. En este ejemplo únicamente se recogen los resultados arrojados por el software, pero en dicho archivo se puede consultar e incluso modificar el código fuente.
@@ -597,10 +596,15 @@ Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este res
     \end{equation}
     Por tanto, el funcional es cuasi-definido y $\{P_n\}$ es su SPOM si, y solo si $\gamma_n\neq 0$ $\forall n\in\N_0$.
     
-    Finalmente, pensemos que $\{P_0, xP_1, x^2P_2,\dots,x^nP_n\}$ forman una base del espacio de polinomios de grado par menor o igual que $2n$. Por lo que, volviendo a aplicar (\ref{eq:LxnPn}), para cualquier polinomio $\pi$ tendríamos que $\mathcal L[\pi^2] > 0$, esto es, $\mathcal{L}$ es definido positivo, si y solo si $\gamma_n > 0$ $\forall n\in\N_0$.
-
-    \cb{REVIEW Este último párrafo es de mi cosecha}
-
+    Por último, véamos que $\mathcal{L}$ es definido positivo si y solo si $\gamma_n >0$ $\forall n\in \N_0$. Sea $\pi(x)$ un polinomio y $m$ su grado. Podemos entonces escribir $\pi(x)=\sum_{i=1}^m c_i P_i(x)$. De esta forma
+    $$
+    \mathcal{L}[\pi^2(x)]=\mathcal{L}[\sum_{i=1}^m c_i^2 P_i^2(x)]= \sum_{i=1}^m  c_i^2 \mathcal{L}[P_i^2(x)],
+    $$
+    donde hemos utilizado la ortogonalidad de $\{P_n\}$. Por tanto, la condición $\mathcal{L}[\pi^2(x)]>0$ es equivalente a $\mathcal{L}[P_n^2(x)]>0 \ \ \forall n\in\N_0$. Aplicando de nuevo la ortogonalidad de la sucesión, tenemos que
+    $$
+    \mathcal{L}[P_n^2(x)] = \mathcal{L}[P_n\cdot P_n] =\mathcal{L}[x^n P_n],
+    $$
+    que por (\ref{eq:LxnPn}) es positivo si y solo si $\gamma_n\gamma_{n-1}\cdots\gamma_0>0$, que es equivalente a que $\gamma_n>0$ $\forall n\in\N_0$.
 \end{proof}
 
 \begin{observacion}
@@ -707,9 +711,8 @@ Este teorema tiene una consecuencia inmediata
     \begin{align*}
         \xi_k &= \lim_{n\rightarrow\infty} x_{nk}, &  \eta_k &= \lim_{n\rightarrow\infty} x_{n,n-k+1}
     \end{align*}
-    existen para todo $k=1,\dots,n$.
+    existen para todo $k=1,\dots,n$, pudiendo tomar los valores $\pm \infty$.
 \end{corolario}
-\cb{TODO Preguntar a Lidia por que existen estos límites}
 
 Estos límites nos llevan a la siguiente definición
 
@@ -720,6 +723,8 @@ Estos límites nos llevan a la siguiente definición
 Este intervalo recién presentado es el intervalo cerrado más pequeño que contiene todos los ceros de todos los polinomios de la SPO $\{P_n\}$. Es posible probar que el conjunto de todos los ceros de todos los $P_n$ es un soporte de $\mathcal{L}$, por lo que el verdadero intervalo de ortogonalidad es además el intervalo cerrado más pequeño que es un soporte de $\mathcal{L}$.
 
 \cb{TODO Lidia como demuestro que el conjunto de todos los ceros de todos los $P_n$ es un soporte de $\mathcal{L}$??}
+
+Si cojo sucesion random y pillo el funcional guay definido positivo puedo obtener el intervalo de ortogonalidad a partir de esto. A partir de un funcional y una funcion peso blabla te vuelve a aparecer el intervalo de ortogonalidad con esta cosa porque los ceros son densos en el intervalo de ortogonalidad.
 
 \begin{ejemplo}
     Como ejemplo, véamos los ceros de los polinomios de Tchebichef de tipo I, que están todos situados en el intervalo $[-1,1]$. En la imagen \ref{img:ejemplo-ceros} hemos representado\footnote{En el archivo \texttt{software/ceros.ipynb}, también disponible en la URL \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ceros.ipynb}, puede encontrarse el código con el cual se han generado las imágenes, pudiendo ser ejecutado o incluso modificado para visualizar las gráficas con grados superiores a $5$ u otras familias de polinomios.} gráficamente los polinomios de Tchebichef para $n=2,3,4,5$, asignando los colores rojo, verde, azul y negro respectivamente, señalando los ceros de cada polinomio con su color correspondiente. 
