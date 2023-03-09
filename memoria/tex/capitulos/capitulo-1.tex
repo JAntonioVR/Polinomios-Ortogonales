@@ -64,10 +64,6 @@ En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente co
 
 Sea $\mu$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\mu(x)<\infty$. Se define el espacio de funciones $L_\mu^p[a,b]$ como el conjunto de funciones tales que
 
-
-\cb{REVIEW Cambiada la notación $d\alpha(x)$ por $d\mu$, pero ahora $\mu$ puede confundirse con los momentos $\{\mu_n\}$??}
-
-
 $$
 \int_a^b |f(x)|^p d\mu(x) < +\infty
 $$
@@ -608,9 +604,13 @@ Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este res
 \end{proof}
 
 \begin{observacion}
-    Nótese que el teorema de Favard está descrito partiendo de una sucesión de polinomios ortogonales \textit{mónicos}. Sin embargo, una vez es calculado el funcional, se puede utilizar cualquier otra estandarización. 
+    Nótese que el teorema de Favard está descrito partiendo de una sucesión de polinomios ortogonales \textit{mónicos}. Sin embargo, una vez es calculado el funcional, se puede utilizar cualquier otra estandarización sin cambiar el funcional. 
 
-    \cb{TODO Pedirle a Lidia que me recuerde cómo}
+    Si partimos de una sucesión de polinomios mónicos $\{P_n\}$ y dos sucesiones de números reales $\{\beta_n\}$ y $\{\gamma_n\}$ verificando las condiciones del teorema de Favard, entonces existe un funcional $\mathcal L$ para el cual $\{P_n\}$ es una SPOM. Si $\{Q_n\}=\{c_n P_n\}$ es otra SPO para $\mathcal L$, podemos sustituir $P_n = \dfrac 1 {c_n} Q_n$ en (\ref{eq:ctes-RRTT}) para obtener la relación 
+    $$
+    xQ_n(x) = \dfrac{c_n}{c_{n+1}}Q_{n+1} + \beta_n Q_n + \dfrac{\gamma_n}{c_{n-1}}Q_{n-1}.
+    $$
+
 \end{observacion}
 
 \section{Propiedades de los ceros}
@@ -720,11 +720,13 @@ Estos límites nos llevan a la siguiente definición
     El intervalo cerrado $[\xi_1,\eta_1]$ es conocido como el \textbf{Verdadero Intervalo de Ortogonalidad} de la SPO asociada al funcional $\mathcal{L}$.
 \end{definicion}
 
-Este intervalo recién presentado es el intervalo cerrado más pequeño que contiene todos los ceros de todos los polinomios de la SPO $\{P_n\}$. Es posible probar que el conjunto de todos los ceros de todos los $P_n$ es un soporte de $\mathcal{L}$, por lo que el verdadero intervalo de ortogonalidad es además el intervalo cerrado más pequeño que es un soporte de $\mathcal{L}$.
+Este intervalo recién presentado es el intervalo cerrado más pequeño que contiene todos los ceros de todos los polinomios de la SPO $\{P_n\}$. Es posible probar que el conjunto de todos los ceros de todos los $P_n$, llamémoslo $I$, es un soporte de $\mathcal{L}$, por lo que el verdadero intervalo de ortogonalidad es además el intervalo cerrado más pequeño que es un soporte de $\mathcal{L}$.
 
-\cb{TODO Lidia como demuestro que el conjunto de todos los ceros de todos los $P_n$ es un soporte de $\mathcal{L}$??}
+En muchos casos se presenta una familia de polinomios ortogonales mediante un funcional y un intervalo $(a,b)$ en el cual se verifica la ortogonalidad. El conjunto $I$ de todos los ceros es un conjunto denso en $(a,b)$, de forma que su adherencia, $[\xi_1,\eta_1]$, coindice con el intervalo de ortogonalidad.
 
-Si cojo sucesion random y pillo el funcional guay definido positivo puedo obtener el intervalo de ortogonalidad a partir de esto. A partir de un funcional y una funcion peso blabla te vuelve a aparecer el intervalo de ortogonalidad con esta cosa porque los ceros son densos en el intervalo de ortogonalidad.
+Sin embargo, recordemos que mediante el teorema de Favard también podemos obtener funcionales definidos positivos a partir de una sucesión de polinomios $\{P_n\}$ y sucesiones de números reales $\{\beta_n\}, \{\gamma\}$ verificando ciertas condiciones. Dicho funcional no especifica el intervalo de ortogonalidad, el cual se puede obtener entonces mediante los ceros de los polinomios $\{P_n\}$.
+
+\cb{TODO Demostraciones de todo y preguntar si esto está bien o entendí seriamente mal}
 
 \begin{ejemplo}
     Como ejemplo, véamos los ceros de los polinomios de Tchebichef de tipo I, que están todos situados en el intervalo $[-1,1]$. En la imagen \ref{img:ejemplo-ceros} hemos representado\footnote{En el archivo \texttt{software/ceros.ipynb}, también disponible en la URL \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ceros.ipynb}, puede encontrarse el código con el cual se han generado las imágenes, pudiendo ser ejecutado o incluso modificado para visualizar las gráficas con grados superiores a $5$ u otras familias de polinomios.} gráficamente los polinomios de Tchebichef para $n=2,3,4,5$, asignando los colores rojo, verde, azul y negro respectivamente, señalando los ceros de cada polinomio con su color correspondiente. 
@@ -733,14 +735,12 @@ Si cojo sucesion random y pillo el funcional guay definido positivo puedo obtene
 
     Además, el primer cero de cada polinomio es cada vez menor, de forma que el primer cero negro es el más pequeño. Análogamente, el último cero es cada vez mayor, siendo el negro el más pequeño de todos. Este hecho ejemplifica el corolario \ref{cor:sucesiones-ceros} con $k=1$.
     
-    \begin{figure}
+    \begin{figure}[h]
         \centering
         \includegraphics[width=9cm]{img/C1/ceros.png}
         \caption{Polinomios de Tchebichef de tipo I y sus ceros}
         \label{img:ejemplo-ceros}
     \end{figure}
-
-    \newpage
 
     
 \end{ejemplo}
