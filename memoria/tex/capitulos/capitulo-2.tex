@@ -19,3 +19,194 @@ En el capítulo \ref{chap:introduccionPO} hemos mostrado una amplia introducció
 \end{figure}
 
 En las imágenes \ref{img:graficas-clasicos} podemos ver la representación gráfica, para parámetros concretos que definiremos próximamente, de los polinomios ortogonales de Hermite, Laguerre y Jacobi. Estas tres son las familias que mayor atención recibirán de nuestra parte al ser aquellas cuya ortogonalidad se manifiesta en intervalos reales.
+
+\section{La ecuación de Pearson}
+
+Para empezar, introduciremos una nueva notación para los funcionales de momentos que también se suele utilizar. Sea $\uu$ un funcional de momentos y $\{\mu_n\}$ su sucesión de momentos, entonces denotamos
+\begin{equation}
+    \label{eq:nueva-notacion-funcional}
+    \begin{split}
+        \uu:\mathbb P & \longrightarrow \R \\
+        x^n & \longmapsto \left\langle \uu, x^n \right\rangle = \mu_n
+    \end{split}
+\end{equation}
+
+A lo largo de este capítulo denotaremos como $\prodesc{\uu}{\pi(x)}$ a la aplicación del funcional $\uu$ a un polinomio $\pi(x)$.
+
+Definimos a continuación dos operadores que actuán sobre los funcionales.
+
+\begin{definicion}[Producto por un polinomio]
+    Para cada polinomio $\pi$, definimos un nuevo funcional de momentos a partir de $\uu$ como
+    \begin{equation}
+        \begin{split}
+            \pi\uu:\mathbb P & \longrightarrow \R \\
+            \phi & \longmapsto \prodesc{\pi\uu}{\phi}=\prodesc{\uu}{\pi\phi}
+        \end{split}
+    \end{equation}
+    
+\end{definicion}
+
+\begin{definicion}[Derivada]
+    Definimos el funcional derivada como
+    \begin{equation}
+        \begin{split}
+            D(\uu):\mathbb P & \longrightarrow \R \\
+            \phi & \longmapsto \prodesc{D(\uu)}{\phi}=-\prodesc{\uu}{\phi'}
+        \end{split}
+    \end{equation}
+    
+\end{definicion}
+
+A partir de estos dos operadores y esta nueva notación daremos una primera definición de lo que es una SPO clásica.
+
+\begin{definicion}[SPO Clásica]
+    La SPO $\{P_n  \}$ para el funcional $\uu$ se dice que es \textbf{clásica} (Hermite, Laguerre, Jacobi o Bessel) si existen polinomios $\sigma(x), \tau(x)$ con $\deg(\sigma)\leq 2$ y $\deg(\tau)= 1$ tales que el funcional $\uu$ verifica la ecuación diferencial
+    \begin{equation}
+        \label{eq:Pearson-u}
+        D(\sigma \uu) = \tau \uu
+    \end{equation}   
+    La ecuación (\ref{eq:Pearson-u}) es conocida como la \textbf{ecuación de Pearson}.
+\end{definicion}
+
+En el caso de que la SPO sea ortogonal respecto a una función peso $\rho$, esto es, $\uu$ es de la forma
+\begin{equation}
+    \label{eq:funcional-peso}
+    \prodesc{\uu}{\pi(x)} = \int_a^b \pi(x)\rho(x)dx,
+\end{equation}
+donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$, podemos deducir una condición equivalente.
+
+\begin{lema}
+    \label{lema:equivalencia-pearson}
+    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$,$\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ la SPO respecto a $\uu$. Si la función peso $\rho(x)$ es solución de la ecuación diferencial
+    \begin{equation}
+        \label{eq:Pearson-peso}
+        [\sigma(x)\rho(x)]'=\tau(x)\rho(x)
+    \end{equation}
+    y además verifica las condiciones de frontera 
+    \begin{equation}
+        \label{eq:cond-frontera}
+        \displaystyle\lim_{x\rightarrow a}\sigma(x)\rho(x)x^n = \displaystyle\lim_{x\rightarrow b}\sigma(x)\rho(x)x^n, \ \ \ n\geq 0,
+    \end{equation}
+    entonces la SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}).
+\end{lema}
+\begin{proof}
+    Queremos comprobar la igualdad de funcionales $D(\sigma \uu)=\tau\uu$. Para ello, tengamos en cuenta que dos funcionales lineales son iguales si, y solo si actuán igual sobre una base de $\mathbb P$. Escogemos la base $\{x^n\}_{n\geq 0}$. Entonces tenemos que
+    $$
+    \prodesc{D(\sigma \uu)}{x^n} = -\prodesc{\sigma \uu}{n x^{n-1}}= -\prodesc{\uu}{\sigma(x)n x^{n-1}},
+    $$
+    aplicando (\ref{eq:funcional-peso}) e integración por partes, llegamos a
+    \begin{equation*}
+        \begin{split}
+            \prodesc{D(\sigma \uu)}{x^n} &= -\int_a^b \sigma(x)n x^{n-1}\rho(x)dx = \left\{\begin{array}{ll}
+                u = \sigma(x)\rho(x) & du=[\sigma(x)\rho(x)]'dx \\
+                dv = n x^{n-1}dx & v = x^n
+            \end{array}\right\} \\
+            &= -\underbrace{\left[\sigma(x)\rho(x)x^n\right]_a^b}_{=0\text{ por (\ref{eq:cond-frontera})}}+ \int_a^b x^n [\sigma(x)\rho(x)]'dx\ \ \ \ \  \text{(aplicando (\ref{eq:Pearson-peso}))} \\
+            &= \int_a^b x^n \tau(x)\rho(x)dx = \prodesc{\uu}{\tau(x)x^n} = \prodesc{\tau \uu}{x^n}
+        \end{split}
+    \end{equation*}
+    
+\end{proof}
+
+\cb{REVIEW El recíproco tiene que ser cierto, pero no tengo la demostración }
+
+\section{Deducción de las familias de polinomios ortogonales clásicos}
+
+A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principales familias de polinomios ortogonales. Hemos impuesto que $\tau(x)=Ax+B$ sea un polinomio de grado exactamente $1$, por lo que tenemos cuatro grados de libertad a partir de las posibilidades de $\sigma(x)$, que supondremos mónico:
+
+\begin{enumerate}
+    \item \textbf{Caso I}: $\sigma(x) = 1$, $x\in\R$. En este caso obtendremos los llamados polinomios de Hermite.
+    \item \textbf{Caso II}: $\sigma(x) = x-a$, $x\in[a,\infty)$. Haciendo el cambio de variable lineal $t=-(x-a)/A$ se tiene $\sigma(x) = x$ y $\tau(x)=-x+B$, $x\in[0,\infty)$. Con estos valores calcularemos los polinomios de Laguerre.
+    \item \textbf{Caso III}: $\sigma(x) = (x-a)(b-x)$, $x\in[a,b]$. Con el cambio de variable $x = (b-a)/2t + (a+b)/2$ podemos escribir $\sigma(x)=1-x^2$ y $\tau=Ax+B$, $x\in[-1,1]$. Y así deduciremos los polinomios de Jacobi.
+    \item \textbf{Caso IV}: $\sigma(x) = (x-a)^2$. En este último caso se obtienen los polinomios de Bessel. 
+\end{enumerate}
+
+De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asegurándonos de que las soluciones calculadas verifiquen las condiciones de frontera (\ref{eq:cond-frontera}), habremos hayado las funciones peso $\rho(x)$ para las cuales el funcional (\ref{eq:funcional-peso}) genera una SPO clásica.Veremos seguidamente los casos I, II y III, obviando los polinomios de Bessel.
+
+\subsection{Caso I: Polinomios de Hermite}
+
+Supongamos que $\sigma(x)=1$, $\forall x\in \R$. El caso puede ser reducido a $\tau(x)=-2x$. Tenemos entonces la ecuación diferencial
+$$
+\rho'(x) = -2x \rho(x), \ \ x\in\R.
+$$
+Esta ecuación es de variables separadas, por lo que podemos tomar
+$$
+\int \dfrac{\rho'(x)}{\rho(x)}dx = \int -2x dx \Leftrightarrow \log(\rho(x)) = -x^2 + log(C) \Leftrightarrow \rho(x) = C e^{-x^2} \neq 0 \ \ \forall x \in \R,
+$$
+tomamos $C=1$ y llegamos a 
+\begin{equation}
+    \label{eq:parametros-hermite}
+    \begin{array}{ccc}
+        \sigma(x)=1, & \tau(x)=-2x, & \rho(x) = e^{-x^2}, \ \ \forall x \in \R.
+    \end{array}
+\end{equation}
+Sobre las condiciones de frontera, tenemos que $\displaystyle\lim_{x\rightarrow\pm\infty} e^{-x^2}x^n = 0$ $\forall n\in\N_0$. Por tanto, la sucesión de polinomios ortogonales con respecto al funcional
+\begin{equation}
+    \label{eq:func-hermite}
+    \prodesc{\uu}{\pi(x)} = \int_{-\infty}^\infty \pi(x)e^{-x^2}dx
+\end{equation}
+es clásica, y sus elementos son los \textbf{polinomios de Hermite}.
+
+\subsection{Caso II: Polinomios de Laguerre}
+
+Supongamos que $\sigma(x) = x$ y $\tau(x)=-x+B$ con $x\in[0,+\infty)$. La ecuación (\ref{eq:Pearson-peso}) queda entonces como
+$$
+(x\rho(x))'=(-x+B)\rho(x),
+$$
+que si derivamos el primer producto y agrupamos equivale a $x\rho'(x)=(B-x-1)\rho(x)$, que es de nuevo una ecuación de variables separadas, de manera que
+$$
+\int \dfrac{\rho'(x)}{\rho(x)}dx = \int \dfrac{B-x-1}{x}dx \Leftrightarrow \log(\rho(x)) = B\log(x)-x-\log(x) + \log(C)\Leftrightarrow $$ $$
+ \rho(x) = Ce^{-x}x^{B-1}\neq 0 \ \ \forall x\in[0,+\infty),
+$$
+Tomamos $C=1$ y definimos $\alpha = B-1$, de forma que
+\begin{equation}
+    \label{eq:parametros-laguerre}
+    \begin{array}{cccc}
+        \sigma(x)=x, & \tau(x)=-x+\alpha+1, & \rho(x) = x^{\alpha} e^{-x}\ \ \forall x \in[0,+\infty), & \alpha > -1.
+    \end{array}
+\end{equation}
+La condición $\alpha > -1$ nos asegura que los momentos del funcional serán finitos, es decir, $\mu_n =\int_0^\infty x^nx^{\alpha} e^{-x}dx <\infty$ $\forall n\geq 0$.
+
+En este caso, las condiciones de frontera también se cumplen, pues $\displaystyle\lim_{x\rightarrow 0} x\cdot x^{\alpha}e^{-x}\cdot x^n = \displaystyle\lim_{x\rightarrow \infty} x\cdot x^{\alpha}\cdot e^{-x} x^n = 0$. Así, la SPO con respecto al funcional
+\begin{equation}
+    \label{eq:func-laguerre}
+    \prodesc{\uu}{\pi(x)} = \int_{0}^\infty \pi(x)x^{\alpha} e^{-x}dx, \ \ \alpha > -1
+\end{equation}
+es clásica, y sus elementos son los \textbf{polinomios de Laguerre}.
+
+\subsection{Caso III: Polinomios de Jacobi}
+
+Por último, consideremos $\sigma(x) = 1-x^2$ y $\tau(x)=Ax+B$ con $x\in[-1,1]$. Aplicado a la ecuación (\ref{eq:Pearson-peso}) tenemos
+$$
+((1-x^2)\rho(x))'=(Ax+B)\rho(x),
+$$
+Derivando el primer miembro y agrupando obtenemos a $(1-x^2)\rho'(x)=(Ax+B+2x)\rho(x)$. Si dividimos y multiplicamos el segundo miembro por $\sigma(x)$ y dividimos la ecuación por $\sigma(x)\rho(x)$ obtenemos la ecuación
+$$
+\dfrac{\sigma(x)\rho(x)}{\sigma(x)\rho(x)} = \dfrac{Ax+B}{1-x^2}.
+$$
+Resolveremos esta ecuación en la que $(\sigma\rho)$ es la incógnita. Una vez resuelta podremos deducir la solución de (\ref{eq:Pearson-peso}).
+$$
+\int \dfrac{\sigma(x)\rho(x)}{\sigma(x)\rho(x)} dx = \int \dfrac{Ax+B}{1-x^2}dx\Leftrightarrow $$ $$\log(\sigma(x)\rho(x)) = -\dfrac{A+B}{2}\log(1-x)-\dfrac{A-B}{2}\log(1+x) + \log(C) \Leftrightarrow $$ $$
+ \sigma(x)\rho(x) = C(1-x)^{-\frac{A+B}{2}}(1+x)^{-\frac{A-B}{2}}  \Leftrightarrow$$ $$\rho(x) = C(1-x)^{-\frac{A+B}{2}-1}(1+x)^{-\frac{A-B}{2}-1} \neq 0 \ \ \forall x\in[-1,1].
+$$
+Tomamos $C=1$ y definimos $\alpha = -\frac{A+B}{2}-1$ y $\beta=-\frac{A-B}{2}-1$, obteniendo
+\begin{equation}
+    \label{eq:parametros-jacobi}
+    \begin{array}{c}
+        \sigma(x)=1-x^2,\hspace{2cm} \tau(x)=-(\alpha+\beta+2)x+(\beta-\alpha), \\ 
+        \rho(x) =(1-x)^{\alpha}(1+x)^{\beta}\ \ \forall x \in[-1,1], \ \ \alpha,\beta > -1.
+    \end{array}
+\end{equation}
+
+Al igual que en el caso anterior, las condiciones $\alpha,\beta > -1$ nos aseguran que los momentos del funcional serán finitos, es decir, $\mu_n =\int_{-1}^1 x^n(1-x)^{\alpha}(1+x)^{\beta}dx <\infty$ $\forall n\geq 0$.
+
+Las condiciones de frontera se verifican nuevamente, pues $$\displaystyle\lim_{x\rightarrow \pm 1} (1-x^2)\cdot (1-x)^{\alpha}(1+x)^{\beta}\cdot x^n = 0.$$
+
+Así, la SPO con respecto al funcional
+\begin{equation}
+    \label{eq:func-jacobi}
+    \prodesc{\uu}{\pi(x)} = \int_{-1}^1 \pi(x)(1-x)^{\alpha}(1+x)^{\beta}dx, \ \ \alpha,\beta > -1
+\end{equation}
+es clásica, y sus elementos son los \textbf{polinomios de Jacobi}.
+
+
