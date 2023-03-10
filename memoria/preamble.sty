@@ -38,6 +38,19 @@
 \usepackage{multirow}
 \usepackage{eurosym}
 \usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{%
+	\put(0,0){%
+		\parbox[b][\paperheight]{\paperwidth}{%
+			\vfill
+			\centering
+			\includegraphics[width=\paperwidth,height=\paperheight,%
+			keepaspectratio]{fondo.pdf}%
+			\vfill
+}}}
+
 %\usepackage{cite}
 \usepackage[style=alphabetic]{biblatex}
 \addbibresource{references.bib}
