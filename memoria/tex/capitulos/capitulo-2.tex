@@ -145,7 +145,7 @@ Sobre las condiciones de frontera, tenemos que $\displaystyle\lim_{x\rightarrow\
     \label{eq:func-hermite}
     \prodesc{\uu}{\pi(x)} = \int_{-\infty}^\infty \pi(x)e^{-x^2}dx
 \end{equation}
-es clásica, y sus elementos son los \textbf{polinomios de Hermite}.
+es clásica, y sus elementos son los \textbf{polinomios de Hermite}, normalmente denotados como $\{H_n(x)\}_{n\geq 0}$.
 
 \subsection{Caso II: Polinomios de Laguerre}
 
@@ -172,7 +172,7 @@ En este caso, las condiciones de frontera también se cumplen, pues $\displaysty
     \label{eq:func-laguerre}
     \prodesc{\uu}{\pi(x)} = \int_{0}^\infty \pi(x)x^{\alpha} e^{-x}dx, \ \ \alpha > -1
 \end{equation}
-es clásica, y sus elementos son los \textbf{polinomios de Laguerre}.
+es clásica, y sus elementos son los \textbf{polinomios de Laguerre}, que son denotados con $\{L_n^{(\alpha)}(x)\}_{n\geq 0}$.
 
 \subsection{Caso III: Polinomios de Jacobi}
 
@@ -207,6 +207,22 @@ Así, la SPO con respecto al funcional
     \label{eq:func-jacobi}
     \prodesc{\uu}{\pi(x)} = \int_{-1}^1 \pi(x)(1-x)^{\alpha}(1+x)^{\beta}dx, \ \ \alpha,\beta > -1
 \end{equation}
-es clásica, y sus elementos son los \textbf{polinomios de Jacobi}.
+es clásica, y sus elementos son los \textbf{polinomios de Jacobi}, denotados como $\{P_n^{(\alpha,\beta)}(x)\}_{n\geq 0}$.
+
+\newpage
+
+Resumiendo, tenemos tres familias de polinomios ortogonales clásicos además de la Bessel: Hermite, Laguerre y Jacobi. En la tabla \ref{tab:SPO-clasicas} recogemos los datos más importantes sobre cada una de ellas: la notación, el intervalo de ortogonalidad y las funciones $\sigma(x)$, $\tau(x)$ y $\rho(x)$ involucradas en las ecuaciones de Pearson.
+
+\begin{table}[h]
+    \begin{tabular}{cccccc}
+    \hline
+    \textbf{Familia} & \textbf{Notación}         & \textbf{Intervalo} & \textbf{$\sigma(x)$} & \textbf{$\tau(x)$}                  & \textbf{$\rho(x)$}            \\ \hline\hline
+    Hermite                        & $H_n(x)$                 & $(-\infty,\infty)$ & $1$                  & $-2x$                               & $e^{-x^2}$                    \\ \hline
+    Laguerre                       & $L_n^{(\alpha)}(x)$       & $[0,\infty)$       & $x$                  & $-x+\alpha+1$                       & $x^{\alpha} e^{-x}$           \\ \hline
+    Jacobi                         & $P_n^{(\alpha,\beta)}(x)$ & $[-1,1]$           & $1-x^2$              & $-(\alpha+\beta+2)x+(\beta-\alpha)$ & $(1-x)^{\alpha}(1+x)^{\beta}$ \\ \hline
+    \end{tabular}
+    \caption{Resumen sobre las SPO clásicas}
+    \label{tab:SPO-clasicas}
+\end{table}
 
 
