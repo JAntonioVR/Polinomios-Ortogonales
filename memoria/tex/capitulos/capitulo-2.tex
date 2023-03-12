@@ -226,4 +226,113 @@ Resumiendo, tenemos tres familias de polinomios ortogonales clásicos además de
     \label{tab:SPO-clasicas}
 \end{table}
 
+\section{Caracterizaciones}
+
+Hasta el momento hemos podido conocer las distintas familias de polinomios ortogonales clásicos y su peculiaridad respecto a las distintas formas de presentar la ecuación de Pearson. Sin embargo, estos polinomios cumplen varias propiedades destacables que además los caracterizan como clásicos. Es decir, son los únicos polinomios ortogonales que las verifican. En esta sucesión estudiaremos algunas de estas propiedades.
+
+\subsection{Ortogonalidad de las derivadas}
+
+La primera de estas caracterizaciones atiende a la sucesión $\{P'_n\}$ formada por las derivadas de los elementos de una SPO $\{P_n\}$, que en el caso de los polinomios ortogonales clásicos resulta no sólo ser también una SPO, sino que además también es clásica.
+
+\begin{teorema}
+    Sea $\{P_n\}$ una SPO clásica respecto a la función peso $\rho(x)$. Entonces la sucesión $\{P'_n\}$ es una SPO respecto a $\sigma(x)\rho(x)$.
+\end{teorema}
+\begin{proof}
+    Al ser $\{P_n\}$ una SPO y $\tau(x)$ un polinomio de grado $1$, tenemos que para $k<n$:
+    \begin{equation*}
+        \begin{split}
+            0 &= \int_a^b P_n(x)x^{k-1}\tau(x)\rho(x)dx \\
+            &= \int_a^b P_n(x)x^{k-1}[\sigma(x)\rho(x)]'dx \ \ \text{(por (\ref{eq:Pearson-peso}).)}
+        \end{split}
+    \end{equation*}
+
+    Si aplicamos integración por partes tomando $$\left\{\begin{array}{ll}
+       u=P_n(x)x^{k-1} & du = P'_n(x)x^{k-1} + (k-1)P_n(x)x^{k-2}dx\\
+       dv =  [\sigma(x)\rho(x)]'dx  & v=\sigma(x)\rho(x)
+    \end{array}\right\},$$ tenemos
+    \begin{equation*}
+        0 = \underbrace{\left[P_n(x)x^{k-1}\sigma(x)\rho(x)\right]_a^b}_{=0 \text{ por (\ref{eq:cond-frontera})}} - \int_a^b P'_n(x)x^{k-1}\sigma(x)\rho(x)dx - (k-1)\underbrace{\int_a^b P_n(x)x^{k-2}\sigma(x)\rho(x)dx}_{=0 \text{ por la ortogonalidad de } \{P_n\}}.
+    \end{equation*}
+
+    Por tanto $\int_a^b P'_n(x)x^{k-1}[\sigma(x)\rho(x)]dx=0$ para $k<n$, esto es, $\{P'_n\}$ es una SPO respecto a $\sigma(x)\rho(x)$.
+
+    \cb{REVIEW Faltaría comprobar que $\int_a^b P'_n(x)x^{n-1}[\sigma(x)\rho(x)]dx\neq0$ no? }
+\end{proof}
+
+A partir de este último resultado podemos probar la consecuencia que ya adelantábamos: la sucesión de las derivadas también es clásica.
+
+\begin{corolario}
+    \label{cor:derivadas-clasicas}
+    Si la sucesión $\{P_n\}$ una SPO clásica entonces la sucesión $\{P'_n\}$ también es clásica.
+\end{corolario}
+\begin{proof}
+    Tenemos que $\{P'_n\}$ es una SPO respecto a $\rho_1(x) = \sigma(x)\rho(x)$. Tenemos además que
+    \begin{equation*}
+        \begin{split}
+            [\sigma(x)\rho_1(x)]' &= \sigma(x)[\sigma(x)\rho(x)]'+\sigma'(x)[\sigma(x)\rho(x)] \\
+            &= \sigma(x)\tau(x)\rho(x) + \sigma'(x)[\sigma(x)\rho(x)] \  \ \ (\text{por (\ref{eq:Pearson-peso}) para }\rho(x)) \\
+            &= \underbrace{(\tau(x)+\sigma'(x))}_{:= \tau_1(x)}\rho_1(x).
+        \end{split}
+    \end{equation*}
+    Nótese que $\tau_1(x)=\tau(x)+\sigma'(x)$ es de nuevo un polinomio de grado $1$.
+
+    \cb{REVIEW Faltaría comprobar que cumple las condiciones de frontera, pero he leído en \cite[Página 90]{renato} que las condiciones de frontera se verifican incluso sin tener que resolver la ecuación de Pearson.}
+\end{proof}
+
+Por inducción en las sucesivas derivadas $\{P^{(k)}_n\}$ podemos deducir el siguiente resultado:
+
+\begin{corolario}
+    Si la sucesión $\{P_n\}$ una SPO clásica entonces la sucesión $\{P^{(k)}_n\}$ es una SPO clásica respecto a la función peso $\rho_k(x)=\sigma^k(x)\rho(x)$, que es solución de la ecuación.
+    $$
+    [\sigma(x)\rho_k(x)]' = \tau_k(x) \rho_k(x),
+    $$
+    donde $\tau_k(x)=\tau(x)+k\sigma'(x)$.
+\end{corolario}
+
+\subsection{Ecuación diferencial}
+
+A partir de la ortogonalidad de las derivadas podemos encontrar una interesante ecuación diferencial que veremos también caracteriza a las familias clásicas de polinomios ortogonales.
+
+\begin{teorema}
+    Sea $\{P_n\}$ una SPO clásica respecto a la función peso $\rho(x)$. Entonces cada polinomio $P_n(x)$, $n\in\N_0$ es solución de la ecuación diferencial
+    \begin{equation}
+        \label{eq:ec-dif-clasicos}
+        \sigma(x)P_n''(x) + \tau(x)P'_n(x)+\lambda_n P_n(x) = 0,
+    \end{equation}
+    con $\lambda_n\in\R$.
+\end{teorema}
+\begin{proof}
+    Al ser $\{P_n\}$ una SPO clásica, por el corolario \ref{cor:derivadas-clasicas} $\{P'_n\}$ es ortogonal y clásica respecto a $\rho_1(x)=\sigma(x)\rho(x)$. Esto es, para $k<n$:
+    $$
+    0=\int_a^b P'_n(x)x^k \rho_1(x)dx.
+    $$
+    Si aplicamos integración por partes y las condiciones de frontera (\ref{eq:cond-frontera}), tenemos
+    \begin{equation*}
+        \begin{split}
+            0&= \int_a^b x^k (P'_n(x) \rho_1(x))'dx \\
+            &= \int_a^b x^k (P''_n(x) \rho_1(x)+P'_n(x)\rho_1'(x))dx  \\
+            &= \int_a^b x^k (P''_n(x)\sigma(x)\rho(x)+P'_n(x)\tau(x)\rho(x))dx \ \ \text{(por (\ref{eq:Pearson-peso}))}  \\
+            &= \int_a^b x^k (P''_n(x)\sigma(x)+P'_n(x)\tau(x))\rho(x)dx
+        \end{split}
+    \end{equation*}
+    para todo $k<n$. Por el teorema \ref{th:caracterizacion}, esto significa que la sucesión de polinomios $\{P''_n(x)\sigma(x)+P'_n(x)\tau(x)\}$ es ortogonal respecto a la función peso $\rho$. Pero por el corolario \ref{cor:unicidad-salvo-cte}, la SPO respecto a $\rho$ es única salvo constante multiplicativa, de forma que para todo $n\in\N_0$ existe una constante $\lambda_n\in\R$ tal que
+    $$
+    P''_n(x)\sigma(x)+P'_n(x)\tau(x) = -\lambda_n P_n(x).
+    $$
+    Esto es, $P_n(x)$ es solución de (\ref{eq:ec-dif-clasicos}).
+    
+    \cb{REVIEW Otra vez que tampoco se comprueba el caso $k=n$}
+\end{proof}
+
+Naturalmente, al ser la sucesión de derivadas sucesivas $\{P^{(k)}_n\}$ una SPO clásica, también verificarán su propia ecuación diferencial.
+
+\begin{corolario}
+    Si la sucesión $\{P_n\}$ una SPO clásica, entonces cada polinomio $P^{(k)}_n(x)$, $k\geq 0, n\in\N_0$ es solución de la ecuación diferencial
+    \begin{equation}
+        \label{eq:ec-dif-der-suc}
+        \sigma(x)[P_n^{(k)}(x)]'' + \tau_k(x)[P_n^{(k)}(x)]'+\lambda_n P^{(k)}_n(x) = 0,
+    \end{equation}
+    con $\lambda_n\in\R$ y donde $\tau_k(x)=\tau(x)+k\sigma'(x)$.
+\end{corolario}
+
 
