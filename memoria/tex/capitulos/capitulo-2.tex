@@ -209,8 +209,6 @@ Así, la SPO con respecto al funcional
 \end{equation}
 es clásica, y sus elementos son los \textbf{polinomios de Jacobi}, denotados como $\{P_n^{(\alpha,\beta)}(x)\}_{n\geq 0}$.
 
-\newpage
-
 Resumiendo, tenemos tres familias de polinomios ortogonales clásicos además de la Bessel: Hermite, Laguerre y Jacobi. En la tabla \ref{tab:SPO-clasicas} recogemos los datos más importantes sobre cada una de ellas: la notación, el intervalo de ortogonalidad y las funciones $\sigma(x)$, $\tau(x)$ y $\rho(x)$ involucradas en las ecuaciones de Pearson.
 
 \begin{table}[h]
@@ -228,7 +226,49 @@ Resumiendo, tenemos tres familias de polinomios ortogonales clásicos además de
 
 \section{Caracterizaciones}
 
-Hasta el momento hemos podido conocer las distintas familias de polinomios ortogonales clásicos y su peculiaridad respecto a las distintas formas de presentar la ecuación de Pearson. Sin embargo, estos polinomios cumplen varias propiedades destacables que además los caracterizan como clásicos. Es decir, son los únicos polinomios ortogonales que las verifican. En esta sucesión estudiaremos algunas de estas propiedades.
+Hasta el momento hemos podido conocer las distintas familias de polinomios ortogonales clásicos y su peculiaridad respecto a las distintas formas de presentar la ecuación de Pearson. Sin embargo, estos polinomios cumplen varias propiedades destacables que además los caracterizan como clásicos. Es decir, son los únicos polinomios ortogonales que las verifican. En esta sección estudiaremos algunas de estas propiedades.
+
+Previamente, presentaremos un resultado que nos ahorrará el tener que probar las condiciones de frontera (\ref{eq:cond-frontera}) cuando queramos comprobar que una SPO es clásica.
+
+\begin{proposicion}
+    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$,$\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ la SPO respecto a $\uu$. Entonces $\{P_n\}$ es clásica si, y sólo si la función peso $\rho(x)$ es solución de la ecuación diferencial
+    \begin{equation*}
+        [\sigma(x)\rho(x)]'=\tau(x)\rho(x).
+    \end{equation*}
+\end{proposicion}
+\begin{proof}
+    Notemos que por el lema \ref{lema:equivalencia-pearson} esta proposición es cierta siempre que se cumplan las condiciones de frontera \ref{eq:cond-frontera}. Véamos que para cualquiera de los posibles valores de $\sigma(x)$ y siendo $\tau(x)$ un polinomio de grado $1$ estas condiciones se verifican incluso antes de resolver la ecuación diferencial. En el caso III tenemos que $\sigma(-1)=\sigma(1)=0$, por lo que la igualdad se verifica trivialmente.
+    Sobre el caso II, tenemos $\sigma(x)=x$, de tal forma que $\displaystyle\lim_{x\rightarrow 0} x\rho(x)x^n = 0$. Véamos que ocurre cuando $x\rightarrow\infty$. Fijamos $k\geq 0$. 
+
+    Consideramos la siguiente integral, en la que aplicamos en la primera igualdad el teorema fundamental del cálculo y la regla de Barrow y en la segunda derivamos el integrando y aplicamos la ecuación de Pearson (\ref{eq:Pearson-peso}).
+
+    \begin{equation*}
+            \int_0^t [x^k\sigma(x)\rho(x)]'dx = \left[x^k\sigma(x)\rho(x)\right]_{x=0}^{x=t} = \int_0^t[kx^{k-1}\sigma(x)\rho(x)+x^k\tau(x)\rho(x)]dx
+    \end{equation*}
+
+    Fijémonos en que si expandimos la última integral esta se reduce al cálculo de momentos, los cuales son finitos, por lo que si aplicamos límite cuando $t\rightarrow\infty$ la última integral es finita. De esto deducimos que 
+    $$
+    \lim_{t\rightarrow\infty} \left[x^k\sigma(x)\rho(x)\right]_{x=0}^{x=t} =  \lim_{t\rightarrow\infty} x^k\sigma(x)\rho(x) =: A_k \Rightarrow |A_k|< \infty.
+    $$
+    Por otro lado,
+    $$
+    A_{k+1}= \lim_{t\rightarrow\infty} x^{k+1}\sigma(x)\rho(x) = \lim_{t\rightarrow\infty} x A_k.
+    $$
+    La única forma de que exista $A_{k+1}$ y sea finito es que ese último límite también lo sea, lo cual únicamente se verifica si $A_k=0=\displaystyle\lim_{x\rightarrow 0} x\rho(x)x^n = 0$, $k\geq 0$. Por tanto, las condiciones de frontera también se verifican en el caso II.
+    Por último, el caso I, en el que $\sigma(x)=1$ es análogo al caso II:
+    \begin{equation*}
+        \int_{-t}^t [x^k\rho(x)]'dx = \left[x^k\rho(x)\right]_{x=-t}^{x=t} = \int_{-t}^t[kx^{k-1}\rho(x)+x^k\tau(x)\rho(x)]  dx
+    \end{equation*}
+    Como los momentos son finitos, al tomar límite en la última integral esta es finita. Esto es
+    $$
+    \left|\lim_{t\rightarrow\infty}\left[x^k\rho(x)\right]_{x=-t}^{x=t}\right|=: B_k < \infty.
+    $$
+    Como $B_{k+1}=\displaystyle\lim_{t\rightarrow\infty} x B_k < \infty$, necesariamente $B_k=0$, $k\geq 0$, de donde $\displaystyle\lim_{t\rightarrow-\infty}x^k\rho(x)=\displaystyle\lim_{t\rightarrow-\infty}x^k\rho(x)$.
+\end{proof}
+
+Este resultado afirma que el hecho de que un funcional $\uu$ definido a partir de una función peso $\rho$ verifique (\ref{eq:Pearson-u}) es equivalente a que $\rho$ sea una solución de (\ref{eq:Pearson-peso}). De esta forma, tan sólo con comprobar que una función peso verifica la ecuación de Pearson podemos concluir que una SPO es clásica.
+
+Con esta nueva herramienta presentamos la primera de las propiedades.
 
 \subsection{Ortogonalidad de las derivadas}
 
@@ -254,12 +294,24 @@ La primera de estas caracterizaciones atiende a la sucesión $\{P'_n\}$ formada 
         0 = \underbrace{\left[P_n(x)x^{k-1}\sigma(x)\rho(x)\right]_a^b}_{=0 \text{ por (\ref{eq:cond-frontera})}} - \int_a^b P'_n(x)x^{k-1}\sigma(x)\rho(x)dx - (k-1)\underbrace{\int_a^b P_n(x)x^{k-2}\sigma(x)\rho(x)dx}_{=0 \text{ por la ortogonalidad de } \{P_n\}}.
     \end{equation*}
 
-    Por tanto $\int_a^b P'_n(x)x^{k-1}[\sigma(x)\rho(x)]dx=0$ para $k<n$, esto es, $\{P'_n\}$ es una SPO respecto a $\sigma(x)\rho(x)$.
+    Por tanto $\int_a^b P'_n(x)x^{k-1}[\sigma(x)\rho(x)]dx=0$ para $k<n$. Comprobemos ahora que $\int_a^b P'_n(x)x^{n-1}[\sigma(x)\rho(x)]dx\neq0$.
 
-    \cb{REVIEW Faltaría comprobar que $\int_a^b P'_n(x)x^{n-1}[\sigma(x)\rho(x)]dx\neq0$ no? }
+    Si procedemos análogamente para $k=n$ llegamos a
+    \begin{equation*}
+        \begin{split}
+            \int_a^b P_n(x)x^{n-1}\tau(x)\rho(x)dx = &- \int_a^b P'_n(x)x^{n-1}\sigma(x)\rho(x)dx\\ & - (n-1)\int_a^b P_n(x)x^{n-2}\sigma(x)\rho(x)dx.
+        \end{split}
+    \end{equation*}
+    De esta igualdad deducimos
+    $$
+    \int_a^b P'_n(x)x^{n-1}\sigma(x)\rho(x)dx = - \int_a^b P_n(x)[x^{n-1}\tau(x) + (n-1)x^{n-2}\sigma(x)]\rho(x)dx.
+    $$
+    Y esta integral no es cero únicamente si $x^{n-1}\tau(x) + (n-1)x^{n-2}\sigma(x)$ tiene grado $n$, o equivalentemente si $\Delta(x):=x\,\tau(x) + (n-1)\sigma(x)$ tiene grado 2. Si $\sigma(x)$ tiene grado 0 o 1 es claro que $\Delta(x)$ tendrá grado 2. Si $\sigma(x)$ tiene grado 2 entonces estamos en el caso III, en el que $\sigma(x)=1-x^2$ y $\tau(x)=-(\alpha+\beta+2)x+\beta -\alpha$. Con esta asunción, $x\,\tau(x)$ tiene coeficiente líder negativo y $(n-1)\sigma(x)$ también, por lo que el coeficiente de grado $2$ de $\Delta(x)$ será no nulo y por tanto $\deg(\Delta)=2$. Es decir, $\int_a^b P'_n(x)x^{n-1}\sigma(x)\rho(x)dx \neq 0$.
+    
+    Esto es, $\{P'_n\}$ es una SPO respecto a $\sigma(x)\rho(x)$.
 \end{proof}
 
-A partir de este último resultado podemos probar la consecuencia que ya adelantábamos: la sucesión de las derivadas también es clásica.
+A partir de este último resultado ya podemos probar la consecuencia que ya adelantábamos: la sucesión de las derivadas también es clásica.
 
 \begin{corolario}
     \label{cor:derivadas-clasicas}
@@ -274,9 +326,7 @@ A partir de este último resultado podemos probar la consecuencia que ya adelant
             &= \underbrace{(\tau(x)+\sigma'(x))}_{:= \tau_1(x)}\rho_1(x).
         \end{split}
     \end{equation*}
-    Nótese que $\tau_1(x)=\tau(x)+\sigma'(x)$ es de nuevo un polinomio de grado $1$.
-
-    \cb{REVIEW Faltaría comprobar que cumple las condiciones de frontera, pero he leído en \cite[Página 90]{renato} que las condiciones de frontera se verifican incluso sin tener que resolver la ecuación de Pearson.}
+    Nótese que $\tau_1(x)=\tau(x)+\sigma'(x)$ es de nuevo un polinomio de grado $1$. Por tanto, $\rho_1$ es solución de la ecuación de Pearson, por lo que $\{P'_n\}$ es una SPO clásica.
 \end{proof}
 
 Por inducción en las sucesivas derivadas $\{P^{(k)}_n\}$ podemos deducir el siguiente resultado:
