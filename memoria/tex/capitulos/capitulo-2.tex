@@ -339,7 +339,7 @@ Por inducción en las sucesivas derivadas $\{P^{(k)}_n\}$ podemos deducir el sig
     donde $\tau_k(x)=\tau(x)+k\sigma'(x)$.
 \end{corolario}
 
-\subsection{Ecuación diferencial}
+\subsection{Ecuación diferencial hipergeométrica}
 
 A partir de la ortogonalidad de las derivadas podemos encontrar una interesante ecuación diferencial que veremos también caracteriza a las familias clásicas de polinomios ortogonales.
 
@@ -389,4 +389,112 @@ Naturalmente, al ser la sucesión de derivadas sucesivas $\{P^{(k)}_n\}$ una SPO
     con $\lambda_n\in\R$ y donde $\tau_k(x)=\tau(x)+k\sigma'(x)$.
 \end{corolario}
 
+De forma general, la ecuación (\ref{eq:ec-dif-clasicos}) es normalmente conocida como la \textbf{ecuación diferencial hipergeométrica}:
 
+\begin{equation}
+    \label{eq:hipergeometrica}
+    \sigma(x)y'' + \tau(x) y' + \lambda y = 0,
+\end{equation}
+donde $ \deg(\sigma)\leq 2, \deg(\tau)\leq 1$.
+
+Esta ecuación veremos próximamente que es de hecho equivalente a la ecuación de Pearson. 
+
+Supongamos ahora que la ecuación (\ref{eq:hipergeometrica}) admite una solución polinómica de grado $n$, digamos $y_n(x) = \sum_{k=0}^n c_k x^k$, con coeficiente líder $c_n\neq 0$. Por otro lado, sea $\rho(x)$ una solución de la ecuación de Pearson (\ref{eq:Pearson-peso}):
+\begin{equation*}
+    [\sigma(x)\rho(x)]'=\tau(x)\rho(x) \tag{\ref{eq:Pearson-peso}}.
+\end{equation*}
+Entonces podemos escribir la ecuación (\ref{eq:hipergeometrica}) en su forma \textbf{simétrica} o \textbf{conjugada}:
+\begin{equation}
+    \label{eq:hipergeometrica-conjugada}
+    [\rho(x)\sigma(x)y']' + \lambda \rho(x) y = 0.
+\end{equation}
+
+Como vemos, las soluciones de la ecuación de Pearson y las soluciones de la ecuación hipergeométrica están íntimamente relacionadas. Benjamin Olinde Rodrigues (1795--1851) demostró que las soluciones polinómicas de la EDO (\ref{eq:hipergeometrica}) pueden escribirse de una peculiar y compacta forma hoy llamada fórmula de Rodrigues, que veremos que también caracteriza a los polinomios ortogonales clásicos.
+
+\subsection{Fórmula de Rodrigues}
+
+Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi (1827) introdujeron una fórmula inicialmente definida para los polinomios de Legendre, posteriormente extendida a todas las soluciones polinómicas de la ecuación hipergeométrica. El nombre de fórmula de Rodrigues fue propuesto por Eduard Heine en 1878, después de que Hermite señalara que fue Rodrigues el primero en descubrirlo. Ya anunciada la peculiaridad de esta fórmula, presentamos su aspecto y demostración en el siguiente resultado.
+
+\begin{teorema}[\textbf{Fórmula de Rodrigues}]
+    Las soluciones polinómicas de la ecuación hipergeométrica (\ref{eq:hipergeometrica}) pueden ser expresadas como
+    \begin{equation}
+        \label{eq:formula-rodrigues}
+        y_n(x) = \dfrac 1 {\rho(x)} \dfrac{d^n}{dx^n} (\rho(x) \sigma^n(x)),
+    \end{equation}
+    donde $\rho(x)$ es una solución de la ecuación de Pearson (\ref{eq:Pearson-peso}).
+\end{teorema}
+\begin{proof}
+    Por simplicidad en la notación, en esta demostración será omitida y asumida la dependencia de $x$ en las distintas funciones.
+    Al ser $\rho$ una solución de la ecuación de Pearson (\ref{eq:Pearson-peso}), tenemos que
+    \begin{equation*}
+        \begin{split}
+            \sigma(\rho \sigma^n)' &= \sigma (\sigma^{n-1}\cdot \sigma \, \rho )' \\
+            &= \sigma ((n-1)\sigma^{n-2}\sigma'\sigma\rho + \sigma^{n-1}\tau\rho) \\
+            &= \rho \sigma^n ((n-1)\sigma'+\tau),
+        \end{split}
+    \end{equation*}
+
+    \begin{equation}
+        \label{eq:rodrigues1}
+        \sigma(\rho \sigma^n)'=\rho \sigma^n ((n-1)\sigma'+\tau)
+    \end{equation}
+
+    Derivamos ahora la ecuación (\ref{eq:rodrigues1}) $n+1$ veces y dividimos entre la función peso $\rho(x)$. Para dividir la ecuación (\ref{eq:rodrigues1}) $n+1$ veces aplicamos la fórmula de Leibniz y tenemos en cuenta que, como $\sigma$ tiene grado a lo sumo 2 el miembro de la izquierda se anularía a partir de la tercera derivada. Análogamente, como $\sigma',\tau$ tienen grado a lo sumo 1 el miembro derecho se anularía a partir de la segunda derivada. Así:
+
+    $$
+    \frac{d^{n+1}}{d x^{n+1}}\left(\sigma(\rho \sigma^n)'\right)= \sigma \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) + (n+1)\sigma'\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) + \frac{(n+1)n}{2}\sigma''\frac{d^{n}}{d x^{n}} \left(\rho\sigma^n \right),
+    $$
+    $$
+    \frac{d^{n+1}}{d x^{n+1}}\left(\rho \sigma^n ((n-1)\sigma'+\tau)\right) = ((n-1)\sigma'+\tau)\frac{d^{n+1}}{d x^{n+1}}\left(\rho\sigma^n \right) + (n+1)\left((n-1)\sigma'' + \tau'\right)\frac{d^{n}}{d x^{n}}\left(\rho\sigma^n \right)
+    $$
+    Igualando los segundos miembros de ambas igualdades y dividiendo entre $\rho$ obtenemos
+
+    \begin{multline}
+        \label{eq:rodrigues2}
+        \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) + \frac{(n+1)\sigma'}{\rho}\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) + \frac{(n+1)n\sigma''}{2\rho}\frac{d^{n}}{d x^{n}} \left(\rho\sigma^n \right) =\\  \frac{(n-1)\sigma'+\tau}{\rho}\frac{d^{n+1}}{d x^{n+1}}\left(\rho\sigma^n \right) + \frac{(n+1)\left((n-1)\sigma'' + \tau'\right)}{\rho}\frac{d^{n}}{d x^{n}}\left(\rho\sigma^n \right)
+    \end{multline}
+    
+    Nuestro objetivo ahora es manipular (\ref{eq:rodrigues2}) de forma que podamos comprobar que una función $y_n$ dada como en (\ref{eq:formula-rodrigues}) es una solución de la ecuación hipergeométrica (\ref{eq:hipergeometrica}). Si en (\ref{eq:rodrigues2}) agrupamos términos y teniendo en cuenta la definición de $y_n$, tenemos la ecuación
+    \begin{equation}
+        \label{eq:rodrigues3}
+        \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) + \frac{2\sigma'-\tau}{\rho} \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\frac{n^2-n-2}{2}\sigma'' + (n+1)\tau'\right)y_n =0
+    \end{equation}
+
+    seguidamente, debemos ajustar la ecuación de manera que los factores $1/\rho$ solo tengan $n$ derivadas a su derecha. Para ello nos ayudamos de la siguiente identidad:
+    \begin{equation}
+        \label{eq:rodrigues4}
+        \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) = \sigma \left(\dfrac 1 {\rho} \dfrac{d^n}{dx^n} (\rho\sigma^n)\right)'' - 2\sigma (1/\rho)' \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) -\sigma (1/\rho)'' \dfrac{d^n}{dx^n} (\rho\sigma^n).
+    \end{equation}
+    Esta igualdad se puede deducir sin más que derivar dos veces el producto $\left(\dfrac 1 {\rho}\right)\cdot\nolinebreak\left(\dfrac{d^n}{dx^n} (\rho\sigma^n)\right)$ utilizando la fórmula de Leibniz e intercambiando miembros en la igualdad. Si calculamos explícitamente las derivadas primera y segunda de $1/\rho$ y aplicamos que, como consecuencia de la ecuación de Pearson (\ref{eq:Pearson-peso}), $\rho' = \rho\frac{\tau-\sigma'}{\sigma}$, la ecuación (\ref{eq:rodrigues4}) puede reducirse a 
+    \begin{equation}
+        \label{eq:rodrigues5}
+        \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) = \sigma y_n'' + \frac{2(\tau-\sigma')}\rho\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\sigma'' - \tau' - \dfrac{\tau-\sigma'}\rho\right)y_n.
+    \end{equation}
+
+    Si ahora sustituimos (\ref{eq:rodrigues5}) en (\ref{eq:rodrigues3}), con algunas simplificaciones obtenemos
+    \begin{equation}
+        \sigma y_n'' + \frac{\tau}{\rho} \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\frac{n^2-n}{2}\sigma''+n\tau'-\frac{\tau(\tau-\sigma')}{\sigma}  \right)y_n = 0.
+    \end{equation}
+    El último paso es aplicar la identidad 
+    \begin{equation}
+        \label{eq:rodrigues6}
+        \frac{\tau}{\rho}\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) = \tau y_n'-\frac{\tau(\tau-\sigma')}{\sigma}y_n.
+    \end{equation}
+    De forma similar a la ecuación (\ref{eq:rodrigues5}), esta expresión se obtiene al derivar una sola vez el producto $\left(\dfrac 1 {\rho}\right)\cdot\nolinebreak\left(\dfrac{d^n}{dx^n} (\rho\sigma^n)\right)$, intercambiando miembros de la igualdad y teniendo en cuenta el valor de $\rho'$ deducido de la ecuación de Pearson. 
+
+    Sustituyendo (\ref{eq:rodrigues6}) en (\ref{eq:rodrigues5}) llegamos finalmente a 
+    \begin{equation}
+        \sigma y_n'' + \tau y_n' - \left(\frac{n^2-n}{2}\sigma'' + n\tau' \right)y_n =0.
+    \end{equation}
+    
+    Como $\deg\sigma\leq 2,  \deg\tau\leq 1$, tenemos que $\frac{n^2-n}{2}\sigma'' + n\tau'$ es una constante, por lo que concluimos que $y_n$ en efecto es una solución de (\ref{eq:hipergeometrica}).
+    
+    Para finalizar, tenemos que probar que la solución $y_n$ dada por la fórmula de Rodrigues (\ref{eq:formula-rodrigues}) es un polinomio de grado $n$. Observemos que, aplicando de nuevo la fórmula de Leibniz para la derivada, tendríamos
+    
+    $$
+    y_n = \frac 1 \rho \sum_{k=0}^n \binom{n}{k} \frac{d^k \rho}{d x^k} \frac{d^{n-k} \sigma^n}{d x^{n-k}}.
+    $$
+    Las derivadas $(n-k)$-ésimas de $\sigma^n$ resultan en $\sigma^k$ multiplicado por un polinomio de grado $n$. Por su parte, derivar $k$ veces $\rho$, si aplicamos sucesivamente $\rho' = \rho\frac{\tau-\sigma'}{\sigma}$ obtenemos un polinomio de grado $n$ multiplicado por $\rho/\sigma^k$. Así, al multiplicar los $\sigma^k$ se cancelan, obteniendo finalmente una suma de polinomios multiplicada por $\rho$, que es cancelada por el término $1/\rho$ que queda fuera de la sumatoria. 
+
+    \cb{REVIEW el último párrafo tiene lagunas}
+\end{proof}
