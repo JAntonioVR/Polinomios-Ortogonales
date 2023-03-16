@@ -353,9 +353,10 @@ A partir de la ortogonalidad de las derivadas podemos encontrar una interesante 
 \end{teorema}
 \begin{proof}
     Al ser $\{P_n\}$ una SPO clásica, por el corolario \ref{cor:derivadas-clasicas} $\{P'_n\}$ es ortogonal y clásica respecto a $\rho_1(x)=\sigma(x)\rho(x)$. Esto es, para $k<n$:
-    $$
-    0=\int_a^b P'_n(x)x^k \rho_1(x)dx.
-    $$
+    \begin{equation}
+        \label{eq:integral-dem}
+        0=\int_a^b P'_n(x)(x^k)' \rho_1(x)dx.
+    \end{equation}
     Si aplicamos integración por partes y las condiciones de frontera (\ref{eq:cond-frontera}), tenemos
     \begin{equation*}
         \begin{split}
@@ -365,13 +366,16 @@ A partir de la ortogonalidad de las derivadas podemos encontrar una interesante 
             &= \int_a^b x^k (P''_n(x)\sigma(x)+P'_n(x)\tau(x))\rho(x)dx
         \end{split}
     \end{equation*}
-    para todo $k<n$. Por el teorema \ref{th:caracterizacion}, esto significa que la sucesión de polinomios $\{P''_n(x)\sigma(x)+P'_n(x)\tau(x)\}$ es ortogonal respecto a la función peso $\rho$. Pero por el corolario \ref{cor:unicidad-salvo-cte}, la SPO respecto a $\rho$ es única salvo constante multiplicativa, de forma que para todo $n\in\N_0$ existe una constante $\lambda_n\in\R$ tal que
+    para todo $k<n$. Análogamente, teniendo en cuenta que para $k=n$ la integral (\ref{eq:integral-dem}) no se anula, podemos comprobar que
+    $$
+    \int_a^b x^n (P''_n(x)\sigma(x)+P'_n(x)\tau(x))\rho(x)dx  \neq 0.
+    $$
+    
+    Por el teorema \ref{th:caracterizacion}, esto significa que la sucesión de polinomios $\{P''_n(x)\sigma(x)+P'_n(x)\tau(x)\}$ es ortogonal respecto a la función peso $\rho$. Pero por el corolario \ref{cor:unicidad-salvo-cte}, la SPO respecto a $\rho$ es única salvo constante multiplicativa, de forma que para todo $n\in\N_0$ existe una constante $\lambda_n\in\R$ tal que
     $$
     P''_n(x)\sigma(x)+P'_n(x)\tau(x) = -\lambda_n P_n(x).
     $$
     Esto es, $P_n(x)$ es solución de (\ref{eq:ec-dif-clasicos}).
-    
-    \cb{REVIEW Otra vez que tampoco se comprueba el caso $k=n$}
 \end{proof}
 
 Naturalmente, al ser la sucesión de derivadas sucesivas $\{P^{(k)}_n\}$ una SPO clásica, también verificarán su propia ecuación diferencial.
