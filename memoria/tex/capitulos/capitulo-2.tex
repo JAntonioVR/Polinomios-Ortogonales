@@ -315,7 +315,12 @@ A partir de este último resultado ya podemos probar la consecuencia que ya adel
 
 \begin{corolario}
     \label{cor:derivadas-clasicas}
-    Si la sucesión $\{P_n\}$ una SPO clásica entonces la sucesión $\{P'_n\}$ también es clásica.
+    Si la sucesión $\{P_n\}$ una SPO clásica respecto a la función peso $\rho(x)$, entonces la sucesión $\{P'_n\}$ también es clásica respecto $\rho_1(x)=\sigma(x)\rho(x)$, que es solución de la ecuación de Pearson
+    \begin{equation}
+        \label{eq:pearson-derivada}
+        [\sigma(x)\rho_1(x)]' = \tau_1(x) \rho_1(x),
+    \end{equation}
+    donde $\tau_1(x)=\tau(x)+\sigma'(x)$.
 \end{corolario}
 \begin{proof}
     Tenemos que $\{P'_n\}$ es una SPO respecto a $\rho_1(x) = \sigma(x)\rho(x)$. Tenemos además que
@@ -323,7 +328,7 @@ A partir de este último resultado ya podemos probar la consecuencia que ya adel
         \begin{split}
             [\sigma(x)\rho_1(x)]' &= \sigma(x)[\sigma(x)\rho(x)]'+\sigma'(x)[\sigma(x)\rho(x)] \\
             &= \sigma(x)\tau(x)\rho(x) + \sigma'(x)[\sigma(x)\rho(x)] \  \ \ (\text{por (\ref{eq:Pearson-peso}) para }\rho(x)) \\
-            &= \underbrace{(\tau(x)+\sigma'(x))}_{:= \tau_1(x)}\rho_1(x).
+            &= \underbrace{(\tau(x)+\sigma'(x))}_{\tau_1(x)}\rho_1(x).
         \end{split}
     \end{equation*}
     Nótese que $\tau_1(x)=\tau(x)+\sigma'(x)$ es de nuevo un polinomio de grado $1$. Por tanto, $\rho_1$ es solución de la ecuación de Pearson, por lo que $\{P'_n\}$ es una SPO clásica.
@@ -332,10 +337,11 @@ A partir de este último resultado ya podemos probar la consecuencia que ya adel
 Por inducción en las sucesivas derivadas $\{P^{(k)}_n\}$ podemos deducir el siguiente resultado:
 
 \begin{corolario}
-    Si la sucesión $\{P_n\}$ una SPO clásica entonces la sucesión $\{P^{(k)}_n\}$ es una SPO clásica respecto a la función peso $\rho_k(x)=\sigma^k(x)\rho(x)$, que es solución de la ecuación.
-    $$
-    [\sigma(x)\rho_k(x)]' = \tau_k(x) \rho_k(x),
-    $$
+    Si la sucesión $\{P_n\}$ una SPO clásica entonces la sucesión $\{P^{(k)}_n\}$ es una SPO clásica respecto a la función peso $\rho_k(x)=\sigma^k(x)\rho(x)$, que es solución de la ecuación
+    \begin{equation}
+        \label{eq:pearson-derivada-k}
+        [\sigma(x)\rho_k(x)]' = \tau_k(x) \rho_k(x),
+    \end{equation}
     donde $\tau_k(x)=\tau(x)+k\sigma'(x)$.
 \end{corolario}
 
@@ -344,6 +350,7 @@ Por inducción en las sucesivas derivadas $\{P^{(k)}_n\}$ podemos deducir el sig
 A partir de la ortogonalidad de las derivadas podemos encontrar una interesante ecuación diferencial que veremos también caracteriza a las familias clásicas de polinomios ortogonales.
 
 \begin{teorema}
+    \label{th:ec-hipergeometrica}
     Sea $\{P_n\}$ una SPO clásica respecto a la función peso $\rho(x)$. Entonces cada polinomio $P_n(x)$, $n\in\N_0$ es solución de la ecuación diferencial
     \begin{equation}
         \label{eq:ec-dif-clasicos}
@@ -413,7 +420,7 @@ Como vemos, las soluciones de la ecuación de Pearson y las soluciones de la ecu
 
 \subsection{Fórmula de Rodrigues}
 
-Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi (1827) introdujeron una fórmula inicialmente definida para los polinomios de Legendre, posteriormente extendida a todas las soluciones polinómicas de la ecuación hipergeométrica. El nombre de fórmula de Rodrigues fue propuesto por Eduard Heine en 1878, después de que Hermite señalara que fue Rodrigues el primero en descubrirlo. Ya anunciada la peculiaridad de esta fórmula, presentamos su aspecto y demostración en el siguiente resultado.
+Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi (1827) introdujeron una fórmula inicialmente definida para los polinomios de Legendre, posteriormente extendida a todas las soluciones polinómicas de la ecuación hipergeométrica. El nombre de fórmula de Rodrigues fue propuesto por Eduard Heine en 1878, después de que Hermite recuperara en 1860 el trabajo original de Rodrigues y señalara que fue él el primero en descubrir esta fórmula. Ya anunciada la peculiaridad de esta fórmula, presentamos su aspecto y demostración en el siguiente resultado.
 
 \begin{teorema}[\textbf{Fórmula de Rodrigues}]
     Las soluciones polinómicas de la ecuación hipergeométrica (\ref{eq:hipergeometrica}) pueden ser expresadas como
@@ -439,7 +446,7 @@ Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi 
         \sigma(\rho \sigma^n)'=\rho \sigma^n ((n-1)\sigma'+\tau)
     \end{equation}
 
-    Derivamos ahora la ecuación (\ref{eq:rodrigues1}) $n+1$ veces y dividimos entre la función peso $\rho(x)$. Para dividir la ecuación (\ref{eq:rodrigues1}) $n+1$ veces aplicamos la fórmula de Leibniz y tenemos en cuenta que, como $\sigma$ tiene grado a lo sumo 2 el miembro de la izquierda se anularía a partir de la tercera derivada. Análogamente, como $\sigma',\tau$ tienen grado a lo sumo 1 el miembro derecho se anularía a partir de la segunda derivada. Así:
+    Derivamos ahora la ecuación (\ref{eq:rodrigues1}) $n+1$ veces y dividimos entre la función peso $\rho(x)$. Para dividir la ecuación (\ref{eq:rodrigues1}) $n+1$ veces aplicamos la fórmula de Leibniz\footnote{Fórmula de Leibniz: Sean $u,v:I\longrightarrow\R$ dos funciones reales $n$-veces derivables en $I\subseteq\R$, entonces se verifica en I que $(uv)^{(n)}=\nolinebreak\sum_{k=0}^n \binom{n}{k} u^{(k)}v^{(n-k)}$.} y tenemos en cuenta que, como $\sigma$ tiene grado a lo sumo 2 el miembro de la izquierda se anularía a partir de la tercera derivada. Análogamente, como $\sigma',\tau$ tienen grado a lo sumo 1 el miembro derecho se anularía a partir de la segunda derivada. Así:
 
     $$
     \frac{d^{n+1}}{d x^{n+1}}\left(\sigma(\rho \sigma^n)'\right)= \sigma \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) + (n+1)\sigma'\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) + \frac{(n+1)n}{2}\sigma''\frac{d^{n}}{d x^{n}} \left(\rho\sigma^n \right),
@@ -497,4 +504,56 @@ Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi 
     Las derivadas $(n-k)$-ésimas de $\sigma^n$ resultan en $\sigma^k$ multiplicado por un polinomio de grado $n$. Por su parte, derivar $k$ veces $\rho$, si aplicamos sucesivamente $\rho' = \rho\frac{\tau-\sigma'}{\sigma}$ obtenemos un polinomio de grado $n$ multiplicado por $\rho/\sigma^k$. Así, al multiplicar los $\sigma^k$ se cancelan, obteniendo finalmente una suma de polinomios multiplicada por $\rho$, que es cancelada por el término $1/\rho$ que queda fuera de la sumatoria. 
 
     \cb{REVIEW el último párrafo tiene lagunas}
+
+    \cb{TODO incluir la expresión del $\lambda_n$}
 \end{proof}
+
+Como ya anunciamos en el teorema \ref{th:ec-hipergeometrica}, los polinomios clásicos son soluciones polinómicas de la ecuación diferencial hipergeométrica. De acuerdo con este último resultado, podemos escribir los polinomios ortogonales clásicos mediante la fórmula de Rodrigues (\ref{eq:formula-rodrigues}). Lo habitual es multiplicar la fórmula de Rodrigues por una constante $B_n$, la cual depende de la familia y de la estandarización que se desee. De esta forma, si $\{P_n\}$ es una SPO clásica respecto a la función peso $\rho(x)$, entonces
+\begin{equation}
+    \label{eq:formula-rodrigues-pol}
+    P_n(x) = \dfrac {B_n}{\rho(x)} \frac{d^n}{d x^n}(\rho(x)\sigma^n(x)). 
+\end{equation} 
+
+Y como ya anunciamos anteriormente, la fórmula de Rodrigues caracteriza a los polinomios ortogonales clásicos.
+
+\begin{teorema}
+    Si una SPO $\{P_n\}$ respecto a una función peso $\rho(x)$ se puede expresar mediante la fórmula de Rodrigues (\ref{eq:formula-rodrigues-pol}), entonces $\{P_n\}$ es una SPO clásica.
+\end{teorema}
+\begin{proof}
+    Si tomamos $n=1$ en (\ref{eq:formula-rodrigues-pol}), obtenemos
+    $$
+    \frac{P_1(x)}{B_1}\rho(x) = [\rho(x)\sigma(x)]'.
+    $$
+    Si denotamos $\tau(x):=\frac{1}{B_1}P_1(x)$, que es claramente un polinomio de grado $1$, tenemos que $\rho(x)$ verifica la ecuación de Pearson (\ref{eq:Pearson-peso}), por lo que $\{P_n\}$ es clásica.
+\end{proof}
+
+El conjunto completo de teoremas e implicaciones demostradas hasta el momento conforma el siguiente teorema de caracterización.
+
+\begin{teorema}
+    Sea $\{P_n\}$ una SPO reales respecto a un funcional $\uu$ definido como en (\ref{eq:funcional-peso}) a partir de la función peso $\rho(x)$. Sean $\sigma(x), \tau(x)$ dos polinomios de grado a lo sumo 2 y exactamente 1 respectivamente. Entonces las siguientes afirmaciones son equivalentes:
+    \begin{enumerate}
+        \item $\{P_n\}$ es una SPO clásica respecto a la función peso $\rho(x)$, solución de la EDO (\ref{eq:Pearson-peso}).
+        \item La sucesión de derivadas $\{P_n'\}$ es una SPO clásica respecto a la función peso $\rho_1(x)=\sigma(x)\rho(x)$, solución de la EDO (\ref{eq:pearson-derivada}).
+        \item La sucesión de derivadas $k$-ésimas $\{P_n^{(k)}\}$ es una SPO clásica respecto a la función peso $\rho_k(x)=\sigma^k(x)\rho(x)$, solución de la EDO (\ref{eq:pearson-derivada-k}).
+        \item Cada polinomio $P_n(x)$ es solución de la ecuación diferencial hipergeométrica (\ref{eq:hipergeometrica}).
+        \item $\{P_n\}$ puede ser expresado mediante la fórmula de Rodrigues (\ref{eq:formula-rodrigues-pol}).
+    \end{enumerate} 
+\end{teorema}
+
+\begin{ejemplo}[Fórmula de Rodrigues de los polinomios de Jacobi]
+    Pongamos en práctica lo aprendido a partir de un ejemplo en el que emplearemos lo que sabemos hasta el momento de los polinomios de Jacobi. 
+    Atendiendo a la tabla \ref{tab:SPO-clasicas}, sabemos que 
+    \begin{align*}
+        \sigma(x)&=1-x^2, & \tau(x) &=-(\alpha+\beta+2)x+(\beta-\alpha) & \rho(x)&=(1-x)^\alpha (1+x)^\beta,
+    \end{align*}
+    con $x\in[-1,1], \alpha,\beta>-1$. Con estos datos, tenemos que los polinomios de Jacobi $P_n^{(\alpha,\beta)}(x)$ son soluciones de la ecuación hipergeométrica
+    $$
+    (1-x^2)y''-((\alpha+\beta+2)x+ \alpha - \beta)y' + n(n+\alpha+\beta+1)y=0.
+    $$
+    
+    Y la fórmula de Rodrigues, teniendo en cuenta que se suele tomar $B_n=\frac{(-1)^n}{2^n n!}$, sería:
+    $$
+    P_n^{(\alpha,\beta)}(x) = \frac{(-1)^n}{2^n n!} (1-x)^{-\alpha}(1+x)^{-\beta}\frac{d^n}{d x^n}(1-x)^{n+\alpha}(1+x)^{n+\beta}.
+    $$
+\end{ejemplo}
+
