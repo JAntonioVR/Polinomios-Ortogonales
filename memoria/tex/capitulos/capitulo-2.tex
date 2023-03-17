@@ -541,6 +541,7 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
 \end{teorema}
 
 \begin{ejemplo}[Fórmula de Rodrigues de los polinomios de Jacobi]
+    \label{ej:rodrigues-jacobi}
     Pongamos en práctica lo aprendido a partir de un ejemplo en el que emplearemos lo que sabemos hasta el momento de los polinomios de Jacobi. 
     Atendiendo a la tabla \ref{tab:SPO-clasicas}, sabemos que 
     \begin{align*}
@@ -557,3 +558,33 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
     $$
 \end{ejemplo}
 
+\begin{ejemplo}[Cálculo de la SPO de Hermite mediante la fórmula de Rodrigues]
+    Recordemos el ejemplo \ref{ej:hermite-rr3t}, en el cual utilizamos la versión más primitiva de la RR3T para calcular de forma explícita los polinomios mónicos de Hermite. La fórmula de Rodrigues nos proporciona un nuevo método de cálculo explícito de polinomios, que es el que pondremos en práctica en este caso. En el archivo \texttt{software/Rodrigues.ipynb} se ha implementado el código necesario para este ejemplo.
+
+    De manera análoga a lo realizado en el ejemplo \ref{ej:rodrigues-jacobi} y sabiendo que, por convenio, lo usual en los polinomios de Hermite es tomar $B_n=(-1)^n$, podemos deducir la siguiente fórmula de Rodrigues. 
+    $$
+    H_n(x)=(-1)^n e^{x^2}\frac{d^n}{dx^n}e^{x^{-2}}
+    $$
+    Así, obtenemos los polinomios de Hermite estándar, los cuales se pueden consultar en la segunda columna de la tabla \ref{tab:hermite-rodrigues}. En este caso se ha hecho también un análisis de tiempos de ejecución siguiendo la misma metodología que en el ejemplo \ref{ej:hermite-rr3t}. Es decir, se han realizado 10 ejecuciones independientes de cada polinomio y el dato presentado en la cuarta columna de la tabla es la media de estas diez ejecuciones. Como puede observarse, el cálculo mediante la fórmula de Rodrigues mejora considerablemente los tiempos de ejecución de la RR3T, de forma que para ninguno de estos grados alcanza media décima de ejecución, mientras que la RR3T alcanzaba el orden de segundos a partir de grado 7.
+
+    De hecho, con la fórmula de Rodrigues se ha conseguido calcular el polinomio de Hermite de grado 500 en tan sólo 15 segundos, lo cual contrasta con los casi 60 segundos que tardó la RR3T en calcular el polinomio de grado 15.
+
+    \begin{table}[]
+        \begin{tabular}{ccccc} \hline
+        $n$ & $H_n(x)$                                                             & RR3T                    & Rodrigues & Nativa  \\ \hline\hline
+        0   & $1$                                                               & $1.1897 \times 10^{-5}$ & 0.0086    & 0.00019 \\ \hline
+        1   & $2x$                                                              & 0.0133                  & 0.0104    & 0.00028 \\ \hline
+        2   & $4x^2 - 2$                                                        & 0.0449                  & 0.0136    & 0.00035 \\ \hline
+        3   & $8x^3 - 12x$                                                      & 0.1073                  & 0.0133    & 0.00037 \\ \hline
+        4   & $16x^4 - 48x^2 + 12$                                              & 0.2161                  & 0.0162    & 0.00041 \\ \hline
+        5   & $32x^5 - 160x^3 + 120x$                                           & 0.4162                  & 0.0182    & 0.00051 \\ \hline
+        6   & $64x^6 - 480x^4 + 720x^2 - 120$                                   & 0.6752                  & 0.0186    & 0.0186  \\ \hline
+        7   & $128x^7 - 1344x^5 + 3360x^3 - 1680x$                              & 1.2009                  & 0.0196    & 0.00054 \\ \hline
+        8   & $256x^8 - 3584x^6 + 13440x^4 - 13440x^2 + 1680$                   & 2.0665                  & 0.0305    & 0.00061 \\ \hline
+        9   & $512x^9 - 9216x^7 + 48384x^5 - 80640x^3 + 30240x$                 & 3.5725                  & 0.0229    & 0.00064 \\ \hline
+        \end{tabular}
+        \caption{Polinomios de Hermite y tiempos de cálculo de distintos métodos}
+        \label{tab:hermite-rodrigues}
+        \end{table}
+
+\end{ejemplo}
