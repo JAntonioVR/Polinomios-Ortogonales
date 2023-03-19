@@ -12,7 +12,7 @@ En el capítulo \ref{chap:introduccionPO} hemos mostrado una amplia introducció
         \includegraphics[width=5cm]{img/C2/hermite.png} & 
         \includegraphics[width=5cm]{img/C2/laguerre.png} &
         \includegraphics[width=5cm]{img/C2/jacobi.png} \\
-        (a) Hermite $H_n$ & (b) Laguerre $L^{(0)}_n$ & (c) Jacobi $J^{(0,0)}_n$ 
+        (a) Hermite $H_n$ & (b) Laguerre $L^{(0)}_n$ & (c) Jacobi $P^{(0,0)}_n$ 
     \end{tabular}
     \caption{Polinomios Ortogonales Clásicos}
     \label{img:graficas-clasicos}
@@ -88,6 +88,7 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$, podemos ded
         \displaystyle\lim_{x\rightarrow a}\sigma(x)\rho(x)x^n = \displaystyle\lim_{x\rightarrow b}\sigma(x)\rho(x)x^n, \ \ \ n\geq 0,
     \end{equation}
     entonces la SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}).
+    \cb{REVIEW Tengo que incluir en algún lugar que $\rho$ tiene momentos finitos, pero lo pongo aquí como una condición extra, lo incluyo en la definición de función peso, en el apartado de funcional de momentos...??}
 \end{lema}
 \begin{proof}
     Queremos comprobar la igualdad de funcionales $D(\sigma \uu)=\tau\uu$. Para ello, tengamos en cuenta que dos funcionales lineales son iguales si, y solo si actuán igual sobre una base de $\mathbb P$. Escogemos la base $\{x^n\}_{n\geq 0}$. Entonces tenemos que
@@ -121,19 +122,22 @@ A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principal
     \item \textbf{Caso IV}: $\sigma(x) = (x-a)^2$. En este último caso se obtienen los polinomios de Bessel. 
 \end{enumerate}
 
-De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asegurándonos de que las soluciones calculadas verifiquen las condiciones de frontera (\ref{eq:cond-frontera}), habremos hayado las funciones peso $\rho(x)$ para las cuales el funcional (\ref{eq:funcional-peso}) genera una SPO clásica.Veremos seguidamente los casos I, II y III, obviando los polinomios de Bessel.
+\cb{REVIEW Pongo algún parrafito explicando por qué se eligen esos dominios?}
+
+De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asegurándonos de que las soluciones calculadas verifiquen las condiciones de frontera (\ref{eq:cond-frontera}), habremos hayado las funciones peso $\rho(x)$ para las cuales el funcional (\ref{eq:funcional-peso}) genera una SPO clásica.Veremos seguidamente los casos I, II y III, obviando \cb{(REVIEW No me gusta la palabra `obviando' porque parece que los estoy ignorando)} los polinomios de Bessel.
 
 \subsection{Caso I: Polinomios de Hermite}
+\label{subsection:Hermite}
 
-Supongamos que $\sigma(x)=1$, $\forall x\in \R$. El caso puede ser reducido a $\tau(x)=-2x$. Tenemos entonces la ecuación diferencial
+Supongamos que $\sigma(x)=1$, $\forall x\in \R$. Tenemos entonces la ecuación diferencial
 $$
-\rho'(x) = -2x \rho(x), \ \ x\in\R.
+\rho'(x) = (Ax+B) \rho(x), \ \ x\in\R.
 $$
 Esta ecuación es de variables separadas, por lo que podemos tomar
 $$
-\int \dfrac{\rho'(x)}{\rho(x)}dx = \int -2x dx \Leftrightarrow \log(\rho(x)) = -x^2 + log(C) \Leftrightarrow \rho(x) = C e^{-x^2} \neq 0 \ \ \forall x \in \R,
+    \int \dfrac{\rho'(x)}{\rho(x)}dx = \int (Ax+B) dx \Leftrightarrow \log(\rho(x)) = \dfrac A 2 x^2 + B x + log(C) \Leftrightarrow$$ $$ \rho(x) = C e^{\frac A 2 x^2 + B x} \neq 0 \ \ \forall x \in \R.    
 $$
-tomamos $C=1$ y llegamos a 
+Si queremos que los momentos sean finitos, necesariamente debemos imponer $A<0$. Por su parte, $B$ es indiferente para la convergencia de los momentos una vez se fija $A$. Por este motivo, podemos reducir el caso genérico mediante un cambio de variable lineal al caso $A=-2, B=0$. Tomamos $C=1$ y llegamos a 
 \begin{equation}
     \label{eq:parametros-hermite}
     \begin{array}{ccc}
@@ -149,23 +153,24 @@ es clásica, y sus elementos son los \textbf{polinomios de Hermite}, normalmente
 
 \subsection{Caso II: Polinomios de Laguerre}
 
-Supongamos que $\sigma(x) = x$ y $\tau(x)=-x+B$ con $x\in[0,+\infty)$. La ecuación (\ref{eq:Pearson-peso}) queda entonces como
+ 
+
+Supongamos que $\sigma(x) = x$ y $\tau(x)=Ax+B$ con $x\in[0,+\infty)$. La ecuación (\ref{eq:Pearson-peso}) queda entonces como
 $$
-(x\rho(x))'=(-x+B)\rho(x),
+(x\rho(x))'=(Ax+B)\rho(x),
 $$
-que si derivamos el primer producto y agrupamos equivale a $x\rho'(x)=(B-x-1)\rho(x)$, que es de nuevo una ecuación de variables separadas, de manera que
+que si derivamos el primer producto y agrupamos equivale a $x\rho'(x)=(Ax+B-1)\rho(x)$, que es de nuevo una ecuación de variables separadas, de manera que
 $$
-\int \dfrac{\rho'(x)}{\rho(x)}dx = \int \dfrac{B-x-1}{x}dx \Leftrightarrow \log(\rho(x)) = B\log(x)-x-\log(x) + \log(C)\Leftrightarrow $$ $$
- \rho(x) = Ce^{-x}x^{B-1}\neq 0 \ \ \forall x\in[0,+\infty),
+\int \dfrac{\rho'(x)}{\rho(x)}dx = \int \dfrac{Ax+B-1}{x}dx \Leftrightarrow \log(\rho(x)) = Ax+(B-1)\log(x) + \log(C)\Leftrightarrow $$ $$
+ \rho(x) = Ce^{Ax}x^{B-1}\neq 0 \ \ \forall x\in[0,+\infty).
 $$
-Tomamos $C=1$ y definimos $\alpha = B-1$, de forma que
+De nuevo, para que los momentos resulten finitos exigimos $A<0$ y $B>0$, y salvo cambio de escala podemos reducir el problema al caso $A=-1$. Tomamos $C=1$ y definimos $\alpha = B-1$, de forma que
 \begin{equation}
     \label{eq:parametros-laguerre}
     \begin{array}{cccc}
         \sigma(x)=x, & \tau(x)=-x+\alpha+1, & \rho(x) = x^{\alpha} e^{-x}\ \ \forall x \in[0,+\infty), & \alpha > -1.
     \end{array}
 \end{equation}
-La condición $\alpha > -1$ nos asegura que los momentos del funcional serán finitos, es decir, $\mu_n =\int_0^\infty x^nx^{\alpha} e^{-x}dx <\infty$ $\forall n\geq 0$.
 
 En este caso, las condiciones de frontera también se cumplen, pues $\displaystyle\lim_{x\rightarrow 0} x\cdot x^{\alpha}e^{-x}\cdot x^n = \displaystyle\lim_{x\rightarrow \infty} x\cdot x^{\alpha}\cdot e^{-x} x^n = 0$. Así, la SPO con respecto al funcional
 \begin{equation}
@@ -189,7 +194,8 @@ $$
 \int \dfrac{\sigma(x)\rho(x)}{\sigma(x)\rho(x)} dx = \int \dfrac{Ax+B}{1-x^2}dx\Leftrightarrow $$ $$\log(\sigma(x)\rho(x)) = -\dfrac{A+B}{2}\log(1-x)-\dfrac{A-B}{2}\log(1+x) + \log(C) \Leftrightarrow $$ $$
  \sigma(x)\rho(x) = C(1-x)^{-\frac{A+B}{2}}(1+x)^{-\frac{A-B}{2}}  \Leftrightarrow$$ $$\rho(x) = C(1-x)^{-\frac{A+B}{2}-1}(1+x)^{-\frac{A-B}{2}-1} \neq 0 \ \ \forall x\in[-1,1].
 $$
-Tomamos $C=1$ y definimos $\alpha = -\frac{A+B}{2}-1$ y $\beta=-\frac{A-B}{2}-1$, obteniendo
+
+Para que los momentos del funcional sean finitos, exigimos que $A, B$ verifiquen $\frac{A+B}{2}<0, \frac{A-B}{2}<0$. Tomamos $C=1$ y definimos $\alpha = -\frac{A+B}{2}-1$ y $\beta=-\frac{A-B}{2}-1$, obteniendo
 \begin{equation}
     \label{eq:parametros-jacobi}
     \begin{array}{c}
@@ -197,8 +203,6 @@ Tomamos $C=1$ y definimos $\alpha = -\frac{A+B}{2}-1$ y $\beta=-\frac{A-B}{2}-1$
         \rho(x) =(1-x)^{\alpha}(1+x)^{\beta}\ \ \forall x \in[-1,1], \ \ \alpha,\beta > -1.
     \end{array}
 \end{equation}
-
-Al igual que en el caso anterior, las condiciones $\alpha,\beta > -1$ nos aseguran que los momentos del funcional serán finitos, es decir, $\mu_n =\int_{-1}^1 x^n(1-x)^{\alpha}(1+x)^{\beta}dx <\infty$ $\forall n\geq 0$.
 
 Las condiciones de frontera se verifican nuevamente, pues $$\displaystyle\lim_{x\rightarrow \pm 1} (1-x^2)\cdot (1-x)^{\alpha}(1+x)^{\beta}\cdot x^n = 0.$$
 
@@ -356,7 +360,7 @@ A partir de la ortogonalidad de las derivadas podemos encontrar una interesante 
         \label{eq:ec-dif-clasicos}
         \sigma(x)P_n''(x) + \tau(x)P'_n(x)+\lambda_n P_n(x) = 0,
     \end{equation}
-    con $\lambda_n\in\R$.
+    con $\lambda_n = -n\left(\tau' + (n-1)\dfrac{\sigma''}{2}\right)\in\R$.
 \end{teorema}
 \begin{proof}
     Al ser $\{P_n\}$ una SPO clásica, por el corolario \ref{cor:derivadas-clasicas} $\{P'_n\}$ es ortogonal y clásica respecto a $\rho_1(x)=\sigma(x)\rho(x)$. Esto es, para $k<n$:
@@ -383,6 +387,11 @@ A partir de la ortogonalidad de las derivadas podemos encontrar una interesante 
     P''_n(x)\sigma(x)+P'_n(x)\tau(x) = -\lambda_n P_n(x).
     $$
     Esto es, $P_n(x)$ es solución de (\ref{eq:ec-dif-clasicos}).
+
+    Comprobemos ahora la expresión de $\lambda_n$ igualando las potencias $x^n$ en (\ref{eq:ec-dif-clasicos}). Si consideramos $\sigma(x)$ un polinomio de grado $2$ (considerando que $\mathbb P_0\subset\mathbb P_1\subset \mathbb{P}_2$), tendríamos que su coeficiente líder es $\sigma''(x)/2$. Análogamente, el coeficiente líder de $\tau(x)$ es $\tau'$. Denotamos $\sigma'' \equiv \sigma(x), \tau'\equiv\tau(x)$ ya que ambas son constantes. Por otro lado, si $c_n\neq 0$ es el coeficiente líder de $P_n(x)$, igualando los términos líderes de (\ref{eq:ec-dif-clasicos}) obtenemos
+    $$
+    \dfrac {\sigma''} 2 n (n-1) c_n + \tau' n c_n + \lambda_n c_n = 0 \Leftrightarrow \lambda_n = -n\left(\tau' + (n-1)\dfrac{\sigma''}{2}\right)
+    $$
 \end{proof}
 
 Naturalmente, al ser la sucesión de derivadas sucesivas $\{P^{(k)}_n\}$ una SPO clásica, también verificarán su propia ecuación diferencial.
@@ -505,7 +514,6 @@ Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi 
 
     \cb{REVIEW el último párrafo tiene lagunas}
 
-    \cb{TODO incluir la expresión del $\lambda_n$}
 \end{proof}
 
 Como ya anunciamos en el teorema \ref{th:ec-hipergeometrica}, los polinomios clásicos son soluciones polinómicas de la ecuación diferencial hipergeométrica. De acuerdo con este último resultado, podemos escribir los polinomios ortogonales clásicos mediante la fórmula de Rodrigues (\ref{eq:formula-rodrigues}). Lo habitual es multiplicar la fórmula de Rodrigues por una constante $B_n$, la cual depende de la familia y de la estandarización que se desee. De esta forma, si $\{P_n\}$ es una SPO clásica respecto a la función peso $\rho(x)$, entonces
@@ -588,3 +596,7 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
         \end{table}
 
 \end{ejemplo}
+
+\cb{REVIEW Qué hago ahora? Puedo con el programita hartarme a poner gráficas, comparar las variaciones que hacen los parámetros en un grado fijo, las variaciones al aumentar el grado, etc. 
+
+O no hacer nada y dar por finalizado el capítulo que tiene ya 13 páginas.}
