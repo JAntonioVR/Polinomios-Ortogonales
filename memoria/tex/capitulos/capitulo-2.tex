@@ -486,7 +486,12 @@ Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi 
         \label{eq:rodrigues4}
         \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) = \sigma \left(\dfrac 1 {\rho} \dfrac{d^n}{dx^n} (\rho\sigma^n)\right)'' - 2\sigma (1/\rho)' \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) -\sigma (1/\rho)'' \dfrac{d^n}{dx^n} (\rho\sigma^n).
     \end{equation}
-    Esta igualdad se puede deducir sin más que derivar dos veces el producto $\left(\dfrac 1 {\rho}\right)\cdot\nolinebreak\left(\dfrac{d^n}{dx^n} (\rho\sigma^n)\right)$ utilizando la fórmula de Leibniz e intercambiando miembros en la igualdad. Si calculamos explícitamente las derivadas primera y segunda de $1/\rho$ y aplicamos que, como consecuencia de la ecuación de Pearson (\ref{eq:Pearson-peso}), $\rho' = \rho\frac{\tau-\sigma'}{\sigma}$, la ecuación (\ref{eq:rodrigues4}) puede reducirse a 
+    Esta igualdad se puede deducir sin más que derivar dos veces el producto $\left(\dfrac 1 {\rho}\right)\cdot\nolinebreak\left(\dfrac{d^n}{dx^n} (\rho\sigma^n)\right)$ utilizando la fórmula de Leibniz e intercambiando miembros en la igualdad. Si calculamos explícitamente las derivadas primera y segunda de $1/\rho$ y aplicamos que, como consecuencia de la ecuación de Pearson (\ref{eq:Pearson-peso}), podemos deducir la identidad
+    \begin{equation}
+        \label{eq:derivada-rho}
+        \rho' = \rho\,\frac{\tau-\sigma'}{\sigma}.
+    \end{equation}
+    Entonces la ecuación (\ref{eq:rodrigues4}) puede reducirse a 
     \begin{equation}
         \label{eq:rodrigues5}
         \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) = \sigma y_n'' + \frac{2(\tau-\sigma')}\rho\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\sigma'' - \tau' - \dfrac{\tau-\sigma'}\rho\right)y_n.
@@ -511,13 +516,34 @@ Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi 
     Como $\deg\sigma\leq 2,  \deg\tau\leq 1$, tenemos que $\frac{n^2-n}{2}\sigma'' + n\tau'$ es una constante, por lo que concluimos que $y_n$ en efecto es una solución de (\ref{eq:hipergeometrica}).
     
     Para finalizar, tenemos que probar que la solución $y_n$ dada por la fórmula de Rodrigues (\ref{eq:formula-rodrigues}) es un polinomio de grado $n$. Observemos que, aplicando de nuevo la fórmula de Leibniz para la derivada, tendríamos
-    
-    $$
-    y_n = \frac 1 \rho \sum_{k=0}^n \binom{n}{k} \frac{d^k \rho}{d x^k} \frac{d^{n-k} \sigma^n}{d x^{n-k}}.
-    $$
-    Las derivadas $(n-k)$-ésimas de $\sigma^n$ resultan en $\sigma^k$ multiplicado por un polinomio de grado $n$. Por su parte, derivar $k$ veces $\rho$, si aplicamos sucesivamente $\rho' = \rho\frac{\tau-\sigma'}{\sigma}$ obtenemos un polinomio de grado $n$ multiplicado por $\rho/\sigma^k$. Así, al multiplicar los $\sigma^k$ se cancelan, obteniendo finalmente una suma de polinomios multiplicada por $\rho$, que es cancelada por el término $1/\rho$ que queda fuera de la sumatoria. 
+    \begin{equation}
+        \label{eq:leibniz-rodrigues}
+        y_n = \frac 1 \rho \sum_{k=0}^n \binom{n}{k} \frac{d^k \rho}{d x^k} \frac{d^{n-k} \sigma^n}{d x^{n-k}}.
+    \end{equation}
 
-    \cb{REVIEW el último párrafo tiene lagunas}
+    Mediante inducción y utilizando (\ref{eq:derivada-rho}) podemos probar que
+    $$
+    \frac{d^k \rho}{d x^k} = \dfrac\rho{\sigma^k} P_k, \ \ \ k\geq 0
+    $$
+    donde $P_k$ es un polinomio de grado a lo sumo $k$. 
+
+    También podemos probar por inducción que
+    $$
+    \frac{d^s \sigma^n}{d x^s} = \sigma^{n-s} Q_s, \ \ \ 1\leq s \leq n,
+    $$
+    siendo $Q_s$ un polinomio de grado a lo sumo $s$. 
+
+    Teniendo en cuenta estas dos igualdades, tomando $s=n-k$ y sustituyendo en (\ref{eq:leibniz-rodrigues}), llegamos a que 
+    \begin{equation}
+        \begin{split}
+            \dfrac 1 \rho \frac{d^n }{d x^n}(\rho \sigma^n) &= \dfrac 1 \rho  \sum_{k=0}^n \binom{n}{k}  \dfrac\rho{\sigma^k} P_k \sigma^{k} Q_{n-k} \\
+            &= \dfrac 1 \rho \sum_{k=0}^n \binom{n}{k} \rho P_k Q_{n-k} \\
+            &= \sum_{k=0}^n \binom{n}{k} P_k Q_{n-k},
+        \end{split}
+    \end{equation}
+    que en definitiva es un polinomio de grado a lo sumo $n$.
+    
+    \cb{REVIEW Modificada esta prueba, pero falta asegurar que el grado es exactamente $n$.}
 
 \end{proof}
 
