@@ -68,16 +68,16 @@ A partir de estos dos operadores y esta nueva notación daremos una primera defi
     La ecuación (\ref{eq:Pearson-u}) es conocida como la \textbf{ecuación de Pearson}.
 \end{definicion}
 
-En el caso de que la SPO sea ortogonal respecto a una función peso $\rho$, esto es, $\uu$ es de la forma
+En el caso de que la SPO sea ortogonal respecto a una función peso $\rho$ con momentos finitos, esto es, $\uu$ es de la forma
 \begin{equation}
     \label{eq:funcional-peso}
     \prodesc{\uu}{\pi(x)} = \int_a^b \pi(x)\rho(x)dx,
 \end{equation}
-donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$, podemos deducir una condición equivalente.
+donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\int_a^b x^k \rho(x)dx\right| < \infty \ \ \ (k\geq 0)$, podemos deducir una condición equivalente.
 
 \begin{lema}
     \label{lema:equivalencia-pearson}
-    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$,$\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ la SPO respecto a $\uu$. Si la función peso $\rho(x)$ es solución de la ecuación diferencial
+    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$ con momentos finitos,$\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ la SPO respecto a $\uu$. Si la función peso $\rho(x)$ es solución de la ecuación diferencial
     \begin{equation}
         \label{eq:Pearson-peso}
         [\sigma(x)\rho(x)]'=\tau(x)\rho(x)
@@ -88,7 +88,7 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$, podemos ded
         \displaystyle\lim_{x\rightarrow a}\sigma(x)\rho(x)x^n = \displaystyle\lim_{x\rightarrow b}\sigma(x)\rho(x)x^n, \ \ \ n\geq 0,
     \end{equation}
     entonces la SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}).
-    \cb{REVIEW Tengo que incluir en algún lugar que $\rho$ tiene momentos finitos, pero lo pongo aquí como una condición extra, lo incluyo en la definición de función peso, en el apartado de funcional de momentos...??}
+
 \end{lema}
 \begin{proof}
     Queremos comprobar la igualdad de funcionales $D(\sigma \uu)=\tau\uu$. Para ello, tengamos en cuenta que dos funcionales lineales son iguales si, y solo si actuán igual sobre una base de $\mathbb P$. Escogemos la base $\{x^n\}_{n\geq 0}$. Entonces tenemos que
@@ -123,7 +123,7 @@ A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principal
     \item \textbf{Caso IV}: $\sigma(x) = (x-a)^2$. En este último caso se obtienen los polinomios de Bessel. 
 \end{enumerate}
 
-\cb{REVIEW Pongo algún parrafito explicando por qué se eligen esos dominios?}
+Obsérvese que, a pesar de que $\sigma(x)$ puede estar definida en todo $\R$, tan sólo utilizamos valores de $x$ en los que $\sigma(x)\geq 0$. La justificación de esta elección se encontrará más adelante cuando resolvamos la ecuación de Pearson en cada caso, aunque adelantamos que los intervalos elegidos son los que hacen que la función peso $\rho$ sea positiva.
 
 De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asegurándonos de que las soluciones calculadas verifiquen las condiciones de frontera (\ref{eq:cond-frontera}), habremos hayado las funciones peso $\rho(x)$ para las cuales el funcional (\ref{eq:funcional-peso}) genera una SPO clásica. Nos centraremos principalmente en los casos I, II y III, en los cuales obtenemos un funcional definido positivo.
 
@@ -247,30 +247,29 @@ Previamente, presentaremos un resultado que nos ahorrará el tener que probar la
     Sobre el caso II, tenemos $\sigma(x)=x$, de tal forma que $\displaystyle\lim_{x\rightarrow 0} x\rho(x)x^n = 0$. Véamos que ocurre cuando $x\rightarrow\infty$. Fijamos $k\geq 0$. 
 
     Consideramos la siguiente integral, en la que aplicamos en la primera igualdad el teorema fundamental del cálculo y la regla de Barrow y en la segunda derivamos el integrando y aplicamos la ecuación de Pearson (\ref{eq:Pearson-peso}).
-    
-    \cb{TODO Cambiar notacion de $x$ y $t$ porque las utilizo indistintamente y eso duele a la vista.}
+
     \begin{equation*}
-            \int_0^t [x^k\sigma(x)\rho(x)]'dx = \left[x^k\sigma(x)\rho(x)\right]_{x=0}^{x=t} = \int_0^t[kx^{k-1}\sigma(x)\rho(x)+x^k\tau(x)\rho(x)]dx
+            \int_0^x [t^k\sigma(t)\rho(t)]'dt = \left[t^k\sigma(t)\rho(t)\right]_{t=0}^{t=x} = \int_0^x[kt^{k-1}\sigma(t)\rho(t)+t^k\tau(t)\rho(t)]dt
     \end{equation*}
 
-    Fijémonos en que si expandimos la última integral esta se reduce al cálculo de momentos, los cuales son finitos, por lo que si aplicamos límite cuando $t\rightarrow\infty$ la última integral es finita. De esto deducimos que 
+    Fijémonos en que si expandimos la última integral esta se reduce al cálculo de momentos, los cuales son finitos, por lo que si aplicamos límite cuando $x\rightarrow\infty$ la última integral es finita. De esto deducimos que 
     $$
-    \lim_{t\rightarrow\infty} \left[x^k\sigma(x)\rho(x)\right]_{x=0}^{x=t} =  \lim_{t\rightarrow\infty} x^k\sigma(x)\rho(x) =: A_k \Rightarrow |A_k|< \infty.
+    \lim_{x\rightarrow\infty} \left[t^k\sigma(t)\rho(t)\right]_{t=0}^{t=x} =  \lim_{x\rightarrow\infty} x^k\sigma(x)\rho(x) =: A_k \Rightarrow |A_k|< \infty.
     $$
     Por otro lado,
     $$
-    A_{k+1}= \lim_{t\rightarrow\infty} x^{k+1}\sigma(x)\rho(x) = \lim_{t\rightarrow\infty} x A_k.
+    A_{k+1}= \lim_{x\rightarrow\infty} x^{k+1}\sigma(x)\rho(x) = \lim_{x\rightarrow\infty} x A_k.
     $$
-    La única forma de que exista $A_{k+1}$ y sea finito es que ese último límite también lo sea, lo cual únicamente se verifica si $A_k=0=\displaystyle\lim_{x\rightarrow 0} x\rho(x)x^n = 0$, $k\geq 0$. Por tanto, las condiciones de frontera también se verifican en el caso II.
+    La única forma de que exista $A_{k+1}$ y sea finito es que ese último límite también lo sea, lo cual únicamente se verifica si $A_k=\displaystyle\lim_{x\rightarrow 0} x^k\sigma(x)\rho(x) = 0$, $k\geq 0$. Por tanto, las condiciones de frontera también se verifican en el caso II.
     Por último, el caso I, en el que $\sigma(x)=1$ es análogo al caso II:
     \begin{equation*}
-        \int_{-t}^t [x^k\rho(x)]'dx = \left[x^k\rho(x)\right]_{x=-t}^{x=t} = \int_{-t}^t[kx^{k-1}\rho(x)+x^k\tau(x)\rho(x)]  dx
+        \int_{-x}^x [t^k\rho(t)]'dt = \left[t^k\rho(t)\right]_{t=-x}^{t=x} = \int_{-x}^x[kt^{k-1}\rho(t)+t^k\tau(t)\rho(t)]  dt
     \end{equation*}
     Como los momentos son finitos, al tomar límite en la última integral esta es finita. Esto es
     $$
-    \left|\lim_{t\rightarrow\infty}\left[x^k\rho(x)\right]_{x=-t}^{x=t}\right|=: B_k < \infty.
+    \left|\lim_{x\rightarrow\infty}\left[t^k\rho(t)\right]_{t=-x}^{t=x}\right|=: B_k < \infty.
     $$
-    Como $B_{k+1}=\displaystyle\lim_{t\rightarrow\infty} x B_k < \infty$, necesariamente $B_k=0$, $k\geq 0$, de donde $\displaystyle\lim_{t\rightarrow-\infty}x^k\rho(x)=\displaystyle\lim_{t\rightarrow-\infty}x^k\rho(x)$.
+    Como $B_{k+1}=\displaystyle\lim_{x\rightarrow\infty} x B_k < \infty$, necesariamente $B_k=0$, $k\geq 0$, de donde $\displaystyle\lim_{x\rightarrow-\infty}x^k\rho(x)=\displaystyle\lim_{x\rightarrow\infty}x^k\rho(x)$.
 \end{proof}
 
 Este resultado afirma que el hecho de que un funcional $\uu$ definido a partir de una función peso $\rho$ verifique (\ref{eq:Pearson-u}) es equivalente a que $\rho$ sea una solución de (\ref{eq:Pearson-peso}). De esta forma, tan sólo con comprobar que una función peso verifica la ecuación de Pearson podemos concluir que una SPO es clásica.
