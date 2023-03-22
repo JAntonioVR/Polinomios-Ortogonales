@@ -112,6 +112,7 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$, podemos ded
 \cb{REVIEW El recíproco tiene que ser cierto, pero no tengo la demostración }
 
 \section{Deducción de las familias de polinomios ortogonales clásicos}
+\label{section:deduccion-clasicos}
 
 A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principales familias de polinomios ortogonales. Hemos impuesto que $\tau(x)=Ax+B$ sea un polinomio de grado exactamente $1$, por lo que tenemos cuatro grados de libertad a partir de las posibilidades de $\sigma(x)$, que supondremos mónico:
 
@@ -124,7 +125,7 @@ A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principal
 
 \cb{REVIEW Pongo algún parrafito explicando por qué se eligen esos dominios?}
 
-De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asegurándonos de que las soluciones calculadas verifiquen las condiciones de frontera (\ref{eq:cond-frontera}), habremos hayado las funciones peso $\rho(x)$ para las cuales el funcional (\ref{eq:funcional-peso}) genera una SPO clásica.Veremos seguidamente los casos I, II y III, obviando \cb{(REVIEW No me gusta la palabra `obviando' porque parece que los estoy ignorando)} los polinomios de Bessel.
+De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asegurándonos de que las soluciones calculadas verifiquen las condiciones de frontera (\ref{eq:cond-frontera}), habremos hayado las funciones peso $\rho(x)$ para las cuales el funcional (\ref{eq:funcional-peso}) genera una SPO clásica. Nos centraremos principalmente en los casos I, II y III, en los cuales obtenemos un funcional definido positivo.
 
 \subsection{Caso I: Polinomios de Hermite}
 \label{subsection:Hermite}
@@ -187,11 +188,11 @@ $$
 $$
 Derivando el primer miembro y agrupando obtenemos a $(1-x^2)\rho'(x)=(Ax+B+2x)\rho(x)$. Si dividimos y multiplicamos el segundo miembro por $\sigma(x)$ y dividimos la ecuación por $\sigma(x)\rho(x)$ obtenemos la ecuación
 $$
-\dfrac{\sigma(x)\rho(x)}{\sigma(x)\rho(x)} = \dfrac{Ax+B}{1-x^2}.
+\dfrac{(\sigma(x)\rho(x))'}{\sigma(x)\rho(x)} = \dfrac{Ax+B}{1-x^2}.
 $$
 Resolveremos esta ecuación en la que $(\sigma\rho)$ es la incógnita. Una vez resuelta podremos deducir la solución de (\ref{eq:Pearson-peso}).
 $$
-\int \dfrac{\sigma(x)\rho(x)}{\sigma(x)\rho(x)} dx = \int \dfrac{Ax+B}{1-x^2}dx\Leftrightarrow $$ $$\log(\sigma(x)\rho(x)) = -\dfrac{A+B}{2}\log(1-x)-\dfrac{A-B}{2}\log(1+x) + \log(C) \Leftrightarrow $$ $$
+\int \dfrac{(\sigma(x)\rho(x))'}{\sigma(x)\rho(x)} dx = \int \dfrac{Ax+B}{1-x^2}dx\Leftrightarrow $$ $$\log(\sigma(x)\rho(x)) = -\dfrac{A+B}{2}\log(1-x)-\dfrac{A-B}{2}\log(1+x) + \log(C) \Leftrightarrow $$ $$
  \sigma(x)\rho(x) = C(1-x)^{-\frac{A+B}{2}}(1+x)^{-\frac{A-B}{2}}  \Leftrightarrow$$ $$\rho(x) = C(1-x)^{-\frac{A+B}{2}-1}(1+x)^{-\frac{A-B}{2}-1} \neq 0 \ \ \forall x\in[-1,1].
 $$
 
@@ -229,13 +230,14 @@ Resumiendo, tenemos tres familias de polinomios ortogonales clásicos además de
 \end{table}
 
 \section{Caracterizaciones}
+\label{section:caracterizaciones}
 
 Hasta el momento hemos podido conocer las distintas familias de polinomios ortogonales clásicos y su peculiaridad respecto a las distintas formas de presentar la ecuación de Pearson. Sin embargo, estos polinomios cumplen varias propiedades destacables que además los caracterizan como clásicos. Es decir, son los únicos polinomios ortogonales que las verifican. En esta sección estudiaremos algunas de estas propiedades.
 
 Previamente, presentaremos un resultado que nos ahorrará el tener que probar las condiciones de frontera (\ref{eq:cond-frontera}) cuando queramos comprobar que una SPO es clásica.
 
 \begin{proposicion}
-    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$,$\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ la SPO respecto a $\uu$. Entonces $\{P_n\}$ es clásica si, y sólo si la función peso $\rho(x)$ es solución de la ecuación diferencial
+    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$,$\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ una SPO respecto a $\uu$. Entonces $\{P_n\}$ es clásica si, y sólo si la función peso $\rho(x)$ es solución de la ecuación diferencial
     \begin{equation*}
         [\sigma(x)\rho(x)]'=\tau(x)\rho(x).
     \end{equation*}
@@ -245,7 +247,8 @@ Previamente, presentaremos un resultado que nos ahorrará el tener que probar la
     Sobre el caso II, tenemos $\sigma(x)=x$, de tal forma que $\displaystyle\lim_{x\rightarrow 0} x\rho(x)x^n = 0$. Véamos que ocurre cuando $x\rightarrow\infty$. Fijamos $k\geq 0$. 
 
     Consideramos la siguiente integral, en la que aplicamos en la primera igualdad el teorema fundamental del cálculo y la regla de Barrow y en la segunda derivamos el integrando y aplicamos la ecuación de Pearson (\ref{eq:Pearson-peso}).
-
+    
+    \cb{TODO Cambiar notacion de $x$ y $t$ porque las utilizo indistintamente y eso duele a la vista.}
     \begin{equation*}
             \int_0^t [x^k\sigma(x)\rho(x)]'dx = \left[x^k\sigma(x)\rho(x)\right]_{x=0}^{x=t} = \int_0^t[kx^{k-1}\sigma(x)\rho(x)+x^k\tau(x)\rho(x)]dx
     \end{equation*}
@@ -425,14 +428,17 @@ Entonces podemos escribir la ecuación (\ref{eq:hipergeometrica}) en su forma \t
     [\rho(x)\sigma(x)y']' + \lambda \rho(x) y = 0.
 \end{equation}
 
+\cb{REVIEW Esto al final no lo uso para nada.}
+
 Como vemos, las soluciones de la ecuación de Pearson y las soluciones de la ecuación hipergeométrica están íntimamente relacionadas. Benjamin Olinde Rodrigues (1795--1851) demostró que las soluciones polinómicas de la EDO (\ref{eq:hipergeometrica}) pueden escribirse de una peculiar y compacta forma hoy llamada fórmula de Rodrigues, que veremos que también caracteriza a los polinomios ortogonales clásicos.
 
 \subsection{Fórmula de Rodrigues}
+\label{subsection:Rodrigues}
 
 Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi (1827) introdujeron una fórmula inicialmente definida para los polinomios de Legendre, posteriormente extendida a todas las soluciones polinómicas de la ecuación hipergeométrica. El nombre de fórmula de Rodrigues fue propuesto por Eduard Heine en 1878, después de que Hermite recuperara en 1860 el trabajo original de Rodrigues y señalara que fue él el primero en descubrir esta fórmula. Ya anunciada la peculiaridad de esta fórmula, presentamos su aspecto y demostración en el siguiente resultado.
 
 \begin{teorema}[\textbf{Fórmula de Rodrigues}]
-    Las soluciones polinómicas de la ecuación hipergeométrica (\ref{eq:hipergeometrica}) pueden ser expresadas como
+    Las soluciones polinómicas de la ecuación hipergeométrica (\ref{eq:hipergeometrica}) se pueden expresar como
     \begin{equation}
         \label{eq:formula-rodrigues}
         y_n(x) = \dfrac 1 {\rho(x)} \dfrac{d^n}{dx^n} (\rho(x) \sigma^n(x)),
@@ -455,7 +461,7 @@ Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi 
         \sigma(\rho \sigma^n)'=\rho \sigma^n ((n-1)\sigma'+\tau)
     \end{equation}
 
-    Derivamos ahora la ecuación (\ref{eq:rodrigues1}) $n+1$ veces y dividimos entre la función peso $\rho(x)$. Para dividir la ecuación (\ref{eq:rodrigues1}) $n+1$ veces aplicamos la fórmula de Leibniz\footnote{Fórmula de Leibniz: Sean $u,v:I\longrightarrow\R$ dos funciones reales $n$-veces derivables en $I\subseteq\R$, entonces se verifica en I que $(uv)^{(n)}=\nolinebreak\sum_{k=0}^n \binom{n}{k} u^{(k)}v^{(n-k)}$.} y tenemos en cuenta que, como $\sigma$ tiene grado a lo sumo 2 el miembro de la izquierda se anularía a partir de la tercera derivada. Análogamente, como $\sigma',\tau$ tienen grado a lo sumo 1 el miembro derecho se anularía a partir de la segunda derivada. Así:
+    Derivamos ahora la ecuación (\ref{eq:rodrigues1}) $n+1$ veces y dividimos entre la función peso $\rho(x)$. Para derivar la ecuación (\ref{eq:rodrigues1}) $n+1$ veces aplicamos la fórmula de Leibniz\footnote{Fórmula de Leibniz: Sean $u,v:I\longrightarrow\R$ dos funciones reales $n$-veces derivables en $I\subseteq\R$, entonces se verifica en I que $(uv)^{(n)}=\nolinebreak\sum_{k=0}^n \binom{n}{k} u^{(k)}v^{(n-k)}$.} y tenemos en cuenta que, como $\sigma$ tiene grado a lo sumo 2 el miembro de la izquierda se anularía a partir de la tercera derivada. Análogamente, como $\sigma',\tau$ tienen grado a lo sumo 1 el miembro derecho se anularía a partir de la segunda derivada. Así:
 
     $$
     \frac{d^{n+1}}{d x^{n+1}}\left(\sigma(\rho \sigma^n)'\right)= \sigma \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) + (n+1)\sigma'\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) + \frac{(n+1)n}{2}\sigma''\frac{d^{n}}{d x^{n}} \left(\rho\sigma^n \right),
@@ -473,10 +479,10 @@ Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi 
     Nuestro objetivo ahora es manipular (\ref{eq:rodrigues2}) de forma que podamos comprobar que una función $y_n$ dada como en (\ref{eq:formula-rodrigues}) es una solución de la ecuación hipergeométrica (\ref{eq:hipergeometrica}). Si en (\ref{eq:rodrigues2}) agrupamos términos y teniendo en cuenta la definición de $y_n$, tenemos la ecuación
     \begin{equation}
         \label{eq:rodrigues3}
-        \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) + \frac{2\sigma'-\tau}{\rho} \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\frac{n^2-n-2}{2}\sigma'' + (n+1)\tau'\right)y_n =0
+        \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) + \frac{2\sigma'-\tau}{\rho} \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\frac{n^2-n-2}{2}\sigma'' + (n+1)\tau'\right)y_n =0.
     \end{equation}
 
-    seguidamente, debemos ajustar la ecuación de manera que los factores $1/\rho$ solo tengan $n$ derivadas a su derecha. Para ello nos ayudamos de la siguiente identidad:
+    Seguidamente, debemos ajustar la ecuación de manera que los factores $1/\rho$ solo tengan $n$ derivadas a su derecha. Para ello primero nos ayudamos de la siguiente identidad:
     \begin{equation}
         \label{eq:rodrigues4}
         \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) = \sigma \left(\dfrac 1 {\rho} \dfrac{d^n}{dx^n} (\rho\sigma^n)\right)'' - 2\sigma (1/\rho)' \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) -\sigma (1/\rho)'' \dfrac{d^n}{dx^n} (\rho\sigma^n).
@@ -597,6 +603,104 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
 
 \end{ejemplo}
 
-\cb{REVIEW Qué hago ahora? Puedo con el programita hartarme a poner gráficas, comparar las variaciones que hacen los parámetros en un grado fijo, las variaciones al aumentar el grado, etc. 
+\section{Polinomios de Hermite, Laguerre y Jacobi}
 
-O no hacer nada y dar por finalizado el capítulo que tiene ya 13 páginas.}
+En la sección \ref{section:deduccion-clasicos} redujimos las posibles familias reales de polinomios ortogonales clásicos a tres casos distintos: las familias de Hermite, Laguerre y Jacobi. Tanto los polinomios de Laguerre $\{L_n^{(\alpha)}\}$, como los de Jacobi $\{P_n^{(\alpha,\beta)}\}$ dependen respectivamente de uno y dos parámetros, teniendo en todos los casos que cumplir que estos parámetros sean mayores que $-1$. 
+
+Por otro lado, en la sección \ref{section:caracterizaciones} hemos visto algunas de las propiedades más relevantes que caracterizan a los polinomios ortogonales clásicos. En el anexo (TODO Referencia) podemos encontrar una serie de tablas con toda la información descrita para cada familia clásica.
+
+En esta sección, teniendo presente la fórmula de Rodrigues que se introdujo en la sección (\ref{subsection:Rodrigues}), presentaremos y describiremos algunas gráficas de las familias de Hermite, Laguerre y Jacobi para comprender el impacto sobre estas de la variación de los parámetros y del grado del polinomio.
+
+\subsection{Polinomios de Hermite}
+
+En el caso de la familia de polinomios de Hermite, $\{H_n\}$, estos no dependen de ningún parámetro, por lo que tan sólo mostraremos la variación de sus gráficas respecto al grado del polinomio. Véanse las imágenes \ref{img:graficas-Hermite}.
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{ccc}
+        \includegraphics[width=5cm]{img/C2/Hermite1.png} & 
+        \includegraphics[width=5cm]{img/C2/Hermite2.png} &
+        \includegraphics[width=5cm]{img/C2/Hermite3.png} \\
+        (a) $H_0, H_1, H_2$ & (b) $H_3, H_4, H_5$ & (c) $H_6, H_7, H_8$ 
+    \end{tabular}
+    \caption{Polinomios de Hermite}
+    \label{img:graficas-Hermite}
+\end{figure}
+
+La primera evidencia es que los polinomios son pares cuando el grado $n$ es par, e impares cuando el grado es impar. Por otra parte, nótese que el rango de representación del eje $X$ escogido en cada una de las tres imágenes es cada uno mayor que el anterior. Esto se debe a que se ha buscado representar todos los ceros de cada polinomio en la gráfica, y recordemos que el intervalo $[x_{n1},x_{nn}]$ es cada vez más grande conforme $n$ aumenta (véase corolario \ref{cor:sucesiones-ceros}). De hecho, si quisiéramos representar todos los ceros de todos los polinomios de Hermite sería imposible, pues el verdadero intervalo de ortogonalidad es $I=(-\infty,+\infty)$.
+
+\subsection{Polinomios de Laguerre}
+
+Los polinomios de Laguerre, tal y como indica su notación, $\{L^{(\alpha)}_n\}$, admiten un parámetro real $\alpha > -1$. Además, su intervalo de ortogonalidad es $[0,+\infty)$, por lo que representaremos subconjuntos acotados de este intervalo. En las imágenes \ref{img:graficas-Laguerre-alpha} podemos ver gráficas de los polinomios de Laguerre para distintos valores de $\alpha$ y un grado fijo. En particular, las imágenes \ref{img:graficas-Laguerre-alpha}(a) y \ref{img:graficas-Laguerre-alpha}(b) presentan gráficas para los polinomios de Laguerre de grado 2 y 3 respectivamente para valores de $\alpha=0,1,5,15,20,25$. El efecto que notamos es que a mayor valor de $\alpha$ la cola derecha es más suave y el crecimiento (resp. decrecimiento) hacia $+\infty$ (resp. $-\infty$) es más lento conforme crece $\alpha$. 
+
+En la imagen  \ref{img:graficas-Laguerre-alpha}(c) presentamos de nuevo polinomios de Laguerre de grado 3 pero con valores de $\alpha$ pequeños en valor absoluto, concretamente $\alpha = -0.9, -0.5, 0, 0.5, 1$. Vemos que la conclusión es la misma que en las gráficas (a) y (b) salvo cambio de escala.
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{ccc}
+        \includegraphics[width=5cm]{img/C2/Laguerre1.png} & 
+        \includegraphics[width=5cm]{img/C2/Laguerre2.png} &
+        \includegraphics[width=5cm]{img/C2/Laguerre3.png} \\
+        (a) Grado 2 & (b) Grado 3 & (c) Grado 3 
+    \end{tabular}
+    \caption{Polinomios de Laguerre con distintos valores de $\alpha$}
+    \label{img:graficas-Laguerre-alpha}
+\end{figure}
+
+Véamos ahora el efecto que tiene en las gráficas el aumento del grado $n$. Para ello, fijamos $\alpha=0$ y observamos algunas imágenes en las que se ha modificado el grado. En la imagen \ref{img:graficas-Laguerre-n}(a) podemos observar las gráficas de grados 0, 1 y 2, mientras que en la imagen (b) se representan los polinomios de grados 3, 4 y 5 y en la (c) los grados 6, 7 y 8.
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{ccc}
+        \includegraphics[width=5cm]{img/C2/Laguerre4.png} & 
+        \includegraphics[width=5cm]{img/C2/Laguerre5.png} &
+        \includegraphics[width=5cm]{img/C2/Laguerre8.png} \\
+        (a) $L_0^{(0)},L_1^{(0)},L_2^{(0)}$ & (b) $L_3^{(0)},L_4^{(0)},L_5^{(0)}$ & (c) $L_6^{(0)},L_7^{(0)},L_8^{(0)}$
+    \end{tabular}
+    \caption{Polinomios de Laguerre de distintos grados}
+    \label{img:graficas-Laguerre-n}
+\end{figure}
+
+En este caso no se presenta, al menos de manera evidente, ningún tipo de simetría o paridad como sí se manifestaba en el caso de los polinomios de Hermite. Por otro lado, nótese que la gráfica (b) está truncada, es decir, no aparecen todos los ceros de todos los polinomios. Por ejemplo, aunque sabemos que $L_5^{(0)}$ tiene 5 ceros simples, únicamente representamos 4 de ellos con el objetivo de observar mejor las ondulaciones y curvas de las gráficas. Sin embargo, en la gráfica (c) sí hemos representado todos los ceros de los tres polinomios indicados, de forma que para que puedan visualizarse todos ellos en una misma gráfica se ha elegido el rango $[0,25]$ y hemos renunciado a los detalles de las curvas en valores más pequeños de $x$. 
+
+Podemos recordar entonces la discusión sobre los ceros ya introducida en la sección anterior. Los intervalos $[x_{n1}, x_{nn}]$ son cada vez más amplios, de forma que el primer cero es cada vez más pequeño y cercano a cero, como puede verse en las imágenes \ref{img:graficas-Laguerre-n} (a) y (b), mientras que el último cero crece sin límite. Esto se debe a que el verdadero intervalo de ortogonalidad en este caso es $[0,+\infty)$.
+
+\subsection{Polinomios de Jacobi}
+
+Por último, analizaremos los polinomios de Jacobi $\{P_n^{(\alpha,\beta)}\}$. Estos admiten hasta dos grados de libertad $\alpha,\beta > -1$ y manifiestan su ortogonalidad en el intervalo $[-1,1]$, lo cual facilita considerablemente la representación gráfica de estos polinomios. 
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{cc}
+        \includegraphics[width=7cm]{img/C2/Jacobi1.png} & 
+        \includegraphics[width=7cm]{img/C2/Jacobi2.png} \\
+        (a) Variaciones de $\alpha$ & (b) Variaciones de $\beta$ \\
+
+        \includegraphics[width=7cm]{img/C2/Jacobi3.png} & \includegraphics[width=7cm]{img/C2/Jacobi4.png} \\
+        (c) Variaciones de $\alpha=\beta$ (grado 3) & (c) Variaciones de $\alpha=\beta$ (grado 4)
+    \end{tabular}
+    \caption{Polinomios de Jacobi con distintos valores de $\alpha$ y $\beta$}
+    \label{img:graficas-Jacobi-alpha-beta}
+\end{figure}
+
+Comenzaremos analizando el efecto del parámetro $\alpha$. Para ello, hemos fijado $n=2$ y $\beta=0$, representando el polinomio de Jacobi $P_2^{(\alpha,0)}$ para los valores $\alpha=0,1,5,15,20,25$, véase la imagen \ref{img:graficas-Jacobi-alpha-beta}(a). Obsérvese que, de forma similar a los polinomios de Laguerre, este parámetro interviene en la velocidad a la que aumenta la cola derecha. Sin embargo, lo hace de forma inversa, ya que mientras que a mayores valores de $\alpha$ la inclinación era menor en los polinomios de Laguerre, en este caso conforme crece $\alpha$ aumenta también la misma.
+
+Respecto a $\beta$, para analizar su impacto en las gráficas fijamos $n=3$ y $\alpha=0$, presentando los polinomios $P_3^{(0,\beta)}$ para $\beta=0,1,5,15,20,25$ en la imagen \ref{img:graficas-Jacobi-alpha-beta}(b). El comportamiento de $\beta$ es análogo al de $\alpha$ pero en la cola izquierda en lugar de la derecha. Es decir, a mayor valor de $\beta$, mayor inclinación de la cola derecha, que en estas gráficas se traduce en un descenso a $-\infty$ más pronunciado.
+
+En los casos de Hermite y Laguerre hemos discutido también la paridad y/o simetría de los gráficos. A juzgar por las imágenes \ref{img:graficas-Jacobi-alpha-beta}(a) y \ref{img:graficas-Jacobi-alpha-beta}(b), los polinomios de Jacobi no cumplen ningún tipo de simetría en general. Sin embargo, en la imagen \ref{img:graficas-Jacobi-alpha-beta}(c) puede comprobarse qué ocurre al igualar $\alpha=\beta$. En efecto, en este caso las gráficas son simétricas respecto al eje $Y$ cuando el grado es par ($P_{2n}^{(\alpha,\alpha)}$ es par). Respectivamente, $P_{2n+1}^{(\alpha,\alpha)}$ es impar. Pueden encontrarse otras gráficas que manifiestan este hecho en el archivo \texttt{software/graficas-clasicos.ipynb}\footnote{Disponible en TODO Enlace}.
+
+Finalmente, comprobemos gracias a las imágenes \ref{img:graficas-Jacobi-n} la variación de estas gráficas al aumentar el grado cuando fijamos $\alpha = \beta = 0$.
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{ccc}
+        \includegraphics[width=5cm]{img/C2/Jacobi5.png} & 
+        \includegraphics[width=5cm]{img/C2/Jacobi6.png} &
+        \includegraphics[width=5cm]{img/C2/Jacobi7.png} \\
+        (a) $P_0^{(0,0)},P_1^{(0,0)},P_2^{(0,0)}$ & (b) $P_3^{(0,0)},P_4^{(0,0)},P_5^{(0,0)}$ & (c) $P_6^{(0,0)},P_7^{(0,0)},P_8^{(0,0)}$
+    \end{tabular}
+    \caption{Polinomios de Jacobi de distintos grados}
+    \label{img:graficas-Jacobi-n}
+\end{figure}
+
+En estas tres figuras se puede comprobar más fácilmente la paridad e imparidad de los polinomios de Jacobi en el caso $\alpha=\beta$ con respecto al grado $n$. Como además el intervalo de ortogonalidad es $I=[-1,1]$, todos los ceros de estos polinomios están representados siempre en el mismo.
