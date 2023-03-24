@@ -12,6 +12,8 @@ En concreto, analizaremos desde un punto de vista general los llamados \textit{p
 
 Nos centraremos principalmente en procesos discretos, es decir, consideramos que el tiempo se divide en instantes $n=0,1,2,\dots$, sin olvidar que existe una teoría análoga en la que el tiempo es continuo $t\in[0,\infty)$. Denominamos \textit{estado} a cualquiera de las situaciones en las que se puede encontrar el sistema en un instante determinado. Por ejemplo, pensemos en una región en la que hay $N$ ciudades y dividimos el tiempo en años. Asumimos que un individuo siempre se encuentra asentado en una de estas ciudades aunque hay posibilidad de que de un año a otro se mude a otra distinta. Etiquetamos cada una de las ciudades con un número: ciudad $1$, ciudad $2$,\dots,ciudad $N$.
 
+\section{Cadenas de Markov discretas. Matriz de transición}
+
 De forma general, consideramos un espacio de estados finito que con frecuencia denotaremos como $S=\{1,\dots, N\}$ y dividimos el tiempo en instantes $n=0,1,2,\dots$. Llamemos $X_n\in S$ al estado del sistema en el instante $n$. La propiedad específica que consideró Markov consiste en asumir que, suponiendo que el sistema se encuentra en un estado concreto en un instante concreto, la probabilidad de que ocurra una transición en el siguiente instante depende única y exclusivamente del estado actual.
 
 \begin{definicion}[Cadena de Markov]
@@ -32,5 +34,102 @@ De forma general, consideramos un espacio de estados finito que con frecuencia d
 
 Es decir, la probabilidad de que en un instante $n+1$ el sistema se encuentre en el estado $j$ es independiente de lo que haya ocurrido en los instantes anteriores a $n$. Por ejemplo, aplicando esta propiedad al tiempo atmosférico podríamos afirmar que la probabilidad de que mañana llueva únicamente depende de si hoy ha llovido, sin tener en cuenta el clima de los días anteriores. En epidemiología, es como afirmar que el número de contagios de una enfermedad únicamente depende del número de contagios que haya habido el día anterior, independientemente del número de contagios de los días anteriores ni los posibles factores externos. Intuitivamente, no parece que esta suposición sea muy realista y no cabe esperar resultados precisos en predicciones futuras. Sin embargo, lo cierto es que es útil para hacernos una idea de lo que puede ocurrir a largo plazo con relativa exactitud y es muy utilizada a la hora de implementar medidas en ámbitos como la migración, la extinción de animales, uso de suelo, etc.
 
-La probabilidad $P[X_{n+1}=j|X_n=i]$ se denomina \textbf{probabilidad de transición en un paso} de la cadena en el instante $n$. Si además la cadena es homogénea, este valor es el mismo para todo instante $n$, de ahí el término `homogénea'.
+La probabilidad $P[X_{n+1}=j|X_n=i]$ se denomina \textbf{probabilidad de transición en un paso} de la cadena en el instante $n$. Si además la cadena es homogénea, este valor es el mismo para todo instante $n$, de ahí el término `homogénea'. En adelante, cuando utilicemos el término `cadena de Markov' nos estaremos refiriendo a una cadena de Markov homogénea. Una vez anulada la dependencia de $n$, introducimos una nueva notación:
+$$
+p_{ij} := P[X_{n+1}=j|X_n=i], \ \ \forall i,j \in \{1,\dots,N\}.
+$$
+Con esta notación, y teniendo en cuenta que en un espacio de $N$ estados existen $N^2$ posibles transiciones, agrupamos todas estas probabilidades en una matriz.
+
+\begin{definicion}[Matriz de transición]
+    Llamamos \textbf{matriz de transición} de una cadena de Markov $\{X_n, n\geq 0\}$ a la matriz
+    \begin{equation}
+        \label{eq:matriz-trans}
+        P=\begin{pmatrix}
+          p_{11} & p_{12} & \cdots & p_{1N} \\
+          p_{21} & p_{22} & \cdots & p_{2N} \\
+          \vdots & \vdots & \ddots & \vdots \\
+          p_{N1} & p_{N2} & \cdots & p_{NN}  
+        \end{pmatrix}.
+    \end{equation}
+\end{definicion}
+
+\begin{observacion}
+    Obsérvese que la $i$-ésima fila corresponde a la distribución de la probabilidad saliente del estado $i$, mientras que la $j$-ésima columna describe la probabilidad entrante al estado $j$.
+\end{observacion}
+
+Presentamos a continuación dos propiedades directas de las matrices de transición.
+
+\begin{proposicion}
+    \label{prop:propiedades-matrices-markov}
+Sea $\{X_n, n\geq 0\}$ una cadena de Markov sobre el espacio de estados $S=\{1,\dots,N\}$ y cuya matriz de transición es $P=(p_{ij})_{i,j=1,\dots,N}$. Entonces
+\begin{enumerate}
+    \item $0\leq p_{ij} \leq 1 \ \ \ \forall i,j\in S$.
+    \item $\sum_{j=1}^N p_{ij} = 1 \ \ \ \forall i\in S$ (todas las filas de $P$ suman 1).
+\end{enumerate}
+\end{proposicion}
+\begin{proof}
+    La propiedad (1) es evidente teniendo en cuenta que $p_{ij}$ es una probabilidad. Sobre la propiedad (2), tenemos que
+    \begin{equation*}
+        \begin{split}
+            \sum_{j=1}^N p_{ij} &= \sum_{j=1}^N P[X_{n+1}=j|X_n=i] \\
+            &= P[X_{n+1}\in S|X_n=i] \ \ \text{(por el teorema de la probabilidad total)} \\
+            &= 1
+        \end{split}
+    \end{equation*}
+\end{proof}
+
+A las matrices que cumplen estas dos propiedades se les denomina \textbf{matrices estocásticas} y pueden ser consideradas matrices de transición de alguna cadena de Markov.
+
+\begin{ejemplo}[Tiempo atmosférico]
+    \label{ej:tiempo}
+    Extraído de \cite{kulkarni-2012}[Ch. 2, Example 2.3]. Supongamos que podemos clasificar el tiempo de una ciudad como soleado (1), nublado (2) o lluvioso (3) y que el tiempo del día siguiente únicamente depende del tiempo del día anterior con las siguientes probabilidades:
+    \begin{itemize}
+        \item Si hoy hace sol, mañana estará nublado con probabilidad $0.3$ y lloverá con probabilidad $0.2$.
+        \item Si hoy está nublado, mañana hará sol con probabilidad $0.5$ y lloverá con con probabilidad $0.3$.
+        \item Si hoy está lloviendo, mañana será un día soleado con probabilidad $0.4$ y nublado con probabilidad $0.5$.
+    \end{itemize}
+
+    Modelaremos este sistema mediante una cadena de Markov. Para ello, consideraremos la variable $X_n \equiv$ ``Tiempo atmosférico en el día $n$''. Y consideramos el espacio de estados $S = \{ 1\equiv\text{soleado}, 2\equiv\text{nublado}, 3\equiv\text{lluvioso}\}$. Atendiendo a las indicaciones anteriores y al item (2) de la proposición \ref{prop:propiedades-matrices-markov}, la matriz de transición sería por tanto
+    $$ P = \begin{pmatrix}
+        0.5 & 0.3 & 0.2 \\
+        0.5 & 0.2 & 0.3 \\
+        0.4 & 0.5 & 0.1
+    \end{pmatrix}.
+    $$
+
+\end{ejemplo}
+
+\section{Distribuciones transitorias}
+
+Hasta el momento nos hemos centrado en la adaptación de distintas situaciones de acuerdo a modelos de estados regidos por cadenas de Markov, que en el caso homogéneo concentra toda su información en una matriz estocástica que denominamos matriz de transición. Sin embargo, ya adelantamos en la introducción que la principal función de este método consiste en tratar de predecir el comportamiento de la variable $X_n$ en algún instante futuro. Pongamos el caso del ejemplo \ref{ej:tiempo} sobre el tiempo atmosférico. Podría interesar predecir el tiempo que va a hacer dentro de 2 o 3 días para posponer o no un evento por lluvia. En esta sección estudiaremos cómo podemos utilizar cadenas de Markov con este objetivo.
+
+Sea $\{X_n, n\geq 0\}$ una cadena de Markov discreta y homogénea sobre un espacio de estados $S=\{1,\dots,N\}$, una matriz de transición $P$ y supongamos conocida la distribución inicial, que denotaremos en forma de vector columna como $X_0 = (a_1, \dots, a_N)^T$, donde $a_i = P[X_0 = i]$, $\forall i \in S$. Se denomina \textbf{distribución transitoria} a la distribución que sigue la variable $X_n$ para cierto $n\geq 0$ fijo cuando es conocida la distribución de $X_0$.
+
+Abordemos este problema con lo que conocemos hasta el momento. Tenemos que
+
+\begin{equation}
+    \begin{split}
+        P[X_n = j] &= \sum_{i=1}^N P[X_n=j|X_0 = i]P[X_0=i] \\
+        &= a_i \sum_{i=1}^N P[X_n=j|X_0 = i].
+    \end{split}
+\end{equation}
+
+Por lo que nuestro problema se reduce a encontrar la probabilidad de que el proceso esté en el estado $j$ tras $n$ instantes suponiendo que inicialmente se encontraba en el estado $i$, $P[X_n=j|X_0 = i]$. Esta probabilidad extiende a la que en su momento llamamos probabilidad de transición en un paso y, naturalmente, se denomina \textbf{probabilidad de transición en }$\mathbf{n}$ \textbf{pasos}. Utilizamos la notación  
+\begin{align*}
+    a_i^{(n)} &:= P[X_n=i], & p_{ij}^{(n)} &:= P[X_{n}=j|X_0=i],
+\end{align*}
+$\forall i,j \in \{1,\dots,N\}$. De esta forma, buscar la distribución de $X_n$ equivale a buscar la distribución del vector aleatorio $a^{(n)}=(a_1^{(n)},\dots,a_N^{(n)})^T$. Análogamente al caso en el que considerábamos un único paso, agrupamos todos los posibles valores de $p_{ij}^{(n)}$ en una matriz.
+
+\begin{definicion}[Matriz de transición en $n$ pasos]
+    Llamamos \textbf{matriz de transición en }$\mathbf{n}$ \textbf{pasos} de una cadena de Markov $\{X_n, n\geq 0\}$ a la matriz
+    \begin{equation}
+        \label{eq:matriz-trans-n}
+        P^{(n)}=\begin{pmatrix}
+          p_{11}^{(n)} & p_{12}^{(n)} & \cdots & p_{1N}^{(n)} \\
+          p_{21}^{(n)} & p_{22}^{(n)} & \cdots & p_{2N}^{(n)} \\
+          \vdots & \vdots & \ddots & \vdots \\
+          p_{N1}^{(n)} & p_{N2}^{(n)} & \cdots & p_{NN}^{(n)}  
+        \end{pmatrix}.
+    \end{equation}
+\end{definicion}
 
