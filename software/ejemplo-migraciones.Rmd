@@ -1,0 +1,74 @@
+---
+title: "Ejemplo cadenas de Markov"
+author: "Juan Antonio Villegas Recio"
+date: "28/3/2023"
+output: html_document
+---
+
+Este documento presenta el código `R` utilizado para los cálculos realizados en el ejemplo sobre cadenas de Markov.
+
+Primero de todo, importamos los paquetes necesarios.
+```{r, message=FALSE}
+library(readxl) # Para leer los datos desde hojas de cálculo
+library(expm) # Para potencias de matrices
+```
+
+Leemos los datos desde la hoja de cálculo y cambiamos los nombres de las filas y columnas para mayor claridad.
+
+```{r}
+M <- as.matrix(read_excel("./datos-migraciones.xlsx", range = "C8:E11"))
+colnames(M) <- c("Alicante", "Castellon", "Valencia")
+rownames(M) <- c("Alicante", "Castellon", "Valencia")
+M
+```
+
+Dividimos cada fila entre su total para obtener una matriz estocástica $P$.
+
+```{r}
+P <- M / rowSums(M)
+P # Matriz de transicion
+```
+
+Leemos las poblaciones iniciales desde otro archivo y cambiamos también el nombre de las filas.
+
+```{r}
+p <- as.matrix(read_excel("datos-poblacion.xlsx", range = "B8:B11"))
+rownames(p) <- c("Alicante", "Castellon", "Valencia")
+p
+
+```
+
+
+Dividimos las componentes del vector entre la suma de todas ellas para obtener $X_0$, la distribución inicial de la población.
+
+```{r}
+X0 <- p/sum(p)
+X0
+```
+
+Calculamos las distribuciones en 2022 ($X_1$) y en 2023 ($X_2$).
+
+En **2022**:
+```{r}
+X1 <- P %*% X0
+X1
+```
+
+En **2023**
+```{r}
+X2 <- (P %^% 2) %*% X0
+X2
+```
+
+Finalmente, multiplicamos por la población total y así tenemos una estimación de la población total en 2022 y 2023.
+
+En **2022**
+```{r}
+X1 %*% sum(p)
+```
+
+En **2023**
+```{r}
+X2 %*% sum(p)
+```
+

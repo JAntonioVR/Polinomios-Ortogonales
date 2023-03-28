@@ -108,6 +108,7 @@ Sea $\{X_n, n\geq 0\}$ una cadena de Markov discreta y homogénea sobre un espac
 Abordemos este problema con lo que conocemos hasta el momento. Tenemos que
 
 \begin{equation}
+    \label{eq:distr-trans}
     \begin{split}
         P[X_n = j] &= \sum_{i=1}^N P[X_n=j|X_0 = i]P[X_0=i] \\
         &= a_i \sum_{i=1}^N P[X_n=j|X_0 = i].
@@ -133,3 +134,154 @@ $\forall i,j \in \{1,\dots,N\}$. De esta forma, buscar la distribución de $X_n$
     \end{equation}
 \end{definicion}
 
+\begin{observacion}
+    Si tomamos $n=0$, tenemos que $p_{ij}=\delta_{ij}$, $i,j\in S$. Esto es, $P^{(0)}=I_N$. Por otro lado, si $n=1$, tenemos que $P^{(1)}=P$, la matriz de transición (\ref{eq:matriz-trans}).
+\end{observacion}
+
+Así, podemos reescribir (\ref{eq:distr-trans}) de forma matricial como
+$$
+a^{(n)}= P^{(n)} \cdot X_0.
+$$
+
+Por lo que resta obtener un método para calcular la matriz de transición en $n$ pasos, $P^{(n)}$. Este método nos lo da el siguiente teorema:
+
+\begin{teorema}[Matriz de transición en $n$ pasos]
+    \label{th:matriz-trans-n}
+    Sea $\{X_n,n\geq 0\}$ una cadena de Markov homogénea con matriz de transición $P$, entonces
+    \begin{equation}
+        \label{eq:matriz-trans-n-teorema}
+        P^{(n)} = P^n.
+    \end{equation}    
+\end{teorema}
+\begin{proof}
+    Consúltese \cite[Ch. II, theorem 2.2]{kulkarni-2012}.
+\end{proof}
+
+De este resultado obtenemos dos sencillas consecuencias:
+
+\begin{corolario}
+    \label{cor:fmp}
+    La variable aleatoria $X_n$ se distribuye según la función masa de probabilidad descrita por el vector aleatorio 
+    $$
+    a^{(n)} = P^n X_0.
+    $$
+\end{corolario}
+
+\begin{corolario}
+    \label{cor:Pnm}
+    $$
+    P[X_{n+m}=j|X_n=i,X_{n-1}=i_{n-1},\dots,X_0=i_0] = P[X_{n+m}=j|X_n=i]=p_{ij}^{(m)},
+    $$
+$j,i,i_{n-1},\dots,i_0\in S$.
+\end{corolario}
+
+Seguidamente, presentamos una ecuación importante en este ámbito.
+
+\begin{teorema}[Ecuación de Chapman-Kolmogorov]
+    Sea $\{X_n,n\geq 0\}$ una cadena de Markov homogénea, entonces las probabilidades de transición en $n$ pasos satisfacen la siguiente igualdad, denominada ecuación de Chapman-Kolmogorov.
+    \begin{equation}
+        \label{eq:chapman-kolmogorov}
+        p_{ij}^{(n+m)}=\sum_{k=1}^N p_{ik}^{(n)}p_{kj}^{(m)}.
+    \end{equation} 
+\end{teorema}
+\begin{proof}
+    \begin{equation*}
+        \begin{split}
+            p_{ij}^{(n+m)} &= P[X_{n+m}=j|X_0=i] \\
+            &= \sum_{k=1}^N P[X_{n+m}=j|X_n=k,X_0=i]\,P[X_n=k|X_0=i]\text{ (th. de la prob. total)}\\
+            &= \sum_{k=1}^N P[X_{n+m}=j|X_n=k]\,P[X_n=k|X_0=i]\text{ (corolario \ref{cor:Pnm})}\\
+            &= \sum_{k=1}^N P[X_{m}=j|X_0=k]\,P[X_n=k|X_0=i]\text{ (por la homogeneidad)}\\
+            &= \sum_{k=1}^N p_{ik}^{(n)} p_{kj}^{(m)}
+        \end{split}
+    \end{equation*}
+\end{proof}
+
+Si escribimos la ecuación (\ref{eq:chapman-kolmogorov}) en forma matricial, tenemos que
+$$
+P^{(n+m)}=P^{(n)}\cdot P^{(m)},
+$$
+lo cual es evidente teniendo en cuenta el teorema \ref{th:matriz-trans-n}. Intercambiando los roles de $n$ y $m$ llegamos a la conclusión de que las matrices $P^{(n)}$ y $P^{(m)}$ conmutan para todo $n,m\geq 0$. El teorema \ref{th:matriz-trans-n} es la clave del método para calcular las distribuciones transitorias, pues reduce el problema a potencias y multiplicaciones de matrices.
+
+\begin{ejemplo}
+    Tratemos ahora un ejemplo distinto. En este caso nos centraremos en las variaciones interprovinciales. La tabla \ref{tab:variaciones} muestra en cada celda el número de individuos que cambiaron su vivienda habitual desde la provincia indicada en la fila hacia la provincia indicada en la columna correspondiente (datos extraídos del INE: Instituto Nacional de Estadística).
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{cccc}\hline
+            \textbf{Provincia} & \textbf{Alicante} & \textbf{Castellón} & \textbf{Valencia} \\ \hline\hline
+        \textbf{Alicante}                  & 41.685                    & 484                         & 3.957                      \\ \hline
+        \textbf{Castellón}                & 369                       & 11.059                      & 2.232                      \\ \hline
+        \textbf{Valencia}                & 3.516                     & 2.903                       & 71.741 \\ \hline            
+        \end{tabular}
+        \caption{Variaciones interprovinciales en la comunidad valenciana (2021)}
+        \label{tab:variaciones}
+        \end{table}
+
+        Por su parte, la tabla \ref{tab:poblacion} muestra la población de cada una de las provincias en el año 2021. 
+
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{cc}\hline
+                \textbf{Provincia}  & \textbf{Población} \\ \hline\hline
+                \textbf{Alicante} &  1881762 \\ \hline
+                \textbf{Castellón} & 587064 \\ \hline
+                \textbf{Valencia} & 2589312 \\ \hline
+            \end{tabular}
+            \caption{Población de las provincias de la comunidad valenciana (2021)}
+            \label{tab:poblacion}
+        \end{table}
+
+        Con estos datos y asumiendo que la población total permanece constante, ¿podemos comprobar la población de cada una de las provincias de la Comunidad Valenciana en el año 2022? ¿Y predecir las que habrá en el año 2023?
+
+        Antes de proceder al propio modelado, queremos mencionar que estos datos han sido manipulados y presentados utilizando el software estadístico \texttt{R}\footnote{Consúltese su página web \url{https://www.r-project.org/}.}. El archivo de `R Markdown' \texttt{software/ejemplo-migraciones.Rmd} 
+        contiene el código fuente en \texttt{R} y algunas descripciones, mientras que el fichero \texttt{software/ejemplo-migraciones.html}, aunque tiene el mismo contenido, es un archivo compilado que es posible abrir con cualquier navegador web y en el que no es necesario ejecutar nada para visualizar las salidas de los distintos comandos. 
+
+        Procedemos a modelar el problema como una cadena de Markov $\{X_n,n\geq0\}$, donde 
+        $$X_n \equiv \text{Distribución de la población total de la Comunidad Valenciana en el año }2021+n.$$ 
+        Esta cadena se construye sobre los estados 
+        $$
+        S=\{1\equiv\text{`Alicante'}, 2\equiv\text{`Castellón'},3\equiv\text{`Valencia'}\}.
+        $$
+        Podemos tomar una matriz asociada a la tabla \ref{tab:variaciones} y a partir de ella construir la matriz de transición de la cadena, teniendo en cuenta que de esta matriz la celda $(i,j)$ representa el número de migraciones de la provincia $i$ a la provincia $j$. Sin embargo, es claro que la tabla \ref{tab:variaciones} no verifica las condiciones de la proposición \ref{prop:propiedades-matrices-markov}, por lo que no podemos formar directamente una matriz estocástica. De igual manera, el vector cuyas componentes son las de la tabla \ref{tab:poblacion} no puede ser una función masa de probabilidad pues sus componentes no suman $1$. Por suerte, estos problemas pueden solucionarse rápidamente sin más que dividir cada fila de la tabla \ref{tab:variaciones} entre el total de cada fila y cada componente de la tabla \ref{tab:poblacion} entre la suma de las tres celdas. De esta forma, tenemos la siguiente matriz de transición $P$ y la distribución inicial $X_0$.
+        \begin{align*}
+            \label{eq:ejemplo-migraciones-matriz}
+            P &= \begin{pmatrix}
+                0.90372024 & 0.01049300 & 0.08578676 \\
+                0.02701318 & 0.80959004 & 0.16339678 \\
+                0.04498465 & 0.03714176 & 0.91787359
+            \end{pmatrix}, & X_0 &= \begin{pmatrix}
+                0.3720266 \\
+                0.1160633 \\
+                0.5119101
+            \end{pmatrix}.
+        \end{align*}
+        Por tanto, para conocer la distribución poblacional del año 2022 y la de 2023 simplemente tenemos que aplicar el teorema \ref{th:matriz-trans-n} y el corolario \ref{cor:fmp} para $n=1$ y $n=2$. Así,
+        \begin{align*}
+            X_1 &= P X_0 = \begin{pmatrix}
+                0.3813410 \\
+                0.1876577 \\
+                0.4909151
+            \end{pmatrix}, & X_2 &= P^2 X_0 = \begin{pmatrix}
+                0.3887086 \\
+                0.2424410 \\
+                0.4747224
+            \end{pmatrix}.
+        \end{align*}
+
+        Por último, si lo que queremos es predecir la población (y no realmente su distribución), tendríamos que multiplicar estas distribuciones por la población total en 2021, obteniendo las poblaciones que recogemos en las tablas \ref{tab:predicciones}.
+
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{ccc}\hline
+            \textbf{Provincia}          & \textbf{2022} & \textbf{2023} \\ \hline\hline
+            \textbf{Alicante}   & 1.928.875,2   & 1.966.142     \\ \hline
+            \textbf{Castellón} & 949.198,8     & 1.226.300     \\ \hline
+            \textbf{Valencia}  & 2.483.116,1   & 2.401.211    \\ \hline
+            \end{tabular}
+            \caption{Predicciones de la població de las provincias de la C. Valenciana en 2022 y 2023}
+            \label{tab:predicciones}
+            \end{table}
+
+            \cb{REVIEW no me termina de convencer cómo he redactado el ejemplo, no sé si le doy el rigor suficiente.}
+        
+\end{ejemplo}
