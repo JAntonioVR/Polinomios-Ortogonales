@@ -217,6 +217,9 @@ lo cual es evidente teniendo en cuenta el teorema \ref{th:matriz-trans-n}. Inter
         \label{tab:variaciones}
         \end{table}
 
+        % https://www.ine.es/jaxi/Datos.htm?tpx=53144#!tabs-tabla
+        % https://www.ine.es/jaxiT3/Datos.htm?t=2852
+
         Por su parte, la tabla \ref{tab:poblacion} muestra la población de cada una de las provincias en el año 2021. 
 
         \begin{table}[h]
@@ -234,7 +237,7 @@ lo cual es evidente teniendo en cuenta el teorema \ref{th:matriz-trans-n}. Inter
         Con estos datos y asumiendo que la población total permanece constante, ¿podemos comprobar la población de cada una de las provincias de la Comunidad Valenciana en el año 2022? ¿Y predecir las que habrá en el año 2023?
 
         Antes de proceder al propio modelado, queremos mencionar que estos datos han sido manipulados y presentados utilizando el software estadístico \texttt{R}\footnote{Consúltese su página web \url{https://www.r-project.org/}.}. El archivo de `R Markdown' \texttt{software/ejemplo-migraciones.Rmd} 
-        contiene el código fuente en \texttt{R} y algunas descripciones, mientras que el fichero \texttt{software/ejemplo-migraciones.html}, aunque tiene el mismo contenido, es un archivo compilado que es posible abrir con cualquier navegador web y en el que no es necesario ejecutar nada para visualizar las salidas de los distintos comandos. 
+        contiene el código fuente en \texttt{R} y algunas descripciones, mientras que el fichero \texttt{software/ejemplo-migraciones.html}, aunque tiene el mismo contenido, es un archivo compilado que es posible abrir con cualquier navegador web y en el que no es necesario ejecutar nada para visualizar las salidas de los distintos comandos\footnote{Ambos ficheros están disponibles en las URLs \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ejemplo-migraciones.Rmd} y \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ejemplo-migraciones.html}}. 
 
         Procedemos a modelar el problema como una cadena de Markov $\{X_n,n\geq0\}$, donde 
         $$X_n \equiv \text{Distribución de la población total de la Comunidad Valenciana en el año }2021+n.$$ 
