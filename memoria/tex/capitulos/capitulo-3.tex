@@ -281,10 +281,97 @@ lo cual es evidente teniendo en cuenta el teorema \ref{th:matriz-trans-n}. Inter
             \textbf{Castellón} & 949.198,8     & 1.226.300     \\ \hline
             \textbf{Valencia}  & 2.483.116,1   & 2.401.211    \\ \hline
             \end{tabular}
-            \caption{Predicciones de la població de las provincias de la C. Valenciana en 2022 y 2023}
+            \caption{Predicciones de la población de las provincias de la C. Valenciana en 2022 y 2023}
             \label{tab:predicciones}
             \end{table}
 
             \cb{REVIEW no me termina de convencer cómo he redactado el ejemplo, no sé si le doy el rigor suficiente.}
         
 \end{ejemplo}
+
+\section{Comportamiento límite}
+
+De nuevo, sea $\{X_n, n\geq 0\}$ una cadena de Markov homogénea sobre un conjunto finito de estados $S=\{1,\dots,N\}$. Hasta el momento hemos aprendido a calcular la distribución de la variable $X_n$ para cualquier $n\in\N_0$, pero es el momento de preguntar qué ocurre con dicha distribución cuando $n\rightarrow\infty$. Surgen así varias preguntas: ¿La distribución de $X_n$ converge a alguna distribución límite? ¿En caso de que converja, la distribución límite es única? ¿Cómo podríamos calcularla? En esta sección trataremos, de manera resumida, de responder a dichas preguntas.
+
+\subsection{Clasificación de los estados de una cadena de Markov}
+
+Antes de enunciar los principales resultados sobre existencia y unicidad de límite introducimos alguna terminología sobre las cadenas de Markov y sus estados.
+
+\begin{definicion}
+    Sean $i,j\in S$ dos estados. Decimos que el estado $j$ es \textbf{accesible} desde el estado $i$ si existe algún $k\geq 0$ tal que $p_{ij}^{(k)}>0$. Decimos que los estados $i$ y $j$ \textbf{se comunican} o que son  \textbf{comunicantes}, y lo denotamos como $i\leftrightarrow j$, si son accesibles entre ellos.
+\end{definicion}
+
+La siguiente proposición nos permitirá trabajar con cierta comodidad con la relación de comunicación.
+
+\begin{proposicion}
+    La `comunicación' ($\leftrightarrow$) es una relación de equivalencia sobre $S$.
+\end{proposicion}
+\begin{proof}
+    Consúltese \cite[Proposition 4.2.1]{Ross}.
+\end{proof}
+
+\begin{definicion}[Cadena de Markov irreducible]
+    Una cadena de Markov $\{X_n,n\geq 0\}$ sobre un conjunto de estados $S$ es \textbf{irreducible} si todos sus estados se comunican entre sí, es decir, si el cociente $S/\leftrightarrow$ consta de una sola clase de equivalencia. Una cadena de Markov que no es irreducible se dice \textbf{reducible}.
+\end{definicion}
+
+Nótese que la condición de cadena irreducible equivale a que sea posible llegar a cualquier estado $j$ desde cualquier estado $i$. Podemos comprobarlo con la matriz de transición sin más que mirar las entradas correspondientes, pero existe un mecanismo más visual e intuitivo que la matriz de transición: el \textbf{diagrama de transición}.
+
+Si una cadena de Markov $\{X_n,n\geq 0\}$ sobre un conjunto de estados $S=\{1,\dots,N\}$ tiene una matriz de transición $P$, podemos construir su diagrama de transición de la siguiente forma:
+\begin{enumerate}
+    \item Dibujamos un nodo por cada posible estado, cada uno con su correspondiente etiqueta.
+    \item Para cada $i,j\in S$, trazamos una flecha desde el nodo $i,j$ únicamente si la entrada $(i,j)$ de la matriz es estrictamente positiva. Esto es, si $p_{ij}>0$. En caso de dibujar la flecha, es recomendable etiquetarla con el correspondiente valor de $p_{ij}$.
+\end{enumerate} 
+Entonces, podemos trasladar las anteriores definiciones con respecto al diagrama de Markov:
+\begin{itemize}
+    \item Un estado $j$ es accesible desde el estado $i$ si, y solo si existe un camino en el diagrama de transición desde el nodo $i$ hacia el nodo $j$.
+    \item Dos estados $i,j$ son comunicantes si, y solo si existe un camino del nodo $j$ al $i$ y viceversa.
+    \item Una cadena es irreducible si, y solo si cada pareja de nodos es mutuamente accesible.
+\end{itemize}
+
+\begin{ejemplo}
+    \begin{enumerate}
+        \item Supongamos una cadena de Markov cuya matriz y diagrama de transición son los siguientes:
+        \begin{table*}[h]
+            \centering
+            \begin{tabular}{cc}
+            $P = \begin{pmatrix}
+                0 & 1 & 0 \\
+                0.1 & 0 & 0.9 \\
+                0 & 1 & 0
+            \end{pmatrix}
+            $ & \includegraphics[width=6cm]{img/C3/ejemplo_diagrama_1.png}
+        \end{tabular}
+        \end{table*}
+
+        En este caso, la cadena sería irreducible.
+        \item Supongamos ahora que la matriz y el diagrama son:
+        \begin{table*}[h]
+            \centering
+            \begin{tabular}{cc}
+            $P = \begin{pmatrix}
+                0.4 & 0.3 & 0.2 \\
+                0 & 1 & 0 \\
+                0.5 & 0 & 0
+            \end{pmatrix}
+            $ & \includegraphics[width=5cm]{img/C3/ejemplo_diagrama_2.png}
+        \end{tabular}
+        \end{table*}
+
+        \cb{REVIEW como alineo estas cosas sin meter 800 paquetes?}
+
+        Fijémonos que, aunque el estado $2$ es accesible desde todos los estados, ni el estado $1$ ni el $3$ son accesibles desde el $2$, lo cual impide que la cadena sea irreducible. Cuando un estado cumple esta propiedad se denomina estado \textit{absorbente}, término que definiremos formalmente más adelante.
+    \end{enumerate}
+\end{ejemplo}
+
+
+En primer lugar, vamos a asumir que existe al menos una distribución de probabilidad a la cual converge la distribución de $X_n$.
+\begin{definicion}
+    Llamamos \textbf{distribución límite} a la función masa de probabilidad a la cual converge la fmp de $X_n$ cuando $n$ tiende a infinito. Denotamos esta fmp como
+    \begin{equation}
+        \label{eq:distr-limite}
+        \pi = (\pi_1,\dots,\pi_N)^T,
+    \end{equation}
+    donde $\pi_j=\displaystyle\lim_{n\rightarrow\infty} P[X_n=j], \ \ \ j\in S$.
+\end{definicion}
+
+\cb{TODO Aclarar que denotamos con vectores las funciones masa de probabilidad y aclarar la abreviatura `fmp' para que al personal no le pase como a mí}
