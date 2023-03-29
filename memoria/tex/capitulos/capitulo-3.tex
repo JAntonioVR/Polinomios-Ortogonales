@@ -329,6 +329,7 @@ Entonces, podemos trasladar las anteriores definiciones con respecto al diagrama
 \end{itemize}
 
 \begin{ejemplo}
+    \label{ej:diagramas}
     \begin{enumerate}
         \item Supongamos una cadena de Markov cuya matriz y diagrama de transición son los siguientes:
         \begin{table*}[h]
@@ -356,15 +357,50 @@ Entonces, podemos trasladar las anteriores definiciones con respecto al diagrama
             $ & \includegraphics[width=5cm]{img/C3/ejemplo_diagrama_2.png}
         \end{tabular}
         \end{table*}
-
+        % http://magjac.com/graphviz-visual-editor/
         \cb{REVIEW como alineo estas cosas sin meter 800 paquetes?}
 
         Fijémonos que, aunque el estado $2$ es accesible desde todos los estados, ni el estado $1$ ni el $3$ son accesibles desde el $2$, lo cual impide que la cadena sea irreducible. Cuando un estado cumple esta propiedad se denomina estado \textit{absorbente}, término que definiremos formalmente más adelante.
     \end{enumerate}
 \end{ejemplo}
 
+\cb{REVIEW añado algo sobre tema de matrices reducibles/irreducibles?}
 
-En primer lugar, vamos a asumir que existe al menos una distribución de probabilidad a la cual converge la distribución de $X_n$.
+Hemos clasificado los estados según su accesibilidad, pero fijémonos ahora en la posibilidad de revisitar o no un estado. En el ejemplo \ref{ej:diagramas}(1) es posible visitar cualquiera de los tres estados cada dos transiciones, mientras que en el ejemplo \ref{ej:diagramas}(2) es posible mantenerse estado $1$ o en el $2$ iteración tras iteración. Sobre esta noción insiste la siguiente definición.
+
+\begin{definicion}[Estado periódico, aperiódico y absorbente]
+    \label{def:estado-periodico}
+    Un estado $i$ es \textbf{periódico} de periodo $d_i$ si la cadena puede regresar a $i$ en pasos múltiplos de $d_i$. Si $d_i=1$, decimos que el estado $i$ es \textbf{aperiódico}. Si ningún estado de la cadena es accesible desde el estado $i$ (\textit{i.e.} $p_{ii}=1$), entonces el estado $i$ se denomina \textbf{absorbente}.
+\end{definicion}
+
+\begin{observacion}
+    Si el estado $j$ es comunicante con un estado periódico, entonces $j$ es periódico.
+\end{observacion}
+
+Podemos extender esta definición a la cadena de Markov completa:
+
+\begin{definicion}[Cadena de Markov periódica y aperiódica]
+    Sea $\{X_n,n\geq 0\}$ una cadena de Markov homogénea, irreducible sobre un espacio de estados $S=\{1,\dots,N\}$. Sea $d$ el mayor número entero tal que, 
+    \begin{equation}
+        \label{eq:cond-periodica}
+        p_{ii}^{(n)}>0 \Rightarrow d|n, \ \ \ \forall i\in S.
+    \end{equation}
+    Si $d>1$, la cadena de Markov es \textbf{periódica}, si $d=1$ es \textbf{aperiódica}.
+\end{definicion}
+Nótese que una cadena periódica puede volver a su estado inicial en $d,2d,3d,\dots$ transiciones. Lo interesante de esta definición y de que únicamente se aplique a cadenas irreducibles es que basta con hallar el mayor periodo $d_i$ (según la definición \ref{def:estado-periodico}) común a todos los estados, de forma que la irreducibilidad de la cadena garantiza que ese valor $d$ es válido para todos los estados. Por otro lado, si $p_{ii}>0$ para algún estado $i\in S$ en una cadena irreducible, necesariamente $d=1$ y la cadena es aperiódica.
+
+\begin{observacion}
+    La periodicidad también es fácil de consultar en los diagramas. Basta con definir un ciclo que empiece y termine en cada uno de los nodos. Entonces $d$ es el máximo común divisor de las longitudes de estos ciclos.
+\end{observacion}
+
+Así, la cadena del ejemplo \ref{ej:diagramas}.1 es periódica con $d=2$. Sin embargo, no podemos plantearnos la periodicidad de la cadena del ejemplo \ref{ej:diagramas}.2, ya que ésta no es irreducible.
+
+\cb{REVIEW Incluyo tema de estados absorbentes y transitorios?}
+
+\subsection{Teoremas límite}
+
+Una vez introducida la terminología principal de estados y cadenas, podemos estudiar la existencia y unicidad de una distribución límite. En primer lugar, vamos a asumir que existe al menos una distribución de probabilidad a la cual converge la distribución de $X_n$.
+
 \begin{definicion}
     Llamamos \textbf{distribución límite} a la función masa de probabilidad a la cual converge la fmp de $X_n$ cuando $n$ tiende a infinito. Denotamos esta fmp como
     \begin{equation}
@@ -375,3 +411,65 @@ En primer lugar, vamos a asumir que existe al menos una distribución de probabi
 \end{definicion}
 
 \cb{TODO Aclarar que denotamos con vectores las funciones masa de probabilidad y aclarar la abreviatura `fmp' para que al personal no le pase como a mí}
+
+Si asumimos la existencia de una distribución límite, esta debe cumplir ciertas propiedades.
+
+\begin{proposicion}
+    Si una cadena de Markov $\{X_n,n\geq 0\}$ admite una distribución límite $\pi$, entonces ésta verifica las siguientes propiedades:
+    \begin{align}
+        \label{eq:condiciones-limite}
+        \pi_j &= \displaystyle\sum_{i=1}^N \pi_i p_{ij},\ \forall j\in S \ \text{ (1)},& \displaystyle\sum_{j=1}^N \pi_j &=1\ \text{ (2)}
+    \end{align}
+\end{proposicion}
+\begin{proof}
+    Aplicando el teorema de la probabilidad total y el teorema de la probabilidad condicionada, tenemos que
+    \begin{equation}
+        \label{eq:prob-total-cond}
+        P[X_{n+1}=j]=\sum_{i=1}^N P[X_n=i]p_{ij}, \ \ \ \forall j\in S.
+    \end{equation}
+    Si tomamos límite en ambos miembros de la igualdad cuando $n\rightarrow\infty$ y asumimos la existencia de esta distribución límite obtenemos la igualdad (1). La igualdad (2) se asume de la representación de $\pi$ como una función masa de probabilidad.
+\end{proof}
+
+Las ecuaciones (\ref{eq:condiciones-limite}.1) también se escriben en forma matricial como 
+\begin{equation}
+    \label{eq:balance}
+    \pi = P\cdot \pi.
+\end{equation} 
+
+Esta ecuación matricial puede resolverse, y si normalizamos el vector obtenido de forma que la suma de sus componentes resulte $1$, obtenemos un vector que denominaremos $\pi^*$. Supongamos ahora que $a^{(0)} = \pi^*$. Entonces, aplicando que es solución de (\ref{eq:balance}), $a^{(1)} = P\cdot \pi^* = \pi^*$, $a^{(2)} = P^2 \pi^* = P(P\cdot \pi^*) = P\cdot \pi^* = \pi^*$, \dots, $a^{(n)}=\pi^*$. Es decir, la distribución de $X_n$, representada por el vector $a^{(n)}$, es la misma siempre independientemente de $n$ e igual a $\pi^*$. Es lo que en adelante denominaremos distribución estacionaria.
+
+\begin{definicion}[Distribución estacionaria]
+    \label{def:estacionaria}
+    Una función masa de probabilidad dada por un vector $\pi^* =(\pi_1^*,\dots,\pi_N^*)^T$, se denomina \textbf{distribución estacionaria} de una cadena de Markov si
+    \begin{equation}
+        P[X_0=i]=\pi_i^* \ \ \forall i\in S \Rightarrow P[X_n=i]=\pi_i^*\ \ \forall i\in S, n\geq 0
+    \end{equation}
+    
+\end{definicion}
+
+Como vemos, las distribuciones límite y las distribuciones estacionarias guardan ambas una estrecha relación con las ecuaciones de la proposición \ref{eq:condiciones-limite}, y vemos que también la tendrán la existencia y unicidad de una y otra.
+
+\begin{proposicion}
+    Una función masa de probabilidad dada por un vector $\pi^* =(\pi_1^*,\dots,\pi_N^*)^T$ es una distribución estacionaria si, y solo si verifica las ecuaciones \ref{eq:condiciones-limite}.
+\end{proposicion}
+\begin{proof}
+    Lo probaremos por doble implicación.
+    \begin{itemize}
+        \item[\fcolorbox{black}{white}{$\Rightarrow$}] Supongamos que $\pi^*$ cumple la propiedad de la definición \ref{def:estacionaria}. Si tomamos $n=0$ en (\ref{eq:prob-total-cond}) obtenemos
+        $$
+        P[X_{1}=j]=\sum_{i=1}^N P[X_0=i] p_{ij}, \ \ \ \forall j\in S.
+        $$ 
+        Pero como $P[X_0=j]=\pi_j^*$ y $P[X_{1}=j]=\pi_j^*$, sustituyendo obtenemos la igualdad (\ref{eq:condiciones-limite}.1). La ecuación (\ref{eq:condiciones-limite}.2) se deduce de que partimos de que $\pi^*$ es una función masa de probabilidad representada en un vector.
+        \item[\fcolorbox{black}{white}{$\Leftarrow$}] Ahora asumimos que $\pi^*$ verifica las ecuaciones (\ref{eq:condiciones-limite}). Consideramos entonces que $P[X_0=j]=\pi_j^*, \ \ j\in S$. De nuevo, tomando $n=0$ en (\ref{eq:prob-total-cond}):
+        $$
+        P[X_{1}=j]=\sum_{i=1}^N P[X_0=i] p_{ij} = \sum_{i=1}^N \pi_i^* p_{ij} \underbrace{=}_{(\ref{eq:condiciones-limite}.1)}\pi_j^*.
+        $$
+        Por lo que la fmp de $X_1$ es $\pi^*$. Si usamos repetidamente (\ref{eq:prob-total-cond}) con distintos valores de $n$, deducimos que la fmp de $X_n$ es $\pi^*$ para cualquier $n\geq 0$. Esto es, $\pi^*$ es una distribución estacionaria.
+    \end{itemize}
+\end{proof}
+
+El hecho de que tanto distribuciones límite como distribuciones estacionarias cumplan las mismas ecuaciones tiene una consecuencia sencilla de comprobar.
+
+\begin{corolario}
+    Si una cadena admite una distribución límite, entonces ésta es también una distribución estacionaria.
+\end{corolario}
