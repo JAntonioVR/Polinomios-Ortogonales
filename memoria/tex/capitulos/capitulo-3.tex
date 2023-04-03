@@ -329,44 +329,52 @@ Entonces, podemos trasladar las anteriores definiciones con respecto al diagrama
 \end{itemize}
 
 \begin{ejemplo}
-    \label{ej:diagramas}
+    
+    
+
     \begin{enumerate}
-        \item Supongamos una cadena de Markov cuya matriz y diagrama de transición son los siguientes:
-        \begin{table*}[h]
-            \centering
-            \begin{tabular}{cc}
+        \item\label{ej:diagramas-1} Supongamos una cadena de Markov cuya matriz y diagrama de transición son los siguientes:
+        $$
+        \begin{tabular}{cc}
+        \centering{\begin{tabular}{c}
             $P = \begin{pmatrix}
                 0 & 1 & 0 \\
                 0.1 & 0 & 0.9 \\
                 0 & 1 & 0
             \end{pmatrix}
-            $ & \includegraphics[width=6cm]{img/C3/ejemplo_diagrama_1.png}
+            $ \end{tabular}}&
+        \begin{tabular}{c}
+        \centering{\includegraphics[width=6cm]{img/C3/ejemplo_diagrama_1.png}}
         \end{tabular}
-        \end{table*}
+        \end{tabular}
+        $$
 
         En este caso, la cadena sería irreducible.
-        \item Supongamos ahora que la matriz y el diagrama son:
-        \begin{table*}[h]
-            \centering
-            \begin{tabular}{cc}
+        \item\label{ej:diagramas-2} Supongamos ahora que la matriz y el diagrama son:
+        $$
+        \begin{tabular}{cc}
+        \centering{\begin{tabular}{c}
             $P = \begin{pmatrix}
                 0.4 & 0.3 & 0.2 \\
                 0 & 1 & 0 \\
                 0.5 & 0 & 0
             \end{pmatrix}
-            $ & \includegraphics[width=5cm]{img/C3/ejemplo_diagrama_2.png}
+            $ \end{tabular}}&
+        \begin{tabular}{c}
+        \centering{\includegraphics[width=5cm]{img/C3/ejemplo_diagrama_2.png}}
         \end{tabular}
-        \end{table*}
+        \end{tabular}
+        $$
         % http://magjac.com/graphviz-visual-editor/
-        \cb{REVIEW como alineo estas cosas sin meter 800 paquetes?}
 
         Fijémonos que, aunque el estado $2$ es accesible desde todos los estados, ni el estado $1$ ni el $3$ son accesibles desde el $2$, lo cual impide que la cadena sea irreducible. Cuando un estado cumple esta propiedad se denomina estado \textit{absorbente}, término que definiremos formalmente más adelante.
     \end{enumerate}
+    \label{ej:diagramas}
 \end{ejemplo}
 
 \cb{REVIEW añado algo sobre tema de matrices reducibles/irreducibles?}
 
-Hemos clasificado los estados según su accesibilidad, pero fijémonos ahora en la posibilidad de revisitar o no un estado. En el ejemplo \ref{ej:diagramas}(1) es posible visitar cualquiera de los tres estados cada dos transiciones, mientras que en el ejemplo \ref{ej:diagramas}(2) es posible mantenerse estado $1$ o en el $2$ iteración tras iteración. Sobre esta noción insiste la siguiente definición.
+Hemos clasificado los estados según su accesibilidad, pero fijémonos ahora en la posibilidad de revisitar o no un estado. En el ejemplo \ref{ej:diagramas}.\ref{ej:diagramas-1} es posible visitar cualquiera de los tres estados cada dos transiciones, mientras que en el ejemplo \ref{ej:diagramas}.\ref{ej:diagramas-2} es posible mantenerse estado $1$ o en el $2$ iteración tras iteración. Sobre esta noción insiste la siguiente definición.
 
 \begin{definicion}[Estado periódico, aperiódico y absorbente]
     \label{def:estado-periodico}
@@ -393,7 +401,7 @@ Nótese que una cadena periódica puede volver a su estado inicial en $d,2d,3d,\
     La periodicidad también es fácil de consultar en los diagramas. Basta con definir un ciclo que empiece y termine en cada uno de los nodos. Entonces $d$ es el máximo común divisor de las longitudes de estos ciclos.
 \end{observacion}
 
-Así, la cadena del ejemplo \ref{ej:diagramas}.1 es periódica con $d=2$. Sin embargo, no podemos plantearnos la periodicidad de la cadena del ejemplo \ref{ej:diagramas}.2, ya que ésta no es irreducible.
+Así, la cadena del ejemplo \ref{ej:diagramas}.\ref{ej:diagramas-1} es periódica con $d=2$. Sin embargo, no podemos plantearnos la periodicidad de la cadena del ejemplo \ref{ej:diagramas}.\ref{ej:diagramas-2}, ya que ésta no es irreducible.
 
 \cb{REVIEW Incluyo tema de estados absorbentes y transitorios?}
 
@@ -464,7 +472,7 @@ Como vemos, las distribuciones límite y las distribuciones estacionarias guarda
         $$
         P[X_{1}=j]=\sum_{i=1}^N P[X_0=i] p_{ij} = \sum_{i=1}^N \pi_i^* p_{ij} \underbrace{=}_{(\ref{eq:condiciones-limite}.1)}\pi_j^*.
         $$
-        Por lo que la fmp de $X_1$ es $\pi^*$. Si usamos repetidamente (\ref{eq:prob-total-cond}) con distintos valores de $n$, deducimos que la fmp de $X_n$ es $\pi^*$ para cualquier $n\geq 0$. Esto es, $\pi^*$ es una distribución estacionaria.
+        Por lo que la fmp de $X_1$ es $\pi^*$. Si usamos repetidamente \eqref{eq:prob-total-cond} con distintos valores de $n$, deducimos que la fmp de $X_n$ es $\pi^*$ para cualquier $n\geq 0$. Esto es, $\pi^*$ es una distribución estacionaria.
     \end{itemize}
 \end{proof}
 
