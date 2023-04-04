@@ -77,39 +77,69 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
 
 \begin{lema}
     \label{lema:equivalencia-pearson}
-    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$ con momentos finitos, $\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ la SPO respecto a $\uu$. Si la función peso $\rho(x)$ es solución de la ecuación diferencial
-    \begin{equation}
-        \label{eq:Pearson-peso}
-        [\sigma(x)\rho(x)]'=\tau(x)\rho(x)
-    \end{equation}
-    y además verifica las condiciones de frontera 
+    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$ con momentos finitos, $\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ la SPO respecto a $\uu$. Entonces las siguientes afirmaciones son equivalentes: 
+    \begin{enumerate}
+        \item La función peso $\rho(x)$ es solución de la ecuación diferencial
+        \begin{equation}
+            \label{eq:Pearson-peso}
+            [\sigma(x)\rho(x)]'=\tau(x)\rho(x)
+        \end{equation}
+        \item La SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}).
+    \end{enumerate}
+    siempre que $\rho(x)$ verifique las condiciones de frontera 
     \begin{equation}
         \label{eq:cond-frontera}
-        \displaystyle\lim_{x\rightarrow a}\sigma(x)\rho(x)x^n = \displaystyle\lim_{x\rightarrow b}\sigma(x)\rho(x)x^n, \ \ \ n\geq 0,
+        \displaystyle\lim_{x\rightarrow a}\sigma(x)\rho(x)x^n = \displaystyle\lim_{x\rightarrow b}\sigma(x)\rho(x)x^n, \ \ \ n\geq 0.
     \end{equation}
-    entonces la SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}).
 
 \end{lema}
 \begin{proof}
-    Queremos comprobar la igualdad de funcionales $D(\sigma \uu)=\tau\uu$. Para ello, tengamos en cuenta que dos funcionales lineales son iguales si, y solo si actuán igual sobre una base de $\mathbb P$. Escogemos la base $\{x^n\}_{n\geq 0}$. Entonces tenemos que
-    $$
-    \prodesc{D(\sigma \uu)}{x^n} = -\prodesc{\sigma \uu}{n x^{n-1}}= -\prodesc{\uu}{\sigma(x)n x^{n-1}},
-    $$
-    aplicando (\ref{eq:funcional-peso}) e integración por partes, llegamos a
-    \begin{equation*}
-        \begin{split}
-            \prodesc{D(\sigma \uu)}{x^n} &= -\int_a^b \sigma(x)n x^{n-1}\rho(x)dx = \left\{\begin{array}{ll}
-                u = \sigma(x)\rho(x) & du=[\sigma(x)\rho(x)]'dx \\
-                dv = n x^{n-1}dx & v = x^n
-            \end{array}\right\} \\
-            &= -\underbrace{\left[\sigma(x)\rho(x)x^n\right]_a^b}_{=0\text{ por (\ref{eq:cond-frontera})}}+ \int_a^b x^n [\sigma(x)\rho(x)]'dx\ \ \ \ \  \text{(aplicando (\ref{eq:Pearson-peso}))} \\
-            &= \int_a^b x^n \tau(x)\rho(x)dx = \prodesc{\uu}{\tau(x)x^n} = \prodesc{\tau \uu}{x^n}
-        \end{split}
-    \end{equation*}
+    \begin{itemize}
+        \item[\fbox{$\Rightarrow$}] Queremos comprobar la igualdad de funcionales $D(\sigma \uu)=\tau\uu$. Para ello, tengamos en cuenta que dos funcionales lineales son iguales si, y solo si actuán igual sobre una base de $\mathbb P$. Escogemos la base $\{x^n\}_{n\geq 0}$. Entonces tenemos que
+        $$
+        \prodesc{D(\sigma \uu)}{x^n} = -\prodesc{\sigma \uu}{n x^{n-1}}= -\prodesc{\uu}{\sigma(x)n x^{n-1}},
+        $$
+        aplicando (\ref{eq:funcional-peso}) e integración por partes, llegamos a
+        \begin{equation*}
+            \begin{split}
+                \prodesc{D(\sigma \uu)}{x^n} &= -\int_a^b \sigma(x)n x^{n-1}\rho(x)dx = \left\{\begin{array}{ll}
+                    u = \sigma(x)\rho(x) & du=[\sigma(x)\rho(x)]'dx \\
+                    dv = n x^{n-1}dx & v = x^n
+                \end{array}\right\} \\
+                &= -\underbrace{\left[\sigma(x)\rho(x)x^n\right]_a^b}_{=0\text{ por (\ref{eq:cond-frontera})}}+ \int_a^b x^n [\sigma(x)\rho(x)]'dx\ \ \ \ \  \text{(aplicando (\ref{eq:Pearson-peso}))} \\
+                &= \int_a^b x^n \tau(x)\rho(x)dx = \prodesc{\uu}{\tau(x)x^n} = \prodesc{\tau \uu}{x^n}
+            \end{split}
+        \end{equation*}
+        \item[\fbox{$\Leftarrow$}] \cb{REVIEW El recíproco me está quitando años de vida.
+        
+        Queremos probar que la función peso $\rho(x)$ es solución de la ecuación \eqref{eq:Pearson-peso}, sabiendo que el funcional $\uu$ definido como en \eqref{eq:funcional-peso} verifica la ecuación de Pearson \eqref{eq:Pearson-u}.
+
+        Por un lado, tenemos que
+
+        $$
+        \int_a^b \pi(x)\tau(x)\rho(x)dx = \prodesc{\tau \uu}{x^n}= \prodesc{D(\sigma \uu)}{x^n} = -\int_a^b \pi'(x) \sigma(x)\rho(x) dx.
+        $$
+        Por tanto, si ahora aplicamos integración por partes
+        \begin{equation*}
+            \begin{split}
+                0 &= \int_a^b \pi(x)\tau(x)\rho(x)dx + \int_a^b \pi'(x) \sigma(x)\rho(x) dx \\
+                &= \left\{\begin{array}{ll}
+                    u = \sigma(x)\rho(x) & du=[\sigma(x)\rho(x)]'dx \\
+                    dv = \pi'(x) dx & v = \pi(x)
+                \end{array}\right\} \\
+                &= \int_a^b \pi(x)\tau(x)\rho(x)dx + \underbrace{\left[\sigma(x)\rho(x)x^n\right]_a^b}_{=0\text{ por (\ref{eq:cond-frontera})}} - \int_a^b \pi(x)[\sigma(x)\rho(x)]'dx \\
+                &= \int_a^b \pi(x)(\tau(x)\rho(x) - [\sigma(x)\rho(x)]' )dx
+            \end{split}
+        \end{equation*}
+        para cualquier polinomio $\pi(x)$.
+        
+        }
+    \end{itemize}
+    
     
 \end{proof}
 
-\cb{REVIEW El recíproco tiene que ser cierto, pero no tengo la demostración }
+
 
 \section{Deducción de las familias de polinomios ortogonales clásicos}
 \label{section:deduccion-clasicos}
@@ -236,6 +266,7 @@ Hasta el momento hemos podido conocer las distintas familias de polinomios ortog
 
 Previamente, presentaremos un resultado que nos ahorrará el tener que probar las condiciones de frontera (\ref{eq:cond-frontera}) cuando queramos comprobar que una SPO es clásica.
 
+\cb{REVIEW ¿Qué hacemos con esta proposición que presuntamente dice que las condiciones de frontera se verifican siempre y con las de debajo?}
 \begin{proposicion}
     Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$, $\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ una SPO respecto a $\uu$. Entonces $\{P_n\}$ es clásica si, y sólo si la función peso $\rho(x)$ es solución de la ecuación diferencial
     \begin{equation*}
@@ -542,12 +573,57 @@ Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi 
         \end{split}
     \end{equation}
     que en definitiva es un polinomio de grado a lo sumo $n$.
-    
-    \cb{REVIEW Modificada esta prueba, pero falta asegurar que el grado es exactamente $n$.}
 
 \end{proof}
 
-Como ya anunciamos en el teorema \ref{th:ec-hipergeometrica}, los polinomios clásicos son soluciones polinómicas de la ecuación diferencial hipergeométrica. De acuerdo con este último resultado, podemos escribir los polinomios ortogonales clásicos mediante la fórmula de Rodrigues (\ref{eq:formula-rodrigues}). Lo habitual es multiplicar la fórmula de Rodrigues por una constante $B_n$, la cual depende de la familia y de la estandarización que se desee. De esta forma, si $\{P_n\}$ es una SPO clásica respecto a la función peso $\rho(x)$, entonces
+Ya hemos comprobado que las soluciones polinómicas de la ecuación hipergeométrica se pueden expresar mediante la fórmula de Rodrigues. Sin embargo, aunque de momento sabemos que, a pesar de su aspecto, $y_n$ es un polinomio de grado a lo sumo $n$, podemos dar un paso más y afirmar que es de hecho un polinomio de grado exacto $n$. Para ello, introduciremos la ortogonalidad.
+
+
+\cb{REVIEW Algo que no sea correcto?}
+\begin{proposicion}
+    Las soluciones polinómicas de la ecuación diferencial hipergeométrica \eqref{eq:hipergeometrica} $y_n$, expresadas mediante la fórmula de Rodrigues \eqref{eq:formula-rodrigues}, son polinomios de grado exacto $n$.
+\end{proposicion}
+\begin{proof}
+    Recordemos que $\rho$ es una solución de la ecuación de Pearson \eqref{eq:Pearson-peso} positiva en un intervalo $[a,b]\subseteq \R$. Podemos entonces construir a partir de $\rho$ un funcional $\uu$ definido como en \eqref{eq:funcional-peso} y su correspondiente producto escalar. Por tanto, tenemos el producto escalar
+    $$
+    \prodesc{p(x)}{q(x)} = \prodesc{\uu}{p(x)q(x)} = \int_a^b p(x)q(x)\rho(x)dx, \ \ \ \forall p(x),q(x)\in\mathbb{P}. 
+    $$
+
+    Sea $\pi(x)\in\mathbb{P}_n$ un polinomio de grado a lo sumo $n$. Calculemos $\prodesc{\pi}{y_n}$.
+    \begin{equation*}
+        \begin{split}
+            \prodesc{\pi}{y_n} &= \prodesc{\uu}{\pi(x)y_n(x)} = \int_a^b \pi(x)y_n(x)\rho(x)dx \\
+            &= \int_a^b \pi(x)\left[\dfrac 1 {\rho(x)} \dfrac{d^n}{dx^n} (\rho(x) \sigma^n(x))\right]\rho(x)dx \\
+            &= \int_a^b \pi(x)\left[\dfrac{d^n}{dx^n} (\rho(x) \sigma^n(x))\right]dx \\
+            &= \left\{\begin{array}{ll}
+                u=\pi(x) & du = \pi'(x)dx\\
+                dv =  \left[\dfrac{d^n}{dx^n} (\rho(x) \sigma^n(x))\right]dx  & v=\left[\dfrac{d^{n-1}}{dx^{n-1}} (\rho(x) \sigma^n(x))\right]
+             \end{array}\right\} \\
+            &= \underbrace{\left[\pi(x)\dfrac{d^{n-1}}{dx^{n-1}} (\rho(x) \sigma^n(x))\right]_a^b}_{(1)} - \int_a^b \pi'(x)\left[\dfrac{d^{n-1}}{dx^{n-1}} (\rho(x) \sigma^n(x))\right]dx \\
+        \end{split}
+    \end{equation*}
+    Por (\cb{TODO Encontrar referencia del lema que no sea el TFG de un buen chaval}), tenemos que
+    $$
+    \dfrac{d^{n-1}}{dx^{n-1}} = \tilde P_{n-1}(x) \sigma^{n-1}(x)\rho(x),
+    $$
+    siendo $\tilde P_{n-1}(x)$ un polinomio de grado a lo sumo $n-1$. En definitiva, la expresión (1) se puede reducir a $\psi(x)\sigma(x)\rho(x)$ siendo $\psi(x)=\displaystyle\sum_{k=0}^{\deg(\psi)}c_k x^k$ un polinomio. Entonces, aplicando las condiciones de frontera \eqref{eq:cond-frontera}, tenemos que (1) vale $0$, por lo que
+    $$
+    \prodesc{\pi}{y_n} = \int_a^b \pi(x)\left[\dfrac{d^n}{dx^n} (\rho(x) \sigma^n(x))\right]dx = - \int_a^b \pi'(x)\left[\dfrac{d^{n-1}}{dx^{n-1}} (\rho(x) \sigma^n(x))\right]dx.
+    $$
+
+    Si aplicamos este procedimiento $n$ veces, finalmente llegamos a 
+    $$
+    \prodesc{\pi}{y_n} = (-1)^n \int_a^b \left[\dfrac{d^n}{dx^n}\pi(x)\right] \sigma^n(x)\rho(x)dx.
+    $$
+    Entonces:
+    \begin{itemize}
+        \item Si $\deg(\pi) < n$, entonces su derivada $n$-ésima es nula y $\prodesc{\pi}{y_n} = 0$.
+        \item Si $\deg(\pi) = n$, entonces su derivada $n$-ésima es una constante no nula y $\prodesc{\pi}{y_n} = K\neq 0$.
+    \end{itemize}
+    Esto es, $y_n$ es un polinomio de grado menor o igual que $n$ ortogonal a todos los polinomios de grado menor que $n$. Por tanto, necesariamente $y_n$ es un polinomio de grado exacto $n$.
+\end{proof}
+
+Recordemos ahora que los polinomios ortogonales clásicos son, en particular, soluciones polinómicas de la ecuación diferencial hipergeométrica. De acuerdo con estos dos últimos resultados, podemos escribir los polinomios ortogonales clásicos mediante la fórmula de Rodrigues (\ref{eq:formula-rodrigues}). Lo habitual es multiplicar la fórmula de Rodrigues por una constante $B_n$, la cual depende de la familia y de la estandarización que se desee. De esta forma, si $\{P_n\}$ es una SPO clásica respecto a la función peso $\rho(x)$, entonces
 \begin{equation}
     \label{eq:formula-rodrigues-pol}
     P_n(x) = \dfrac {B_n}{\rho(x)} \frac{d^n}{d x^n}(\rho(x)\sigma^n(x)). 
