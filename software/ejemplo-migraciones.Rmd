@@ -71,4 +71,10 @@ En **2023**
 ```{r}
 X2 %*% sum(p)
 ```
+```{r}
+S <- as.matrix(eigen(P)$vectors)  # Matriz S
+invS <- solve(S)
+Dn <- as.vector(c(1, rep(0,2))) * diag(3)
+X0 %*% S%*%Dn%*%invS
+```
 
