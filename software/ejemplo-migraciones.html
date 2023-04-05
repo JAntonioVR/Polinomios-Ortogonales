@@ -360,7 +360,7 @@ pre code {
 
 <h1 class="title toc-ignore">Ejemplo cadenas de Markov</h1>
 <h4 class="author">Juan Antonio Villegas Recio</h4>
-<h4 class="date">28/3/2023</h4>
+<h4 class="date">5/4/2023</h4>
 
 </div>
 
@@ -368,7 +368,8 @@ pre code {
 <p>Este documento presenta el código <code>R</code> utilizado para los cálculos realizados en el ejemplo sobre cadenas de Markov.</p>
 <p>Primero de todo, importamos los paquetes necesarios.</p>
 <pre class="r"><code>library(readxl) # Para leer los datos desde hojas de cálculo
-library(expm) # Para potencias de matrices</code></pre>
+library(expm) # Para potencias de matrices
+library(pracma) # Para utilizar nullspace</code></pre>
 <p>Leemos los datos desde la hoja de cálculo y cambiamos los nombres de las filas y columnas para mayor claridad.</p>
 <pre class="r"><code>M &lt;- as.matrix(read_excel(&quot;./datos-migraciones.xlsx&quot;, range = &quot;C8:E11&quot;))
 colnames(M) &lt;- c(&quot;Alicante&quot;, &quot;Castellon&quot;, &quot;Valencia&quot;)
@@ -386,48 +387,49 @@ P # Matriz de transicion</code></pre>
 ## Castellon 0.02701318 0.80959004 0.16339678
 ## Valencia  0.04498465 0.03714176 0.91787359</code></pre>
 <p>Leemos las poblaciones iniciales desde otro archivo y cambiamos también el nombre de las filas.</p>
-<pre class="r"><code>p &lt;- as.matrix(read_excel(&quot;datos-poblacion.xlsx&quot;, range = &quot;B8:B11&quot;))
-rownames(p) &lt;- c(&quot;Alicante&quot;, &quot;Castellon&quot;, &quot;Valencia&quot;)
+<pre class="r"><code>p &lt;- t(as.matrix(read_excel(&quot;datos-poblacion.xlsx&quot;, range = &quot;B8:B11&quot;)))
+class(p) = &quot;numeric&quot;
+colnames(p) &lt;- c(&quot;Alicante&quot;, &quot;Castellon&quot;, &quot;Valencia&quot;)
 p</code></pre>
-<pre><code>##              2021
-## Alicante  1881762
-## Castellon  587064
-## Valencia  2589312</code></pre>
+<pre><code>##      Alicante Castellon Valencia
+## 2021  1881762    587064  2589312</code></pre>
 <p>Dividimos las componentes del vector entre la suma de todas ellas para obtener <span class="math inline">\(X_0\)</span>, la distribución inicial de la población.</p>
 <pre class="r"><code>X0 &lt;- p/sum(p)
 X0</code></pre>
-<pre><code>##                2021
-## Alicante  0.3720266
-## Castellon 0.1160633
-## Valencia  0.5119101</code></pre>
+<pre><code>##       Alicante Castellon  Valencia
+## 2021 0.3720266 0.1160633 0.5119101</code></pre>
 <p>Calculamos las distribuciones en 2022 (<span class="math inline">\(X_1\)</span>) y en 2023 (<span class="math inline">\(X_2\)</span>).</p>
 <p>En <strong>2022</strong>:</p>
-<pre class="r"><code>X1 &lt;- P %*% X0
+<pre class="r"><code>X1 &lt;- X0 %*% P 
 X1</code></pre>
-<pre><code>##                2021
-## Alicante  0.3813410
-## Castellon 0.1876577
-## Valencia  0.4909151</code></pre>
+<pre><code>##       Alicante Castellon  Valencia
+## 2021 0.3623713 0.1168806 0.5207481</code></pre>
 <p>En <strong>2023</strong></p>
-<pre class="r"><code>X2 &lt;- (P %^% 2) %*% X0
+<pre class="r"><code>X2 &lt;- X0 %*% (P %^% 2) 
 X2</code></pre>
-<pre><code>##                2021
-## Alicante  0.3887086
-## Castellon 0.2424410
-## Valencia  0.4747224</code></pre>
+<pre><code>##       Alicante Castellon  Valencia
+## 2021 0.3540653 0.1177692 0.5281655</code></pre>
 <p>Finalmente, multiplicamos por la población total y así tenemos una estimación de la población total en 2022 y 2023.</p>
 <p>En <strong>2022</strong></p>
-<pre class="r"><code>X1 %*% sum(p)</code></pre>
-<pre><code>##                [,1]
-## Alicante  1928875.2
-## Castellon  949198.8
-## Valencia  2483116.1</code></pre>
+<pre class="r"><code>X1 * sum(p)</code></pre>
+<pre><code>##      Alicante Castellon Valencia
+## 2021  1832924  591198.1  2634016</code></pre>
 <p>En <strong>2023</strong></p>
-<pre class="r"><code>X2 %*% sum(p)</code></pre>
-<pre><code>##              [,1]
-## Alicante  1966142
-## Castellon 1226300
-## Valencia  2401211</code></pre>
+<pre class="r"><code>X2 * sum(p)</code></pre>
+<pre><code>##      Alicante Castellon Valencia
+## 2021  1790911  595692.9  2671534</code></pre>
+<p>Calcularemos el vector estacionario, que es también el vector al que converge la distribución de <span class="math inline">\(X_n\)</span>. Para ello, resolvemos la ecuación <span class="math inline">\(\pi=\pi\cdot P\)</span> teniendo en cuenta que <span class="math display">\[
+\pi = \pi \cdot P \Leftrightarrow \pi(P-I_3)=0\Leftrightarrow \pi \in \ker(P^t-I_3)
+\]</span> Por lo que escogemos un representante del núcleo de la matriz <span class="math inline">\(P^t-I_3\)</span> y lo normalizamos</p>
+<pre class="r"><code>pi &lt;- t(nullspace(t(P)-diag(3)))
+pi &lt;- pi/sum(pi)
+pi</code></pre>
+<pre><code>##           [,1]      [,2]      [,3]
+## [1,] 0.3021799 0.1278348 0.5699852</code></pre>
+<p>Multiplicamos por la población total para obtener la estimación de la población a largo plazo</p>
+<pre class="r"><code>pi * sum(p)</code></pre>
+<pre><code>##         [,1]     [,2]    [,3]
+## [1,] 1528468 646606.3 2883064</code></pre>
 
 
 

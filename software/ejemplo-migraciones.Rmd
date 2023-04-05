@@ -1,7 +1,7 @@
 ---
 title: "Ejemplo cadenas de Markov"
 author: "Juan Antonio Villegas Recio"
-date: "28/3/2023"
+date: "5/4/2023"
 output: html_document
 ---
 
@@ -11,6 +11,7 @@ Primero de todo, importamos los paquetes necesarios.
 ```{r, message=FALSE}
 library(readxl) # Para leer los datos desde hojas de cálculo
 library(expm) # Para potencias de matrices
+library(pracma) # Para utilizar nullspace
 ```
 
 Leemos los datos desde la hoja de cálculo y cambiamos los nombres de las filas y columnas para mayor claridad.
@@ -32,8 +33,9 @@ P # Matriz de transicion
 Leemos las poblaciones iniciales desde otro archivo y cambiamos también el nombre de las filas.
 
 ```{r}
-p <- as.matrix(read_excel("datos-poblacion.xlsx", range = "B8:B11"))
-rownames(p) <- c("Alicante", "Castellon", "Valencia")
+p <- t(as.matrix(read_excel("datos-poblacion.xlsx", range = "B8:B11")))
+class(p) = "numeric"
+colnames(p) <- c("Alicante", "Castellon", "Valencia")
 p
 
 ```
@@ -50,13 +52,13 @@ Calculamos las distribuciones en 2022 ($X_1$) y en 2023 ($X_2$).
 
 En **2022**:
 ```{r}
-X1 <- P %*% X0
+X1 <- X0 %*% P 
 X1
 ```
 
 En **2023**
 ```{r}
-X2 <- (P %^% 2) %*% X0
+X2 <- X0 %*% (P %^% 2) 
 X2
 ```
 
@@ -64,17 +66,26 @@ Finalmente, multiplicamos por la población total y así tenemos una estimación
 
 En **2022**
 ```{r}
-X1 %*% sum(p)
+X1 * sum(p)
 ```
 
 En **2023**
 ```{r}
-X2 %*% sum(p)
+X2 * sum(p)
 ```
-```{r}
-S <- as.matrix(eigen(P)$vectors)  # Matriz S
-invS <- solve(S)
-Dn <- as.vector(c(1, rep(0,2))) * diag(3)
-X0 %*% S%*%Dn%*%invS
-```
+Calcularemos el vector estacionario, que es también el vector al que converge la distribución de $X_n$. Para ello, resolvemos la ecuación $\pi=\pi\cdot P$ teniendo en cuenta que
+$$
+\pi = \pi \cdot P \Leftrightarrow \pi(P-I_3)=0\Leftrightarrow \pi \in \ker(P^t-I_3)
+$$
+Por lo que escogemos un representante del núcleo de la matriz $P^t-I_3$ y lo normalizamos
 
+```{r}
+pi <- t(nullspace(t(P)-diag(3)))
+pi <- pi/sum(pi)
+pi
+```
+Multiplicamos por la población total para obtener la estimación de la población a largo plazo
+
+```{r}
+pi * sum(p)
+```
