@@ -2,12 +2,340 @@
 %% Capítulo 4: Relación entre los PO y los PNM           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+En el capítulo anterior hemos conocido a los procesos de Markov discretos, más frecuentemente denominados \textit{cadenas de Markov}. Por otra parte, en los dos primeros capítulos hemos visto la teoría fundamental de polinomios ortogonales, profundizando en los conocidos polinomios clásicos. Aparentemente, son dos ámbitos completamente diferentes: los polinomios ortogonales están muy relacionados con teoría de la medida, álgebra lineal y análisis funcional, mientras que las cadenas de Markov son modelos meramente probabilísticos. A pesar de ello, ambas disciplinas confluyen en un caso particular de cadena de Markov: los procesos de nacimiento y muerte (\textit{birth-and-death processes}). 
+
+Los procesos de nacimiento y muerte discretos, también llamados cadenas de nacimiento y muerte, caminatas aleatorias, o en inglés más conocidos como \textit{random walks}, son cadenas de Markov en la que desde un determinado estado $i$ tan solo es posible acceder al siguiente ($i+1$), al anterior ($i-1$), o permanecer en el mismo estado ($i$). Fueron los matemáticos Samuel Karlin (1924--2007) y James McGregor (1921--1988) quienes profundizaron en la relación de estas particulares cadenas con los polinomios ortogonales, destacando la que llamaremos fórmula de representación de Karlin y McGregor.
+
+Para la redacción de este capítulo se han usado como bibliografía fundamental las referencias \cite[Ch. II]{Manuel}, \cite[Ch. II]{schoutens-2000}, \cite{random-walks}, \cite{Linear-Growth}, entre otras.
+
+\section{Procesos de nacimiento y muerte}
+
+Como mencionamos anteriormente, un proceso de nacimiento y muerte discreto, cadena de nacimiento y muerte o caminata aleatoria es un caso particular de proceso de Markov en el que la única transición posible desde un estado $i\in S$ es hacia el estado siguiente, $i+1$, hacia el anterior, $i-1$, o hacia el propio estado $i$. Intuitivamente, es como un juego de plataformas infinito. Entonces, tomamos $S=\N_0 = \{0,1,2,\dots\}$\footnote{Existe una extensión en la que $S = \{-1,0,1,2,\dots\}$ y el estado $-1$ es un estado absorbente. Nosotros supondremos $S=\N_0$, aunque si se desea se puede consultar \cite[Ch. II, Section 2.3]{schoutens-2000} para más información sobre dicha extensión.} y, por esta suposición, tenemos la matriz tridiagonal infinita
+
+\begin{equation}
+    \label{eq:matriz-pnm}
+    P = \begin{pmatrix}
+        r_0 & p_0 & 0 & 0 & \cdots \\
+        q_1 & r_1 & p_1 & 0 & \cdots \\
+        0 & q_2 & r_2 & p_2 & \cdots \\
+        \vdots & \ddots & \ddots & \ddots & \ddots 
+    \end{pmatrix},
+\end{equation}
+donde
+\begin{itemize}
+    \item $q_i = P[X_{n+1}=i-1|X_n=i]$, $i=1,2,\dots$
+    \item $r_i = P[X_{n+1}=i|X_n=i]$, $i=0,1,2,\dots$
+    \item $p_i = P[X_{n+1}=i+1|X_n=i]$, $i=0,1,2,\dots$
+    \item Asumimos que $q_i > 0 \ (i\geq 1)$, $r_i\geq 0 \  (i\geq 0)$, $p_i>0 \ (i\geq 0)$, $r_0+p_0 =1$, $q_i+r_i+p_i=1 \ (i\geq 1)$.
+\end{itemize}
+
+Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre sea posible mantenerse en el mismo estado. En la imagen \ref{img:diagrama-trans-pnm} se representa el diagrama de estados asociado a esta particular cadena.
+
+\begin{figure}[ht] 
+    \label{img:diagrama-trans-pnm}
+    \centering 
+      \begin{tikzpicture}[->, %Líneas direccionadas
+                         >=stealth', %Puntas de flecha rellenas
+                         shorten >=1pt,
+                         auto,
+                         node distance=2cm,] %distancia mínima entre nodos
+    
+          
+       \node[state] (q0) {$0$};
+       \node[state, right of=q0] (q1) {$1$};
+       \node[state, right of=q1] (q2) {$2$};
+       \node[right of=q2] (q3) {$\dots$};
+       
+       \draw (q0) edge[loop above] node{$r_0$} (q0);
+       \draw (q0) edge[bend left, above] node{$p_0$} (q1);
+       \draw (q1) edge[bend left, below] node{$q_1$} (q0);
+       \draw (q1) edge[loop above] node{$r_1$} (q1);
+       \draw (q1) edge[bend left, above] node{$p_1$} (q2);
+       \draw (q2) edge[bend left, below] node{$q_2$} (q1);
+       \draw (q2) edge[loop above] node{$r_2$} (q2);
+       \draw (q2) edge[bend left, above] node{$p_2$} (q3);
+       \draw (q3) edge[bend left, below] node{$q_3$} (q2);
+       
+      \end{tikzpicture}
+    \caption{Diagrama de transición de un proceso de nacimiento y muerte}
+    \end{figure}
+
+    El comportamiento a largo plazo de los procesos de nacimiento y muerte puede explicarse a partir de unos coeficientes que definimos a continuación:
+
+    \begin{definicion}[Coeficientes potenciales]
+        Dado un proceso de nacimiento y muerte $\{X_n:n\geq 0\}$ con matriz de transición $P$ definida como en \eqref{eq:matriz-pnm}, se definen sus \textbf{coeficientes potenciales} como
+        \begin{align}
+            \label{eq:coeficientes-potenciales}
+            \pi_0&= 1 & \pi_n &= \dfrac{p_0 p_1 \cdots p_{n-1}}{q_1 q_2 \cdots q_n} \ \ \ (n\geq 1)
+        \end{align}
+    \end{definicion}
+    Nótese que, para $n\geq 1$ los coeficientes potenciales cumplen la relación de recurrencia $\pi_n = \pi_{n-1} \dfrac{p_{n-1}}{q_n}$, de la cual podemos deducir las siguientes ecuaciones de simetría:
+    \begin{equation}
+        \label{eq:ecs-simetria}
+        \pi_n p_n = \pi_{n+1}q_{n+1} \ \ \ (n\geq 0).
+    \end{equation} 
+    Por otro lado, obsérvese que, con las condiciones impuestas sobre $P$, el vector fila infinito $\pi = (\pi_n)_{n\in\N_0}$ verifica $\pi P = \pi$, la ecuación \eqref{eq:balance} extendida a vectores y matrices infinitos. Por tanto, $\pi$ es un vector estacionario de la cadena, que de hecho será una distribución estacionaria si $\sum_{n=0}^\infty$.
+
+    \cb{REVIEW Aquí tengo tela de ganas de decir que la cadena es irreducible, aperiódica (si algún $r_n > 0$) y aplicar el teorema \ref{th:teorema-estacionaria} y por tanto admite una única distribución límite, pero lo primero que la cadena no es finita, lo segundo que en ningún momento se específica que haya algún $r_n>0$ que la haga aperiódica.}
+
+    \cb{TODO Referencia al libro y apartado que no recuerdo en el que se extendían los teoremas al infinito.}
+
+    \section{El teorema espectral}
+
+    Una vez que conocemos qué es un proceso de nacimiento y muerte, que como hemos visto no es más que un caso particular de cadena de Markov, emprendemos el camino en busca de la conocida fórmula de representación, la cual relaciona estos procesos con los polinomios ortogonales. Una herramienta fundamental en este proceso es el teorema espectral, gracias al cual obtendremos la medida que nos proporcionará la ortogonalidad de los polinomios.
+
+    Recordamos algunos conceptos fundamentales de análisis funcional.
+
+    \begin{definicion}[Espacio de Hilbert]
+        Un espacio vectorial $\mathcal{H}$ se denomina \textbf{espacio de Hilbert} si está dotado de un producto escalar interno $\prodesc{\cdot}{\cdot}$ y es además completo respecto a la norma asociada a dicho producto escalar.
+    \end{definicion}
+
+    Denotamos como $\mathcal{B}(\mathcal{H})$ al conjunto de todos los operadores lineales de $\mathcal{H}$ en sí mismo. Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal. $T$ es un operador acotado si, dado un subconjunto $A\subseteq \mathcal{H}$ acotado, $T(A)$ también es acotado. Es decir, un operador lineal acotado transforma conjuntos acotados en conjuntos acotados. 
+
+
+    \begin{definicion}[Operador autoadjunto]
+        Sea $\mathcal{H}$ un espacio de Hilbert. Un operador lineal $T:\mathcal H \longrightarrow \mathcal{H}$ es \textbf{autoadjunto} si
+        \begin{equation}
+            \label{eq:operador-autoadjunto}
+            \prodesc{Tx}{y} = \prodesc{x}{Ty}, \ \ \ \forall x,y\in \mathcal H.
+        \end{equation}
+    \end{definicion}
+
+    Por último, recordemos que el espectro de una matriz cuadrada $A\in\R^{N\times N}$, denotado como $\sigma(A)$ es el conjunto de sus valores propios. Es decir, los números $\lambda\in\C$ tales que el determinante de la matriz $A-\lambda I_N$ se anulaba. Dicho de otra manera, si nos planteamos el endomorfismo de $\R^N$ $x\mapsto xA$, $\sigma(A)$ es el conjunto de valores $\lambda$ tales que el endomorfismo $x\mapsto x(A-\lambda I)$ no es invertible. A partir de esta idea, podemos generalizar el concepto de espectro a cualquier operador.
+    
+    \begin{definicion}[Conjuntos espectro y resolvente]
+        Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal sobre un espacio de Hilbert. 
+        \begin{itemize}
+            \item El \textbf{resolvente} de $T$, denotado como $\rho(T)$ es el conjunto de valores $\lambda\in\C$ tales que el operador $T-\lambda I$ (también denominado \textbf{operador resolvente}) es invertible.
+            \item El \textbf{espectro} de $T$, denotado como $\sigma(T)$ es el conjunto de valores $\lambda\in\C$ tales que el operador resolvente $T-\lambda I$ no es invertible.
+        \end{itemize}
+        Naturalmente, $\sigma(T)$ y $\rho(T)$ son conjuntos complementarios.
+    \end{definicion}
+
+    Si un operador lineal $T\in\mathcal{B}(\mathcal{H})$ es acotado, entonces $\sigma(T)$ es un subconjunto compacto del disco de radio $\|T\|$. Si además $T$ es autoadjunto, $\sigma(T)\subseteq\R$, por lo que $\sigma(T)\subseteq[-\|T\|,\|T\|]$.
+    
+    \cb{REVIEW Esto de aquí arriba lo pongo como un lema o lo dejo así? No tengo la demostración ciertamente, pero no creo que merezca la pena quebrarse la cabeza con esto.}
+
+    Por último, un concepto que próximamente nos facilitará la medida de ortogonalidad.
+    
+    \begin{definicion}[Resolución de la identidad]
+        \label{def:resolucion-identidad}
+        Una \textbf{resolución de la identidad} $E$ en el espacio de Hilbert $\mathcal{H}$ es un operador $E:\R\longrightarrow\mathcal{B}(\mathcal{H})$ que, para cualesquiera subconjuntos Borel-medibles $A,B\subseteq \R$, verifica las siguientes condiciones:
+        \begin{enumerate}
+            \item $E(A)$ es una proyección, es decir $E(A)\circ E(A)=E(A)$.
+            \item $E(A\cap B)=E(A)E(B)$.
+            \item $E(\emptyset)=0_{\mathcal{B}(\mathcal{H})}$, $E(\R)=I_\mathcal{H}$.
+            \item Si $A$ y $B$ son disjuntos, $E(A\cup B)=E(A)+E(B)$.
+            \item La aplicación $A\longmapsto E_{x,y}(A)=\prodesc{E(A)x}{y}$ es una medida compleja para cualesquiera $x,y\in\mathcal{H}$.
+        \end{enumerate}
+    \end{definicion}
+
+    En realidad, el teorema espectral es el que nos facilita una resolución de la identidad a partir de un operador lineal. Con todos estos ingredientes, podemos presentar el teorema espectral.
+
+    \begin{teorema}[Teorema espectral]
+        \label{th:espectral}
+
+        Sea $\mathcal{H}$ un espacio de Hilbert y $T\in\mathcal{B}(\mathcal{H})$ un operador lineal acotado y autoadjunto. Entonces existe una única resolución de la identidad $E$ en $\mathcal{H}$ tal que $T=\int_\R t dE(t)$, \textit{i.e.}
+        \begin{equation}
+            \label{eq:teorema-espectral}
+            \prodesc{Tx}{y} = \int_\R t dE_{x,y}(t).
+        \end{equation}
+        Además, el soporte de $E$ está contenido en $\sigma(T)\subseteq[-\|T\|,\|T\|]$.
+    \end{teorema}
+    \begin{proof}
+        Consúltese \cite[Theorem 12.22]{rudin}.
+    \end{proof}
+
+    A partir de aquí, la idea es encontrar un operador lineal que induzca un producto escalar a partir del cual obtener una ortogonalidad para los polinomios.
+
+    \section{La fórmula de representación de Karlin-McGregor}
+
+    \cb{REVIEW Lidia qué opinas de que primero ponga la sección del teorema espectral y después defina los procesos de nacimiento y muerte? Es que así siento que es fácil descolgarse del tema de los procesos de nacimiento y muerte para ahora en esta sección recordarlos. Pero por otro lado soltar como primera sección el teorema espectral no sé si es buena idea.}
+
+    Recordemos que una cadena de nacimiento y muerte es una cadena de Markov en la que desde el estado $i$-ésimo tan solo se puede retroceder al estado anterior con probabilidad $q_i$, mantenerse en el mismo con probabilidad $r_i$ o avanzar al siguiente con probabilidad $p_i$, obteniendo una matriz del proceso como la presentada en \eqref{eq:matriz-pnm}.
+
+    A partir de los coeficientes $\{q_n\}_{n\geq 1}$, $\{r_n\}_{n\geq 0}$ y $\{p_n\}_{n\geq 0}$ definimos recurrentemente la sucesión de polinomios $\{Q_n\}$ como
+
+    \begin{equation}
+        \label{eq:polinomios-pnm}
+        \begin{array}{l}
+            Q_{-1}(x) = 0, \ \ \ Q_0(x)=1, \\
+            xQ_0(x)=p_0 Q_1(x) + r_0 Q_0(x), \\
+            x Q_n(x) = p_n Q_{n+1}(x) + r_n Q_n(x) + q_n Q_{n-1}(x), \ \ \ (n\geq 1).
+        \end{array}
+    \end{equation}
+    
+    Nótese la similitud entre estas ecuaciones y la relación de recurrencia a tres términos \eqref{eq:RRTT} de los polinomios ortogonales. 
+
+    \cb{REVIEW Aplicando el teorema de Favard podemos conseguir un funcional que de hecho sería definido positivo que hiciera que estos polinomios fueran ortogonales. He pensado en poner eso y que la fórmula de representación lo que hace en realidad es facilitarnos una expresión explícita de ese funcional.}
+
+    Consideramos ahora un espacio de Hilbert concreto, el espacio $\ell^2_\pi(\N_0)$, definido como el espacio de sucesiones complejas tales que 
+    $$
+    \|f\|_\pi^2=\sum_{n=0}^\infty |f_n|^2\pi_n <\infty,
+    $$
+    donde los coeficientes $\pi_n$ son los dados en \eqref{eq:coeficientes-potenciales}. Para cuando sea necesario, asumimos que $f_n=0$ siempre que $n<0$.
+
+    Teniendo presente la matriz $P$ dada en \eqref{eq:matriz-pnm}, en el espacio de Hilbert $\ell^2_\pi(\N_0)$, asumiendo un abuso de notación consideramos la transformación
+    \begin{equation}
+        \label{eq:operador-P}
+        \begin{split}
+            P : \ell^2_\pi(\N_0) & \longrightarrow \ell^2_\pi(\N_0) \\
+            f & \longmapsto Pf,
+        \end{split}
+    \end{equation}
+    donde
+    $$
+    (Pf)_n = \sum_{m=0}^\infty P_{nm} f_m = p_n f_{n+1} + r_n f_n + q_n f_{n-1}. 
+    $$
+    Obsérvese que en realidad $Pf$ es el resultado de multiplicar la matriz $P$ por $f$ visto como un vector columna.
+
+    El objetivo es aplicar el teorema espectral al operador $P$, aunque para ello debemos asegurarnos de que verifica sus hipótesis.
+
+    \begin{lema}
+        El operador $P$ definido en \eqref{eq:operador-P} es un operador lineal, acotado y autoadjunto sobre el espacio de Hilbert $\ell^2_\pi(\N_0)$ cuya norma verifica $\|P\|\leq 1$.
+    \end{lema}
+    \begin{proof} Sean $f,g\in\ell^2_\pi(\N_0)$.
+        \begin{itemize}
+            \item Lineal: Es trivial.
+            \item Acotado:
+            \begin{equation*}
+                \begin{split}
+                    \|Pf\|_\pi^2 &= \sum_{n=0}^\infty |p_n f_{n+1} + r_n f_n + q_n f_{n-1}|^2 \pi_n \ \ \ \text{(desigualdad triangular y }p_n,r_n,q_n\leq 1\text{)} \\
+                    &\leq \sum_{n=0}^\infty |f_{n-1}|^2\pi_n + \sum_{n=0}^\infty |f_{n}|^2\pi_n + \sum_{n=0}^\infty |f_{n+1}|^2\pi_n \\
+                    &= \frac{q_n}{p_{n-1}} \sum_{n=0}^\infty |f_{n-1}|^2\pi_{n-1} + \sum_{n=0}^\infty |f_{n}|^2\pi_n + \frac{p_n}{q_{n+1}}  \sum_{n=0}^\infty |f_{n+1}|^2\pi_{n-1} < \infty.
+                \end{split}
+            \end{equation*}
+
+            \cb{REVIEW Pero que $\|Pf\|_\pi^2\leq \infty$ te dice que $Pf$ está en el espacio no que sea acotado el operador no?}
+            \item $\|P\|\leq 1$: Sabemos que, al ser $P$ estocástica por filas, la norma infinito de $P$ es exactamente $1$, $\|P\|_\infty=1$. Por otro lado, por un resultado básico sabemos que el valor espectral de una matriz $A$ es menor o igual que cualquier otra norma matricial aplicada a $A$. Esto es, $\rho(P)\leq\|P\|_\infty = 1$. Como, $\rho(P)=\max\{|\lambda|:\lambda\text{ es un valor propio de }P\}$, necesariamente todos los valores propios de $P$ son menores o iguales que $1$. \cb{TODO debe ser facilísimo pero no caigo en cómo deducir que entonces la norma del operador $P$ es $\leq 1$.}
+            \item Autoadjunto: Recordemos la relación de simetría \eqref{eq:ecs-simetria} ($\pi_n p_n = \pi_{n+1}q_{n+1}$). Entonces
+            \begin{equation*}
+                \begin{split}
+                    \prodesc{Pf}{g}_\pi&=\sum_{n=0}^\infty(p_n f_{n+1} + r_n f_n + q_n f_{n-1})g_n\pi_n\\
+                    &= \sum_{n=0}^\infty p_n f_{n+1}g_n\pi_n + \sum_{n=0}^\infty r_n f_{n}g_n\pi_n + \sum_{n=0}^\infty q_n f_{n-1}g_n\pi_n \\
+                    &= \sum_{n=0}^\infty q_{n+1} f_{n+1}g_n\pi_{n+1} + \sum_{n=0}^\infty r_n f_{n}g_n\pi_n + \sum_{n=0}^\infty p_{n-1} f_{n-1}g_n\pi_{n-1} \\
+                    &= \sum_{n=0}^\infty q_{n} f_{n}g_{n-1}\pi_{n} + \sum_{n=0}^\infty r_n f_{n}g_n\pi_n + \sum_{n=0}^\infty p_{n} f_{n}g_{n+1}\pi_{n} \\
+                    &= \sum_{n=0}^\infty f_n(p_n g_{n+1} + r_n g_n+ q_n g_{n-1})\pi_n = \prodesc{f}{Pg}_\pi.
+                \end{split}  
+            \end{equation*}
+            En la cuarta igualdad hemos modificado los índices de la primera y de la tercera sumatoria aprovechando el convenio de que $f_{-1}=g_{-1}=0$.
+
+        \end{itemize}
+
+    \end{proof}
+
+    Con este lema nos aseguramos que el operador $P$ verifica las condiciones del teorema espectral \ref{th:espectral}, aunque para entender algo mejor qué consecuencias tiene aplicar este teorema primero estudiaremos en mayor profundidad el espacio $\ell^2_\pi(\N_0)$.
+
+    Para $i\geq 0$, denotamos con $e^{(i)}\in\ell^2_\pi(\N_0)$ a las sucesiones tales que $(e^{(i)})_j = \delta_{ij}/\pi_i$, que expresada en forma de vector columna tendrían la forma
+    $$
+    e^{(i)}=(0,\overbrace{\dots}^{(i)},0,1/\pi_i,0,\dots)^T.
+    $$
+    Si aplicamos el operador $P$ a estos elementos particulares, obtenemos
+    \begin{equation*}
+        \begin{split}
+            Pe^{(i)} &= (0,\overbrace{\dots}^{(i-1)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T \\
+            &= (0,\dots,0, q_i/\pi_{i-1},  r_i/\pi_i, p_i/\pi_{i+1},0,\dots) \ \ \ \text{(por \eqref{eq:ecs-simetria})}\\
+            &= q_i e^{(i-1)} + r_i e^{(i)} + p_i e^{(i+1)}.
+        \end{split}
+    \end{equation*}
+
+    Hemos deducido la siguiente ecuación, que nos será útil próximamente en la demostración de la proposición \ref{prop:formula-e}:
+
+    \begin{equation}
+        \label{eq:Pen}
+        Pe^{(n)} =  q_n e^{(n-1)} + r_n  e^{(n)} + p_n e^{(n+1)} \ \ \ (n\geq 1)
+    \end{equation}
+
+    Seguidamente introduciremos un resultado para el cuál conviene recordar la posibilidad de, dado un polinomio cualquiera $\pi(x)= a_0 + a_1 x + \cdots + a_n x^n$ y una matriz cuadrada $A$, es posible evaluar el polinomio en $A$ sin más que considerar
+    $$
+    \pi(A) = a_0 I + a_1 A + \cdots + a_n A^n.
+    $$
+    Esta posibilidad nos ofrece una llamativa proposición.
+
+    \begin{proposicion}
+        \label{prop:formula-e}
+        Para $n\geq 0$,
+        \begin{equation}
+            Q_n(P)e^{(0)} = e^{(n)}
+        \end{equation}
+    \end{proposicion}
+    \begin{proof}
+        Lo probaremos por inducción.
+        \begin{itemize}
+            \item Caso base $n=0$. Tenemos que $Q_0(x)=1$, luego $Q_0(P)=I$. Por tanto $Q_0(P) e^{(0)} = e^{(0)}$.
+            \item Caso base $n=1$. En este caso, por la segunda ecuación de \eqref{eq:polinomios-pnm} y teniendo en cuenta que $Q_0(x)=1$,
+            $$
+            Q_1(x) = \frac{1}{p_0}(x-r_0).
+            $$
+            Por tanto, $Q_1(P) = \frac{1}{p_0}(P-r_0 I)$. Si multiplicamos por $e^{(0)}=(1,0,\dots)^T$ obtenemos:
+            \begin{equation*}
+                \begin{split}
+                    Q_1(P)e^{(0)} &=  \frac{1}{p_0}(P-r_0 I) e^{(0)} \\
+                    &=  \frac{1}{p_0} \begin{pmatrix}
+                        0 & p_0 & 0  & \cdots & 0 \\
+                        q_1 & r_1-r_0 & p_1 & \cdots & 0 \\
+                        0 & q_2 & r_2-r_0 & \cdots & 0 \\
+                        \vdots & \vdots & \vdots &\ddots & \vdots
+                    \end{pmatrix} \begin{pmatrix}
+                        1 \\ 0 \\ 0 \\ \vdots 
+                    \end{pmatrix} = \begin{pmatrix}
+                        0 \\ q_1/p_0 \\ 0 \\ \vdots
+                    \end{pmatrix}= e^{(1)}
+                \end{split}
+            \end{equation*}
+            \item Inducción. Supongamos que la fórmula es cierta para valores $\leq n$ y comprobemos si es cierta para $n+1$. Previamente, por la tercera ecuación de \eqref{eq:polinomios-pnm}, obtenemos que 
+            $$
+            Q_{n+1}(x) = \dfrac{1}{p_n}((x-r_n)Q_n(x)-q_n Q_{n-1}(x)),
+            $$
+            y si evaluamos matricialmente el polinomio en $P$ y multiplicamos por $e^{(0)}$:
+            \begin{equation*}
+                \begin{split}
+                    Q_{n+1}(P)e^{(0)} &= \dfrac{1}{p_n}((P-r_n I)Q_n(P)e^{(0)}-q_n Q_{n-1}(P)e^{(0)}) \\
+                    &= \dfrac{1}{p_n}((P-r_n I)e^{(n)}-q_n e^{(n-1)}) \ \  \ \text{(aplicando la hipótesis de inducción)} \\
+                    &= \dfrac{1}{p_n}(Pe^{(n)} -r_n e^{(n)}-q_n e^{(n-1)}) \\
+                    &= e^{(n+1)} \ \ \ \text{(por la igualdad \eqref{eq:Pen})}.
+                \end{split}
+            \end{equation*}
+        \end{itemize}
+    \end{proof}
+
+    A nivel intuitivo, esta proposición nos dice que los elementos $e^{(n)}$ tal como los hemos definido son la primera columna de la matriz infinita que resulta al evaluar el $n$-ésimo polinomio $Q_n(x)$ definido en \eqref{eq:polinomios-pnm} matricialmente en la matriz $P$ definida en \eqref{eq:matriz-pnm}.
+
+    Recordemos que el teorema espectral \ref{th:espectral} relacionaba el producto escalar de un espacio de Hilbert con una fórmula que involucra integrales. Por lo que, tomando $\mathcal{H}=\ell^2_\pi(\N_0)$, $T=P^n$, $x=e^{(j)}$ e $y=e^{(i)}$ tenemos
+    \begin{equation*}
+        \begin{split}
+            \prodesc{P^n e^{(j)}}{e^{(i)}}_\pi &= \prodesc{\left(\dfrac{1}{\pi_j}\left(P^n_{0,j},P^n_{1,j},\dots\right)\right)^T}{\left(0,0,\dots, \dfrac{1}{\pi_i},\dots \right)^T}_\pi \\
+            &= \dfrac{1}{\pi_j} \sum_{k=0}^\infty P^n_{k,j} \dfrac{\delta_{ik}}{\pi_i}\pi_k = \dfrac{P^n_{ij}}{\pi_j}=\dfrac{P^{(n)}_{ij}}{\pi_j}.
+        \end{split}
+    \end{equation*}
+
+    Y si despejamos $P^{(n)}_{ij}$, obtenemos
+
+    \begin{equation*}
+        P^{(n)}_{ij} = \pi_j \prodesc{P^n e^{(j)}}{e^{(i)}}_\pi,
+    \end{equation*}
+    que aplicando la proposición \ref{prop:formula-e} podemos escribir como
+    \begin{equation*}
+        P^{(n)}_{ij} = \pi_j \prodesc{P^n Q_j(P)e^{(0)}}{Q_{i}(P)e^{(0)}}_\pi.
+    \end{equation*}
+    Aplicando que $P$, y por tanto $P^k$ para $k=0,\dots,i$ es un operador autoadjunto, tenemos
+    \begin{equation*}
+        P^{(n)}_{ij} = \pi_j \prodesc{P^n Q_j(P)Q_{i}(P)e^{(0)}}{e^{(0)}}_\pi.
+    \end{equation*}
+
+    Ahora si, por el teorema espectral, podemos afirmar que existe una medida $\psi$, cuyo soporte está contenido en $[-\|P\|,\|P\|]\subseteq[-1,1]$, tal que 
+    \begin{equation}
+        \int_{-1}^1 f(x)d\psi(x) = \prodesc{f(Pe^{0})}{}
+    \end{equation}
+
+    \cb{REVIEW No encuentro del todo la relación entre el teorema espectral y la existencia de esa norma.}
+
 \begin{ejemplo}[Procesos de nacimiento y muerte lineales]
     Sea el proceso de nacimiento y muerte dado por los parámetros
     \begin{align*}
         \lambda_n &=(n+\beta)\kappa & \mu_n = n\kappa, 
     \end{align*}
-    donde $\beta,\kappa > 0$. Comprobaremos que los polinomios asociados a este proceso guardan una estrecha relación con los polinomios de Laguerre (TODO referencia a Laguerre).
+    donde $\beta,\kappa > 0$. Comprobaremos que los polinomios asociados a este proceso guardan una estrecha relación con los polinomios de Laguerre, introducidos en la sección \ref{subsec:Laguerre}.
 
     Con estos parámetros, los polinomios de nacimiento y muerte $Q_n(x)$ siguen la relación de recurrencia
     \begin{equation*}
