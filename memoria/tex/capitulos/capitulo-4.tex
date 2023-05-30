@@ -74,11 +74,10 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         \label{eq:ecs-simetria}
         \pi_n p_n = \pi_{n+1}q_{n+1} \ \ \ (n\geq 0).
     \end{equation} 
-    Por otro lado, obsérvese que, con las condiciones impuestas sobre $P$, el vector fila infinito $\pi = (\pi_n)_{n\in\N_0}$ verifica $\pi P = \pi$, la ecuación \eqref{eq:balance} extendida a vectores y matrices infinitos. Por tanto, $\pi$ es un vector estacionario de la cadena, que de hecho será una distribución estacionaria si $\sum_{n=0}^\infty$.
+    Por otro lado, obsérvese que, con las condiciones impuestas sobre $P$, el vector fila infinito $\pi = (\pi_n)_{n\in\N_0}$ verifica $\pi P = \pi$, la ecuación \eqref{eq:balance} extendida a vectores y matrices infinitos. Por tanto, $\pi$ es un vector estacionario de la cadena, que de hecho será una distribución estacionaria si $\sum_{n=0}^\infty \pi_n < \infty$.
 
-    \cb{REVIEW Aquí tengo tela de ganas de decir que la cadena es irreducible, aperiódica (si algún $r_n > 0$) y aplicar el teorema \ref{th:teorema-estacionaria} y por tanto admite una única distribución límite, pero lo primero que la cadena no es finita, lo segundo que en ningún momento se específica que haya algún $r_n>0$ que la haga aperiódica.}
-
-    \cb{TODO Referencia al libro y apartado que no recuerdo en el que se extendían los teoremas al infinito.}
+    \cb{REVIEW Párrafo actualizado:}
+    Por la estructura que posee la matriz $P$, podemos comprobar que siempre es irreducible y es aperiódica si existe algún $r_n>0$. Bajo estas hipótesis, podemos pensar que es posible aplicar el teorema \ref{th:teorema-limite} para asegurar la existencia de una distribución límite, pero recordemos que en este caso estamos tratando con cadenas de Markov infinitas. Afortunadamente, en \cite[Theorem 5.5]{Seneta} y en \cite[Theorem 2.3]{Manuel} podemos encontrar generalizaciones del teorema \ref{th:teorema-limite} que nos ayudan a deducir que el vector infinito $\pi$ representa la distribución límite del proceso de nacimiento y muerte.
 
     \section{El teorema espectral}
 
@@ -115,6 +114,8 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     Si un operador lineal $T\in\mathcal{B}(\mathcal{H})$ es acotado, entonces $\sigma(T)$ es un subconjunto compacto del disco de radio $\|T\|$. Si además $T$ es autoadjunto, $\sigma(T)\subseteq\R$, por lo que $\sigma(T)\subseteq[-\|T\|,\|T\|]$.
     
     \cb{REVIEW Esto de aquí arriba lo pongo como un lema o lo dejo así? No tengo la demostración ciertamente, pero no creo que merezca la pena quebrarse la cabeza con esto.}
+
+    Mencionar que busquen en \cite{rudin} si quieren más info porque no es objetivo de este TFM contarte todas las historias de analisis funcional :D.
 
     Por último, un concepto que próximamente nos facilitará la medida de ortogonalidad.
     
@@ -207,7 +208,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
             \end{equation*}
 
             \cb{REVIEW Pero que $\|Pf\|_\pi^2\leq \infty$ te dice que $Pf$ está en el espacio no que sea acotado el operador no?}
-            \item $\|P\|\leq 1$: Sabemos que, al ser $P$ estocástica por filas, la norma infinito de $P$ es exactamente $1$, $\|P\|_\infty=1$. Por otro lado, por un resultado básico sabemos que el valor espectral de una matriz $A$ es menor o igual que cualquier otra norma matricial aplicada a $A$. Esto es, $\rho(P)\leq\|P\|_\infty = 1$. Como, $\rho(P)=\max\{|\lambda|:\lambda\text{ es un valor propio de }P\}$, necesariamente todos los valores propios de $P$ son menores o iguales que $1$. \cb{TODO debe ser facilísimo pero no caigo en cómo deducir que entonces la norma del operador $P$ es $\leq 1$.}
+            \item $\|P\|\leq 1$: Sabemos que, al ser $P$ estocástica por filas, la norma infinito de $P$ es exactamente $1$, $\|P\|_\infty=1$. Por otro lado, por un resultado básico sabemos que el radio espectral de una matriz $A$ es menor o igual que cualquier otra norma matricial aplicada a $A$. Esto es, $\rho(P)\leq\|P\|_\infty = 1$. Como, $\rho(P)=\max\{|\lambda|:\lambda\text{ es un valor propio de }P\}$, necesariamente todos los valores propios de $P$ son menores o iguales que $1$. \cb{TODO debe ser facilísimo pero no caigo en cómo deducir que entonces la norma del operador $P$ es $\leq 1$.}
             \item Autoadjunto: Recordemos la relación de simetría \eqref{eq:ecs-simetria} ($\pi_n p_n = \pi_{n+1}q_{n+1}$). Entonces
             \begin{equation*}
                 \begin{split}
