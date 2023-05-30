@@ -79,81 +79,12 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \cb{REVIEW Párrafo actualizado:}
     Por la estructura que posee la matriz $P$, podemos comprobar que siempre es irreducible y es aperiódica si existe algún $r_n>0$. Bajo estas hipótesis, podemos pensar que es posible aplicar el teorema \ref{th:teorema-limite} para asegurar la existencia de una distribución límite, pero recordemos que en este caso estamos tratando con cadenas de Markov infinitas. Afortunadamente, en \cite[Theorem 5.5]{Seneta} y en \cite[Theorem 2.3]{Manuel} podemos encontrar generalizaciones del teorema \ref{th:teorema-limite} que nos ayudan a deducir que el vector infinito $\pi$ representa la distribución límite del proceso de nacimiento y muerte.
 
-    \section{El teorema espectral}
-
-    Una vez que conocemos qué es un proceso de nacimiento y muerte, que como hemos visto no es más que un caso particular de cadena de Markov, emprendemos el camino en busca de la conocida fórmula de representación, la cual relaciona estos procesos con los polinomios ortogonales. Una herramienta fundamental en este proceso es el teorema espectral, gracias al cual obtendremos la medida que nos proporcionará la ortogonalidad de los polinomios.
-
-    Recordamos algunos conceptos fundamentales de análisis funcional.
-
-    \begin{definicion}[Espacio de Hilbert]
-        Un espacio vectorial $\mathcal{H}$ se denomina \textbf{espacio de Hilbert} si está dotado de un producto escalar interno $\prodesc{\cdot}{\cdot}$ y es además completo respecto a la norma asociada a dicho producto escalar.
-    \end{definicion}
-
-    Denotamos como $\mathcal{B}(\mathcal{H})$ al conjunto de todos los operadores lineales de $\mathcal{H}$ en sí mismo. Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal. $T$ es un operador acotado si, dado un subconjunto $A\subseteq \mathcal{H}$ acotado, $T(A)$ también es acotado. Es decir, un operador lineal acotado transforma conjuntos acotados en conjuntos acotados. 
-
-
-    \begin{definicion}[Operador autoadjunto]
-        Sea $\mathcal{H}$ un espacio de Hilbert. Un operador lineal $T:\mathcal H \longrightarrow \mathcal{H}$ es \textbf{autoadjunto} si
-        \begin{equation}
-            \label{eq:operador-autoadjunto}
-            \prodesc{Tx}{y} = \prodesc{x}{Ty}, \ \ \ \forall x,y\in \mathcal H.
-        \end{equation}
-    \end{definicion}
-
-    Por último, recordemos que el espectro de una matriz cuadrada $A\in\R^{N\times N}$, denotado como $\sigma(A)$ es el conjunto de sus valores propios. Es decir, los números $\lambda\in\C$ tales que el determinante de la matriz $A-\lambda I_N$ se anulaba. Dicho de otra manera, si nos planteamos el endomorfismo de $\R^N$ $x\mapsto xA$, $\sigma(A)$ es el conjunto de valores $\lambda$ tales que el endomorfismo $x\mapsto x(A-\lambda I)$ no es invertible. A partir de esta idea, podemos generalizar el concepto de espectro a cualquier operador.
     
-    \begin{definicion}[Conjuntos espectro y resolvente]
-        Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal sobre un espacio de Hilbert. 
-        \begin{itemize}
-            \item El \textbf{resolvente} de $T$, denotado como $\rho(T)$ es el conjunto de valores $\lambda\in\C$ tales que el operador $T-\lambda I$ (también denominado \textbf{operador resolvente}) es invertible.
-            \item El \textbf{espectro} de $T$, denotado como $\sigma(T)$ es el conjunto de valores $\lambda\in\C$ tales que el operador resolvente $T-\lambda I$ no es invertible.
-        \end{itemize}
-        Naturalmente, $\sigma(T)$ y $\rho(T)$ son conjuntos complementarios.
-    \end{definicion}
-
-    Si un operador lineal $T\in\mathcal{B}(\mathcal{H})$ es acotado, entonces $\sigma(T)$ es un subconjunto compacto del disco de radio $\|T\|$. Si además $T$ es autoadjunto, $\sigma(T)\subseteq\R$, por lo que $\sigma(T)\subseteq[-\|T\|,\|T\|]$.
-    
-    \cb{REVIEW Esto de aquí arriba lo pongo como un lema o lo dejo así? No tengo la demostración ciertamente, pero no creo que merezca la pena quebrarse la cabeza con esto.}
-
-    Mencionar que busquen en \cite{rudin} si quieren más info porque no es objetivo de este TFM contarte todas las historias de analisis funcional :D.
-
-    Por último, un concepto que próximamente nos facilitará la medida de ortogonalidad.
-    
-    \begin{definicion}[Resolución de la identidad]
-        \label{def:resolucion-identidad}
-        Una \textbf{resolución de la identidad} $E$ en el espacio de Hilbert $\mathcal{H}$ es un operador $E:\R\longrightarrow\mathcal{B}(\mathcal{H})$ que, para cualesquiera subconjuntos Borel-medibles $A,B\subseteq \R$, verifica las siguientes condiciones:
-        \begin{enumerate}
-            \item $E(A)$ es una proyección, es decir $E(A)\circ E(A)=E(A)$.
-            \item $E(A\cap B)=E(A)E(B)$.
-            \item $E(\emptyset)=0_{\mathcal{B}(\mathcal{H})}$, $E(\R)=I_\mathcal{H}$.
-            \item Si $A$ y $B$ son disjuntos, $E(A\cup B)=E(A)+E(B)$.
-            \item La aplicación $A\longmapsto E_{x,y}(A)=\prodesc{E(A)x}{y}$ es una medida compleja para cualesquiera $x,y\in\mathcal{H}$.
-        \end{enumerate}
-    \end{definicion}
-
-    En realidad, el teorema espectral es el que nos facilita una resolución de la identidad a partir de un operador lineal. Con todos estos ingredientes, podemos presentar el teorema espectral.
-
-    \begin{teorema}[Teorema espectral]
-        \label{th:espectral}
-
-        Sea $\mathcal{H}$ un espacio de Hilbert y $T\in\mathcal{B}(\mathcal{H})$ un operador lineal acotado y autoadjunto. Entonces existe una única resolución de la identidad $E$ en $\mathcal{H}$ tal que $T=\int_\R t dE(t)$, \textit{i.e.}
-        \begin{equation}
-            \label{eq:teorema-espectral}
-            \prodesc{Tx}{y} = \int_\R t dE_{x,y}(t).
-        \end{equation}
-        Además, el soporte de $E$ está contenido en $\sigma(T)\subseteq[-\|T\|,\|T\|]$.
-    \end{teorema}
-    \begin{proof}
-        Consúltese \cite[Theorem 12.22]{rudin}.
-    \end{proof}
-
-    A partir de aquí, la idea es encontrar un operador lineal que induzca un producto escalar a partir del cual obtener una ortogonalidad para los polinomios.
-
     \section{La fórmula de representación de Karlin-McGregor}
 
-    \cb{REVIEW Lidia qué opinas de que primero ponga la sección del teorema espectral y después defina los procesos de nacimiento y muerte? Es que así siento que es fácil descolgarse del tema de los procesos de nacimiento y muerte para ahora en esta sección recordarlos. Pero por otro lado soltar como primera sección el teorema espectral no sé si es buena idea.}
-
-    Recordemos que una cadena de nacimiento y muerte es una cadena de Markov en la que desde el estado $i$-ésimo tan solo se puede retroceder al estado anterior con probabilidad $q_i$, mantenerse en el mismo con probabilidad $r_i$ o avanzar al siguiente con probabilidad $p_i$, obteniendo una matriz del proceso como la presentada en \eqref{eq:matriz-pnm}.
+    En la última sección hemos presentado las cadenas de nacimiento y muerte desde un punto de vista probabilístico, extendiendo lo aprendido en el capítulo \ref{chap:Markov}. En esta y en las próximas secciones estudiaremos qué relación existe entre estas particulares cadenas y los polinomios ortogonales. Para ello nos ayudaremos de varias técnicas analíticas, entre las que destacamos el conocido teorema espectral (teorema \ref{th:espectral}), presentado con mayor nivel de detalle en el apéndice \ref{appendix:teorema-espectral}.
+    
+    Recordemos que las cadenas de nacimiento y muerte son cadenas de Markov en las que desde el estado $i$-ésimo tan solo se puede retroceder al estado anterior con probabilidad $q_i$, mantenerse en el mismo con probabilidad $r_i$ o avanzar al siguiente con probabilidad $p_i$, obteniendo una matriz del proceso como la presentada en \eqref{eq:matriz-pnm}.
 
     A partir de los coeficientes $\{q_n\}_{n\geq 1}$, $\{r_n\}_{n\geq 0}$ y $\{p_n\}_{n\geq 0}$ definimos recurrentemente la sucesión de polinomios $\{Q_n\}$ como
 

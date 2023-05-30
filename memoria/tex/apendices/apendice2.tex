@@ -1,3 +1,76 @@
 % ─── EL TEOREMA ESPECTRAL ─────────────────────────────────────────────────────
 
     
+    En este apéndice introducimos una herramienta fundamental en el camino en busca de la fórmula de representación de Karlin-McGregor: el teorema espectral. Gracias a este teorema obtendremos una medida que nos proporcionará la ortogonalidad de los polinomios. Estos conceptos, al no ser tan cercanos al objetivo de este trabajo, se introducen de manera superficial, recomendando al lector que si desea profundizar en ellos consulte bibliografía relacionada con análisis funcional. Por ejemplo, se propone \cite[Ch. 1]{Manuel} o \cite[Ch. 12]{rudin}.
+
+    Para empezar, recordamos algunos conceptos básicos de análisis funcional.
+
+    \begin{definicion}[Espacio de Hilbert]
+        Un espacio vectorial $\mathcal{H}$ se denomina \textbf{espacio de Hilbert} si está dotado de un producto escalar interno $\prodesc{\cdot}{\cdot}$ y es además completo respecto a la norma asociada a dicho producto escalar.
+    \end{definicion}
+
+    Denotamos como $\mathcal{B}(\mathcal{H})$ al conjunto de todos los operadores lineales de $\mathcal{H}$ en sí mismo. Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal. $T$ es un operador acotado si, dado un subconjunto $A\subseteq \mathcal{H}$ acotado, $T(A)$ también es acotado. Es decir, un operador lineal acotado transforma conjuntos acotados en conjuntos acotados. 
+
+
+    \begin{definicion}[Operador autoadjunto]
+        Sea $\mathcal{H}$ un espacio de Hilbert. Un operador lineal $T:\mathcal H \longrightarrow \mathcal{H}$ es \textbf{autoadjunto} si
+        \begin{equation}
+            \label{eq:operador-autoadjunto}
+            \prodesc{Tx}{y} = \prodesc{x}{Ty}, \ \ \ \forall x,y\in \mathcal H.
+        \end{equation}
+    \end{definicion}
+
+    Por último, recordemos que el espectro de una matriz cuadrada $A\in\R^{N\times N}$, denotado como $\sigma(A)$ es el conjunto de sus valores propios. Es decir, los números $\lambda\in\C$ tales que el determinante de la matriz $A-\lambda I_N$ se anulaba. Dicho de otra manera, si nos planteamos el endomorfismo de $\R^N$ $x\mapsto xA$, $\sigma(A)$ es el conjunto de valores $\lambda$ tales que el endomorfismo $x\mapsto x(A-\lambda I)$ no es invertible. A partir de esta idea, podemos generalizar el concepto de espectro a cualquier operador.
+    
+    \begin{definicion}[Conjuntos espectro y resolvente]
+        Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal sobre un espacio de Hilbert. 
+        \begin{itemize}
+            \item El \textbf{resolvente} de $T$, denotado como $\rho(T)$ es el conjunto de valores $\lambda\in\C$ tales que el operador $T-\lambda I$ (también denominado \textbf{operador resolvente}) es invertible.
+            \item El \textbf{espectro} de $T$, denotado como $\sigma(T)$ es el conjunto de valores $\lambda\in\C$ tales que el operador resolvente $T-\lambda I$ no es invertible.
+        \end{itemize}
+        Naturalmente, $\sigma(T)$ y $\rho(T)$ son conjuntos complementarios.
+    \end{definicion}
+
+    Si un operador lineal $T\in\mathcal{B}(\mathcal{H})$ es acotado, entonces $\sigma(T)$ es un subconjunto compacto del disco de radio $\|T\|$. Si además $T$ es autoadjunto, $\sigma(T)\subseteq\R$, por lo que $\sigma(T)\subseteq[-\|T\|,\|T\|]$.
+
+    Por último, un concepto que próximamente nos facilitará la medida de ortogonalidad.
+    
+    \begin{definicion}[Resolución de la identidad]
+        \label{def:resolucion-identidad}
+        Una \textbf{resolución de la identidad} $E$ en el espacio de Hilbert $\mathcal{H}$ es un operador $E:\R\longrightarrow\mathcal{B}(\mathcal{H})$ que, para cualesquiera subconjuntos Borel-medibles $A,B\subseteq \R$, verifica las siguientes condiciones:
+        \begin{enumerate}
+            \item $E(A)$ es una proyección, es decir $E(A)\circ E(A)=E(A)$.
+            \item $E(A\cap B)=E(A)E(B)$.
+            \item $E(\emptyset)=0_{\mathcal{B}(\mathcal{H})}$, $E(\R)=I_\mathcal{H}$.
+            \item Si $A$ y $B$ son disjuntos, $E(A\cup B)=E(A)+E(B)$.
+            \item La aplicación $A\longmapsto E_{x,y}(A)=\prodesc{E(A)x}{y}$ es una medida compleja para cualesquiera $x,y\in\mathcal{H}$.
+        \end{enumerate}
+    \end{definicion}
+
+    A modo introductorio, el teorema espectral nos facilita una resolución de la identidad a partir de un operador lineal. Con todos estos ingredientes, podemos presentar el enunciado esperado.
+
+    \begin{teorema}[Teorema espectral]
+        \label{th:espectral}
+
+        Sea $\mathcal{H}$ un espacio de Hilbert y $T\in\mathcal{B}(\mathcal{H})$ un operador lineal acotado y autoadjunto. Entonces existe una única resolución de la identidad $E$ en $\mathcal{H}$ tal que $T=\int_\R t dE(t)$, \textit{i.e.}
+        \begin{equation}
+            \label{eq:teorema-espectral}
+            \prodesc{Tx}{y} = \int_\R t dE_{x,y}(t).
+        \end{equation}
+        Además, el soporte de $E$ está contenido en $\sigma(T)\subseteq[-\|T\|,\|T\|]$.
+    \end{teorema}
+    \begin{proof}
+        Consúltese \cite[Theorem 12.22]{rudin}.
+    \end{proof}
+
+    Como última apreciación, pensemos en una función continua $f$ definida sobre el espectro $\sigma(T)$ de un operador. Podemos definir entonces el operador
+    $$
+    f(T)=\int_\R f(t) dE(t),
+    $$
+    de forma que
+    $$
+    \prodesc{f(T)x}{y}=\int_\R f(t)d E_{x,y}(t).
+    $$
+    Entonces el operador $f(T)$ es acotado y tiene norma $\|f(T)\|=\displaystyle\sup_{x\in\sigma(T)}|f(x)|$.
+
+    
