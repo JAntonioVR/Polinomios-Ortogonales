@@ -166,7 +166,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \begin{equation*}
         \begin{split}
             Pe^{(i)} &= (0,\overbrace{\dots}^{(i-1)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T \\
-            &= (0,\dots,0, q_i/\pi_{i-1},  r_i/\pi_i, p_i/\pi_{i+1},0,\dots) \ \ \ \text{(por \eqref{eq:ecs-simetria})}\\
+            &= (0,\dots,0, q_i/\pi_{i-1},  r_i/\pi_i, p_i/\pi_{i+1},0,\dots)^T \ \ \ \text{(por \eqref{eq:ecs-simetria})}\\
             &= q_i e^{(i-1)} + r_i e^{(i)} + p_i e^{(i+1)}.
         \end{split}
     \end{equation*}
@@ -255,12 +255,18 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         P^{(n)}_{ij} = \pi_j \prodesc{P^n Q_j(P)Q_{i}(P)e^{(0)}}{e^{(0)}}_\pi.
     \end{equation*}
 
-    Ahora si, por el teorema espectral, podemos afirmar que existe una medida $\psi$, cuyo soporte está contenido en $[-\|P\|,\|P\|]\subseteq[-1,1]$, tal que 
+    Atendiendo al último párrafo del apéndice \ref{appendix:teorema-espectral}, tomando $f(x)=x^n Q_j(x)Q_i(x)$, podemos afirmar que existe una medida $\psi$, cuyo soporte está contenido en $[-\|P\|,\|P\|]\subseteq[-1,1]$, tal que 
+    \begin{equation*}
+        \int_{-1}^1 f(x)d\psi(x) = \prodesc{f(P)e^{0}}{e^{(0)}}_\pi,
+    \end{equation*}
+    es decir
+    \begin{equation*}
+        \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x) = \prodesc{P^n Q_j(P)Q_i(P)e^{0})}{e^{(0)}}_\pi = \dfrac{P_{ij}^{(n)}}{\pi_j}.
+    \end{equation*}
+    De donde deducimos la fórmula de representación
     \begin{equation}
-        \int_{-1}^1 f(x)d\psi(x) = \prodesc{f(Pe^{0})}{}
+        P_{ij}^{(n)}=\pi_j \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x).
     \end{equation}
-
-    \cb{REVIEW No encuentro del todo la relación entre el teorema espectral y la existencia de esa norma.}
 
 \begin{ejemplo}[Procesos de nacimiento y muerte lineales]
     Sea el proceso de nacimiento y muerte dado por los parámetros
