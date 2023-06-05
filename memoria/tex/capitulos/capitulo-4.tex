@@ -81,6 +81,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     
     \section{La fórmula de representación de Karlin-McGregor}
+    \label{section:formula-representacion}
 
     En la última sección hemos presentado las cadenas de nacimiento y muerte desde un punto de vista probabilístico, extendiendo lo aprendido en el capítulo \ref{chap:Markov}. En esta y en las próximas secciones estudiaremos qué relación existe entre estas particulares cadenas y los polinomios ortogonales. Para ello nos ayudaremos de varias técnicas analíticas, entre las que destacamos el conocido teorema espectral (teorema \ref{th:espectral}), presentado con mayor nivel de detalle en el apéndice \ref{appendix:teorema-espectral}.
     
@@ -233,7 +234,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     A nivel intuitivo, esta proposición nos dice que los elementos $e^{(n)}$ tal como los hemos definido son la primera columna de la matriz infinita que resulta al evaluar el $n$-ésimo polinomio $Q_n(x)$ definido en \eqref{eq:polinomios-pnm} matricialmente en la matriz $P$ definida en \eqref{eq:matriz-pnm}.
 
-    Recordemos que el teorema espectral \ref{th:espectral} relacionaba el producto escalar de un espacio de Hilbert con una fórmula que involucra integrales. Por lo que, tomando $\mathcal{H}=\ell^2_\pi(\N_0)$, $T=P^n$, $x=e^{(j)}$ e $y=e^{(i)}$ tenemos
+    Seguidamente, buscaremos expresar la probabilidad $P_{ij}^{(n)}$ en función de productos escalares a los que podamos aplicar el teorema espectral. Así, tenemos
     \begin{equation*}
         \begin{split}
             \prodesc{P^n e^{(j)}}{e^{(i)}}_\pi &= \prodesc{\left(\dfrac{1}{\pi_j}\left(P^n_{0,j},P^n_{1,j},\dots\right)\right)^T}{\left(0,0,\dots, \dfrac{1}{\pi_i},\dots \right)^T}_\pi \\
@@ -242,7 +243,6 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \end{equation*}
 
     Y si despejamos $P^{(n)}_{ij}$, obtenemos
-
     \begin{equation*}
         P^{(n)}_{ij} = \pi_j \prodesc{P^n e^{(j)}}{e^{(i)}}_\pi,
     \end{equation*}
@@ -255,18 +255,133 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         P^{(n)}_{ij} = \pi_j \prodesc{P^n Q_j(P)Q_{i}(P)e^{(0)}}{e^{(0)}}_\pi.
     \end{equation*}
 
-    Atendiendo al último párrafo del apéndice \ref{appendix:teorema-espectral}, tomando $f(x)=x^n Q_j(x)Q_i(x)$, podemos afirmar que existe una medida $\psi$, cuyo soporte está contenido en $[-\|P\|,\|P\|]\subseteq[-1,1]$, tal que 
+    Atendiendo al último párrafo del apéndice \ref{appendix:teorema-espectral} y aplicando el teorema espectral \ref{th:espectral}, tomando $\mathcal{H}=\ell_\pi^2(\N_0)$, $f(x)=x^n Q_j(x)Q_i(x)$, $T=f(P)$, $x=y=e^{(0)}$, podemos afirmar que existe una medida $\psi=E_{e^{(0)},e^{(0)}}$, cuyo soporte está contenido en $[-\|P\|,\|P\|]\subseteq[-1,1]$, tal que 
     \begin{equation*}
-        \int_{-1}^1 f(x)d\psi(x) = \prodesc{f(P)e^{0}}{e^{(0)}}_\pi,
+        \int_{-1}^1 f(x)d\psi(x) = \prodesc{f(P)e^{(0)}}{e^{(0)}}_\pi,
     \end{equation*}
     es decir
     \begin{equation*}
-        \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x) = \prodesc{P^n Q_j(P)Q_i(P)e^{0})}{e^{(0)}}_\pi = \dfrac{P_{ij}^{(n)}}{\pi_j}.
+        \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x) = \prodesc{P^n Q_j(P)Q_i(P)e^{(0)}}{e^{(0)}}_\pi = \dfrac{P_{ij}^{(n)}}{\pi_j}.
     \end{equation*}
     De donde deducimos la fórmula de representación
-    \begin{equation}
+    \begin{equation*}
         P_{ij}^{(n)}=\pi_j \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x).
+    \end{equation*}
+
+    Resumimos esta deducción en el siguiente teorema.
+
+    \begin{teorema}[Fórmula de Representación de Karlin-McGregor]
+        Sea $\{X_n, n\geq 0\}$ un proceso de nacimiento y muerte discreto con matriz de transición $P$ definida como en \eqref{eq:matriz-pnm}. Entonces existe una única medida $\psi$, con soporte contenido en el intervalo $[-1,1]$ tal que para cualesquiera estados $i,j$ y cualquier instante $n$ se tiene que
+        \begin{equation}
+            \label{eq:formula-representacion}
+            P_{ij}^{(n)}=\pi_j \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x).
+        \end{equation}
+    \end{teorema}
+    \begin{proof}
+        La existencia está probada, la unicidad puede probarse teniendo en cuenta que tomando $i=j=0$ se obtienen los momentos de $\psi$: $\int_{-1}^1 x^n d\psi(x)$. Estos momentos determinan unívocamente a la medida $\psi$. Consúltese \cite[Theorem 1]{random-walks}.
+    \end{proof}
+
+    Como ya hemos adelantado anteriormente, de la medida $\psi$ que nos proporciona el teorema espectral obtendremos la ortogonalidad de los polinomios $Q_n(x)$ dados en \eqref{eq:polinomios-pnm}. Esta propiedad es, de hecho, una sencilla consecuencia de la fórmula de representación.
+
+    \begin{corolario}
+        Los polinomios $\{Q_n\}$ definidos en \eqref{eq:polinomios-pnm} son ortogonales respecto a la medida $\psi$.
+    \end{corolario}
+    \begin{proof}
+        Si tomamos $n=0$ en la fórmula de representación \eqref{eq:formula-representacion} y recordamos que $P^{(0)}=I$, la matriz identidad, que en este caso sería infinita, obtenemos
+        $$
+        \int_{-1}^1 Q_j(x)Q_i(x)d\psi(x) = \frac{1}{\pi_j}\delta_{ij}.
+        $$
+    \end{proof}
+
+    A la medida $\psi$ se le suele denominar \textbf{medida espectral} y a los polinomios $\{Q_n\}$ \textbf{polinomios de nacimiento y muerte}. 
+
+    \cb{REVIEW ¿No hay algún ejemplo de PNM lineal con la fórmula de representación para cadenas discretas? El que tengo ahora es para continuas}
+
+    \cb{TODO Añadir párrafo diciendo que se puede abordar el problema inverso: a partir de una SPO y una medida, buscar un PNM asociado}
+
+    \section{Análogos continuos de la fórmula de representación}
+
+    Hasta el momento, en este capítulo y los anteriores hemos descrito la relación entre las cadenas de Markov, concretamente las cadenas de nacimiento y muerte, y los polinomios ortogonales. Esta relación se encuentra en la fórmula de representación de Samuel Karlin y James McGregor \eqref{eq:formula-representacion}, mediante la cual podemos calcular fácilmente probabilidades mediante integrales de manera sencilla teniendo en cuenta la ortogonalidad de los polinomios $Q_n(x)$ descritos en \eqref{eq:polinomios-pnm}.
+
+    Sin embargo, en todo momento nos hemos restringido al caso estrictamente discreto: cadenas de Markov discretas, procesos de nacimiento y muerte discretos... que nos llevan a una versión discreta de la fórmula de representación. Sin embargo, existe una definición continua de las cadenas de Markov y de los procesos de nacimiento y muerte a partir de la cual se obtiene una expresión continua de la fórmula de representación de Karlin McGregor.
+
+    En esta sección introduciremos superficialmente los análogos continuos de los procesos de nacimiento y muerte y la fórmula de representación de Karlin-McGregor. El siguiente texto está basado en las referencias \cite{Anderson}, \cite[Ch. 2, 3]{schoutens-2000}, \cite{differential-equations} y \cite[Sections 3.1, 3.2]{Manuel}, a las cuales remitimos al lector que desee profundizar.
+
+    \subsection{Procesos de nacimiento y muerte continuos}
+
+    Hasta el momento, hemos considerado el paso del tiempo como incrementos del valor de un parámetro $n=0,1,2,\dots$ que representa el instante $n$-ésimo. En el caso continuo, de forma general consideramos que un instante viene dado por un valor $t\in[0,+\infty)$. Por su parte, el espacio de estados $S$ no cambia, $S=\N_0={0,1,2,\dots}$. Así, fijado $t\in[0,+\infty)$, llamamos $X_t\in S$ a la variable aleatoria ``estado del sistema en el instante $t$'' y la colección de variables aleatorias $\{X_t, t\geq 0\}$ es un \textbf{proceso de nacimiento y muerte continuo}.
+    
+    En este caso, la propiedad de Markov viene dada como:
+    \begin{equation}
+        P[X_{t+s}=j|X_s=i, X_\tau, 0\leq \tau < s] = P[X_{t+s}=j|X_s=i], \ \ \ s,t>0.
     \end{equation}
+    Es decir, el estado en el que se encuentre el proceso en un instante $t+s$ depende únicamente del estado en el que se encuentre en un instante anterior $t$, independientemente de lo que haya ocurrido antes de $t$. De nuevo, nos centraremos en procesos homogéneos, que son aquellos en los cuales las probabilidades únicamente dependen de la diferencia $t-s$, por lo que podemos eliminar la dependencia de $s$ y denotar
+    \begin{equation}
+        \label{eq:prob-trans-cont}
+       p_{ij}(t) := P[X_{t}=j|X_0=i]  \ \ \ t>0.
+    \end{equation}
+    
+    De esta forma, vemos que las probabilidades de transición se expresan en función del tiempo, de forma que lo que en el caso discreto era la matriz de transición $P$ dada en \eqref{eq:matriz-pnm}, ahora es una función matricial $P(t)$:
+
+    \begin{equation}
+        \label{eq:matriz-pnm-cont}
+        P = \begin{pmatrix}
+            p_{00}(t) & p_{01}(t) & 0 & 0 & \cdots \\
+            p_{10}(t) & p_{11}(t) & p_{12}(t) & 0 & \cdots \\
+            0 & p_{21}(t) & p_{22}(t) & p_{23}(t) & \cdots \\
+            \vdots & \ddots & \ddots & \ddots & \ddots 
+        \end{pmatrix}.
+    \end{equation}
+
+    \cb{REVIEW ¿Lo pongo así o lo pongo mejor en plan general y luego concreto al caso de PNM?}
+
+    Además, asumiremos que las probabilidades \eqref{eq:prob-trans-cont} satisfacen las siguientes propiedades:
+
+    \cb{TODO Revisar cuando he puesto que los estados empiezan en 0 y cuando en 1 que tengo un follón montado curioso}.
+
+    \begin{enumerate}
+        \item $p_{i,i+1}(h) = \lambda_i h + o(h)$ cuando $h\searrow 0$, $i\geq 0$.
+        \item $p_{i,i-1}(h) = \mu_i h + o(h)$ cuando $h\searrow 0$, $i\geq 1$.
+        \item $p_{i,i}(h) = 1 - (\lambda_i + \mu_i h) + o(h)$  cuando $h\searrow 0$, $i\geq 0$ asumiendo $\mu_0=0$.
+        \item $p_{ij}(0)=\delta_{ij}$.
+        \item Asumimos que $\lambda_0>0$, $\lambda_i, \mu_i > 0$, $i\geq 1$.
+    \end{enumerate}
+
+    Los parámetros $\lambda_i, \mu_i$ son las llamadas \textbf{tasas de nacimiento y muerte}, respectivamente. En los puntos 1 y 2 afirmamos que, si el proceso empieza en el estado $i$, en un intervalo pequeño de tiempo las probabilidades de avanar o retroceder son aproximadamente proporcionales a la longitud del intervalo, siendo $\lambda_i$ y $\mu_i$ las constantes que marcan esta proporcionalidad. En el punto 3 asumimos que no existen otras posibles transiciones que avanzar, retroceder o mantenerse en el estado $i$.
+
+    Las constantes $\{\mu_i\}, \{\lambda_i\}$ determinan por completo el comportamiento del proceso. Recogemos toda esta información en una matriz concreta.
+    
+    \begin{definicion}[Matriz generadora infinitesimal]
+        Dado un proceso de nacimiento y muerte continuo $\{X_t, t\geq 0\}$ caracterizado por las constantes $\{\mu_i\}, \{\lambda_i\}$, definimos su \textbf{matriz generadora infinitesimal} como:
+        \begin{equation}
+            \label{eq:matrix-generadora}
+            \mathcal A = \begin{pmatrix}
+                -(\lambda_0+\mu_0) & \lambda_0 & 0 & 0 & \cdots \\
+                \mu_1 & -(\lambda_1+\mu_1) & \lambda_1 & 0 & \cdots \\
+                0 & \mu_2 & -(\lambda_2+\mu_2) & \lambda_2 & \cdots \\
+                \vdots & \ddots & \ddots & \ddots & \ddots
+            \end{pmatrix}.
+        \end{equation}
+    \end{definicion}
+
+    Más información acerca de la génesis y la importancia de esta matriz en \cite[Section 2.1]{schoutens-2000}.
+
+    \subsection{La fórmula de representación de Karlin y McGregor continua}
+
+    De manera análoga a la sección \ref{section:formula-representacion}, presentaremos los llamados polinomios de nacimiento y muerte y la versión continua de la fórmula de representación.
+
+    Para empezar, a partir de la matriz generadora infinitesimal \eqref{eq:matrix-generadora}, definimos una sucesión de polinomios $\{Q_n\}$ con $\deg(Q_n)=n$:
+    \begin{equation}
+        \label{eq:polinomios-pnm-cont}
+        \begin{array}{l}
+            Q_{0}(x) = 1 \\
+            -xQ_0(x)=\lambda_0 Q_1(x) -(\lambda_0 + \mu_0) Q_0(x), \\
+            x Q_n(x) = \lambda_n Q_{n+1}(x) -(\lambda_n+\mu_n) Q_n(x) + \mu_n Q_{n-1}(x), \ \ \ (n\geq 1).
+        \end{array}
+    \end{equation}
+
+    De forma vectorial, las ecuaciones pueden expresarse como $-x Q(x)=\mathcal{A} Q(x)$, donde $Q(x)=(Q_0(x), Q_1(x),\dots)^T$.
+
 
 \begin{ejemplo}[Procesos de nacimiento y muerte lineales]
     Sea el proceso de nacimiento y muerte dado por los parámetros
