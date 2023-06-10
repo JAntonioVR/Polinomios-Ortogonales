@@ -10,7 +10,7 @@ Para la redacción de este capítulo se han usado como bibliografía fundamental
 
 \section{Procesos de nacimiento y muerte}
 
-Como mencionamos anteriormente, un proceso de nacimiento y muerte discreto, cadena de nacimiento y muerte o caminata aleatoria es un caso particular de proceso de Markov en el que la única transición posible desde un estado $i\in S$ es hacia el estado siguiente, $i+1$, hacia el anterior, $i-1$, o hacia el propio estado $i$. Intuitivamente, es como un juego de plataformas infinito. Entonces, tomamos $S=\N_0 = \{0,1,2,\dots\}$\footnote{Existe una extensión en la que $S = \{-1,0,1,2,\dots\}$ y el estado $-1$ es un estado absorbente. Nosotros supondremos $S=\N_0$, aunque si se desea se puede consultar \cite[Ch. II, Section 2.3]{schoutens-2000} para más información sobre dicha extensión.} y, por esta suposición, tenemos la matriz tridiagonal infinita
+Como mencionamos anteriormente, un proceso de nacimiento y muerte discreto, cadena de nacimiento y muerte o caminata aleatoria es un caso particular de proceso de Markov en el que la única transición posible desde un estado $i\in S$ es hacia el estado siguiente, $i+1$, hacia el anterior, $i-1$, o hacia el propio estado $i$. Intuitivamente, es como un juego de plataformas infinito. Entonces, tomamos $S=\N_0 = \{0,1,2,\dots\}$\footnote{Existe una extensión en la que $S = \{-1,0,1,2,\dots\}$ y el estado $-1$ es un estado absorbente. Nosotros supondremos $S=\N_0$, aunque si se desea se puede consultar \cite[Ch. II, Section 2.3]{schoutens-2000} para más información.} y, por esta suposición, tenemos la matriz tridiagonal infinita
 
 \begin{equation}
     \label{eq:matriz-pnm}
@@ -76,7 +76,6 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \end{equation} 
     Por otro lado, obsérvese que, con las condiciones impuestas sobre $P$, el vector fila infinito $\pi = (\pi_n)_{n\in\N_0}$ verifica $\pi P = \pi$, la ecuación \eqref{eq:balance} extendida a vectores y matrices infinitos. Por tanto, $\pi$ es un vector estacionario de la cadena, que de hecho será una distribución estacionaria si $\sum_{n=0}^\infty \pi_n < \infty$.
 
-    \cb{REVIEW Párrafo actualizado:}
     Por la estructura que posee la matriz $P$, podemos comprobar que siempre es irreducible y es aperiódica si existe algún $r_n>0$. Bajo estas hipótesis, podemos pensar que es posible aplicar el teorema \ref{th:teorema-limite} para asegurar la existencia de una distribución límite, pero recordemos que en este caso estamos tratando con cadenas de Markov infinitas. Afortunadamente, en \cite[Theorem 5.5]{Seneta} y en \cite[Theorem 2.3]{Manuel} podemos encontrar generalizaciones del teorema \ref{th:teorema-limite} que nos ayudan a deducir que el vector infinito $\pi$ representa la distribución límite del proceso de nacimiento y muerte.
 
     
@@ -99,8 +98,6 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \end{equation}
     
     Nótese la similitud entre estas ecuaciones y la relación de recurrencia a tres términos \eqref{eq:RRTT} de los polinomios ortogonales. 
-
-    \cb{REVIEW Aplicando el teorema de Favard podemos conseguir un funcional que de hecho sería definido positivo que hiciera que estos polinomios fueran ortogonales. He pensado en poner eso y que la fórmula de representación lo que hace en realidad es facilitarnos una expresión explícita de ese funcional.}
 
     Consideramos ahora un espacio de Hilbert concreto, el espacio $\ell^2_\pi(\N_0)$, definido como el espacio de sucesiones complejas tales que 
     $$
@@ -135,12 +132,17 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
                 \begin{split}
                     \|Pf\|_\pi^2 &= \sum_{n=0}^\infty |p_n f_{n+1} + r_n f_n + q_n f_{n-1}|^2 \pi_n \ \ \ \text{(desigualdad triangular y }p_n,r_n,q_n\leq 1\text{)} \\
                     &\leq \sum_{n=0}^\infty |f_{n-1}|^2\pi_n + \sum_{n=0}^\infty |f_{n}|^2\pi_n + \sum_{n=0}^\infty |f_{n+1}|^2\pi_n \\
-                    &= \frac{q_n}{p_{n-1}} \sum_{n=0}^\infty |f_{n-1}|^2\pi_{n-1} + \sum_{n=0}^\infty |f_{n}|^2\pi_n + \frac{p_n}{q_{n+1}}  \sum_{n=0}^\infty |f_{n+1}|^2\pi_{n-1} < \infty.
+                    &=  \sum_{n=0}^\infty \frac{q_n}{p_{n-1}} |f_{n-1}|^2\pi_{n-1} + \sum_{n=0}^\infty |f_{n}|^2\pi_n + \sum_{n=0}^\infty \frac{p_n}{q_{n+1}} |f_{n+1}|^2\pi_{n+1} < \infty.
                 \end{split}
             \end{equation*}
+            \cb{TODO No puedo sacar de la sumatoria algo que depende de $n$, puedo justificarlo con que $f_{n-1}$ y $f_{n+1}$ tb es del espacio. O no. Preguntar a Payá.}
 
             \cb{REVIEW Pero que $\|Pf\|_\pi^2\leq \infty$ te dice que $Pf$ está en el espacio no que sea acotado el operador no?}
-            \item $\|P\|\leq 1$: Sabemos que, al ser $P$ estocástica por filas, la norma infinito de $P$ es exactamente $1$, $\|P\|_\infty=1$. Por otro lado, por un resultado básico sabemos que el radio espectral de una matriz $A$ es menor o igual que cualquier otra norma matricial aplicada a $A$. Esto es, $\rho(P)\leq\|P\|_\infty = 1$. Como, $\rho(P)=\max\{|\lambda|:\lambda\text{ es un valor propio de }P\}$, necesariamente todos los valores propios de $P$ son menores o iguales que $1$. \cb{TODO debe ser facilísimo pero no caigo en cómo deducir que entonces la norma del operador $P$ es $\leq 1$.}
+            \item $\|P\|\leq 1$: Sabemos que, al ser $P$ estocástica por filas, la norma infinito de $P$ es exactamente $1$, $\|P\|_\infty=1$. Por otro lado, por un resultado básico sabemos que el radio espectral de una matriz $A$ es menor o igual que cualquier otra norma matricial aplicada a $A$. Esto es, $\rho(P)\leq\|P\|_\infty = 1$. Como, $\rho(P)=\max\{|\lambda|:\lambda\text{ es un valor propio de }P\}$, necesariamente todos los valores propios de $P$ son, en valor absoluto, menores o iguales que $1$. 
+            
+            Tenemos entonces que $\|P f\|_\pi = \|\lambda f \|_\pi = |\lambda|\|f\|_\pi\leq \|f\|\pi$ para todo valor propio $\lambda$ de $P$. Como $\|P f\|_\pi \leq \|f\|_\pi$ y $\|P\|$ es la menor constante $K\geq 0$ tal que $\|Pf\|_\pi\leq K \|f\|_\pi$, necesariamente $\|P\|\leq 1$.
+            \cb{REVIEW: La propiedad esa del radio espectral también vale para matrices infinitas?}
+
             \item Autoadjunto: Recordemos la relación de simetría \eqref{eq:ecs-simetria} ($\pi_n p_n = \pi_{n+1}q_{n+1}$). Entonces
             \begin{equation*}
                 \begin{split}
@@ -151,6 +153,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
                     &= \sum_{n=0}^\infty f_n(p_n g_{n+1} + r_n g_n+ q_n g_{n-1})\pi_n = \prodesc{f}{Pg}_\pi.
                 \end{split}  
             \end{equation*}
+            
             En la cuarta igualdad hemos modificado los índices de la primera y de la tercera sumatoria aprovechando el convenio de que $f_{-1}=g_{-1}=0$.
 
         \end{itemize}
@@ -161,12 +164,12 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     Para $i\geq 0$, denotamos con $e^{(i)}\in\ell^2_\pi(\N_0)$ a las sucesiones tales que $(e^{(i)})_j = \delta_{ij}/\pi_i$, que expresada en forma de vector columna tendrían la forma
     $$
-    e^{(i)}=(0,\overbrace{\dots}^{(i)},0,1/\pi_i,0,\dots)^T.
+    e^{(i)}=(\overbrace{0,\dots,0}^{(i-1)},1/\pi_i,0,\dots)^T.
     $$
     Si aplicamos el operador $P$ a estos elementos particulares, obtenemos
     \begin{equation*}
         \begin{split}
-            Pe^{(i)} &= (0,\overbrace{\dots}^{(i-1)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T \\
+            Pe^{(i)} &= (\overbrace{0,\dots,0}^{(i-2)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T \\
             &= (0,\dots,0, q_i/\pi_{i-1},  r_i/\pi_i, p_i/\pi_{i+1},0,\dots)^T \ \ \ \text{(por \eqref{eq:ecs-simetria})}\\
             &= q_i e^{(i-1)} + r_i e^{(i)} + p_i e^{(i+1)}.
         \end{split}
@@ -179,7 +182,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         Pe^{(n)} =  q_n e^{(n-1)} + r_n  e^{(n)} + p_n e^{(n+1)} \ \ \ (n\geq 1)
     \end{equation}
 
-    Seguidamente introduciremos un resultado para el cuál conviene recordar la posibilidad de, dado un polinomio cualquiera $\pi(x)= a_0 + a_1 x + \cdots + a_n x^n$ y una matriz cuadrada $A$, es posible evaluar el polinomio en $A$ sin más que considerar
+    Seguidamente introduciremos un resultado para el cual conviene recordar que, dado un polinomio cualquiera $\pi(x)= a_0 + a_1 x + \cdots + a_n x^n$ y una matriz cuadrada $A$, es posible evaluar el polinomio en $A$ sin más que considerar
     $$
     \pi(A) = a_0 I + a_1 A + \cdots + a_n A^n.
     $$
@@ -281,6 +284,8 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         La existencia está probada, la unicidad puede probarse teniendo en cuenta que tomando $i=j=0$ se obtienen los momentos de $\psi$: $\int_{-1}^1 x^n d\psi(x)$. Estos momentos determinan unívocamente a la medida $\psi$. Consúltese \cite[Theorem 1]{random-walks}.
     \end{proof}
 
+    \cb{REVIEW He puesto que la medida se denota con $\psi$ mientras que en el primer capítulo puse $\mu$, creo que convendría poner ambas iguales.}
+
     Como ya hemos adelantado anteriormente, de la medida $\psi$ que nos proporciona el teorema espectral obtendremos la ortogonalidad de los polinomios $Q_n(x)$ dados en \eqref{eq:polinomios-pnm}. Esta propiedad es, de hecho, una sencilla consecuencia de la fórmula de representación.
 
     \begin{corolario}
@@ -295,9 +300,66 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     A la medida $\psi$ se le suele denominar \textbf{medida espectral} y a los polinomios $\{Q_n\}$ \textbf{polinomios de nacimiento y muerte}. 
 
-    \cb{REVIEW ¿No hay algún ejemplo de PNM lineal con la fórmula de representación para cadenas discretas? El que tengo ahora es para continuas}
+    Hasta el momento, hemos probado que cualquier proceso de nacimiento y muerte admite una única medida espectral cuyo soporte está contenido en el intervalo $[-1,1]$ y tal que sus polinomios de nacimiento y muerte, definidos en \eqref{eq:polinomios-pnm}, forman una SPO. Además, las probabilidades de transición pueden ser calculadas utilizando integrales mediante la fórmula de representación de Karlin-McGregor \eqref{eq:formula-representacion}. Sin embargo, es posible también estudiar el problema inverso, es decir, a partir de una medida $\psi$ con soporte contenido en $[-1,1]$, conocer la existencia y/o unicidad de los posibles procesos de nacimiento y muerte para los cuales $\psi$ es su medida espectral. Por extensión no abordamos este aspecto en este trabajo, pero aconsejamos al lector interesado profundizar en \cite[Section 2.2]{Manuel} y \cite{random-walks}.
 
-    \cb{TODO Añadir párrafo diciendo que se puede abordar el problema inverso: a partir de una SPO y una medida, buscar un PNM asociado}
+    \begin{ejemplo}[Proceso de nacimiento y muerte generado por los polinomios de Jacobi]
+        Consideremos el proceso de nacimiento y muerte dado por los parámetros
+        \begin{align*}
+            p_n &= \dfrac{n+2\alpha+1}{2n+2\alpha+1} & r_n&= 0 & q_n = \dfrac{n}{2n+2\alpha+1},
+        \end{align*}
+        con $\alpha>-1$. Trataremos de calcular los polinomios de nacimiento y muerte, la medida espectral y la fórmula de representación. Comprobaremos que los polinomios de nacimiento y muerte $Q_n(x)$ son, en esencia, los polinomios de Jacobi presentados en la sección \ref{subsection:jacobi}, tomando $\alpha=\beta$.
+
+        De acuerdo a las ecuaciones \eqref{eq:polinomios-pnm}, los polinomios $Q_n(x)$ del proceso obedecen a la relación de recurrencia:
+        \begin{equation}
+            \label{eq:recurrencia-ejemplo}
+            x Q_n(x) = \dfrac{n+2\alpha+1}{2n+2\alpha+1} Q_{n+1} + \dfrac{n}{2n+2\alpha+1} Q_{n-1}.
+        \end{equation}
+        
+        Los polinomios de Jacobi $P^{(\alpha,\beta)}_n(x)$, particularizando al caso $\alpha=\beta$, obedecen a la relación de recurrencia dada por (consúltese apéndice \ref{appendix:tablas}):
+
+        $$
+            (2n+2\alpha)_3\, x P^{(\alpha,\alpha)}_n(x) = 2(n+1)(n+2\alpha+1)(2n+2\alpha)P^{(\alpha,\alpha)}_{n+1}(x) + 2(n+\alpha)^2(2n+2\alpha+2)P^{(\alpha,\alpha)}_{n-1}(x)
+        $$o equivalentemente \begin{equation}
+            \label{eq:ecuaciones-jacobi-ejemplo}
+            x P^{(\alpha,\alpha)}_n(x) = \dfrac{2(n+1)(n+2\alpha+1)}{(2n+2\alpha+1)(2n+2\alpha+2)} P^{(\alpha,\alpha)}_{n+1}(x) + \dfrac{n+\alpha}{2n+2\alpha+1}P^{(\alpha,\alpha)}_{n-1}(x)
+        \end{equation}
+        
+        Consideramos $Q_n$ como la estandarización de los polinomios de Jacobi según:
+        \begin{equation}
+            \label{eq:polinomios-ejemplo}
+            Q_n(x) = \dfrac{P^{(\alpha,\alpha)}_n(x)}{P^{(\alpha,\alpha)}_n(1)}.
+        \end{equation}
+        Si sustituimos en la ecuación \eqref{eq:recurrencia-ejemplo} teniendo en cuenta que $P^{(\alpha,\alpha)}_n(1)=\dfrac{(\alpha+1)_n}{n!}$ (véase \cite[Table 22.4]{abramowitz-stegun}) obtenemos
+        $$
+        x P^{(\alpha,\alpha)}_n(x) \dfrac{n!}{(\alpha+1)_n} = \dfrac{n+2\alpha+1}{2n+2\alpha+1} \dfrac{(n+1)!}{(\alpha+1)_{n+1}} P^{(\alpha,\alpha)}_{n+1}(x) + \dfrac{n}{2n+2\alpha+1} \dfrac{(n-1)!}{(\alpha+1)_{n-1}} P^{(\alpha,\alpha)}_{n-1}(x),
+        $$
+        que mediante sencillas simplificaciones podemos comprobar que, en efecto, es equivalente a \eqref{eq:ecuaciones-jacobi-ejemplo}.
+
+        Por tanto, los polinomios de nacimiento y muerte de este proceso son los definidos en \eqref{eq:polinomios-ejemplo}. Tenemos entonces que los polinomios $\{Q_n(x)\}$ del proceso son ortogonales en el intervalo $[-1,1]$ y con respecto a la función peso
+        $$
+        \rho(x) = c\, (1-x^2)^\alpha,
+        $$
+        donde $c$ es una constante de estandarización.
+
+        Por otro lado, mediante un sencillo cálculo tenemos
+        \begin{equation}
+            \begin{split}
+                \pi_i &=\dfrac{p_0\cdots p_{i-1}}{q_1\cdots q_i} = \dfrac{\dfrac{1+2\alpha+1}{2+2\alpha+1}\cdot\dfrac{2+2\alpha+1}{4+2\alpha+1}\cdots \dfrac{i+2\alpha}{2(i-1)+2\alpha+1}}{\dfrac{1}{2+2\alpha+1}\cdot\dfrac{2}{4+2\alpha+1}\cdots \dfrac{i}{2i+2\alpha+1}} \\
+                &= \dfrac{(2\alpha+2)_{i-1}(2i+2\alpha+1)}{i!}.
+            \end{split}
+        \end{equation}
+
+        Finalmente, podemos aplicar la fórmula de representación \eqref{eq:formula-representacion} para obtener
+        \begin{equation*}
+            \begin{split}
+                P_{ij}^{(n)}& = P[X_n=j|X_0=i] \\
+                &= \pi_j \int_{-1}^1 x^n Q_i(x)Q_j(x)\rho(x)dx \\
+                &= \dfrac{(2\alpha+2)_{j-1}(2j+2\alpha+1)}{j!} \int_{-1}^1 x^n \left[\dfrac{P^{(\alpha,\alpha)}_i(x)}{P^{(\alpha,\alpha)}_i(1)}\right]\left[\dfrac{P^{(\alpha,\alpha)}_j(x)}{P^{(\alpha,\alpha)}_j(1)}\right]\rho(x) dx \\
+                &= \dfrac{(2\alpha+2)_{j-1}(2j+2\alpha+1)}{(j!)P^{(\alpha,\alpha)}_i(1)\, P^{(\alpha,\alpha)}_j(1)} \int_{-1}^1 x^n P^{(\alpha,\alpha)}_i(x) P^{(\alpha,\alpha)}_j(x)\rho(x) dx.
+            \end{split}
+        \end{equation*} 
+
+    \end{ejemplo}
 
     \section{Análogos continuos de la fórmula de representación}
 
@@ -307,9 +369,9 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     En esta sección introduciremos superficialmente los análogos continuos de los procesos de nacimiento y muerte y la fórmula de representación de Karlin-McGregor. El siguiente texto está basado en las referencias \cite{Anderson}, \cite[Ch. 2, 3]{schoutens-2000}, \cite{differential-equations} y \cite[Sections 3.1, 3.2]{Manuel}, a las cuales remitimos al lector que desee profundizar.
 
-    \subsection{Procesos de nacimiento y muerte continuos}
+    \subsection{Procesos de Markov continuos}
 
-    Hasta el momento, hemos considerado el paso del tiempo como incrementos del valor de un parámetro $n=0,1,2,\dots$ que representa el instante $n$-ésimo. En el caso continuo, de forma general consideramos que un instante viene dado por un valor $t\in[0,+\infty)$. Por su parte, el espacio de estados $S$ no cambia, $S=\N_0={0,1,2,\dots}$. Así, fijado $t\in[0,+\infty)$, llamamos $X_t\in S$ a la variable aleatoria ``estado del sistema en el instante $t$'' y la colección de variables aleatorias $\{X_t, t\geq 0\}$ es un \textbf{proceso de nacimiento y muerte continuo}.
+    Hasta el momento, hemos considerado el paso del tiempo como incrementos del valor de un parámetro $n=0,1,2,\dots$ que representa el instante $n$-ésimo. En el caso continuo, de forma general consideramos que un instante viene dado por un valor $t\in[0,+\infty)$. Por su parte, el espacio de estados $S$ no cambia, $S=\{0,1,\dots,N\}$ en el caso finito o $S=\N_0$ en caso de que exista una cantidad infinita de posibles estados. Así, fijado $t\in[0,+\infty)$, llamamos $X_t\in S$ a la variable aleatoria ``estado del sistema en el instante $t$'' y la colección de variables aleatorias $\{X_t, t\geq 0\}$ es un \textbf{proceso de Markov continuo}.
     
     En este caso, la propiedad de Markov viene dada como:
     \begin{equation}
@@ -321,19 +383,31 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
        p_{ij}(t) := P[X_{t}=j|X_0=i]  \ \ \ t>0.
     \end{equation}
     
-    De esta forma, vemos que las probabilidades de transición se expresan en función del tiempo, de forma que lo que en el caso discreto era la matriz de transición $P$ dada en \eqref{eq:matriz-pnm}, ahora es una función matricial $P(t)$:
+    De esta forma, vemos que las probabilidades de transición se expresan en función del tiempo, de forma que lo que en el caso discreto era la matriz de transición $P$ dada en \eqref{eq:matriz-trans}, ahora es una función matricial $P(t)$:
 
     \begin{equation}
-        \label{eq:matriz-pnm-cont}
-        P = \begin{pmatrix}
-            p_{00}(t) & p_{01}(t) & 0 & 0 & \cdots \\
-            p_{10}(t) & p_{11}(t) & p_{12}(t) & 0 & \cdots \\
-            0 & p_{21}(t) & p_{22}(t) & p_{23}(t) & \cdots \\
-            \vdots & \ddots & \ddots & \ddots & \ddots 
+        \label{eq:matriz-trans-cont}
+        P(t) = \begin{pmatrix}
+            p_{00}(t) & p_{01}(t) & p_{02}(t)  & \cdots \\
+            p_{10}(t) & p_{11}(t) & p_{12}(t)  & \cdots \\
+            \vdots & \vdots & \vdots  & \ddots 
         \end{pmatrix}.
     \end{equation}
 
-    \cb{REVIEW ¿Lo pongo así o lo pongo mejor en plan general y luego concreto al caso de PNM?}
+    \subsection{Procesos de nacimiento y muerte continuos}
+
+    Particularizaremos al caso de procesos de nacimiento y muerte, en los que recordamos que su principal particularidad era la posibilidad de que en cualquier instante tan sólo era posible cambiar al siguiente estado, al anterior, o mantenerse en el mismo estado. Esta propiedad, llevada al modelo continuo, implica que si en un instante $t$ el sistema se sitúa en el estado $i$, únicamente podemos permitir que $p_{i,i-1}(t)$, $p_{i,i}(t)$ o $p_{i,i+1}(t)$ sean no nulas. Por tanto, la matriz \eqref{eq:matriz-trans-cont}, que extiende a la matriz \eqref{eq:matriz-pnm} al caso continuo, sería la siguiente:
+
+    \begin{equation}
+        \label{eq:matriz-pnm-cont}
+        P(t) = \begin{pmatrix}
+            p_{00}(t) & p_{01}(t) & 0 & 0  & \cdots \\
+            p_{10}(t) & p_{11}(t) & p_{12}(t) & 0  & \cdots \\
+
+            0 & p_{21}(t) & p_{22}(t) & p_{23}(t) &  \cdots \\
+            \vdots & \ddots & \ddots & \ddots & \ddots 
+        \end{pmatrix}.
+    \end{equation}
 
     Además, asumiremos que las probabilidades \eqref{eq:prob-trans-cont} satisfacen las siguientes propiedades:
 
@@ -342,7 +416,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \begin{enumerate}
         \item $p_{i,i+1}(h) = \lambda_i h + o(h)$ cuando $h\searrow 0$, $i\geq 0$.
         \item $p_{i,i-1}(h) = \mu_i h + o(h)$ cuando $h\searrow 0$, $i\geq 1$.
-        \item $p_{i,i}(h) = 1 - (\lambda_i + \mu_i h) + o(h)$  cuando $h\searrow 0$, $i\geq 0$ asumiendo $\mu_0=0$.
+        \item $p_{i,i}(h) = 1 - (\lambda_i + \mu_i) h + o(h)$  cuando $h\searrow 0$, $i\geq 0$ asumiendo $\mu_0=0$ salvo que se indique lo contrario.
         \item $p_{ij}(0)=\delta_{ij}$.
         \item Asumimos que $\lambda_0>0$, $\lambda_i, \mu_i > 0$, $i\geq 1$.
     \end{enumerate}
@@ -366,6 +440,19 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     Más información acerca de la génesis y la importancia de esta matriz en \cite[Section 2.1]{schoutens-2000}.
 
+    De forma similar al caso de procesos de nacimiento y muerte discretos, podemos definir a partir de $\{\mu_i\}$ y $\{\lambda_i\}$ los coeficientes potenciales
+    \begin{align}
+        \label{eq:coeficientes-potenciales-cont}
+        \pi_0&= 1 & \pi_n &= \dfrac{\lambda_0 \lambda_1 \cdots \lambda_{n-1}}{\mu_1 \mu_2 \cdots \mu_n} \ \ \ (n\geq 1).
+    \end{align}
+    Estos coeficientes verifican las ecuaciones de simetría
+    \begin{equation}
+        \label{eq:ecs-simetria-cont}
+        \pi_n \lambda_n = \pi_{n+1}\mu_{n+1} \ \ \ (n\geq 0).
+    \end{equation} 
+
+    La matriz \eqref{eq:matrix-generadora} y los coeficientes \eqref{eq:coeficientes-potenciales-cont} jugarán un papel esencial en el análogo continuo de la fórmula de representación.
+
     \subsection{La fórmula de representación de Karlin y McGregor continua}
 
     De manera análoga a la sección \ref{section:formula-representacion}, presentaremos los llamados polinomios de nacimiento y muerte y la versión continua de la fórmula de representación.
@@ -373,16 +460,23 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     Para empezar, a partir de la matriz generadora infinitesimal \eqref{eq:matrix-generadora}, definimos una sucesión de polinomios $\{Q_n\}$ con $\deg(Q_n)=n$:
     \begin{equation}
         \label{eq:polinomios-pnm-cont}
-        \begin{array}{l}
-            Q_{0}(x) = 1 \\
-            -xQ_0(x)=\lambda_0 Q_1(x) -(\lambda_0 + \mu_0) Q_0(x), \\
-            x Q_n(x) = \lambda_n Q_{n+1}(x) -(\lambda_n+\mu_n) Q_n(x) + \mu_n Q_{n-1}(x), \ \ \ (n\geq 1).
-        \end{array}
+        \begin{split}
+            Q_{0}(x) &= 1 \\
+            -xQ_0(x)&=\lambda_0 Q_1(x) -(\lambda_0 + \mu_0) Q_0(x), \\
+            -x Q_n(x) &= \lambda_n Q_{n+1}(x) -(\lambda_n+\mu_n) Q_n(x) + \mu_n Q_{n-1}(x), \ \ \ (n\geq 1).
+        \end{split}
     \end{equation}
 
-    De forma vectorial, las ecuaciones pueden expresarse como $-x Q(x)=\mathcal{A} Q(x)$, donde $Q(x)=(Q_0(x), Q_1(x),\dots)^T$.
+    De forma vectorial, las ecuaciones pueden expresarse como $-x Q(x)=\mathcal{A} Q(x)$, donde $Q(x)=(Q_0(x), Q_1(x),\dots)^T$. Estos polinomios son los que nos permiten obtener la fórmula de representación de Karlin-McGregor continua:
 
-
+    \begin{equation}
+        \label{eq:formula-representacion-cont}
+        P_{ij}(t)=\pi_j \int_{0}^\infty e^{-xt} Q_j(x)Q_i(x)d\psi(x), \ \ \ i,j\in\N_0, t\geq 0,
+    \end{equation}
+    donde $\psi$ es una medida cuyo soporte está contenido en el intervalo $[0,\infty)$ y para la cual los polinomios $\{Q_n\}$ definidos en \eqref{eq:polinomios-pnm-cont} forman una SPO.
+    
+    La demostración y los detalles de esta prueba pueden encontrarse en las referencias \cite{differential-equations} o \cite[Section 3.2]{Manuel}. Finalmente, para clarificar el uso de esta fórmula, presentamos un ejemplo.
+    
 \begin{ejemplo}[Procesos de nacimiento y muerte lineales]
     Sea el proceso de nacimiento y muerte dado por los parámetros
     \begin{align*}
@@ -426,13 +520,13 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     
     Aplicando estas igualdades, tenemos que (\ref{eq:ejemplo-laguerre2}) es equivalente a (\ref{eq:ejemplo-laguerre1}).
 
-    Por tanto, los polinomios asociados al proceso de nacimiento y muerte de este ejemplo son los presentados en (\ref{eq:polinomiosQejemplo}). Por tanto, $Q_i(x)$ son ortogonales en $[0,+\infty)$ con respecto a la función peso 
+    Por tanto, los polinomios asociados al proceso de nacimiento y muerte de este ejemplo son los presentados en (\ref{eq:polinomiosQejemplo}). Esto es, $Q_i(x)$ son ortogonales en $[0,+\infty)$ con respecto a la función peso 
     $$
     \rho(x) = ce^{-x/\kappa} x^{\beta-1},
     $$
     donde $c$ es una constante de estandarización.
 
-    Por tanto, podemos calcular las probabilidades de transición aplicando la ecuación (TODO referencia) y teniendo en cuenta que
+    Podemos así calcular las probabilidades de transición aplicando la ecuación (TODO referencia) y teniendo en cuenta que
     $$
         \pi_i = \dfrac{\lambda_0\cdots \lambda_{i-1}}{\mu_1\cdots \mu_i} = \dfrac{\beta(\beta+1)\cdots (\beta+i-1)}{i!} = \dfrac{(\beta)_i}{i!}.
     $$
@@ -448,3 +542,8 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \end{equation*}
 
 \end{ejemplo}
+
+En conclusión, una vez presentada la teoría de polinomios ortogonales y la de procesos y cadenas de Markov de manera independiente, aunque aparentemente no parecían guardar ninguna relación la una con la otra, hemos podido presentar la relación entre una y otra disciplina. Esta relación se sitúa en los procesos de nacimiento y muerte, en la que aprovechamos los tres coeficientes que caracterizan cada estado del sistema para crear lo que será una sucesión de polinomios ortogonales. Por su parte, la fórmula de representación de Karlin-McGregor permite encontrar un punto en común entre el cálculo de probabilidades y el de integrales, que aprovechando la ortogonalidad de los polinomios puede simplificarse considerablemente.
+
+\cb{REVIEW No sé si poner que esto realmente facilita los cálculos de probabilidades. Aparentemente el cálculo de integrales no se ve más sencillo que el de probabilidades, pero teniendo en cuenta que aquí la cadena es infinita igual sí que compensa.}
+
