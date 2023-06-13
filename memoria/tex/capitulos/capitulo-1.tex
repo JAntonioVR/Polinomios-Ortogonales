@@ -60,7 +60,7 @@ De acuerdo a este ejemplo, decimos que los polinomios $T_n$ son \textit{ortogona
 \section{Ortogonalidad y función peso}
 \label{c1section:ort-peso}
 
-En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente conocido de ortogonalidad, restringido a espacios como $\R^d$, a otros tipos de espacios. Además, introdujimos la primera familia de polinomios ortogonales: los polinomios de Tchebichef de tipo I. En esta sección daremos definiciones más formales y genéricas sobre la ortogonalidad.
+En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente conocido de ortogonalidad, restringido a espacios como $\R^d$, a otros tipos de espacios. Además, introdujimos la primera familia de polinomios ortogonales: los polinomios de Tchebichef de tipo I. En esta sección daremos definiciones más formales y genéricas sobre la ortogonalidad, basándonos en los textos de \cite[Ch. II]{renato}, \cite[Ch. I]{chihara} y \cite[Ch. II, III]{szego}.
 
 Sea $\mu$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\mu(x)<\infty$. Se define el espacio de funciones $L_\mu^p[a,b]$ como el conjunto de funciones tales que
 
@@ -329,7 +329,7 @@ En conclusión, no existe una única forma de estandarizar una SPO, sino que en 
 \section{Existencia de SPO}
 \label{section:existencia-SPO}
 
-Recordemos que con anterioridad hemos comentado en la observación \ref{observacion:existencia} que no cualquier sucesión de números complejos $\{\mu_n\}$ da lugar a una SPO. Es necesario por tanto exigir alguna condición sobre dicha sucesión si realmente queremos asegurar la existencia la correspondiente SPO.
+Recordemos que con anterioridad hemos comentado en la observación \ref{observacion:existencia} que no cualquier sucesión de números complejos $\{\mu_n\}$ da lugar a una SPO. Es necesario por tanto exigir alguna condición sobre dicha sucesión si realmente queremos asegurar la existencia de la correspondiente SPO.
 
 Para ello, introducimos el siguiente concepto.
 
@@ -387,7 +387,7 @@ Este determinante está directamente relacionado con la existencia de una SPO.
 Con esta notación, podemos ponerle nombre a aquellos funcionales para los cuales existe una SPO.
 
 \begin{definicion}[Funcional cuasi-definido]
-    Un funcional $\mathcal L$ es \textbf{cuasi-definido} si, y solo si admite una sucesión de polinomios ortogonales. Equivalentemente, si $\Delta_n > 0, \ \ \forall n\in \N_0$.
+    Un funcional $\mathcal L$ es \textbf{cuasi-definido} si, y solo si admite una sucesión de polinomios ortogonales. Equivalentemente, si $\Delta_n \neq 0, \ \ \forall n\in \N_0$.
     
 \end{definicion}
 
@@ -453,7 +453,7 @@ Las SPO respecto a un funcional siempre cumplen una ecuación que es la denomina
         \label{eq:RRTT}
         xP_n(x) = \alpha_n P_{n+1}(x) + \beta_n P_n(x) + \gamma_n P_{n-1}(x) \ \ \ \forall n\in\N_0.
     \end{equation}
-    Normalmente se impone que $P_{-1}=0, P_0 = 1$, por lo que una SPO queda determinada unívocamente a partir de las sucesiones $\{\alpha_n\},\{\beta_n\},\{\gamma_n\}$.
+    Normalmente se impone que $P_{-1}=0, P_0 = 1$, por lo que una SPO queda determinada unívocamente a partir de las sucesiones $\{\alpha_n\},\{\beta_n\},\{\gamma_n\}$. De hecho, se cumple que $\alpha_n,\gamma_n\neq 0 \ \ \ \forall n\in\N_0$ .
 
     Además, si la SPO es mónica, los polinomios $\{P_n\}$ verifican la ecuación equivalente
     \begin{equation}
@@ -473,6 +473,8 @@ Las SPO respecto a un funcional siempre cumplen una ecuación que es la denomina
     $$
     de donde se deduce (\ref{eq:RRTT}). Si además $P_n(x)$ es mónico, $xP_n(x)$ también lo es, por lo que $a_{n+1,n}=1$, luego se tiene que 
     $$ xP_n(x)  = P_{n+1}(x) + \beta_n P_n(x) + \gamma_n P_{n-1}, $$ que es equivalente a (\ref{eq:RRTT2}).
+    
+    Además, $\alpha_n = a_{n+1,n}= \dfrac{\mathcal{L}[xP_n(x)P_{n+1}(x)]}{\mathcal{L}[P_{n+1}^2(x)]}\neq 0$ porque $\mathcal{L}[xP_n(x)P_{n+1}(x)]\neq 0$ al ser $xP_n(x)$ un polinomio de grado $n+1$ al igual que $P_{n+1}(x)$. Por su parte, $\gamma_n=a_{n-1,n}= \dfrac{\mathcal{L}[xP_n(x)P_{n-1}(x)]}{\mathcal{L}[P_{n-1}^2(x)]}\neq 0$ porque $\mathcal{L}[xP_n(x)P_{n-1}(x)]\neq 0$ al ser $xP_{n-1}(x)$ un polinomio de grado $n$ al igual que $P_{n}(x)$.
 \end{proof}
 
 De esta demostración podemos deducir además la expresión de las constantes $\alpha_n, \beta_n$ y $\gamma_n$:
@@ -503,7 +505,7 @@ Con las ecuaciones (\ref{eq:ctes-RRTT}) podemos construir la SPO utilizando la R
     $$
     \mathcal{L}[f] = \int_{-\infty}^{+\infty} f(x) e^{-x^2}dx.
     $$
-    Calculemos la SPOM correspondiente al funcional $\mathcal L$. Si tomamos $P_{-1}=0, P_0=1$, podemos calcular a partir de (\ref{eq:ctes-RRTT}) las constantes $\beta_n,\gamma_n$ para $n\leq 1$ y mediante (\ref{eq:RRTT2}) obtenemos los polinomios $P_n$ para $n\geq 1$, véase la tabla \ref{tab:pol-Hermite}.
+    Calculemos la SPOM correspondiente al funcional $\mathcal L$. Si tomamos $P_{-1}=0, P_0=1$, podemos calcular a partir de (\ref{eq:ctes-RRTT}) las constantes $\beta_n,\gamma_n$ para $n\geq 1$ y mediante (\ref{eq:RRTT2}) obtenemos los polinomios $P_n$ para $n\geq 1$, véase la tabla \ref{tab:pol-Hermite}.
 
     \begin{table}[h]
         \centering
@@ -666,7 +668,7 @@ $$
 \end{observacion}
 
 \begin{observacion}
-    $P'_n$ tiene exactamente un cero en cada intervalo $(x_{n,k},x_{n,k+1})$, por lo que $P'_n(x_{nk})$ alterna su signo con $k=1,\dots ,n$. Como el signo de $P'_n(x)$ también es positivo, concluimos que
+    $P'_n$ tiene exactamente un cero en cada intervalo $(x_{n,k},x_{n,k+1})$, por lo que $P'_n(x_{nk})$ alterna su signo con $k=1,\dots ,n$. Como el signo del coeficiente líder de $P'_n(x)$ también es positivo, concluimos que
     \begin{equation}
         \label{eq:signo-derivada}
         \sgn P'_n(x_{nk}) =(-1)^{n-k}, \ \ k = 1,\dots, n.
@@ -681,7 +683,7 @@ Estas dos observaciones relacionan en cierto modo los ceros de $P_n$ con el comp
     Si $\mathcal{L}$ es un funcional definido positivo y $\{P_n\}$ es su SPO, entonces se verifica la desigualdad
     \begin{equation}
         \label{eq:desigualdad-cd}
-        P'_{n+1}(x)P_n(x) -P'_n(x)P_{n+1} > 0, \ \ \forall x\in\R.
+        P'_{n+1}(x)P_n(x) -P'_n(x)P_{n+1}(x) > 0, \ \ \forall x\in\R.
     \end{equation}
 \end{lema}
 
@@ -694,7 +696,7 @@ Esta desigualdad es una consecuencia de la conocida \textit{Identidad de Christo
     $$
 \end{teorema}
 \begin{proof}
-    A partir de la desigualdad (\ref{eq:desigualdad-cd}) obtenemos que $P'_{n+1}(x)P_n(x)>0$, y si evaluamos en $x=x_{n+1,k}$ se tiene que
+    A partir de la desigualdad (\ref{eq:desigualdad-cd}), si evaluamos en $x=x_{n+1,k}$ se tiene que
     $$
     P'_{n+1}(x_{n+1,k})P_n(x_{n+1,k})>0, \ \ k=1,\dots n+1
     $$
@@ -746,4 +748,4 @@ Sin embargo, recordemos que mediante el teorema de Favard también podemos obten
     
 \end{ejemplo}
 
-Los ceros de los polinomios ortogonales tienen un papel importante, por ejemplo, en fórmulas de integración numérica, ya que tomar los nodos en los ceros de los polinomios ortogonales reduce considerablemente el error en la integración. Una aplicación bastante directa podrían ser las fórmulas de cuadratura gaussiana (véase \cite[Ch. I, Sección 6]{chihara}). También serán relevantes en los próximos capítulos al jugar $\xi_1$ un papel importante en el soporte de la medida. Incluso tienen una interpretación en el campo del equilibrio electrostático (véase \cite{Steinerberger}).
+Los ceros de los polinomios ortogonales tienen un papel importante, por ejemplo, en fórmulas de integración numérica, ya que tomar los nodos en los ceros de los polinomios ortogonales reduce considerablemente el error en la integración. Una aplicación bastante directa podrían ser las fórmulas de cuadratura gaussiana (véase \cite[Ch. I, Sección 6]{chihara}). Incluso tienen una interpretación en el campo del equilibrio electrostático (véase \cite{Steinerberger}).

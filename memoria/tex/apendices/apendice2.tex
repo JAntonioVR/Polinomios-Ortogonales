@@ -4,7 +4,6 @@
     En este apéndice introducimos una herramienta fundamental en el camino en busca de la fórmula de representación de Karlin-McGregor: el teorema espectral. Gracias a este teorema obtendremos una medida que nos proporcionará la ortogonalidad de los polinomios. Estos conceptos, al no ser tan cercanos al objetivo de este trabajo, se introducen de manera superficial, recomendando al lector que si desea profundizar en ellos consulte bibliografía relacionada con análisis funcional. Por ejemplo, se propone \cite[Ch. 1]{Manuel} o \cite[Ch. 12]{rudin}.
 
     \cb{TODO Añadir definición de norma de operador}
-    \cb{TODO Contactar con Payá.}
     
     Para empezar, recordamos algunos conceptos básicos de análisis funcional.
 
@@ -12,8 +11,17 @@
         Un espacio vectorial $\mathcal{H}$ se denomina \textbf{espacio de Hilbert} si está dotado de un producto escalar interno $\prodesc{\cdot}{\cdot}$ y es además completo respecto a la norma asociada a dicho producto escalar.
     \end{definicion}
 
-    Denotamos como $\mathcal{B}(\mathcal{H})$ al conjunto de todos los operadores lineales de $\mathcal{H}$ en sí mismo. Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal. $T$ es un operador acotado si, dado un subconjunto $A\subseteq \mathcal{H}$ acotado, $T(A)$ también es acotado. Es decir, un operador lineal acotado transforma conjuntos acotados en conjuntos acotados. 
+    Denotamos como $\mathcal{B}(\mathcal{H})$ al conjunto de todos los operadores lineales de $\mathcal{H}$ en sí mismo. Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal. $T$ es un operador acotado si, dado un subconjunto $A\subseteq \mathcal{H}$ acotado, $T(A)$ también es acotado. Es decir, un operador lineal acotado transforma conjuntos acotados en conjuntos acotados. Equivalentemente, un operador lineal es acotado si, y solo si es continuo, es decir, si existe una constante $K\geq 0$ tal que, para todo $x\in\mathcal H$, $\|Tx\|\leq K\|x\|$. A partir de esta equivalencia presentamos la siguiente definición.
 
+    \begin{definicion}
+        Sea $\mathcal{H}$ un espacio de Hilbert y $T:\mathcal H \longrightarrow \mathcal{H}$ un perador lineal continuo ($\Leftrightarrow$ acotado). Se define la \textbf{norma del operador} $T$ como
+        \begin{equation}
+            \label{eq:norma-operadores}
+            \|T\|:= \min\{K\geq 0: \|Tx\|\leq K\|x\|\}.
+        \end{equation}
+    \end{definicion}
+
+    Definimos una propiedad particular que pueden verificar los operadores lineales.
 
     \begin{definicion}[Operador autoadjunto]
         Sea $\mathcal{H}$ un espacio de Hilbert. Un operador lineal $T:\mathcal H \longrightarrow \mathcal{H}$ es \textbf{autoadjunto} si

@@ -84,8 +84,9 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
             \label{eq:Pearson-peso}
             [\sigma(x)\rho(x)]'=\tau(x)\rho(x)
         \end{equation}
-        \item La SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}).
+        \item La SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}),    
     \end{enumerate}
+
     siempre que $\rho(x)$ verifique las condiciones de frontera 
     \begin{equation}
         \label{eq:cond-frontera}
@@ -110,14 +111,11 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
                 &= \int_a^b x^n \tau(x)\rho(x)dx = \prodesc{\uu}{\tau(x)x^n} = \prodesc{\tau \uu}{x^n}
             \end{split}
         \end{equation*}
-        \item[\fbox{$\Leftarrow$}] \cb{REVIEW El recíproco me está quitando años de vida.
-        
-        Queremos probar que la función peso $\rho(x)$ es solución de la ecuación \eqref{eq:Pearson-peso}, sabiendo que el funcional $\uu$ definido como en \eqref{eq:funcional-peso} verifica la ecuación de Pearson \eqref{eq:Pearson-u}.
+        \item[\fbox{$\Leftarrow$}] Queremos probar que la función peso $\rho(x)$ es solución de la ecuación \eqref{eq:Pearson-peso}, sabiendo que el funcional $\uu$ definido como en \eqref{eq:funcional-peso} verifica la ecuación de Pearson \eqref{eq:Pearson-u} y que $\rho(x)$ cumple \eqref{eq:cond-frontera}.
 
-        Por un lado, tenemos que
-
+        Por un lado, tenemos que para cualquier polinomio $\pi(x)$:
         $$
-        \int_a^b \pi(x)\tau(x)\rho(x)dx = \prodesc{\tau \uu}{x^n}= \prodesc{D(\sigma \uu)}{x^n} = -\int_a^b \pi'(x) \sigma(x)\rho(x) dx.
+        \int_a^b \pi(x)\tau(x)\rho(x)dx = \prodesc{\tau \uu}{\pi(x)}= \prodesc{D(\sigma \uu)}{\pi(x)} = -\int_a^b \pi'(x) \sigma(x)\rho(x) dx.
         $$
         Por tanto, si ahora aplicamos integración por partes
         \begin{equation*}
@@ -127,13 +125,12 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
                     u = \sigma(x)\rho(x) & du=[\sigma(x)\rho(x)]'dx \\
                     dv = \pi'(x) dx & v = \pi(x)
                 \end{array}\right\} \\
-                &= \int_a^b \pi(x)\tau(x)\rho(x)dx + \underbrace{\left[\sigma(x)\rho(x)x^n\right]_a^b}_{=0\text{ por (\ref{eq:cond-frontera})}} - \int_a^b \pi(x)[\sigma(x)\rho(x)]'dx \\
+                &= \int_a^b \pi(x)\tau(x)\rho(x)dx + \underbrace{\left[\sigma(x)\rho(x)\pi(x)\right]_a^b}_{=0\text{ por (\ref{eq:cond-frontera})}} - \int_a^b \pi(x)[\sigma(x)\rho(x)]'dx \\
                 &= \int_a^b \pi(x)(\tau(x)\rho(x) - [\sigma(x)\rho(x)]' )dx
             \end{split}
         \end{equation*}
-        para cualquier polinomio $\pi(x)$.
-        
-        }
+        Si la última integral es nula para todo polinomio $\pi(x)$, necesariamente $\tau(x)\rho(x) - [\sigma(x)\rho(x)]' =0$ y tendríamos la ecuación de Pearson \eqref{eq:Pearson-peso}.
+        \cb{REVIEW ¿En realidad no sería que esa ecuación se verifica para casi todo punto?}
     \end{itemize}
     
     
@@ -216,14 +213,14 @@ Por último, consideremos $\sigma(x) = 1-x^2$ y $\tau(x)=Ax+B$ con $x\in[-1,1]$.
 $$
 ((1-x^2)\rho(x))'=(Ax+B)\rho(x),
 $$
-Derivando el primer miembro y agrupando obtenemos a $(1-x^2)\rho'(x)=(Ax+B+2x)\rho(x)$. Si dividimos y multiplicamos el segundo miembro por $\sigma(x)$ y dividimos la ecuación por $\sigma(x)\rho(x)$ obtenemos la ecuación
+Si dividimos la ecuación por $\sigma(x)\rho(x)$ obtenemos
 $$
 \dfrac{(\sigma(x)\rho(x))'}{\sigma(x)\rho(x)} = \dfrac{Ax+B}{1-x^2}.
 $$
 Resolveremos esta ecuación en la que $(\sigma\rho)$ es la incógnita. Una vez resuelta podremos deducir la solución de (\ref{eq:Pearson-peso}).
 $$
 \int \dfrac{(\sigma(x)\rho(x))'}{\sigma(x)\rho(x)} dx = \int \dfrac{Ax+B}{1-x^2}dx\Leftrightarrow $$ $$\log(\sigma(x)\rho(x)) = -\dfrac{A+B}{2}\log(1-x)-\dfrac{A-B}{2}\log(1+x) + \log(C) \Leftrightarrow $$ $$
- \sigma(x)\rho(x) = C(1-x)^{-\frac{A+B}{2}}(1+x)^{-\frac{A-B}{2}}  \Leftrightarrow$$ $$\rho(x) = C(1-x)^{-\frac{A+B}{2}-1}(1+x)^{-\frac{A-B}{2}-1} \neq 0 \ \ \forall x\in[-1,1].
+ \sigma(x)\rho(x) = C(1-x)^{-\frac{A+B}{2}}(1+x)^{-\frac{A-B}{2}}  \Leftrightarrow$$ $$\rho(x) = C(1-x)^{-\frac{A+B}{2}-1}(1+x)^{-\frac{A-B}{2}-1} \neq 0 \ \ \forall x\in(-1,1).
 $$
 
 Para que los momentos del funcional sean finitos, exigimos que $A, B$ verifiquen $\frac{A+B}{2}<0, \frac{A-B}{2}<0$. Tomamos $C=1$ y definimos $\alpha = -\frac{A+B}{2}-1$ y $\beta=-\frac{A-B}{2}-1$, obteniendo
@@ -421,7 +418,7 @@ A partir de la ortogonalidad de las derivadas podemos encontrar una interesante 
     $$
     Esto es, $P_n(x)$ es solución de (\ref{eq:ec-dif-clasicos}).
 
-    Comprobemos ahora la expresión de $\lambda_n$ igualando las potencias $x^n$ en (\ref{eq:ec-dif-clasicos}). Si consideramos $\sigma(x)$ un polinomio de grado $2$ (considerando que $\mathbb P_0\subset\mathbb P_1\subset \mathbb{P}_2$), tendríamos que su coeficiente líder es $\sigma''(x)/2$. Análogamente, el coeficiente líder de $\tau(x)$ es $\tau'$. Denotamos $\sigma'' \equiv \sigma(x), \tau'\equiv\tau(x)$ ya que ambas son constantes. Por otro lado, si $c_n\neq 0$ es el coeficiente líder de $P_n(x)$, igualando los términos líderes de (\ref{eq:ec-dif-clasicos}) obtenemos
+    Comprobemos ahora la expresión de $\lambda_n$ igualando las potencias $x^n$ en (\ref{eq:ec-dif-clasicos}). Si consideramos $\sigma(x)$ un polinomio de grado $2$ (considerando que $\mathbb P_0\subset\mathbb P_1\subset \mathbb{P}_2$), tendríamos que su coeficiente líder es $\sigma''(x)/2$. Análogamente, el coeficiente líder de $\tau(x)$ es $\tau'$. Denotamos $\sigma'' \equiv \sigma''(x), \tau'\equiv\tau'(x)$ ya que ambas son constantes. Por otro lado, si $c_n\neq 0$ es el coeficiente líder de $P_n(x)$, igualando los términos líderes de (\ref{eq:ec-dif-clasicos}) obtenemos
     $$
     \dfrac {\sigma''} 2 n (n-1) c_n + \tau' n c_n + \lambda_n c_n = 0 \Leftrightarrow \lambda_n = -n\left(\tau' + (n-1)\dfrac{\sigma''}{2}\right)
     $$
@@ -444,7 +441,7 @@ De forma general, la ecuación (\ref{eq:ec-dif-clasicos}) es normalmente conocid
     \label{eq:hipergeometrica}
     \sigma(x)y'' + \tau(x) y' + \lambda y = 0,
 \end{equation}
-donde $ \deg(\sigma)\leq 2, \deg(\tau)\leq 1$.
+donde $ \deg(\sigma)\leq 2, \deg(\tau)= 1$.
 
 Esta ecuación veremos próximamente que es de hecho equivalente a la ecuación de Pearson. 
 
