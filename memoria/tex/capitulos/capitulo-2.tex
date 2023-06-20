@@ -18,7 +18,7 @@ En el capítulo \ref{chap:introduccionPO} hemos mostrado una amplia introducció
     \label{img:graficas-clasicos}
 \end{figure}
 
-En las imágenes \ref{img:graficas-clasicos} podemos ver la representación gráfica, para parámetros concretos que definiremos próximamente, de los polinomios ortogonales de Hermite, Laguerre y Jacobi. Estas tres son las familias que mayor atención recibirán de nuestra parte al ser aquellas cuya ortogonalidad se manifiesta en intervalos reales.
+En las imágenes \ref{img:graficas-clasicos} podemos ver la representación gráfica, para parámetros concretos que definiremos próximamente, de los polinomios ortogonales de Hermite, Laguerre y Jacobi de grados $n=0,1,\dots,5$. Estas tres son las familias que mayor atención recibirán de nuestra parte al ser aquellas cuya ortogonalidad se manifiesta en intervalos reales.
 
 \section{La ecuación de Pearson}
 
@@ -27,13 +27,13 @@ Para empezar, introduciremos una nueva notación para los funcionales de momento
     \label{eq:nueva-notacion-funcional}
     \begin{split}
         \uu:\mathbb P & \longrightarrow \R \\
-        x^n & \longmapsto \left\langle \uu, x^n \right\rangle = \mu_n
+        x^n & \longmapsto \left\langle \uu, x^n \right\rangle = \mu_n.
     \end{split}
 \end{equation}
 
 A lo largo de este capítulo denotaremos como $\prodesc{\uu}{\pi(x)}$ a la aplicación del funcional $\uu$ a un polinomio $\pi(x)$.
 
-Definimos a continuación dos operadores que actuán sobre los funcionales.
+Definimos a continuación dos operadores que actúan sobre los funcionales.
 
 \begin{definicion}[Producto por un polinomio]
     Para cada polinomio $\pi$, definimos un nuevo funcional de momentos a partir de $\uu$ como
@@ -59,7 +59,10 @@ Definimos a continuación dos operadores que actuán sobre los funcionales.
 
 A partir de estos dos operadores y esta nueva notación daremos una primera definición de lo que es una SPO clásica.
 
+\cb{REVIEW Nona me dice que ponga `\textbf{una} SPO', no `\textbf{la} SPO' para un funcional. Suelo asumir la unicidad salvo constante o salvo estandarización, de ahí que tenga una sección hablando de estandarizaciones. Aún así, ¿pongo mejor `una' para no asumir esa unicidad?}
+
 \begin{definicion}[SPO Clásica]
+    \label{def:SPO-clasica}
     La SPO $\{P_n  \}$ para el funcional $\uu$ se dice que es \textbf{clásica} (Hermite, Laguerre, Jacobi o Bessel) si existen polinomios $\sigma(x), \tau(x)$ con $\deg(\sigma)\leq 2$ y $\deg(\tau)= 1$ tales que el funcional $\uu$ verifica la ecuación diferencial
     \begin{equation}
         \label{eq:Pearson-u}
@@ -82,33 +85,31 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
         \item La función peso $\rho(x)$ es solución de la ecuación diferencial
         \begin{equation}
             \label{eq:Pearson-peso}
-            [\sigma(x)\rho(x)]'=\tau(x)\rho(x)
+            [\sigma(x)\rho(x)]'=\tau(x)\rho(x).
         \end{equation}
-        \item La SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}),    
+        \item La SPO $\{P_n\}$ es clásica, \textit{i.e.} $\uu$ verifica la ecuación de Pearson (\ref{eq:Pearson-u}).    
     \end{enumerate}
-
-    siempre que $\rho(x)$ verifique las condiciones de frontera 
+    Esta equivalencia se cumple siempre que se impongan sobre $\rho(x)$ las condiciones de frontera 
     \begin{equation}
         \label{eq:cond-frontera}
         \displaystyle\lim_{x\rightarrow a}\sigma(x)\rho(x)x^n = \displaystyle\lim_{x\rightarrow b}\sigma(x)\rho(x)x^n, \ \ \ n\geq 0.
     \end{equation}
-
 \end{lema}
 \begin{proof}
     \begin{itemize}
-        \item[\fbox{$\Rightarrow$}] Queremos comprobar la igualdad de funcionales $D(\sigma \uu)=\tau\uu$. Para ello, tengamos en cuenta que dos funcionales lineales son iguales si, y solo si actuán igual sobre una base de $\mathbb P$. Escogemos la base $\{x^n\}_{n\geq 0}$. Entonces tenemos que
+        \item[\fbox{$\Rightarrow$}] Queremos comprobar la igualdad de funcionales $D(\sigma \uu)=\tau\uu$. Para ello, tengamos en cuenta que dos funcionales lineales son iguales si, y solo si actuán igual sobre cualquier polinomio $\pi(x)$. Entonces tenemos que
         $$
-        \prodesc{D(\sigma \uu)}{x^n} = -\prodesc{\sigma \uu}{n x^{n-1}}= -\prodesc{\uu}{\sigma(x)n x^{n-1}},
+        \prodesc{D(\sigma \uu)}{\pi(x)} = -\prodesc{\sigma \uu}{\pi'(x)}= -\prodesc{\uu}{\sigma(x)\pi'(x)},
         $$
         aplicando (\ref{eq:funcional-peso}) e integración por partes, llegamos a
         \begin{equation*}
             \begin{split}
-                \prodesc{D(\sigma \uu)}{x^n} &= -\int_a^b \sigma(x)n x^{n-1}\rho(x)dx = \left\{\begin{array}{ll}
+                \prodesc{D(\sigma \uu)}{\pi(x)} &= -\int_a^b \sigma(x)\pi'(x)\rho(x)dx = \left\{\begin{array}{ll}
                     u = \sigma(x)\rho(x) & du=[\sigma(x)\rho(x)]'dx \\
-                    dv = n x^{n-1}dx & v = x^n
+                    dv = \pi'(x)dx & v = \pi(x)
                 \end{array}\right\} \\
-                &= -\underbrace{\left[\sigma(x)\rho(x)x^n\right]_a^b}_{=0\text{ por (\ref{eq:cond-frontera})}}+ \int_a^b x^n [\sigma(x)\rho(x)]'dx\ \ \ \ \  \text{(aplicando (\ref{eq:Pearson-peso}))} \\
-                &= \int_a^b x^n \tau(x)\rho(x)dx = \prodesc{\uu}{\tau(x)x^n} = \prodesc{\tau \uu}{x^n}
+                &= -\underbrace{\left[\sigma(x)\rho(x)\pi(x)\right]_a^b}_{=0\text{ por (\ref{eq:cond-frontera})}}+ \int_a^b \pi(x) [\sigma(x)\rho(x)]'dx\ \ \ \ \  \text{(aplicando (\ref{eq:Pearson-peso}))} \\
+                &= \int_a^b \pi(x) \tau(x)\rho(x)dx = \prodesc{\uu}{\tau(x)\pi(x)} = \prodesc{\tau \uu}{\pi(x)}
             \end{split}
         \end{equation*}
         \item[\fbox{$\Leftarrow$}] Queremos probar que la función peso $\rho(x)$ es solución de la ecuación \eqref{eq:Pearson-peso}, sabiendo que el funcional $\uu$ definido como en \eqref{eq:funcional-peso} verifica la ecuación de Pearson \eqref{eq:Pearson-u} y que $\rho(x)$ cumple \eqref{eq:cond-frontera}.
@@ -136,43 +137,58 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
     
 \end{proof}
 
+\begin{definicion}
+    Diremos que una SPO $\{P_n\}$ es \textbf{clásica respecto a una función peso} $\rho(x)$ si existen polinomios $\sigma(x),\tau(x)$ con $\deg(\sigma)\leq 2$ y $\deg(\tau)=1$ tales que, asumiendo las condiciones de frontera \eqref{eq:cond-frontera}, entonces $\rho(x)$ es solución de la ecuación diferencial \eqref{eq:Pearson-peso}.
+\end{definicion}
+
+Notemos que esta definición, gracias al lema \ref{lema:equivalencia-pearson}, es equivalente a la definición \ref{def:SPO-clasica} definiendo el funcional $\mathbf{u}$ a partir del peso $\rho$ como en \eqref{eq:funcional-peso}.
 
 
 \section{Deducción de las familias de polinomios ortogonales clásicos}
 \label{section:deduccion-clasicos}
 
-A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principales familias de polinomios ortogonales. Hemos impuesto que $\tau(x)=Ax+B$ sea un polinomio de grado exactamente $1$, por lo que tenemos cuatro grados de libertad a partir de las posibilidades de $\sigma(x)$, que supondremos mónico:
+A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principales familias de polinomios ortogonales. Hemos impuesto que $\tau(x)=Ax+B$ sea un polinomio de grado exactamente $1$, por lo que tenemos cinco posibles casos a partir de las posibilidades de $\sigma(x)$:
 
 \begin{enumerate}
-    \item \textbf{Caso I}: $\sigma(x) = 1$, $x\in\R$. En este caso obtendremos los llamados polinomios de Hermite.
-    \item \textbf{Caso II}: $\sigma(x) = x-a$, $x\in[a,\infty)$. Haciendo el cambio de variable lineal $t=-(x-a)/A$ se tiene $\sigma(x) = x$ y $\tau(x)=-x+B$, $x\in[0,\infty)$. Con estos valores calcularemos los polinomios de Laguerre.
-    \item \textbf{Caso III}: $\sigma(x) = (x-a)(b-x)$, $x\in[a,b]$. Con el cambio de variable $x = (b-a)/2t + (a+b)/2$ podemos escribir $\sigma(x)=1-x^2$ y $\tau=Ax+B$, $x\in[-1,1]$. Y así deduciremos los polinomios de Jacobi.
-    \item \textbf{Caso IV}: $\sigma(x) = (x-a)^2$. En este último caso se obtienen los polinomios de Bessel. 
+    \item \textbf{Caso I}: $\sigma$ es constante. Podemos suponer, sin pérdida de generalidad, que $\sigma(x) = 1$. En este caso obtendremos los llamados polinomios de Hermite.
+    \item \textbf{Caso II}: $\sigma$ es de grado $1$. Suponemos que $\sigma(x) = x-a$. Haciendo el cambio de variable lineal $x = -\frac t A+a$\footnote{Renombramos $t\equiv x$ tras el cambio de variable.} se tiene $\sigma(x) = x$ y $\tau(x)=-x+B$. Con estos valores calcularemos los polinomios de Laguerre.
+    \item \textbf{Caso III}: $\sigma$ es de grado $2$ y tiene dos raíces reales distintas. Asumimos $\sigma(x) = (x-a)(b-x)$. Con el cambio de variable $x = \frac{b-a}{2}t + \frac{a+b}{2}$ podemos escribir $\sigma(x)=1-x^2$ y $\tau(x)=Ax+B$. Y así deduciremos los polinomios de Jacobi.
+    \item \textbf{Caso IV}: $\sigma$ es de grado $2$ y tiene una única raíz real doble: $\sigma(x) = (x-a)^2$. En este caso se obtienen los polinomios de Bessel, que se corresponden con un funcional que no es definido positivo. Por ello, su estudio se complica considerablemente, por lo que será omitido. Más información en \cite{Bessel-polynomials}.  
+    \item \textbf{Caso V}: $\sigma$ es un polinomio de grado $2$ y tiene dos raíces complejas conjugadas \linebreak $\sigma(x) = (x-a-bi)(x-a+bi)$. Con esta asunción la solución que se obtiene no admite momentos finitos, por lo que no puede ser considerada.
 \end{enumerate}
 
-Obsérvese que, a pesar de que $\sigma(x)$ puede estar definida en todo $\R$, tan sólo utilizamos valores de $x$ en los que $\sigma(x)\geq 0$. La justificación de esta elección se encontrará más adelante cuando resolvamos la ecuación de Pearson en cada caso, aunque adelantamos que los intervalos elegidos son los que hacen que la función peso $\rho$ sea positiva.
+De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asumiendo las condiciones de frontera (\ref{eq:cond-frontera}) y comprobando que los momentos resultantes son finitos, habremos hayado las funciones peso $\rho(x)$ respecto a las cuales la SPO es clásica. Nos centraremos principalmente en los casos I, II y III, en los cuales obtenemos un funcional definido positivo.
 
-De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asegurándonos de que las soluciones calculadas verifiquen las condiciones de frontera (\ref{eq:cond-frontera}), habremos hayado las funciones peso $\rho(x)$ para las cuales el funcional (\ref{eq:funcional-peso}) genera una SPO clásica. Nos centraremos principalmente en los casos I, II y III, en los cuales obtenemos un funcional definido positivo.
+De forma genérica, podemos comprobar de manera sencilla que una fórmula explícita para $\rho(x)$ es
+\begin{equation}
+    \label{eq:rho-general}
+    \rho(x) = \dfrac{1}{\sigma(x)}\exp\left\{\int^x_{x_0} \dfrac{\tau(t)}{\sigma(t)}dt\right\},
+\end{equation}
+donde $x$ toma valores en aquellos puntos en los que $\sigma(x)\neq 0$ y $\rho(x)>0$.
 
 \subsection{Caso I: Polinomios de Hermite}
 \label{subsection:Hermite}
 
-Supongamos que $\sigma(x)=1$, $\forall x\in \R$. Tenemos entonces la ecuación diferencial
-$$
-\rho'(x) = (Ax+B) \rho(x), \ \ x\in\R.
-$$
-Esta ecuación es de variables separadas, por lo que podemos tomar
-$$
-    \int \dfrac{\rho'(x)}{\rho(x)}dx = \int (Ax+B) dx \Leftrightarrow \log(\rho(x)) = \dfrac A 2 x^2 + B x + log(C) \Leftrightarrow$$ $$ \rho(x) = C e^{\frac A 2 x^2 + B x} \neq 0 \ \ \forall x \in \R.    
-$$
-Si queremos que los momentos sean finitos, necesariamente debemos imponer $A<0$. Por su parte, $B$ es indiferente para la convergencia de los momentos una vez se fija $A$. Por este motivo, podemos reducir el caso genérico mediante un cambio de variable lineal al caso $A=-2, B=0$. Tomamos $C=1$ y llegamos a 
+Supongamos que $\sigma(x)=1$. Tenemos entonces que
+\begin{equation*}
+    \begin{split}
+        \rho(x) &= \exp\left\{ \int_0^x (At+B)dt \right\}\\
+        &= \exp\left\{ \dfrac{A}{2}x^2+Bx+\log(C) \right\} \\
+        &= C \exp\left\{ \dfrac{A}{2}x^2+Bx \right\}, \ \ \ \forall x\in\R
+    \end{split}
+\end{equation*}
+
+Para que los momentos sean finitos, necesariamente $A<0$. Por su parte, $B$ es indiferente para la convergencia de los momentos una vez se fija $A$. Por este motivo, podemos elegir $A=-2, B=0$. Tomamos $C=1$ y llegamos a 
 \begin{equation}
     \label{eq:parametros-hermite}
     \begin{array}{ccc}
         \sigma(x)=1, & \tau(x)=-2x, & \rho(x) = e^{-x^2}, \ \ \forall x \in \R.
     \end{array}
 \end{equation}
-Sobre las condiciones de frontera, tenemos que $\displaystyle\lim_{x\rightarrow\pm\infty} e^{-x^2}x^n = 0$ $\forall n\in\N_0$. Por tanto, la sucesión de polinomios ortogonales con respecto al funcional
+\begin{comment}
+Sobre las condiciones de frontera, tenemos que $\displaystyle\lim_{x\rightarrow\pm\infty} e^{-x^2}x^n = 0$ $\forall n\in\N_0$. 
+\end{comment}
+Por tanto, la sucesión de polinomios ortogonales con respecto al funcional
 \begin{equation}
     \label{eq:func-hermite}
     \prodesc{\uu}{\pi(x)} = \int_{-\infty}^\infty \pi(x)e^{-x^2}dx
@@ -181,26 +197,22 @@ es clásica, y sus elementos son los \textbf{polinomios de Hermite}, normalmente
 
 \subsection{Caso II: Polinomios de Laguerre}
 
- 
-
-Supongamos que $\sigma(x) = x$ y $\tau(x)=Ax+B$ con $x\in[0,+\infty)$. La ecuación (\ref{eq:Pearson-peso}) queda entonces como
-$$
-(x\rho(x))'=(Ax+B)\rho(x),
-$$
-que si derivamos el primer producto y agrupamos equivale a $x\rho'(x)=(Ax+B-1)\rho(x)$, que es de nuevo una ecuación de variables separadas, de manera que
-$$
-\int \dfrac{\rho'(x)}{\rho(x)}dx = \int \dfrac{Ax+B-1}{x}dx \Leftrightarrow \log(\rho(x)) = Ax+(B-1)\log(x) + \log(C)\Leftrightarrow $$ $$
- \rho(x) = Ce^{Ax}x^{B-1}\neq 0 \ \ \forall x\in[0,+\infty).
-$$
-De nuevo, para que los momentos resulten finitos exigimos $A<0$ y $B>0$, y salvo cambio de escala podemos reducir el problema al caso $A=-1$. Tomamos $C=1$ y definimos $\alpha = B-1$, de forma que
+Supongamos que $\sigma(x) = x$ y $\tau(x)=-x+B$. En este caso, para que $\sigma$ no se anule debemos restringirnos a intervalos en los que $x\neq0$. Así,
+\begin{equation*}
+    \begin{split}
+        \rho(x) &= \dfrac 1 x \exp\left\{ \int_{x_0}^x \left(-1+\dfrac B t\right)dt \right\}\\
+        &=  \dfrac 1 x \exp\left\{ -x + B\log|x| + \log(C) \right\} \\
+        &= C \dfrac{|x|^B}{x}e^{-x}.
+    \end{split}
+\end{equation*}
+Si asumimos $x>0$, entonces $\rho(x)=Cx^{B-1}e^{-x}$, resultando los momentos finitos siempre que $B > 0$. Por su parte, si $x<0$ los momentos de $\rho(x)=C(-x)^{B-1}e^{-x}$ no resultan finitos. En resumen, podemos definir $\alpha=B-1$ y tomar $C=1$, de forma que
 \begin{equation}
     \label{eq:parametros-laguerre}
     \begin{array}{cccc}
         \sigma(x)=x, & \tau(x)=-x+\alpha+1, & \rho(x) = x^{\alpha} e^{-x}\ \ \forall x \in[0,+\infty), & \alpha > -1.
     \end{array}
 \end{equation}
-
-En este caso, las condiciones de frontera también se cumplen, pues $\displaystyle\lim_{x\rightarrow 0} x\cdot x^{\alpha}e^{-x}\cdot x^n = \displaystyle\lim_{x\rightarrow \infty} x\cdot x^{\alpha}\cdot e^{-x} x^n = 0$. Así, la SPO con respecto al funcional
+Así, la SPO con respecto al funcional
 \begin{equation}
     \label{eq:func-laguerre}
     \prodesc{\uu}{\pi(x)} = \int_{0}^\infty \pi(x)x^{\alpha} e^{-x}dx, \ \ \alpha > -1
@@ -209,21 +221,15 @@ es clásica, y sus elementos son los \textbf{polinomios de Laguerre}, que son de
 
 \subsection{Caso III: Polinomios de Jacobi}
 
-Por último, consideremos $\sigma(x) = 1-x^2$ y $\tau(x)=Ax+B$ con $x\in[-1,1]$. Aplicado a la ecuación (\ref{eq:Pearson-peso}) tenemos
-$$
-((1-x^2)\rho(x))'=(Ax+B)\rho(x),
-$$
-Si dividimos la ecuación por $\sigma(x)\rho(x)$ obtenemos
-$$
-\dfrac{(\sigma(x)\rho(x))'}{\sigma(x)\rho(x)} = \dfrac{Ax+B}{1-x^2}.
-$$
-Resolveremos esta ecuación en la que $(\sigma\rho)$ es la incógnita. Una vez resuelta podremos deducir la solución de (\ref{eq:Pearson-peso}).
-$$
-\int \dfrac{(\sigma(x)\rho(x))'}{\sigma(x)\rho(x)} dx = \int \dfrac{Ax+B}{1-x^2}dx\Leftrightarrow $$ $$\log(\sigma(x)\rho(x)) = -\dfrac{A+B}{2}\log(1-x)-\dfrac{A-B}{2}\log(1+x) + \log(C) \Leftrightarrow $$ $$
- \sigma(x)\rho(x) = C(1-x)^{-\frac{A+B}{2}}(1+x)^{-\frac{A-B}{2}}  \Leftrightarrow$$ $$\rho(x) = C(1-x)^{-\frac{A+B}{2}-1}(1+x)^{-\frac{A-B}{2}-1} \neq 0 \ \ \forall x\in(-1,1).
-$$
-
-Para que los momentos del funcional sean finitos, exigimos que $A, B$ verifiquen $\frac{A+B}{2}<0, \frac{A-B}{2}<0$. Tomamos $C=1$ y definimos $\alpha = -\frac{A+B}{2}-1$ y $\beta=-\frac{A-B}{2}-1$, obteniendo
+Por último, consideremos $\sigma(x) = 1-x^2$ y $\tau(x)=Ax+B$. Ahora $\sigma$ tiene raíces simples en $x=-1,1$. Por este motivo, la solución $\rho$ de la ecuación de Pearson debe estar necesariamente definida en $(-\infty,-1)$, $(-1,1)$ ó $(1,+\infty)$.
+\begin{equation*}
+    \begin{split}
+        \rho(x)&=\dfrac{1}{1-x^2}\exp\left\{\int_{x_0}^x\dfrac{At+B}{1-t^2}dt\right\}\\
+        &= \dfrac{1}{1-x^2}\exp\left\{-\dfrac{A+B}{2}\log|1-x|-\dfrac{A-B}{2}\log|1+x|+\log(C)\right\}\\
+        &= \dfrac{C}{1-x^2}|1-x|^{-\frac{A+B}{2}}|1+x|^{-\frac{A-B}{2}}
+    \end{split}
+\end{equation*}
+Si tomamos $x<-1$ ó $x>1$ los momentos de la función $\rho$ resultante no son finitos al no estar acotada en $\pm\infty$. La única posibilidad con la cual los momentos resultan finitos es tomando $x\in(-1,1)$ y valores $A,B$ tales que $\frac{A+B}{2}<0, \frac{A-B}{2}<0$. Por tanto, si definimos $\alpha = -\frac{A+B}{2}-1$ y $\beta=-\frac{A-B}{2}-1$, obtenemos
 \begin{equation}
     \label{eq:parametros-jacobi}
     \begin{array}{c}
@@ -231,8 +237,6 @@ Para que los momentos del funcional sean finitos, exigimos que $A, B$ verifiquen
         \rho(x) =(1-x)^{\alpha}(1+x)^{\beta}\ \ \forall x \in[-1,1], \ \ \alpha,\beta > -1.
     \end{array}
 \end{equation}
-
-Las condiciones de frontera se verifican nuevamente, pues $$\displaystyle\lim_{x\rightarrow \pm 1} (1-x^2)\cdot (1-x)^{\alpha}(1+x)^{\beta}\cdot x^n = 0.$$
 
 Así, la SPO con respecto al funcional
 \begin{equation}
@@ -260,6 +264,8 @@ Resumiendo, tenemos tres familias de polinomios ortogonales clásicos además de
 \label{section:caracterizaciones}
 
 Hasta el momento hemos podido conocer las distintas familias de polinomios ortogonales clásicos y su peculiaridad respecto a las distintas formas de presentar la ecuación de Pearson. Sin embargo, estos polinomios cumplen varias propiedades destacables que además los caracterizan como clásicos. Es decir, son los únicos polinomios ortogonales que las verifican. En esta sección estudiaremos algunas de estas propiedades.
+
+\begin{comment}
 
 Previamente, presentaremos un resultado que nos ahorrará el tener que probar las condiciones de frontera (\ref{eq:cond-frontera}) cuando queramos comprobar que una SPO es clásica.
 
@@ -304,11 +310,14 @@ Este resultado afirma que el hecho de que un funcional $\uu$ definido a partir d
 
 Con esta nueva herramienta presentamos la primera de las propiedades.
 
+\end{comment}
+
 \subsection{Ortogonalidad de las derivadas}
 
 La primera de estas caracterizaciones atiende a la sucesión $\{P'_n\}$ formada por las derivadas de los elementos de una SPO $\{P_n\}$, que en el caso de los polinomios ortogonales clásicos resulta no sólo ser también una SPO, sino que además también es clásica.
 
 \begin{teorema}
+    \label{th:ortogonalidad-derivadas}
     Sea $\{P_n\}$ una SPO clásica respecto a la función peso $\rho(x)$. Entonces la sucesión $\{P'_n\}$ es una SPO respecto a $\sigma(x)\rho(x)$.
 \end{teorema}
 \begin{proof}
@@ -371,6 +380,7 @@ A partir de este último resultado ya podemos probar la consecuencia que ya adel
 Por inducción en las sucesivas derivadas $\{P^{(k)}_n\}$ podemos deducir el siguiente resultado:
 
 \begin{corolario}
+    \label{cor:ort-derivadas}
     Si la sucesión $\{P_n\}$ una SPO clásica entonces la sucesión $\{P^{(k)}_n\}$ es una SPO clásica respecto a la función peso $\rho_k(x)=\sigma^k(x)\rho(x)$, que es solución de la ecuación
     \begin{equation}
         \label{eq:pearson-derivada-k}
@@ -427,6 +437,7 @@ A partir de la ortogonalidad de las derivadas podemos encontrar una interesante 
 Naturalmente, al ser la sucesión de derivadas sucesivas $\{P^{(k)}_n\}$ una SPO clásica, también verificarán su propia ecuación diferencial.
 
 \begin{corolario}
+    \label{cor:derivadas-k-hipergeometrica}
     Si la sucesión $\{P_n\}$ una SPO clásica, entonces cada polinomio $P^{(k)}_n(x)$, $k\geq 0, n\in\N_0$ es solución de la ecuación diferencial
     \begin{equation}
         \label{eq:ec-dif-der-suc}
@@ -465,6 +476,7 @@ Como vemos, las soluciones de la ecuación de Pearson y las soluciones de la ecu
 Originalmente, Olinde Rodrigues (1816), James Ivory (1824) y Carl Gustav Jacobi (1827) introdujeron una fórmula inicialmente definida para los polinomios de Legendre, posteriormente extendida a todas las soluciones polinómicas de la ecuación hipergeométrica. El nombre de fórmula de Rodrigues fue propuesto por Eduard Heine en 1878, después de que Hermite recuperara en 1860 el trabajo original de Rodrigues y señalara que fue él el primero en descubrir esta fórmula. Ya anunciada la peculiaridad de esta fórmula, presentamos su aspecto y demostración en el siguiente resultado.
 
 \begin{teorema}[\textbf{Fórmula de Rodrigues}]
+    \label{th:formula-rodrigues}
     Las soluciones polinómicas de la ecuación hipergeométrica (\ref{eq:hipergeometrica}) se pueden expresar como
     \begin{equation}
         \label{eq:formula-rodrigues}
@@ -578,6 +590,7 @@ Ya hemos comprobado que las soluciones polinómicas de la ecuación hipergeomét
 
 \cb{REVIEW Algo que no sea correcto?}
 \begin{proposicion}
+    \label{prop:grado-rodrigues}
     Las soluciones polinómicas de la ecuación diferencial hipergeométrica \eqref{eq:hipergeometrica} $y_n$, expresadas mediante la fórmula de Rodrigues \eqref{eq:formula-rodrigues}, son polinomios de grado exacto $n$.
 \end{proposicion}
 \begin{proof}
@@ -629,6 +642,7 @@ Recordemos ahora que los polinomios ortogonales clásicos son, en particular, so
 Y como ya anunciamos anteriormente, la fórmula de Rodrigues caracteriza a los polinomios ortogonales clásicos.
 
 \begin{teorema}
+    \label{th:rodrigues-pearson}
     Si una SPO $\{P_n\}$ respecto a una función peso $\rho(x)$ se puede expresar mediante la fórmula de Rodrigues (\ref{eq:formula-rodrigues-pol}), entonces $\{P_n\}$ es una SPO clásica.
 \end{teorema}
 \begin{proof}
@@ -651,6 +665,28 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
         \item $\{P_n\}$ puede ser expresado mediante la fórmula de Rodrigues (\ref{eq:formula-rodrigues-pol}).
     \end{enumerate} 
 \end{teorema}
+\begin{proof}
+    
+    Revisamos las implicaciones ya probadas y aclararemos las que aún no han sido demostradas.
+    \begin{itemize}
+        \item[\fbox{$1.\Rightarrow 2.$}] Es el teorema \ref{th:ortogonalidad-derivadas}.
+        \item[\fbox{$2.\Rightarrow 1.$}] Supongamos que la sucesión $\{P'_n\}$ es clásica respecto a la función peso $\rho_1(x)=\sigma(x)\rho(x)$, solución de $[\sigma(x)\rho_1(x)]'=\tau_1(x)\rho(x)$ con $\tau_1(x)=\tau(x)+\sigma'(x)$. Si derivamos el primer miembro y sustituimos la expresión de $\rho_1$ y cancelamos $\sigma(x)$, obtenemos
+        $$
+        2\sigma'(x)\rho(x)+\sigma(x)\rho'(x)=\tau_1(x)\rho(x) \Leftrightarrow
+        $$ $$
+        \sigma'(x)\rho(x)+\sigma(x)\rho'(x) = \tau_1(x)\rho(x) - \sigma'(x)\rho(x) \Leftrightarrow
+        $$ $$
+        [\sigma(x)\rho(x)]'=\tau(x)\rho(x),
+        $$
+        que es justamente la ecuación de Pearson \eqref{eq:Pearson-peso}.
+        \item[\fbox{$2.\Leftrightarrow 3.$}] Es trivial sin más que aplicar sucesivamente la equivalencia $1.\Leftrightarrow 2.$ 
+        \item[\fbox{$1.\Rightarrow 4.$}] Es el teorema \ref{th:ec-hipergeometrica}.
+        \item[\fbox{$4.\Rightarrow 5.$}] Es el teorema \ref{th:formula-rodrigues} junto con la proposición \ref{prop:grado-rodrigues}.
+        \item[\fbox{$5.\Rightarrow 1.$}] Es el teorema \ref{th:rodrigues-pearson}.
+         
+    \end{itemize}
+\end{proof}
+\cb{REVIEW Corregido, pero un detalle. Resulta que, aunque tenemos que $1\Rightarrow 4$ porque el teorema \ref{th:ec-hipergeometrica} dice que si $\{P_n\}$ es clásica entonces es solución de la ecuación hipergeométrica, si nos fijamos en la demostración lo primero que hago es usar que las derivadas son ortogonales, por tanto, ¿podría decir que (4) es consecuencia de (3)? De poder hacerlo podría encadenar $1\Rightarrow 2\Rightarrow 3 \Rightarrow 4 \Rightarrow 5 \Rightarrow 1$.}
 
 \begin{ejemplo}[Fórmula de Rodrigues de los polinomios de Jacobi]
     \label{ej:rodrigues-jacobi}
