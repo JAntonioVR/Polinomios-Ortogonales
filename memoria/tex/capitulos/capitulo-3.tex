@@ -8,20 +8,20 @@ Hasta este momento, en los dos primeros capítulos, nos hemos centrado totalment
 
 En concreto, analizaremos desde un punto de vista general los llamados \textit{procesos de Markov, procesos markovianos} o simplemente \textit{cadenas de Markov}. Estos modelos, basados en estados, tratan de explicar las probabilidades de los posibles cambios de estado de un sistema a partir de  un principio denominado \textit{propiedad de Markov}. Esta denominación tanto del modelo como de la propiedad se debe a \textsc{Andrey Markov}, matemático que fue el primero en estudiar, en la década de 1900, los procesos estocásticos con dicha propiedad, que posteriormente se popularizarían.
 
-Nos centraremos principalmente en procesos discretos, es decir, consideramos que el tiempo se divide en instantes $n=0,1,2,\dots$, sin olvidar que existe una formulación análoga en la que el tiempo es continuo $t\in[0,\infty)$. Denominamos \textit{estado} a cualquiera de las situaciones en las que se puede encontrar el sistema en un instante determinado. Por ejemplo, pensemos en un barrio en el que hay $N$ fruterías y dividimos el tiempo en semanas. Asumimos que un individuo siempre va a comprar a una de estas tiendas aunque hay posibilidad de que cambie de una a otra distinta cada semana. Etiquetamos cada una de las fruterías con un número: frutería $1$, frutería $2$,\dots, frutería $N$.
+Nos centraremos principalmente en procesos discretos, es decir, consideramos que el tiempo se divide en instantes $n=0,1,2,\dots$, sin olvidar que existe una formulación análoga en la que el tiempo es continuo $t\in[0,\infty)$. Denominamos \textit{estado} a cualquiera de las situaciones en las que se puede encontrar el sistema en un instante determinado. Por ejemplo, pensemos en un barrio en el que hay $N$ fruterías y dividimos el tiempo en semanas. Asumimos que un individuo siempre va a comprar a una de estas tiendas aunque hay posibilidad de que cambie de una a otra distinta cada semana. Etiquetamos cada una de las fruterías con un número: frutería $0$, frutería $1$,\dots, frutería $N$.
 
 \section{Cadenas de Markov discretas. Matriz de transición}
 
-De forma general, consideramos un espacio de estados finito que con frecuencia denotaremos como $S=\{1,\dots, N\}$ y dividimos el tiempo en instantes $n=0,1,2,\dots$. Llamemos $X_n\in S$ al estado del sistema en el instante $n$. La propiedad específica que consideró Markov consiste en asumir que, suponiendo que el sistema se encuentra en un estado concreto en un instante concreto, la probabilidad de que ocurra una transición en el siguiente instante depende única y exclusivamente del estado actual.
+En general, consideraremos un espacio de estados $S\subseteq \N_0$ que con frecuencia denotaremos como $S=\{0,1,\dots,N\}$ si consideramos un espacio finito de estados y $S=\N_0=\{0,1,2,\dots\}$ en caso de considerarlo infinito. A su vez, dividimos el tiempo en instantes $n=0,1,2,\dots$. Fijado $n$, llamamos $X_n\in S$ a la variable aleatoria ``estado del sistema en el instante $n$''. La propiedad específica que consideró Markov consiste en asumir que, suponiendo que el sistema se encuentra en un estado concreto en un instante concreto, la probabilidad de que ocurra una transición en el siguiente instante depende única y exclusivamente del estado actual.
 
 \begin{definicion}[Cadena de Markov]
-    Un proceso estocástico $\{X_n,n\geq 0\}$ en un espacio de estados $S$ verifica la \textbf{propiedad markoviana} o \textbf{propiedad de Markov} si, para todo $n\in\N_0$ y $j,i,i_{n-1},\dots, i_0 \in S$:
+    El conjunto de variables aleatorias $\{X_n,n\geq 0\}$ sobre el espacio de estados $S$ verifica la \textbf{propiedad markoviana} o \textbf{propiedad de Markov} si, para todo $n\in\N_0$ y $j,i,i_{n-1},\dots, i_0 \in S$:
     \begin{equation}
         \label{eq:prop-markow}
         P[X_{n+1}=j | X_n=i, X_{n-1}=i_{n-1}, \dots, X_0=i_0 ] = P[X_{n+1}=j | X_n=i].
     \end{equation}
 
-    En caso de que el proceso cumpla la propiedad (\ref{eq:prop-markow}) se denominará \textbf{cadena de Markov discreta}.
+    En caso de que $\{X_n,n\geq 0\}$ cumpla la propiedad (\ref{eq:prop-markow}) se denominará \textbf{cadena de Markov discreta}.
 
     Una cadena de Markov $\{X_n, n\geq 0\}$ se llamará \textbf{homogénea} si, para todo $n\in\N_0$,
     \begin{equation}
@@ -34,20 +34,29 @@ Es decir, la probabilidad de que en un instante $n+1$ el sistema se encuentre en
 
 La probabilidad $P[X_{n+1}=j|X_n=i]$ se denomina \textbf{probabilidad de transición en un paso} de la cadena en el instante $n$. Si además la cadena es homogénea, este valor es el mismo para todo instante $n$, de ahí el término `homogénea'. En adelante, cuando utilicemos el término `cadena de Markov' nos estaremos refiriendo a una cadena de Markov homogénea. Una vez anulada la dependencia de $n$, introducimos una nueva notación:
 $$
-p_{ij} := P[X_{n+1}=j|X_n=i], \ \ \forall i,j \in \{1,\dots,N\}.
+P_{ij} := P[X_{n+1}=j|X_n=i], \ \ \forall i,j \in S.
 $$
-Con esta notación, y teniendo en cuenta que en un espacio de $N$ estados existen $N^2$ posibles transiciones, agrupamos todas estas probabilidades en una matriz.
+Con esta notación, y teniendo en cuenta que en un espacio finito de $N+1$ estados existen $(N+1)^2$ posibles transiciones, agrupamos todas estas probabilidades en una matriz, que en el caso de que $S$ sea infinito resultaría ser una matriz infinita.
 
 \begin{definicion}[Matriz de transición]
     Llamamos \textbf{matriz de transición} de una cadena de Markov $\{X_n, n\geq 0\}$ a la matriz
     \begin{equation}
         \label{eq:matriz-trans}
-        P=\begin{pmatrix}
-          p_{11} & p_{12} & \cdots & p_{1N} \\
-          p_{21} & p_{22} & \cdots & p_{2N} \\
-          \vdots & \vdots & \ddots & \vdots \\
-          p_{N1} & p_{N2} & \cdots & p_{NN}  
-        \end{pmatrix}.
+        \begin{array}{ccc}
+            P=\begin{pmatrix}
+                P_{00} & P_{01} & \cdots & P_{0N} \\
+                P_{10} & P_{11} & \cdots & P_{1N} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                P_{N0} & P_{N1} & \cdots & P_{NN}  
+            \end{pmatrix} & \text{ ó } &
+            P=\begin{pmatrix}
+                P_{00} & P_{01} & P_{02} & \cdots  \\
+                P_{10} & P_{11} & P_{12} & \cdots  \\
+                P_{20} & P_{21} & P_{22} & \cdots  \\
+                \vdots & \vdots & \vdots & \ddots  \\ 
+            \end{pmatrix} \\
+            \text{(si }S\text{ es finito)} & & \text{(si }S\text{ es infinito)}\\
+        \end{array}
     \end{equation}
 \end{definicion}
 
@@ -59,21 +68,23 @@ Presentamos a continuación dos propiedades directas de las matrices de transici
 
 \begin{proposicion}
     \label{prop:propiedades-matrices-markov}
-Sea $\{X_n, n\geq 0\}$ una cadena de Markov sobre el espacio de estados $S=\{1,\dots,N\}$ y cuya matriz de transición es $P=(p_{ij})_{i,j=1,\dots,N}$. Entonces
+Sea $\{X_n, n\geq 0\}$ una cadena de Markov sobre el espacio de estados $S\subseteq \N_0$ y cuya matriz de transición es $P$ dada como en \eqref{eq:matriz-trans}. Entonces
 \begin{enumerate}
-    \item $0\leq p_{ij} \leq 1 \ \ \ \forall i,j\in S$.
-    \item $\sum_{j=1}^N p_{ij} = 1 \ \ \ \forall i\in S$ (todas las filas de $P$ suman 1).
+    \item $0\leq P_{ij} \leq 1 \ \ \ \forall i,j\in S$.
+    \item Si $S$ es finito con $N+1$ elementos, $\sum_{j=0}^N P_{ij} = 1 \ \ \ \forall i\in S$ (todas las filas de $P$ suman 1).
+    \item Si $S$ es infinito, $\sum_{j=0}^\infty P_{ij} = 1 \ \ \ \forall i\in S$.
 \end{enumerate}
 \end{proposicion}
 \begin{proof}
-    La propiedad (1) es evidente teniendo en cuenta que $p_{ij}$ es una probabilidad. Sobre la propiedad (2), tenemos que
+    La propiedad (1) es evidente teniendo en cuenta que $P_{ij}$ es una probabilidad. Sobre la propiedad (2), tenemos que
     \begin{equation*}
         \begin{split}
-            \sum_{j=1}^N p_{ij} &= \sum_{j=1}^N P[X_{n+1}=j|X_n=i] \\
+            \sum_{j=1}^N P_{ij} &= \sum_{j=1}^N P[X_{n+1}=j|X_n=i] \\
             &= P[X_{n+1}\in S|X_n=i] \ \ \text{(por el teorema de la probabilidad total)} \\
             &= 1
         \end{split}
     \end{equation*}
+    Y la demostración de (3) es análoga a la de (2).
 \end{proof}
 
 A las matrices que cumplen estas dos propiedades se les denomina \textbf{matrices estocásticas} y pueden ser consideradas matrices de transición de alguna cadena de Markov.
