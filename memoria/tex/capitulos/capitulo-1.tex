@@ -62,34 +62,34 @@ De acuerdo a este ejemplo, decimos que los polinomios $T_n$ son \textit{ortogona
 
 En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente conocido de ortogonalidad, restringido a espacios como $\R^d$, a otros tipos de espacios. Además, introdujimos la primera familia de polinomios ortogonales: los polinomios de Tchebichef de tipo I. En esta sección daremos definiciones más formales y genéricas sobre la ortogonalidad, basándonos en los textos de \cite[Ch. II]{renato}, \cite[Ch. I]{chihara} y \cite[Ch. II, III]{szego}.
 
-Sea $\mu$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\mu(x)<\infty$. Se define el espacio de funciones $L_\mu^p[a,b]$ como el conjunto de funciones tales que
+Sea $\psi$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\psi(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\psi(x)<\infty$. Se define el espacio de funciones $L_\psi^p[a,b]$ como el conjunto de funciones tales que
 
 $$
-\int_a^b |f(x)|^p d\mu(x) < +\infty
+\int_a^b |f(x)|^p d\psi(x) < +\infty
 $$
 
-En $L_\mu^2[a,b]$, se define un producto escalar:
+En $L_\psi^2[a,b]$, se define un producto escalar:
 
 \begin{equation}
     \label{eq:prodescLpalpha}
     \begin{split}
-        \left\langle\cdot,\cdot\right\rangle:L_\mu^2[a,b]\times L_\mu^2[a,b] &\longrightarrow \R \\
-        (f,g)&\longmapsto \left\langle f,g \right\rangle=\int_a^b f(x)g(x)d\mu(x).
+        \left\langle\cdot,\cdot\right\rangle:L_\psi^2[a,b]\times L_\psi^2[a,b] &\longrightarrow \R \\
+        (f,g)&\longmapsto \left\langle f,g \right\rangle=\int_a^b f(x)g(x)d\psi(x).
     \end{split}
 \end{equation}
 
-A partir del espacio $L_\mu^2[a,b]$ podemos dar una definición de ortogonalidad.
+A partir del espacio $L_\psi^2[a,b]$ podemos dar una definición de ortogonalidad.
 
 \begin{definicion}[Ortogonalidad]
 
-    Fijada una función $\mu$ no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\mu(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\mu(x)<\infty$ y dadas $f,g\in L_\mu^2[a,b]$, se dice que las funciones $\mathbf f$ \textbf y $\mathbf g$ \textbf{son ortogonales} o que $\mathbf f$ \textbf{es ortogonal a} $\mathbf{g}$ respecto a la distribución $d\mu$ si
+    Fijada una función $\psi$ no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\psi(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\psi(x)<\infty$ y dadas $f,g\in L_\psi^2[a,b]$, se dice que las funciones $\mathbf f$ \textbf y $\mathbf g$ \textbf{son ortogonales} o que $\mathbf f$ \textbf{es ortogonal a} $\mathbf{g}$ respecto a la distribución $d\psi$ si
     \begin{equation}
         \label{eq:defortogonalidad}
         \left\langle f,g\right\rangle = 0.
     \end{equation}
 \end{definicion}
 
-No obstante, en la mayoría de los casos y por simplicidad en lugar de utilizar una función $\mu$ y su medida inducida, si $\mu$ es absolutamente continua podemos reescribir (\ref{eq:prodescLpalpha}) como una integral de Lebesgue
+No obstante, en la mayoría de los casos y por simplicidad en lugar de utilizar una función $\psi$ y su medida inducida, si $\psi$ es absolutamente continua podemos reescribir (\ref{eq:prodescLpalpha}) como una integral de Lebesgue
 
 \begin{equation}
     \label{eq:deffuncionpeso}
@@ -108,13 +108,13 @@ siendo $\rho$ una función medible no negativa tal que $0<\int_a^b\rho(x)dx<\inf
 
 \section{Funcional de momentos}
 
-Tenemos ya por tanto una definición rigurosa de lo que es la ortogonalidad de funciones de $L^2_\mu[a,b]$. Podemos reescribir esta propiedad mediante el uso de funcionales lineales aprovechando la linealidad de la integral. Se define el funcional $\mathcal{L}$ como 
+Tenemos ya por tanto una definición rigurosa de lo que es la ortogonalidad de funciones de $L^2_\psi[a,b]$. Podemos reescribir esta propiedad mediante el uso de funcionales lineales aprovechando la linealidad de la integral. Se define el funcional $\mathcal{L}$ como 
 
 \begin{equation}
     \label{eq:funcionalLineal}
     \begin{split}
-        \mathcal{L}:L_\mu^2[a,b]&\longrightarrow \C \\
-        f&\longmapsto \mathcal{L}[f]=\int_a^b f(x)d\mu(x).
+        \mathcal{L}:L_\psi^2[a,b]&\longrightarrow \C \\
+        f&\longmapsto \mathcal{L}[f]=\int_a^b f(x)d\psi(x).
     \end{split}
 \end{equation}
 
@@ -126,7 +126,7 @@ Por tanto, vemos que la propiedad de ortogonalidad (\ref{eq:defortogonalidad}) e
         \label{eq:linealidadfuncional}
         \mathcal{L}[a f + b g]=a\mathcal{L}[f] + b\mathcal{L}[g],
     \end{equation}
-    para cualesquiera $a,b\in\C$ y $f,g\in L_\mu^2[a,b]$.
+    para cualesquiera $a,b\in\C$ y $f,g\in L_\psi^2[a,b]$.
 \end{observacion}
 
 \begin{ejemplo}
@@ -186,7 +186,7 @@ $$
 $$
 donde $\delta_{mn}$ denota la función delta de Kronecker. 
 
-En el caso de que $d\mu(x)=\rho(x)dx$, es decir, en el caso de trabajar con funciones peso, la condición (3) se satisface de manera automática.
+En el caso de que $d\psi(x)=\rho(x)dx$, es decir, en el caso de trabajar con funciones peso, la condición (3) se satisface de manera automática.
 
 \begin{ejemplo}
     \label{ej:charlier}
