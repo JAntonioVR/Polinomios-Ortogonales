@@ -71,8 +71,8 @@ Presentamos a continuación dos propiedades directas de las matrices de transici
 Sea $\{X_n, n\geq 0\}$ una cadena de Markov sobre el espacio de estados $S\subseteq \N_0$ y cuya matriz de transición es $P$ dada como en \eqref{eq:matriz-trans}. Entonces
 \begin{enumerate}
     \item $0\leq P_{ij} \leq 1 \ \ \ \forall i,j\in S$.
-    \item Si $S$ es finito con $N+1$ elementos, $\sum_{j=0}^N P_{ij} = 1 \ \ \ \forall i\in S$ (todas las filas de $P$ suman 1).
-    \item Si $S$ es infinito, $\sum_{j=0}^\infty P_{ij} = 1 \ \ \ \forall i\in S$.
+    \item Si $S=\{0,1,\dots,N\}$, $\sum_{j=0}^N P_{ij} = 1 \ \ \ \forall i\in S$ (todas las filas de $P$ suman 1).
+    \item Si $S=\N_0$, $\sum_{j=0}^\infty P_{ij} = 1 \ \ \ \forall i\in S$.
 \end{enumerate}
 \end{proposicion}
 \begin{proof}
@@ -91,14 +91,14 @@ A las matrices que cumplen estas dos propiedades se les denomina \textbf{matrice
 
 \begin{ejemplo}[Tiempo atmosférico]
     \label{ej:tiempo}
-    Extraído de \cite[Ch. 2, Example 2.3]{kulkarni-2012}. Supongamos que podemos clasificar el tiempo de una ciudad como soleado (1), nublado (2) o lluvioso (3) y que el tiempo del día siguiente únicamente depende del tiempo del día anterior con las siguientes probabilidades:
+    Extraído de \cite[Ch. 2, Example 2.3]{kulkarni-2012}. Supongamos que podemos clasificar el tiempo de una ciudad como soleado (0), nublado (1) o lluvioso (2) y que el tiempo del día siguiente únicamente depende del tiempo del día anterior con las siguientes probabilidades:
     \begin{itemize}
         \item Si hoy hace sol, mañana estará nublado con probabilidad $0.3$ y lloverá con probabilidad $0.2$.
         \item Si hoy está nublado, mañana hará sol con probabilidad $0.5$ y lloverá con probabilidad $0.3$.
         \item Si hoy está lloviendo, mañana será un día soleado con probabilidad $0.4$ y nublado con probabilidad $0.5$.
     \end{itemize}
 
-    Modelaremos este sistema mediante una cadena de Markov. Para ello, consideraremos la variable $X_n \equiv$ ``Tiempo atmosférico en el día $n$''. Y consideramos el espacio de estados $S = \{ 1\equiv\text{soleado}, 2\equiv\text{nublado}, 3\equiv\text{lluvioso}\}$. Atendiendo a las indicaciones anteriores y al item (2) de la proposición \ref{prop:propiedades-matrices-markov}, la matriz de transición sería por tanto
+    Modelaremos este sistema mediante una cadena de Markov. Para ello, consideraremos la variable $X_n \equiv$ ``Tiempo atmosférico en el día $n$''. Y consideramos el espacio de estados $S = \{ 0\equiv\text{soleado}, 1\equiv\text{nublado}, 1\equiv\text{lluvioso}\}$. Atendiendo a las indicaciones anteriores y al item (2) de la proposición \ref{prop:propiedades-matrices-markov}, la matriz de transición sería por tanto
     $$ P = \begin{pmatrix}
         0.5 & 0.3 & 0.2 \\
         0.5 & 0.2 & 0.3 \\
@@ -110,42 +110,42 @@ A las matrices que cumplen estas dos propiedades se les denomina \textbf{matrice
 
 \section{Distribuciones transitorias}
 
-Hasta el momento nos hemos centrado en la adaptación de distintas situaciones de acuerdo a modelos de estados regidos por cadenas de Markov, que en el caso homogéneo concentra toda su información en una matriz estocástica que denominamos matriz de transición. Sin embargo, ya adelantamos en la introducción que la principal función de este método consiste en tratar de predecir el comportamiento de la variable $X_n$ en algún instante futuro. Pongamos el caso del ejemplo \ref{ej:tiempo} sobre el tiempo atmosférico. Podría interesar predecir el tiempo que va a hacer dentro de 2 o 3 días para posponer o no un evento por lluvia. En esta sección estudiaremos cómo podemos utilizar cadenas de Markov con este objetivo.
+Hasta el momento nos hemos centrado en la adaptación de distintas situaciones de acuerdo a modelos de estados regidos por cadenas de Markov, que en el caso homogéneo concentra toda su información en una matriz estocástica que denominamos matriz de transición. Sin embargo, ya adelantamos en la introducción que la principal función de este método consiste en tratar de predecir el comportamiento de la variable $X_n$ en algún instante futuro. Pongamos el caso del ejemplo \ref{ej:tiempo} sobre el tiempo atmosférico. Podría interesar predecir el tiempo que va a hacer dentro de 2 o 3 días para posponer o no un evento por lluvia. En esta sección estudiaremos cómo podemos utilizar cadenas de Markov con este objetivo. En adelante supondremos que el espacio de estados $S$ es finito con $N+1$ elementos, es decir, $S=\{0,1,\dots,N\}$.
 
-Sea $\{X_n, n\geq 0\}$ una cadena de Markov discreta y homogénea sobre un espacio de estados $S=\{1,\dots,N\}$, una matriz de transición $P$ y supongamos conocida la distribución inicial, que denotaremos en forma de vector fila como $a^{(0)} = (a_1, \dots, a_N)$, donde $a_i = P[X_0 = i]$, $\forall i \in S$. Se denomina \textbf{distribución transitoria} a la distribución que sigue la variable $X_n$ para cierto $n\geq 0$ fijo cuando es conocida la distribución de $X_0$.
+Sea $\{X_n, n\geq 0\}$ una cadena de Markov discreta y homogénea sobre un espacio de estados $S=\{0,1,\dots,N\}$, una matriz de transición $P$ y supongamos conocida la distribución inicial, que denotaremos en forma de vector fila como $a^{(0)} = (a_0, \dots, a_N)$, donde $a_i = P[X_0 = i]$, $\forall i \in S$. Se denomina \textbf{distribución transitoria} a la distribución que sigue la variable $X_n$ para cierto $n\geq 0$ fijo cuando es conocida la distribución de $X_0$.
 
 Abordemos este problema con lo que conocemos hasta el momento. Tenemos que
 \begin{equation}
     \label{eq:distr-trans}
     \begin{split}
-        P[X_n = j] &= \sum_{i=1}^N P[X_n=j|X_0 = i]P[X_0=i] \\
-        &= \sum_{i=1}^Na_i \, P[X_n=j|X_0 = i].
+        P[X_n = j] &= \sum_{i=0}^N P[X_n=j|X_0 = i]P[X_0=i] \\
+        &= \sum_{i=0}^Na_i \, P[X_n=j|X_0 = i].
     \end{split}
 \end{equation}
 
 Por lo que nuestro problema se reduce a encontrar la probabilidad de que el proceso esté en el estado $j$ tras $n$ instantes suponiendo que inicialmente se encontraba en el estado $i$, $P[X_n=j|X_0 = i]$. Esta probabilidad extiende a la que en su momento llamamos probabilidad de transición en un paso y, naturalmente, se denomina \textbf{probabilidad de transición en }$\mathbf{n}$ \textbf{pasos}. Utilizamos la notación  
 \begin{align*}
-    a_i^{(n)} &:= P[X_n=i], & p_{ij}^{(n)} &:= P[X_{n}=j|X_0=i],
+    a_i^{(n)} &:= P[X_n=i], & P_{ij}^{(n)} &:= P[X_{n}=j|X_0=i],
 \end{align*}
-$\forall i,j \in \{1,\dots,N\}$. De esta forma, estamos denotando la función masa de probabilidad (a menudo abreviada como ``fmp'') de la variable aleatoria $X_n$ mediante el vector $a^{(n)}=(a_1^{(n)},\dots,a_N^{(n)})$. Recordemos que la fmp de una variable aleatoria discreta determina unívocamente su distribución, por lo cual en adelante utilizaremos indistintamente el término `distribución' y `función masa de probabilidad', sin olvidar que en realidad son conceptos distintos. 
+$\forall i,j \in \{0,1,\dots,N\}$. De esta forma, estamos denotando la función masa de probabilidad (a menudo abreviada como ``fmp'') de la variable aleatoria $X_n$ mediante el vector $a^{(n)}=(a_0^{(n)},\dots,a_N^{(n)})$. Recordemos que la fmp de una variable aleatoria discreta determina unívocamente su distribución, por lo cual en adelante utilizaremos indistintamente el término `distribución' y `función masa de probabilidad', sin olvidar que en realidad son conceptos distintos. 
 
-Análogamente al caso en el que considerábamos un único paso, agrupamos todos los posibles valores de $p_{ij}^{(n)}$ en una matriz.
+Análogamente al caso en el que considerábamos un único paso, agrupamos todos los posibles valores de $P_{ij}^{(n)}$ en una matriz.
 
 \begin{definicion}[Matriz de transición en $n$ pasos]
     Llamamos \textbf{matriz de transición en }$\mathbf{n}$ \textbf{pasos} de una cadena de Markov $\{X_n, n\geq 0\}$ a la matriz
     \begin{equation}
         \label{eq:matriz-trans-n}
         P^{(n)}=\begin{pmatrix}
-          p_{11}^{(n)} & p_{12}^{(n)} & \cdots & p_{1N}^{(n)} \\
-          p_{21}^{(n)} & p_{22}^{(n)} & \cdots & p_{2N}^{(n)} \\
+          P_{00}^{(n)} & P_{01}^{(n)} & \cdots & P_{0N}^{(n)} \\
+          P_{10}^{(n)} & P_{11}^{(n)} & \cdots & P_{1N}^{(n)} \\
           \vdots & \vdots & \ddots & \vdots \\
-          p_{N1}^{(n)} & p_{N2}^{(n)} & \cdots & p_{NN}^{(n)}  
+          P_{N0}^{(n)} & P_{N1}^{(n)} & \cdots & P_{NN}^{(n)}  
         \end{pmatrix}.
     \end{equation}
 \end{definicion}
 
 \begin{observacion}
-    Si tomamos $n=0$, tenemos que $p_{ij}=\delta_{ij}$, $i,j\in S$. Esto es, $P^{(0)}=I_N$. Por otro lado, si $n=1$, tenemos que $P^{(1)}=P$, la matriz de transición (\ref{eq:matriz-trans}).
+    Si tomamos $n=0$, tenemos que $P^{(0)}_{ij}=\delta_{ij}$, $i,j\in S$. Esto es, $P^{(0)}=I_{N+1}$. Por otro lado, si $n=1$, tenemos que $P^{(1)}=P$, la matriz de transición (\ref{eq:matriz-trans}).
 \end{observacion}
 
 A partir de la definición de matriz de transición en $n$ pasos podemos reescribir (\ref{eq:distr-trans}) de forma matricial como
@@ -182,7 +182,7 @@ Y aplicando la homogeneidad que asumimos en toda cadena:
 \begin{corolario}
     \label{cor:Pnm}
     $$
-    P[X_{n+m}=j|X_n=i,X_{n-1}=i_{n-1},\dots,X_0=i_0] = P[X_{n+m}=j|X_n=i]=p_{ij}^{(m)},
+    P[X_{n+m}=j|X_n=i,X_{n-1}=i_{n-1},\dots,X_0=i_0] = P[X_{n+m}=j|X_n=i]=P_{ij}^{(m)},
     $$
 $j,i,i_{n-1},\dots,i_0\in S$.
 \end{corolario}
@@ -193,17 +193,17 @@ Seguidamente, presentamos una ecuación importante en este ámbito.
     Sea $\{X_n,n\geq 0\}$ una cadena de Markov discreta y homogénea, entonces las probabilidades de transición en $n$ pasos satisfacen la siguiente igualdad, denominada ecuación de Chapman-Kolmogorov.
     \begin{equation}
         \label{eq:chapman-kolmogorov}
-        p_{ij}^{(n+m)}=\sum_{k=1}^N p_{ik}^{(n)}p_{kj}^{(m)}.
+        P_{ij}^{(n+m)}=\sum_{k=0}^N P_{ik}^{(n)}P_{kj}^{(m)}.
     \end{equation} 
 \end{teorema}
 \begin{proof}
     \begin{equation*}
         \begin{split}
-            p_{ij}^{(n+m)} &= P[X_{n+m}=j|X_0=i] \\
-            &= \sum_{k=1}^N P[X_{n+m}=j|X_n=k,X_0=i]\,P[X_n=k|X_0=i]\text{ (th. de la prob. total)}\\
-            &= \sum_{k=1}^N P[X_{n+m}=j|X_n=k]\,P[X_n=k|X_0=i]\text{ (corolario \ref{cor:Pnm})}\\
-            &= \sum_{k=1}^N P[X_{m}=j|X_0=k]\,P[X_n=k|X_0=i]\text{ (por la homogeneidad)}\\
-            &= \sum_{k=1}^N p_{ik}^{(n)} p_{kj}^{(m)}
+            P_{ij}^{(n+m)} &= P[X_{n+m}=j|X_0=i] \\
+            &= \sum_{k=0}^N P[X_{n+m}=j|X_n=k,X_0=i]\,P[X_n=k|X_0=i]\text{ (th. de la prob. total)}\\
+            &= \sum_{k=0}^N P[X_{n+m}=j|X_n=k]\,P[X_n=k|X_0=i]\text{ (corolario \ref{cor:Pnm})}\\
+            &= \sum_{k=0}^N P[X_{m}=j|X_0=k]\,P[X_n=k|X_0=i]\text{ (por la homogeneidad)}\\
+            &= \sum_{k=0}^N P_{ik}^{(n)} P_{kj}^{(m)}
         \end{split}
     \end{equation*}
 \end{proof}
@@ -249,13 +249,13 @@ lo cual es evidente teniendo en cuenta el teorema \ref{th:matriz-trans-n}. Inter
         Con estos datos y asumiendo que la población total permanece constante, ¿podemos comprobar la población de cada una de las provincias de la Comunidad Valenciana en el año 2022? ¿Y predecir las que habrá en el año 2023?
 
         Antes de proceder al propio modelado, queremos mencionar que estos datos han sido manipulados y presentados utilizando el software estadístico \texttt{R}\footnote{Consúltese su página web \url{https://www.r-project.org/}.}. El archivo de `R Markdown' \texttt{software/ejemplo-migraciones.Rmd} 
-        contiene el código fuente en \texttt{R} y algunas descripciones, mientras que el fichero \texttt{software/ejemplo-migraciones.html}, aunque tiene el mismo contenido, es un archivo compilado que es posible abrir con cualquier navegador web y en el que no es necesario ejecutar nada para visualizar las salidas de los distintos comandos\footnote{Ambos ficheros están disponibles en las URLs \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ejemplo-migraciones.Rmd} y \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ejemplo-migraciones.html}}. 
+        contiene el código fuente en \texttt{R} y algunas descripciones, mientras que el fichero \texttt{software/ejemplo-migraciones.html}, aunque tiene el mismo contenido, es un archivo compilado que es posible abrir con cualquier navegador web y en el que no es necesario ejecutar nada para visualizar las salidas de los distintos comandos\footnote{Ambos ficheros están disponibles en las URLs \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ejemplo-migraciones.Rmd}, \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ejemplo-migraciones.html}}. 
 
         Procedemos a modelar el problema como una cadena de Markov $\{X_n,n\geq0\}$, donde 
         $$X_n \equiv \text{Provincia en la que reside un individuo al azar de la C. Valenciana en }2021+n.$$ 
         Esta cadena se construye sobre los estados 
         $$
-        S=\{1\equiv\text{`Alicante'}, 2\equiv\text{`Castellón'},3\equiv\text{`Valencia'}\}.
+        S=\{0\equiv\text{`Alicante'}, 1\equiv\text{`Castellón'},2\equiv\text{`Valencia'}\}.
         $$
         Podemos tomar una matriz asociada a la tabla \ref{tab:variaciones} y a partir de ella construir la matriz de transición de la cadena, teniendo en cuenta que de esta matriz la celda $(i,j)$ representa el número de migraciones de la provincia $i$ a la provincia $j$. Sin embargo, es claro que la tabla \ref{tab:variaciones} no verifica las condiciones de la proposición \ref{prop:propiedades-matrices-markov}, por lo que no podemos formar directamente una matriz estocástica. De igual manera, el vector cuyas componentes son las de la tabla \ref{tab:poblacion} no puede denotar una función masa de probabilidad pues sus componentes no suman $1$. Por suerte, estos problemas pueden solucionarse rápidamente sin más que dividir cada fila de la tabla \ref{tab:variaciones} entre el total de cada fila y cada componente de la tabla \ref{tab:poblacion} entre la suma de las tres celdas. De esta forma, tenemos la siguiente matriz de transición $P$ y la distribución inicial $a^{(0)}$.
         \begin{equation*}
@@ -308,14 +308,14 @@ lo cual es evidente teniendo en cuenta el teorema \ref{th:matriz-trans-n}. Inter
 
 \section{Comportamiento límite}
 
-De nuevo, sea $\{X_n, n\geq 0\}$ una cadena de Markov homogénea sobre un conjunto finito de estados $S=\{1,\dots,N\}$. En las secciones anteriores hemos aprendido a calcular la distribución de la variable $X_n$ para cualquier $n\in\N_0$, pero es el momento de preguntar qué ocurre con dicha distribución cuando $n\rightarrow\infty$. Surgen así varias preguntas: ¿La distribución de $X_n$ converge a alguna distribución límite? ¿En caso de que converja, la distribución límite es única? ¿Cómo podríamos calcularla? En esta sección trataremos, de manera resumida, de responder a dichas preguntas.
+De nuevo, sea $\{X_n, n\geq 0\}$ una cadena de Markov homogénea sobre un conjunto finito de estados $S=\{0,1,\dots,N\}$. En las secciones anteriores hemos aprendido a calcular la distribución de la variable $X_n$ para cualquier $n\in\N_0$, pero es el momento de preguntar qué ocurre con dicha distribución cuando $n\rightarrow\infty$. Surgen así varias preguntas: ¿La distribución de $X_n$ converge a alguna distribución límite? ¿En caso de que converja, la distribución límite es única? ¿Cómo podríamos calcularla? En esta sección trataremos, de manera resumida, de responder a dichas preguntas.
 
 \subsection{Clasificación de los estados de una cadena de Markov}
 
 Antes de enunciar los principales resultados sobre existencia y unicidad de límite introducimos alguna terminología sobre las cadenas de Markov y sus estados.
 
 \begin{definicion}
-    Sean $i,j\in S$ dos estados. Decimos que el estado $j$ es \textbf{accesible} desde el estado $i$ si existe algún $k\geq 0$ tal que $p_{ij}^{(k)}>0$. Decimos que los estados $i$ y $j$ \textbf{se comunican} o que son  \textbf{comunicantes}, y lo denotamos como $i\leftrightarrow j$, si son accesibles entre ellos.
+    Sean $i,j\in S$ dos estados. Decimos que el estado $j$ es \textbf{accesible} desde el estado $i$ si existe algún $k\geq 0$ tal que $P_{ij}^{(k)}>0$. Decimos que los estados $i$ y $j$ \textbf{se comunican} o que son  \textbf{comunicantes}, y lo denotamos como $i\leftrightarrow j$, si son accesibles entre ellos.
 \end{definicion}
 
 La siguiente proposición nos permitirá trabajar con cierta comodidad con la relación de comunicación.
@@ -336,7 +336,7 @@ Nótese que la condición de cadena irreducible equivale a que sea posible llega
 Si una cadena de Markov $\{X_n,n\geq 0\}$ sobre un conjunto de estados $S=\{1,\dots,N\}$ tiene una matriz de transición $P$, podemos construir su diagrama de transición de la siguiente forma:
 \begin{enumerate}
     \item Dibujamos un nodo por cada posible estado, cada uno con su correspondiente etiqueta.
-    \item Para cada $i,j\in S$, trazamos una flecha desde el nodo $i,j$ únicamente si la entrada $(i,j)$ de la matriz es estrictamente positiva. Esto es, si $p_{ij}>0$. En caso de dibujar la flecha, es recomendable etiquetarla con el correspondiente valor de $p_{ij}$.
+    \item Para cada $i,j\in S$, trazamos una flecha desde el nodo $i,j$ únicamente si la entrada $(i,j)$ de la matriz es estrictamente positiva. Esto es, si $P_{ij}>0$. En caso de dibujar la flecha, es recomendable etiquetarla con el correspondiente valor de $P_{ij}$.
 \end{enumerate} 
 Entonces, podemos trasladar las anteriores definiciones con respecto al diagrama de Markov:
 \begin{itemize}
@@ -389,13 +389,11 @@ Entonces, podemos trasladar las anteriores definiciones con respecto al diagrama
     \label{ej:diagramas}
 \end{ejemplo}
 
-\cb{REVIEW añado algo sobre tema de matrices reducibles/irreducibles?}
-
 Hemos clasificado los estados según su accesibilidad, pero fijémonos ahora en la posibilidad de revisitar o no un estado. En el ejemplo \ref{ej:diagramas}.\ref{ej:diagramas-1} es posible visitar cualquiera de los tres estados cada dos transiciones, mientras que en el ejemplo \ref{ej:diagramas}.\ref{ej:diagramas-2} es posible mantenerse en cualquiera de los tres estados iteración tras iteración. Sobre esta noción insiste la siguiente definición.
 
 \begin{definicion}[Estado periódico, aperiódico y absorbente]
     \label{def:estado-periodico}
-    Un estado $i$ es \textbf{periódico} de periodo $d_i$ si la cadena puede regresar a $i$ en pasos múltiplos de $d_i$. Si $d_i=1$, decimos que el estado $i$ es \textbf{aperiódico}. Si ningún estado de la cadena es accesible desde el estado $i$ (\textit{i.e.} $p_{ii}=1$), entonces el estado $i$ se denomina \textbf{absorbente}.
+    Un estado $i$ es \textbf{periódico} de periodo $d_i$ si la cadena puede regresar a $i$ en pasos múltiplos de $d_i$. Si $d_i=1$, decimos que el estado $i$ es \textbf{aperiódico}. Si ningún estado de la cadena es accesible desde el estado $i$ (\textit{i.e.} $P_{ii}=1$), entonces el estado $i$ se denomina \textbf{absorbente}.
 \end{definicion}
 
 \begin{observacion}
@@ -405,22 +403,20 @@ Hemos clasificado los estados según su accesibilidad, pero fijémonos ahora en 
 Podemos extender esta definición a la cadena de Markov completa:
 
 \begin{definicion}[Cadena de Markov periódica y aperiódica]
-    Sea $\{X_n,n\geq 0\}$ una cadena de Markov homogénea, irreducible sobre un espacio de estados $S=\{1,\dots,N\}$. Sea $d$ el mayor número entero tal que, 
+    Sea $\{X_n,n\geq 0\}$ una cadena de Markov homogénea, irreducible sobre un espacio de estados $S=\{0,\dots,N\}$. Sea $d$ el mayor número entero tal que, 
     \begin{equation}
         \label{eq:cond-periodica}
-        p_{ii}^{(n)}>0 \Rightarrow d|n, \ \ \ \forall i\in S.
+        P_{ii}^{(n)}>0 \Rightarrow d|n, \ \ \ \forall i\in S.
     \end{equation}
     Si $d>1$, la cadena de Markov es \textbf{periódica}, si $d=1$ es \textbf{aperiódica}.
 \end{definicion}
-Nótese que una cadena periódica puede volver a su estado inicial en $d,2d,3d,\dots$ transiciones. Lo interesante de esta definición y de que únicamente se aplique a cadenas irreducibles es que basta con hallar el mayor periodo $d_i$ (según la definición \ref{def:estado-periodico}) común a todos los estados, de forma que la irreducibilidad de la cadena garantiza que ese valor $d$ es válido para todos los estados. Por otro lado, si $p_{ii}>0$ para algún estado $i\in S$ en una cadena irreducible, necesariamente $d=1$ y la cadena es aperiódica.
+Nótese que una cadena periódica puede volver a su estado inicial en $d,2d,3d,\dots$ transiciones. Lo interesante de esta definición y de que únicamente se aplique a cadenas irreducibles es que basta con hallar el mayor periodo $d_i$ (según la definición \ref{def:estado-periodico}) común a todos los estados, de forma que la irreducibilidad de la cadena garantiza que ese valor $d$ es válido para todos los estados. Por otro lado, si $P_{ii}>0$ para algún estado $i\in S$ en una cadena irreducible, necesariamente $d=1$ y la cadena es aperiódica.
 
 \begin{observacion}
-    La periodicidad también es fácil de consultar en los diagramas. Basta con definir un ciclo que empiece y termine en cada uno de los nodos. Entonces $d$ es el máximo común divisor de las longitudes de estos ciclos.
+    La periodicidad también es fácil de consultar en los diagramas. Basta con definir el ciclo más corto que empiece y termine en cada uno de los nodos. Entonces $d$ es el mínimo común múltiplo de las longitudes de estos ciclos.
 \end{observacion}
 
 Así, la cadena del ejemplo \ref{ej:diagramas}.\ref{ej:diagramas-1} es periódica con $d=2$. Sin embargo, no podemos plantearnos la periodicidad de la cadena del ejemplo \ref{ej:diagramas}.\ref{ej:diagramas-2}, ya que ésta no es irreducible.
-
-\cb{REVIEW Incluyo tema de estados absorbentes y transitorios?}
 
 \subsection{Teoremas límite}
 
@@ -430,7 +426,7 @@ Una vez introducida la terminología principal de estados y cadenas, podemos est
     Llamamos \textbf{distribución límite} a la función masa de probabilidad a la cual converge la fmp de $X_n$ cuando $n$ tiende a infinito. Denotamos esta fmp como
     \begin{equation}
         \label{eq:distr-limite}
-        \pi = (\pi_1,\dots,\pi_N)   ,
+        \pi = (\pi_0,\dots,\pi_N)   ,
     \end{equation}
     donde $\pi_j=\displaystyle\lim_{n\rightarrow\infty} P[X_n=j], \ \ \ j\in S$.
 \end{definicion}
@@ -442,11 +438,11 @@ Si asumimos la existencia de una distribución límite, esta debe cumplir cierta
     Si una cadena de Markov $\{X_n,n\geq 0\}$ admite una distribución límite $\pi$, entonces ésta verifica las siguientes propiedades:
     \begin{equation}
         \label{eq:condiciones-limite-1}
-        \pi_j = \sum_{i=1}^N \pi_i p_{ij},\ \forall j\in S \ \ \ \ 
+        \pi_j = \sum_{i=0}^N \pi_i P_{ij},\ \forall j\in S \ \ \ \ 
     \end{equation}
     \begin{equation}
         \label{eq:condiciones-limite-2}
-        \sum_{j=1}^N \pi_j =1 \ \ \ \ 
+        \sum_{j=0}^N \pi_j =1 \ \ \ \ 
     \end{equation}
     
 \end{proposicion}
@@ -454,7 +450,7 @@ Si asumimos la existencia de una distribución límite, esta debe cumplir cierta
     Aplicando el teorema de la probabilidad total y el teorema de la probabilidad condicionada, tenemos que
     \begin{equation}
         \label{eq:prob-total-cond}
-        P[X_{n+1}=j]=\sum_{i=1}^N P[X_n=i]p_{ij}, \ \ \ \forall j\in S.
+        P[X_{n+1}=j]=\sum_{i=0}^N P[X_n=i]\,P_{ij}, \ \ \ \forall j\in S.
     \end{equation}
     Si tomamos límite en ambos miembros de la igualdad cuando $n\rightarrow\infty$ y asumimos la existencia de esta distribución límite obtenemos la igualdad (1). La igualdad (2) se asume de la representación de $\pi$ como una función masa de probabilidad.
 \end{proof}
@@ -469,7 +465,7 @@ Esta ecuación matricial puede resolverse, y si normalizamos el vector obtenido 
 
 \begin{definicion}[Distribución estacionaria]
     \label{def:estacionaria}
-    Una función masa de probabilidad dada por un vector fila $\pi^* =(\pi_1^*,\dots,\pi_N^*)$, se denomina \textbf{distribución estacionaria} de una cadena de Markov si
+    Una función masa de probabilidad dada por un vector fila $\pi^* =(\pi_0^*,\dots,\pi_N^*)$, se denomina \textbf{distribución estacionaria} de una cadena de Markov si
     \begin{equation}
         P[X_0=i]=\pi_i^* \ \ \forall i\in S \Rightarrow P[X_n=i]=\pi_i^*\ \ \forall i\in S, n\geq 0
     \end{equation}
@@ -479,19 +475,19 @@ Esta ecuación matricial puede resolverse, y si normalizamos el vector obtenido 
 Como vemos, las distribuciones límite y las distribuciones estacionarias guardan ambas una estrecha relación con las ecuaciones de la proposición \ref{prop:condiciones-limite}, y vemos que también la tendrán la existencia y unicidad de una y otra.
 
 \begin{proposicion}
-    Una función masa de probabilidad dada por un vector fila $\pi^* =(\pi_1^*,\dots,\pi_N^*)$ es una distribución estacionaria si, y solo si verifica las ecuaciones \eqref{eq:condiciones-limite-1} y \eqref{eq:condiciones-limite-2}.
+    Una función masa de probabilidad dada por un vector fila $\pi^* =(\pi_0^*,\dots,\pi_N^*)$ es una distribución estacionaria si, y solo si verifica las ecuaciones \eqref{eq:condiciones-limite-1} y \eqref{eq:condiciones-limite-2}.
 \end{proposicion}
 \begin{proof}
     Lo probaremos por doble implicación.
     \begin{itemize}
         \item[\fcolorbox{black}{white}{$\Rightarrow$}] Supongamos que $\pi^*$ cumple la propiedad de la definición \ref{def:estacionaria}. Si tomamos $n=0$ en (\ref{eq:prob-total-cond}) obtenemos
         $$
-        P[X_{1}=j]=\sum_{i=1}^N P[X_0=i] p_{ij}, \ \ \ \forall j\in S.
+        P[X_{1}=j]=\sum_{i=1}^N P[X_0=i] P_{ij}, \ \ \ \forall j\in S.
         $$ 
         Pero como $P[X_0=j]=\pi_j^*$ y $P[X_{1}=j]=\pi_j^*$, sustituyendo obtenemos la igualdad (\ref{eq:condiciones-limite-1}). La ecuación (\ref{eq:condiciones-limite-2}) se deduce de que partimos de que $\pi^*$ es una función masa de probabilidad representada en un vector.
         \item[\fcolorbox{black}{white}{$\Leftarrow$}] Ahora asumimos que $\pi^*$ verifica las ecuaciones (\ref{eq:condiciones-limite-1}) y \eqref{eq:condiciones-limite-2}. Consideramos entonces que $P[X_0=j]=\pi_j^*, \ \ j\in S$. De nuevo, tomando $n=0$ en (\ref{eq:prob-total-cond}):
         $$
-        P[X_{1}=j]=\sum_{i=1}^N P[X_0=i] p_{ij} = \sum_{i=1}^N \pi_i^* p_{ij} \underbrace{=}_{(\ref{eq:condiciones-limite-1})}\pi_j^*.
+        P[X_{1}=j]=\sum_{i=1}^N P[X_0=i]\, P_{ij} = \sum_{i=1}^N \pi_i^* P_{ij} \underbrace{=}_{(\ref{eq:condiciones-limite-1})}\pi_j^*.
         $$
         Por lo que la fmp de $X_1$ es $\pi^*$. Si usamos repetidamente \eqref{eq:prob-total-cond} con distintos valores de $n$, deducimos que la fmp de $X_n$ es $\pi^*$ para cualquier $n\geq 0$. Esto es, $\pi^*$ es una distribución estacionaria.
     \end{itemize}
