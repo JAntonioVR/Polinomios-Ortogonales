@@ -60,6 +60,8 @@ Con esta notación, y teniendo en cuenta que en un espacio finito de $N+1$ estad
     \end{equation}
 \end{definicion}
 
+\cb{REVIEW Para la matriz sugiere Nona poner $\mathcal{P}$. Consultar con Lidia}
+
 \begin{observacion}
     Obsérvese que la $i$-ésima fila corresponde a la distribución de la probabilidad saliente del estado $i$, mientras que la $j$-ésima columna describe la probabilidad entrante al estado $j$.
 \end{observacion}
@@ -71,8 +73,8 @@ Presentamos a continuación dos propiedades directas de las matrices de transici
 Sea $\{X_n, n\geq 0\}$ una cadena de Markov sobre el espacio de estados $S\subseteq \N_0$ y cuya matriz de transición es $P$ dada como en \eqref{eq:matriz-trans}. Entonces
 \begin{enumerate}
     \item $0\leq P_{ij} \leq 1 \ \ \ \forall i,j\in S$.
-    \item Si $S=\{0,1,\dots,N\}$, $\sum_{j=0}^N P_{ij} = 1 \ \ \ \forall i\in S$ (todas las filas de $P$ suman 1).
-    \item Si $S=\N_0$, $\sum_{j=0}^\infty P_{ij} = 1 \ \ \ \forall i\in S$.
+    \item Si $S=\{0,1,\dots,N\}$, $\displaystyle\sum_{j=0}^N P_{ij} = 1 \ \ \ \forall i\in S$ (todas las filas de $P$ suman 1).
+    \item Si $S=\N_0$, $\displaystyle\sum_{j=0}^\infty P_{ij} = 1 \ \ \ \forall i\in S$.
 \end{enumerate}
 \end{proposicion}
 \begin{proof}
@@ -522,6 +524,7 @@ Con este último teorema, sumado a la última afirmación del enunciado del teor
 El caso de cadenas de Markov reducibles y/o periódicas es más complejo. Por ejemplo, la distribución de $X_n$ puede converger a un ciclo de longitud $d$ si la cadena $\{X_n, n\geq 0\}$ es irreducible pero periódica con periodo $d$. O si es reducible, la distribución límite puede ser dependiente del estado inicial. Para un estudio más detallado de estos casos, así como la demostración de estos últimos teoremas, remitimos al lector a \cite[Ch. II, Sections 4.2 and 4.3]{Ross}.
 
 \begin{ejemplo}
+    \label{ej:cv2}
     Retomamos el ejemplo \ref{ej:cv} con la intención de predecir la población de cada provincia de la comunidad valenciana a largo plazo. Si nos fijamos en la matriz de transición podemos ver rápidamente que la cadena de Markov $\{X_n,n\geq 0\}$ es irreducible y aperiódica. Si resolvemos la ecuación $\pi=\pi \cdot P$, que es equivalente a resolver el sistema de ecuaciones 
     \begin{equation*}
         \pi_{1\times 3} (P-I_3)_{3\times 3} = 0_{1\times 3} 
@@ -546,4 +549,4 @@ El caso de cadenas de Markov reducibles y/o periódicas es más complejo. Por ej
     \end{table}
 \end{ejemplo}
 
-Para finalizar este capítulo, aclaramos que todos estos teoremas y definiciones tienen un análogo en el que se trabaja con columnas en lugar de con filas. Es decir, existe una manera distinta aunque equivalente de formular la teoría de las cadenas de Markov en la que las columnas de las matrices de transición suman $1$ (en lugar de las filas), las fmp se denotan con vectores columnas, las distribuciones transitorias se calculan multiplicando por la derecha un vector columna por la matriz de transición, etc. Es frecuente encontrar este enfoque en la literatura, aunque en nuestro caso se ha elegido éste por la intuición fácilmente recordable de que una probabilidad $p_{ij}$ sea la `probabilidad de ir desde el estado $i$ al estado $j$' por encima de que fuera la `probabilidad de llegar al estado $i$ desde el estado $j$'. 
+Para finalizar este capítulo, aclaramos que todos estos teoremas y definiciones tienen un análogo en el que se trabaja con columnas en lugar de con filas. Es decir, existe una manera distinta aunque equivalente de formular la teoría de las cadenas de Markov en la que las columnas de las matrices de transición suman $1$ (en lugar de las filas), las fmp se denotan con vectores columnas, las distribuciones transitorias se calculan multiplicando por la derecha un vector columna por la matriz de transición, etc. Es frecuente encontrar este enfoque en la literatura, aunque en nuestro caso se ha elegido éste por la intuición fácilmente recordable de que una probabilidad $P_{ij}$ sea la `probabilidad de ir desde el estado $i$ al estado $j$' por encima de que fuera la `probabilidad de llegar al estado $i$ desde el estado~$j$'. 
