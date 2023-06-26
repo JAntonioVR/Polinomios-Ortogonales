@@ -3,6 +3,10 @@
 %% Capítulo 1: Introducción a los Polinomios Ortogonales %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Comenzamos el camino por el primer paso, que es el estudio preliminar de los polinomios ortogonales y sus principales propiedades. Para ello, introduciremos la ortogonalidad de polinomios desde la base, relacionando esta propiedad con la reconocida ortogonalidad de vectores, a menudo llamada `perpendicularidad'. Estableceremos distintas formas de obtener sucesiones de polinomios ortogonales, caracterizaremos su existencia y explicaremos propiedades relevantes que verifican los polinomios ortogonales: la relación de recurrencia a tres términos y los principales resultados que verifican los ceros de los polinomios ortogonales.
+
+Este capítulo ha sido redactado basándonos, principalmente, en los textos de las referencias \cite[Ch. II]{renato}, \cite[Ch. I]{chihara} y \cite[Ch. II, III]{szego}.
+
 \section{Introducción}
 \label{c1section:intro}
 
@@ -60,7 +64,7 @@ De acuerdo a este ejemplo, decimos que los polinomios $T_n$ son \textit{ortogona
 \section{Ortogonalidad y función peso}
 \label{c1section:ort-peso}
 
-En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente conocido de ortogonalidad, restringido a espacios como $\R^d$, a otros tipos de espacios. Además, introdujimos la primera familia de polinomios ortogonales: los polinomios de Tchebichef de tipo I. En esta sección daremos definiciones más formales y genéricas sobre la ortogonalidad, basándonos en los textos de \cite[Ch. II]{renato}, \cite[Ch. I]{chihara} y \cite[Ch. II, III]{szego}.
+En la sección \ref{c1section:intro} pudimos ampliar el concepto generalmente conocido de ortogonalidad, restringido a espacios como $\R^d$, a otros tipos de espacios. Además, introdujimos la primera familia de polinomios ortogonales: los polinomios de Tchebichef de tipo I. En esta sección daremos definiciones más formales y genéricas sobre la ortogonalidad.
 
 Sea $\psi$ una función no decreciente y no constante definida en un intervalo $(a,b)$ tal que si $a=-\infty$ entonces $\displaystyle\lim_{x\rightarrow-\infty}\psi(x)>-\infty$ y si $b=\infty$ entonces $\displaystyle\lim_{x\rightarrow\infty}\psi(x)<\infty$. Se define el espacio de funciones $L_\psi^p[a,b]$ como el conjunto de funciones tales que
 
@@ -150,10 +154,10 @@ A partir de este momento consideraremos el espacio vectorial de los polinomios $
     \end{equation}    
 \end{definicion}
 
-Gracias a los momentos de un funcional y considerando que cualquier polinomio de grado $n$ puede escribirse como $p(x)=\sum_{k=0}^n c_k x^k$ podemos entonces combinar (\ref{eq:linealidadfuncional}) y (\ref{eq:defmomentos}) para  escribir la acción de un funcional $\mathcal{L}$ sobre $p(x)$ como
+Gracias a los momentos de un funcional y considerando que cualquier polinomio de grado $n$ puede escribirse como $\pi(x)=\sum_{k=0}^n c_k x^k$ podemos entonces combinar (\ref{eq:linealidadfuncional}) y (\ref{eq:defmomentos}) para  escribir la acción de un funcional $\mathcal{L}$ sobre $\pi(x)$ como
 
 $$
-\mathcal{L}[p] = \mathcal{L}\left[ \sum_{k=0}^n c_k x^k \right] = \sum_{k=0}^n c_k \mu_k
+\mathcal{L}[\pi] = \mathcal{L}\left[ \sum_{k=0}^n c_k x^k \right] = \sum_{k=0}^n c_k \mu_k
 $$
 
 Por lo que, de esta forma, únicamente conociendo la sucesión de momentos $\{\mu_n\}$ podríamos conocer el resultado de aplicar $\mathcal{L}$ a cualquier polinomio. Por tanto, es posible dar una nueva definición de ortogonalidad respecto a funcionales lineales que en este caso estén definidos no mediante una integral como en el caso de (\ref{eq:funcionalLineal}), sino a partir de una sucesión de momentos $\{\mu_n\}$.
