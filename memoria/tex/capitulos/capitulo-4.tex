@@ -9,6 +9,7 @@ Los procesos de nacimiento y muerte discretos, también llamados cadenas de naci
 Para la redacción de este capítulo se han usado como bibliografía fundamental las referencias \cite[Ch. II, III]{Manuel}, \cite[Ch. II]{schoutens-2000}, \cite{random-walks}, \cite{Linear-Growth}, \cite{differential-equations}, entre otras.
 
 \section{Procesos de nacimiento y muerte}
+\label{sec:PNM}
 
 Como mencionamos anteriormente, un proceso de nacimiento y muerte discreto, cadena de nacimiento y muerte o caminata aleatoria es un caso particular de proceso de Markov en el que la única transición posible desde un estado $i\in S$ es hacia el estado siguiente, $i+1$, hacia el anterior, $i-1$, o hacia el propio estado $i$. Intuitivamente, es como un juego de plataformas infinito. Entonces, tomamos $S=\N_0 = \{0,1,2,\dots\}$\footnote{Existe una extensión en la que $S = \{-1,0,1,2,\dots\}$ y el estado $-1$ es un estado absorbente. Nosotros supondremos $S=\N_0$, aunque si se desea se puede consultar \cite[Ch. II, Section 2.3]{schoutens-2000} para más información.} y, por esta suposición, la matriz del proceso sería la matriz tridiagonal infinita
 
@@ -387,6 +388,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \end{ejemplo}
 
     \section{Análogos continuos de la fórmula de representación}
+    \label{sec:analogos-continuos}
 
     Por ahora, en este capítulo y los anteriores hemos descrito la relación entre las cadenas de Markov, concretamente las cadenas de nacimiento y muerte, y los polinomios ortogonales. Esta relación se encuentra en la fórmula de representación de Samuel Karlin y James McGregor \eqref{eq:formula-representacion}, mediante la cual podemos calcular fácilmente probabilidades mediante integrales de manera sencilla teniendo en cuenta la ortogonalidad de los polinomios $Q_n(x)$ descritos en \eqref{eq:polinomios-pnm}.
 
