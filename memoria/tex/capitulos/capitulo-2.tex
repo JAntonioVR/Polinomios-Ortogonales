@@ -131,7 +131,6 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
             \end{split}
         \end{equation*}
         Si la última integral es nula para todo polinomio $\pi(x)$, necesariamente $\tau(x)\rho(x) - [\sigma(x)\rho(x)]' =0$ y tendríamos la ecuación de Pearson \eqref{eq:Pearson-peso}.
-        \cb{REVIEW ¿En realidad no sería que esa ecuación se verifica para casi todo punto? CONTINUIDAD}
     \end{itemize}
     
     
@@ -162,10 +161,9 @@ De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación d
 De forma genérica, podemos comprobar de manera sencilla que una fórmula explícita para $\rho(x)$ es
 \begin{equation}
     \label{eq:rho-general}
-    \rho(x) = \dfrac{1}{\sigma(x)}\exp\left\{\int^x_{x_0} \dfrac{\tau(t)}{\sigma(t)}dt\right\},
+    \rho(x) = \dfrac{1}{\sigma(x)}\exp\left\{F(x)\right\},
 \end{equation}
-donde $x$ toma valores en aquellos puntos en los que $\sigma(x)\neq 0$ y $\rho(x)>0$.
-\cb{TODO Cambiar esto por una primitiva de $\tau/\sigma$}
+donde $F(x)$ es una primitiva de $\dfrac{\tau(x)}{\sigma(x)}$ y donde $x$ toma valores en aquellos puntos en los que $\sigma(x)\neq 0$ y $\rho(x)>0$.
 
 \subsection{Caso I: Polinomios de Hermite}
 \label{subsection:Hermite}
@@ -467,8 +465,6 @@ Entonces podemos escribir la ecuación (\ref{eq:hipergeometrica}) en su forma \t
     [\rho(x)\sigma(x)y']' + \lambda \rho(x) y = 0.
 \end{equation}
 
-\cb{REVIEW Esto al final no lo uso para nada.}
-
 Como vemos, las soluciones de la ecuación de Pearson y las soluciones de la ecuación hipergeométrica están íntimamente relacionadas. Benjamin Olinde Rodrigues (1795--1851) demostró que las soluciones polinómicas de la EDO (\ref{eq:hipergeometrica}) pueden escribirse de una peculiar y compacta forma hoy llamada fórmula de Rodrigues, que veremos que también caracteriza a los polinomios ortogonales clásicos.
 
 \subsection{Fórmula de Rodrigues}
@@ -668,9 +664,10 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
 \end{teorema}
 \begin{proof}
     
-    Revisamos las implicaciones ya probadas y aclararemos las que aún no han sido demostradas.
+    Revisamos las implicaciones ya probadas y aclararemos las que aún no lo han sido.
     \begin{itemize}
         \item[\fbox{$1.\Rightarrow 2.$}] Es el teorema \ref{th:ortogonalidad-derivadas}.
+        \begin{comment} 
         \item[\fbox{$2.\Rightarrow 1.$}] Supongamos que la sucesión $\{P'_n\}$ es clásica respecto a la función peso $\rho_1(x)=\sigma(x)\rho(x)$, solución de $[\sigma(x)\rho_1(x)]'=\tau_1(x)\rho(x)$ con $\tau_1(x)=\tau(x)+\sigma'(x)$. Si derivamos el primer miembro y sustituimos la expresión de $\rho_1$ y cancelamos $\sigma(x)$, obtenemos
         $$
         2\sigma'(x)\rho(x)+\sigma(x)\rho'(x)=\tau_1(x)\rho(x) \Leftrightarrow
@@ -680,14 +677,14 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
         [\sigma(x)\rho(x)]'=\tau(x)\rho(x),
         $$
         que es justamente la ecuación de Pearson \eqref{eq:Pearson-peso}.
-        \item[\fbox{$2.\Leftrightarrow 3.$}] Es trivial sin más que aplicar sucesivamente la equivalencia $1.\Leftrightarrow 2.$ 
-        \item[\fbox{$1.\Rightarrow 4.$}] Es el teorema \ref{th:ec-hipergeometrica}.
+        \end{comment}
+        \item[\fbox{$2.\Rightarrow 3.$}] Basta con aplicar inductivamente la implicación $(1)\Rightarrow (2)$.
+        \item[\fbox{$3.\Rightarrow 4.$}] Si nos fijamos en el teorema \ref{th:ec-hipergeometrica}, a pesar de que la hipótesis inicial es que $\{P_n\}$ es clásica, en la demostración se puede observar que basta con partir de que $\{P'_n\}$ es clásica, pues en ningún momento de la demostración usamos la ecuación de Pearson para $\rho$, sino que la utilizamos para $\rho$, es decir, partimos de (3) suponiendo $k=1$.
         \item[\fbox{$4.\Rightarrow 5.$}] Es el teorema \ref{th:formula-rodrigues} junto con la proposición \ref{prop:grado-rodrigues}.
         \item[\fbox{$5.\Rightarrow 1.$}] Es el teorema \ref{th:rodrigues-pearson}.
          
     \end{itemize}
 \end{proof}
-\cb{REVIEW Corregido, pero un detalle. Resulta que, aunque tenemos que $1\Rightarrow 4$ porque el teorema \ref{th:ec-hipergeometrica} dice que si $\{P_n\}$ es clásica entonces es solución de la ecuación hipergeométrica, si nos fijamos en la demostración lo primero que hago es usar que las derivadas son ortogonales, por tanto, ¿podría decir que (4) es consecuencia de (3)? De poder hacerlo podría encadenar $1\Rightarrow 2\Rightarrow 3 \Rightarrow 4 \Rightarrow 5 \Rightarrow 1$.}
 
 \begin{ejemplo}[Fórmula de Rodrigues de los polinomios de Jacobi]
     \label{ej:rodrigues-jacobi}
