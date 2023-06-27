@@ -308,8 +308,6 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         La existencia está probada, la unicidad puede probarse teniendo en cuenta que tomando $i=j=0$ se obtienen los momentos de $\psi$: $\int_{-1}^1 x^n d\psi(x)$. Estos momentos determinan unívocamente a la medida $\psi$. Consúltese \cite[Theorem 1]{random-walks}.
     \end{proof}
 
-    \cb{REVIEW He puesto que la medida se denota con $\psi$ mientras que en el primer capítulo puse $\mu$, creo que convendría poner ambas iguales.}
-
     Como ya hemos adelantado anteriormente, de la medida $\psi$ que nos proporciona el teorema espectral obtendremos la ortogonalidad de los polinomios $Q_n(x)$ dados en \eqref{eq:polinomios-pnm}. Esta propiedad es, de hecho, una sencilla consecuencia de la fórmula de representación.
 
     \begin{corolario}
@@ -394,17 +392,16 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     Sin embargo, en todo momento nos hemos restringido al caso estrictamente discreto: cadenas de Markov discretas, procesos de nacimiento y muerte discretos... que nos llevan a una versión discreta de la fórmula de representación. Sin embargo, existe una definición continua de las cadenas de Markov y de los procesos de nacimiento y muerte a partir de la cual se obtiene una expresión continua de la fórmula de representación de Karlin McGregor.
 
-    En esta sección introduciremos superficialmente los análogos continuos de los procesos de nacimiento y muerte y la fórmula de representación de Karlin-McGregor. El siguiente texto está basado en las referencias \cite{Anderson}, \cite[Ch. 2, 3]{schoutens-2000}, \cite{differential-equations} y \cite[Ch. III, Sections 3.1, 3.2]{Manuel}, a las cuales remitimos al lector que desee profundizar.
+    En esta sección introduciremos superficialmente los análogos continuos de los procesos de nacimiento y muerte y la fórmula de representación de Karlin-McGregor. El siguiente texto está basado en las referencias \cite{Anderson}, \cite[Ch. II, III]{schoutens-2000}, \cite{differential-equations} y \cite[Ch. III, Sections 3.1, 3.2]{Manuel}, a las cuales remitimos al lector que desee profundizar.
 
     \subsection{Procesos de Markov continuos}
 
-    Hasta el momento, hemos considerado el paso del tiempo como incrementos del valor de un parámetro $n=0,1,2,\dots$ que representa el instante $n$-ésimo. En el caso continuo, de forma general consideramos que un instante viene dado por un valor $t\in[0,+\infty)$. Por su parte, el espacio de estados $S$ no cambia: $S=\{0,1,\dots,N\}$ en el caso finito o $S=\N_0$ en caso de que exista una cantidad infinita de posibles estados, que es el caso de los procesos de nacimiento y muerte. Así, fijado $t\in[0,+\infty)$, llamamos $X_t\in S$ a la variable aleatoria ``estado del sistema en el instante $t$'' y la colección de variables aleatorias $\{X_t, t\geq 0\}$ es un \textbf{proceso de Markov continuo}.
-    
-    En este caso, la propiedad de Markov viene dada como:
+    Hasta el momento, hemos considerado el paso del tiempo como incrementos del valor de un parámetro $n=0,1,2,\dots$ que representa el instante $n$-ésimo. En el caso continuo, de forma general consideramos que un instante viene dado por un valor $t\in[0,+\infty)$. Por su parte, el espacio de estados $S$ no cambia: $S=\{0,1,\dots,N\}$ en el caso finito o $S=\N_0$ en caso de que exista una cantidad infinita de posibles estados, que es el caso de los procesos de nacimiento y muerte. Así, fijado $t\in[0,+\infty)$, llamamos $X_t\in S$ a la variable aleatoria ``estado del sistema en el instante $t$''. En este caso, la propiedad de Markov viene dada como:
     \begin{equation}
+        \label{eq:prop-Markov-cont}
         P[X_{t+s}=j|X_s=i, X_\tau, 0\leq \tau < s] = P[X_{t+s}=j|X_s=i], \ \ \ s,t>0.
     \end{equation}
-    Es decir, el estado en el que se encuentre el proceso en un instante $t+s$ depende únicamente del estado en el que se encuentre en un instante anterior $t$, independientemente de lo que haya ocurrido antes de $t$. De nuevo, nos centraremos en procesos homogéneos, que son aquellos en los cuales las probabilidades únicamente dependen de la diferencia $t-s$, por lo que podemos eliminar la dependencia de $s$ y denotar
+    Es decir, el estado en el que se encuentre el proceso en un instante $t+s$ depende únicamente del estado en el que se encuentre en un instante anterior $t$, independientemente de lo que haya ocurrido antes de $t$.  Una colección de variables aleatorias $\{X_t, t\geq 0\}$ que verifica la propiedad \eqref{eq:prop-Markov-cont} es un \textbf{proceso de Markov continuo}. De nuevo, nos centraremos en procesos homogéneos, que son aquellos en los cuales las probabilidades únicamente dependen de la diferencia $t-s$, por lo que podemos eliminar la dependencia de $s$ y denotar
     \begin{equation}
         \label{eq:prob-trans-cont}
        P_{ij}(t) := P[X_{t}=j|X_0=i]  \ \ \ t>0.
@@ -414,11 +411,21 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     \begin{equation}
         \label{eq:matriz-trans-cont}
-        P(t) = \begin{pmatrix}
-            P_{00}(t) & P_{01}(t) & P_{02}(t)  & \cdots \\
-            P_{10}(t) & P_{11}(t) & P_{12}(t)  & \cdots \\
-            \vdots & \vdots & \vdots  & \ddots 
-        \end{pmatrix}.
+        \begin{array}{ccc}
+            P(t)=\begin{pmatrix}
+                P_{00}(t) & P_{01}(t) & \cdots & P_{0N}(t) \\
+                P_{10}(t) & P_{11}(t) & \cdots & P_{1N}(t) \\
+                \vdots & \vdots & \ddots & \vdots \\
+                P_{N0}(t) & P_{N1}(t) & \cdots & P_{NN}(t)  
+            \end{pmatrix} & \text{ ó } &
+            P(t)=\begin{pmatrix}
+                P_{00}(t) & P_{01}(t) & P_{02}(t) & \cdots  \\
+                P_{10}(t) & P_{11}(t) & P_{12}(t) & \cdots  \\
+                P_{20}(t) & P_{21}(t) & P_{22}(t) & \cdots  \\
+                \vdots & \vdots & \vdots & \ddots  \\ 
+            \end{pmatrix} \\
+            \text{(si }S\text{ es finito)} & & \text{(si }S\text{ es infinito)}\\
+        \end{array}
     \end{equation}
 
     \subsection{Procesos de nacimiento y muerte continuos}
@@ -437,8 +444,6 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \end{equation}
 
     Además, asumiremos que las probabilidades \eqref{eq:prob-trans-cont} satisfacen las siguientes propiedades:
-
-    \cb{TODO Revisar cuando he puesto que los estados empiezan en 0 y cuando en 1 que tengo un follón montado curioso}.
 
     \begin{enumerate}
         \item $P_{i,i+1}(h) = \lambda_i h + o(h)$ cuando $h\searrow 0$, $i\geq 0$.
@@ -487,11 +492,11 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     Para empezar, a partir de la matriz generadora infinitesimal \eqref{eq:matrix-generadora}, definimos una sucesión de polinomios $\{Q_n\}$ con $\deg(Q_n)=n$:
     \begin{equation}
         \label{eq:polinomios-pnm-cont}
-        \begin{split}
+        \left\{\begin{aligned}
             Q_{0}(x) &= 1 \\
             -xQ_0(x)&=\lambda_0 Q_1(x) -(\lambda_0 + \mu_0) Q_0(x), \\
             -x Q_n(x) &= \lambda_n Q_{n+1}(x) -(\lambda_n+\mu_n) Q_n(x) + \mu_n Q_{n-1}(x), \ \ \ (n\geq 1).
-        \end{split}
+        \end{aligned}\right.
     \end{equation}
 
     De forma vectorial, las ecuaciones pueden expresarse como $-x Q(x)=\mathcal{A} Q(x)$, donde $Q(x)=(Q_0(x), Q_1(x),\dots)^T$. Estos polinomios son los que nos permiten obtener la fórmula de representación de Karlin-McGregor continua:
