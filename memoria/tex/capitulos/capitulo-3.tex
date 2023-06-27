@@ -10,6 +10,8 @@ En concreto, analizaremos desde un punto de vista general los llamados \textit{p
 
 Nos centraremos principalmente en procesos discretos, es decir, consideramos que el tiempo se divide en instantes $n=0,1,2,\dots$, sin olvidar que existe una formulación análoga en la que el tiempo es continuo $t\in[0,\infty)$. Denominamos \textit{estado} a cualquiera de las situaciones en las que se puede encontrar el sistema en un instante determinado. Por ejemplo, pensemos en un barrio en el que hay $N$ fruterías y dividimos el tiempo en semanas. Asumimos que un individuo siempre va a comprar a una de estas tiendas aunque hay posibilidad de que cambie de una a otra distinta cada semana. Etiquetamos cada una de las fruterías con un número: frutería $0$, frutería $1$,\dots, frutería $N$.
 
+Para la redacción de este capítulo se han utilizado fundamentalmente las referencias \cite{Ross}, \cite{schoutens-2000}, \cite{kulkarni-2012} y \cite{Manuel}.
+
 \section{Cadenas de Markov discretas. Matriz de transición}
 
 En general, consideraremos un espacio de estados $S\subseteq \N_0$ que con frecuencia denotaremos como $S=\{0,1,\dots,N\}$ si consideramos un espacio finito de estados y $S=\N_0=\{0,1,2,\dots\}$ en caso de considerarlo infinito. A su vez, dividimos el tiempo en instantes $n=0,1,2,\dots$. Fijado $n$, llamamos $X_n\in S$ a la variable aleatoria ``estado del sistema en el instante $n$''. La propiedad específica que consideró Markov consiste en asumir que, suponiendo que el sistema se encuentra en un estado concreto en un instante concreto, la probabilidad de que ocurra una transición en el siguiente instante depende única y exclusivamente del estado actual.
