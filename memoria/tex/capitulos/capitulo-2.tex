@@ -59,11 +59,9 @@ Definimos a continuación dos operadores que actúan sobre los funcionales.
 
 A partir de estos dos operadores y esta nueva notación daremos una primera definición de lo que es una SPO clásica.
 
-\cb{REVIEW Nona me dice que ponga `\textbf{una} SPO', no `\textbf{la} SPO' para un funcional. Suelo asumir la unicidad salvo constante o salvo estandarización, de ahí que tenga una sección hablando de estandarizaciones. Aún así, ¿pongo mejor `una' para no asumir esa unicidad?}
-
 \begin{definicion}[SPO Clásica]
     \label{def:SPO-clasica}
-    La SPO $\{P_n  \}$ para el funcional $\uu$ se dice que es \textbf{clásica} (Hermite, Laguerre, Jacobi o Bessel) si existen polinomios $\sigma(x), \tau(x)$ con $\deg(\sigma)\leq 2$ y $\deg(\tau)= 1$ tales que el funcional $\uu$ verifica la ecuación diferencial
+    Una SPO $\{P_n  \}$ para el funcional $\uu$ se dice que es \textbf{clásica} (Hermite, Laguerre, Jacobi o Bessel) si existen polinomios $\sigma(x), \tau(x)$ con $\deg(\sigma)\leq 2$ y $\deg(\tau)= 1$ tales que el funcional $\uu$ verifica la ecuación diferencial
     \begin{equation}
         \label{eq:Pearson-u}
         D(\sigma \uu) = \tau \uu
@@ -80,7 +78,7 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
 
 \begin{lema}
     \label{lema:equivalencia-pearson}
-    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$ con momentos finitos, $\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ la SPO respecto a $\uu$. Entonces las siguientes afirmaciones son equivalentes: 
+    Sean $\rho(x)$ una función peso positiva en el intervalo $(a,b)$ con momentos finitos, $\uu$ el funcional definido como en (\ref{eq:funcional-peso}) y $\{P_n\}$ una SPO respecto a $\uu$. Entonces las siguientes afirmaciones son equivalentes: 
     \begin{enumerate}
         \item La función peso $\rho(x)$ es solución de la ecuación diferencial
         \begin{equation}
@@ -156,7 +154,7 @@ A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principal
     \item \textbf{Caso V}: $\sigma$ es un polinomio de grado $2$ y tiene dos raíces complejas conjugadas \linebreak $\sigma(x) = (x-a-bi)(x-a+bi)$. Con esta asunción la solución que se obtiene no admite momentos finitos, por lo que no puede ser considerada.
 \end{enumerate}
 
-De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asumiendo las condiciones de frontera (\ref{eq:cond-frontera}) y comprobando que los momentos resultantes son finitos, habremos hayado las funciones peso $\rho(x)$ respecto a las cuales la SPO es clásica. Nos centraremos principalmente en los casos I, II y III, en los cuales obtenemos un funcional definido positivo.
+De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asumiendo las condiciones de frontera (\ref{eq:cond-frontera}) y comprobando que los momentos resultantes son finitos, habremos hallado las funciones peso $\rho(x)$ respecto a las cuales las SPO son clásicas. Nos centraremos principalmente en los casos I, II y III, en los cuales obtenemos un funcional definido positivo.
 
 De forma genérica, podemos comprobar de manera sencilla que una fórmula explícita para $\rho(x)$ es
 \begin{equation}
@@ -582,10 +580,47 @@ Originalmente, \textsc{Olinde Rodrigues} (1816), \textsc{James Ivory} (1824) y \
 
 \end{proof}
 
-Ya hemos comprobado que las soluciones polinómicas de la ecuación hipergeométrica se pueden expresar mediante la fórmula de Rodrigues. Sin embargo, aunque de momento sabemos que, a pesar de su aspecto, $y_n$ es un polinomio de grado a lo sumo $n$, podemos dar un paso más y afirmar que es de hecho un polinomio de grado exacto $n$. Para ello, introduciremos la ortogonalidad.
+Ya hemos comprobado que las soluciones polinómicas de la ecuación hipergeométrica se pueden expresar mediante la fórmula de Rodrigues. Sin embargo, aunque de momento sabemos que, a pesar de su aspecto, $y_n$ es un polinomio de grado a lo sumo $n$, podemos dar un paso más y afirmar que es de hecho un polinomio de grado exacto $n$. Para ello, utilizaremos la ortogonalidad. Previamente, introducimos un lema necesario en la demostración de la proposición \ref{prop:grado-rodrigues}.
 
+\begin{lema}
+    \label{lema:derivadas-raras}
+    Para $0\leq r \leq n$, se tiene que
+    \begin{equation}
+        \label{eq:lema-aux}
+        \dfrac{d^{r}}{dx^{r}}(\sigma^n(x)\rho(x))=\tilde{P}_r(x)\sigma^{n-r}(x)\rho(x),
+    \end{equation}
+    donde $\tilde{P}_r(x)$ es un polinomio de grado a lo sumo $r$.
+\end{lema}
+\begin{proof}
+    Lo probaremos por inducción en $r$.
+    \begin{itemize}
+        \item Caso base $r=0$. Es trivial.
+        \item Caso base $r=1$. 
+        \begin{equation*}
+            \begin{split}
+                \dfrac{d}{dx}(\sigma^n(x)\rho(x)) &= \dfrac{d^{r}}{dx^{r}}(\sigma^{n-1}(x)\sigma(x)\rho(x)) \\
+                &= (n-1)\sigma^{n-2}(x)\sigma'(x)(\sigma(x)\rho(x)) + \sigma^{n-1}(x)(\sigma(x)\rho(x))' \\
+                &= (n-1)\sigma^{n-1}(x)\sigma'(x)\rho(x) + \sigma^{n-1}(x)\tau(x)\rho(x) \\
+                &= \underbrace{\left[(n-1)(x)\sigma'(x) + \tau(x)\right]}_{\deg \leq 1}\sigma^{n-1}(x)\rho(x).
+            \end{split}
+        \end{equation*}
+        Donde hemos utilizado la ecuación de Pearson \eqref{eq:Pearson-peso} en la tercera igualdad.
+        \item Inducción. Supongamos que la ecuación \eqref{eq:lema-aux} es cierta para $r\leq n$ y comprobemos que entonces también es cierta para $r+1$.
+        \begin{equation*}
+            \begin{split}
+                \dfrac{d^{r+1}}{dx^{r+1}}(\sigma^n(x)\rho(x)) &= \dfrac{d}{dx}\left[\dfrac{d^{r}}{dx^{r}}(\sigma^n(x)\rho(x))\right] \\
+                &= \dfrac{d}{dx}\left[\tilde{P}_r(x)\sigma^{n-r}(x)\rho(x)\right] \ \ \ \ \text{(hipótesis de inducción)} \\
+                &= \tilde{P}_r'(x)\sigma^{n-r}(x)\rho(x) + \tilde P_r(x) \dfrac{d}{dx}(\sigma^{n-r}(x)\rho(x)) \\
+                &= \tilde{P}_r'(x)\sigma^{n-r}(x)\rho(x) + \tilde P_r(x)\tilde P_1(x)\sigma^{n-r-1}(x)\rho(x) \\
+                &=  \underbrace{\left(\tilde{P}_r'(x)\sigma(x) + \tilde P_r(x)\tilde P_1(x)\right)}_{\deg \leq r+1}\sigma^{n-(r+1)}(x)\rho(x)
+            \end{split}
+        \end{equation*}
+        Donde hemos utilizado por segunda vez la hipótesis de inducción en la cuarta igualdad.
+    \end{itemize}
+\end{proof}
 
-\cb{REVIEW Algo que no sea correcto?}
+Ahora sí, utilizando la ortogonalidad comprobaremos que el grado de las soluciones $y_n$ es exactamente $n$.
+
 \begin{proposicion}
     \label{prop:grado-rodrigues}
     Las soluciones polinómicas de la ecuación diferencial hipergeométrica \eqref{eq:hipergeometrica} $y_n$, expresadas mediante la fórmula de Rodrigues \eqref{eq:formula-rodrigues}, son polinomios de grado exacto $n$.
@@ -609,7 +644,7 @@ Ya hemos comprobado que las soluciones polinómicas de la ecuación hipergeomét
             &= \underbrace{\left[\pi(x)\dfrac{d^{n-1}}{dx^{n-1}} (\rho(x) \sigma^n(x))\right]_a^b}_{(1)} - \int_a^b \pi'(x)\left[\dfrac{d^{n-1}}{dx^{n-1}} (\rho(x) \sigma^n(x))\right]dx \\
         \end{split}
     \end{equation*}
-    Por (\cb{TODO Encontrar referencia del lema que no sea el TFG de un buen chaval}), tenemos que
+    Por el lema \ref{lema:derivadas-raras}, tenemos que
     $$
     \dfrac{d^{n-1}}{dx^{n-1}} = \tilde P_{n-1}(x) \sigma^{n-1}(x)\rho(x),
     $$

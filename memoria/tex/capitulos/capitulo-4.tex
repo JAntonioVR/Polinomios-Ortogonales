@@ -15,7 +15,7 @@ Como mencionamos anteriormente, un proceso de nacimiento y muerte discreto, cade
 
 \begin{equation}
     \label{eq:matriz-pnm}
-    P = \begin{pmatrix}
+    \mathcal P =\begin{pmatrix}
         r_0 & p_0 & 0 & 0 & \cdots \\
         q_1 & r_1 & p_1 & 0 & \cdots \\
         0 & q_2 & r_2 & p_2 & \cdots \\
@@ -65,7 +65,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     \begin{definicion}[Coeficientes potenciales]
         \label{def:coeficientes-potenciales}
-        Dado un proceso de nacimiento y muerte $\{X_n:n\geq 0\}$ con matriz de transición $P$ definida como en \eqref{eq:matriz-pnm}, se definen sus \textbf{coeficientes potenciales} como
+        Dado un proceso de nacimiento y muerte $\{X_n:n\geq 0\}$ con matriz de transición $\mathcal P$ definida como en \eqref{eq:matriz-pnm}, se definen sus \textbf{coeficientes potenciales} como
         \begin{align}
             \label{eq:coeficientes-potenciales}
             \pi_0&= 1 & \pi_n &= \dfrac{p_0 p_1 \cdots p_{n-1}}{q_1 q_2 \cdots q_n} \ \ \ (n\geq 1)
@@ -76,9 +76,9 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         \label{eq:ecs-simetria}
         \pi_n p_n = \pi_{n+1}q_{n+1} \ \ \ (n\geq 0).
     \end{equation} 
-    Por otro lado, obsérvese que, con las condiciones impuestas sobre $P$, el vector fila infinito $\pi = (\pi_n)_{n\in\N_0}$ verifica $\pi P = \pi$, la ecuación \eqref{eq:balance} extendida a vectores y matrices infinitos. Por tanto, $\pi$ es un vector estacionario de la cadena, que de hecho será una distribución estacionaria si $\sum_{n=0}^\infty \pi_n < \infty$.
+    Por otro lado, obsérvese que, con las condiciones impuestas sobre $\mathcal P$, el vector fila infinito $\pi = (\pi_n)_{n\in\N_0}$ verifica $\pi \cdot \mathcal P =\pi$, la ecuación \eqref{eq:balance} extendida a vectores y matrices infinitos. Por tanto, $\pi$ es un vector estacionario de la cadena, que de hecho será una distribución estacionaria si $\sum_{n=0}^\infty \pi_n < \infty$.
 
-    Por la estructura que posee la matriz $P$, podemos comprobar que siempre es irreducible y es aperiódica si existe algún $r_n>0$. Bajo estas hipótesis, podemos pensar que es posible aplicar el teorema \ref{th:teorema-limite} para asegurar la existencia de una distribución límite, pero recordemos que en este caso estamos tratando con cadenas de Markov infinitas. Afortunadamente, en \cite[Theorem 5.5]{Seneta} y en \cite[Theorem 2.3]{Manuel} podemos encontrar generalizaciones del teorema \ref{th:teorema-limite} que nos ayudan a deducir que el vector infinito $\pi$ representa la distribución límite del proceso de nacimiento y muerte.
+    Por la estructura que posee la matriz $\mathcal P$, podemos comprobar que siempre es irreducible y es aperiódica si existe algún $r_n>0$. Bajo estas hipótesis, podemos pensar que es posible aplicar el teorema \ref{th:teorema-limite} para asegurar la existencia de una distribución límite, pero recordemos que en este caso estamos tratando con cadenas de Markov infinitas. Afortunadamente, en \cite[Theorem 5.5]{Seneta} y en \cite[Theorem 2.3]{Manuel} podemos encontrar generalizaciones del teorema \ref{th:teorema-limite} que nos ayudan a deducir que el vector infinito $\pi$ representa la distribución límite del proceso de nacimiento y muerte.
 
     
     \section{La fórmula de representación de Karlin-McGregor}
@@ -107,25 +107,25 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     $$
     donde los coeficientes $\pi_n$ son los dados en \eqref{eq:coeficientes-potenciales}. Para cuando sea necesario, asumimos que $f_n=0$ siempre que $n<0$.
 
-    Teniendo presente la matriz $P=\left(P_{ij}\right)_{i,j\geq 0}$ dada en \eqref{eq:matriz-pnm}, en el espacio de Hilbert $\ell^2_\pi(\N_0)$, asumiendo un abuso de notación consideramos la transformación
+    Teniendo presente la matriz $\mathcal P=\left(P_{ij}\right)_{i,j\geq 0}$ dada en \eqref{eq:matriz-pnm}, en el espacio de Hilbert $\ell^2_\pi(\N_0)$, asumiendo un abuso de notación consideramos la transformación
     \begin{equation}
         \label{eq:operador-P}
-        f \longmapsto Pf,
+        f \longmapsto \mathcal \mathcal P f,
     \end{equation}
     donde
     $$
-    (Pf)_n = \sum_{m=0}^\infty P_{nm} f_m = p_n f_{n+1} + r_n f_n + q_n f_{n-1}. 
+    (\mathcal P f)_n = \sum_{m=0}^\infty P_{nm} f_m = p_n f_{n+1} + r_n f_n + q_n f_{n-1}. 
     $$
-    Obsérvese que en realidad $Pf$ es el resultado de multiplicar la matriz $P$ por $f$ visto como un vector columna.
+    Obsérvese que en realidad $\mathcal P f$ es el resultado de multiplicar la matriz $\mathcal P$ por $f$ visto como un vector columna.
 
-    El objetivo es aplicar el teorema espectral a un operador que, aunque no será el propio $P$, estará muy relacionado con él. Primero nos aseguraremos de que $P$ verifica las hipótesis del teorema espectral.
+    El objetivo es aplicar el teorema espectral a un operador que, aunque no será el propio $\mathcal P$, estará muy relacionado con él. Primero nos aseguraremos de que $\mathcal P$ verifica las hipótesis del teorema espectral.
 
     \begin{lema}
-        El operador $P$ definido en \eqref{eq:operador-P} es un operador lineal, acotado y autoadjunto sobre el espacio de Hilbert $\ell^2_\pi(\N_0)$ cuya norma verifica $\|P\|\leq 1$.
+        El operador $\mathcal P$ definido en \eqref{eq:operador-P} es un operador lineal, acotado y autoadjunto sobre el espacio de Hilbert $\ell^2_\pi(\N_0)$ cuya norma verifica $\|\mathcal P\|\leq 1$.
     \end{lema}
     \begin{proof} Sean $f,g\in\ell^2_\pi(\N_0)$.
         \begin{itemize}
-            \item $Pf\in \ell^2_\pi(\N_0)$: Para asegurar que $Pf$ pertenece al espacio $\ell^2_\pi(\N_0)$, podemos comprobar que las sucesiones $\{p_n f_{n+1}\}_{n\geq 0}$, $\{r_n f_{n}\}_{n\geq 0}$ y $\{q_n f_{n-1}\}_{n\geq 0}$ son elementos de $\ell^2_\pi(\N_0)$, de forma que $Pf$ también lo será por ser suma de elementos de $\ell^2_\pi(\N_0)$. Así, tenemos que:
+            \item $\mathcal P f\in \ell^2_\pi(\N_0)$: Para asegurar que $\mathcal P f$ pertenece al espacio $\ell^2_\pi(\N_0)$, podemos comprobar que las sucesiones $\{p_n f_{n+1}\}_{n\geq 0}$, $\{r_n f_{n}\}_{n\geq 0}$ y $\{q_n f_{n-1}\}_{n\geq 0}$ son elementos de $\ell^2_\pi(\N_0)$, de forma que $\mathcal P f$ también lo será por ser suma de elementos de $\ell^2_\pi(\N_0)$. Así, tenemos que:
             \begin{equation*}
                 \begin{split}
                     \sum_{n=0}^\infty |p_n f_{n+1}|^2 \pi_n &= \sum_{n=0}^\infty p_n^2 |f_{n+1}|^2 \pi_n \\
@@ -148,13 +148,13 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
                     &= \sum_{n=0}^\infty |f_n|^2 \pi_n  < \infty
                 \end{split}
             \end{equation*}
-            Por tanto, estas tres sucesiones y también $Pf$ son elementos de $\ell^2_\pi(\N_0)$.
+            Por tanto, estas tres sucesiones y también $\mathcal P f$ son elementos de $\ell^2_\pi(\N_0)$.
 
             \item Lineal: Es trivial.
-            \item Acotado: Probar que un operador lineal en un espacio de Hilbert está acotado es equivalente a probar que es continuo. Es decir, que existe una constante $K\geq 0$ tal que $\|Pf\|_\pi\geq K\|f\|_\pi$. En efecto:
+            \item Acotado: Probar que un operador lineal en un espacio de Hilbert está acotado es equivalente a probar que es continuo. Es decir, que existe una constante $K\geq 0$ tal que $\|\mathcal P f\|_\pi\geq K\|f\|_\pi$. En efecto:
             \begin{equation*}
                 \begin{split}
-                    \|Pf\|_\pi &= \left(\sum_{n=0}^\infty |p_n f_{n+1} + r_n f_n + q_n f_{n-1}|^2 \pi_n\right)^{1/2} \\
+                    \|\mathcal P f\|_\pi &= \left(\sum_{n=0}^\infty |p_n f_{n+1} + r_n f_n + q_n f_{n-1}|^2 \pi_n\right)^{1/2} \\
                     &\leq \left(\sum_{n=0}^\infty |p_n f_{n+1}|^2\pi_n\right)^{1/2} + \left(\sum_{n=0}^\infty |r_n f_{n}|^2\pi_n\right)^{1/2} + \left(\sum_{n=0}^\infty |q_n f_{n-1}|^2\pi_n\right)^{1/2}  \\
                     &= \left(\sum_{n=0}^\infty p_n^2 |f_{n+1}|^2\pi_n\right)^{1/2} + \left(\sum_{n=0}^\infty r_n^2 |f_{n}|^2\pi_n\right)^{1/2} + \left(\sum_{n=0}^\infty q_n^2 |f_{n-1}|^2\pi_n\right)^{1/2}  \\
                     &= \left(\sum_{n=0}^\infty p_n |f_{n+1}|^2q_{n+1}\pi_{n+1}\right)^{1/2} + \left(\sum_{n=0}^\infty r_n^2 |f_{n}|^2\pi_n\right)^{1/2} \\ &\ \ \ \ + \left(\sum_{n=0}^\infty q_n |f_{n-1}|^2p_{n-1}\pi_{n-1}\right)^{1/2} \\
@@ -162,21 +162,21 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
                     &\leq 3  \|f\|_\pi,
                 \end{split}
             \end{equation*}
-            donde hemos usado la desigualdad triangular, las ecuaciones de simetría \eqref{eq:ecs-simetria} y que $0 <p_n,q_{n+1},r_n,q_n,p_{n-1}<1$. Por lo que el operador $P$ es continuo y por tanto acotado en $\ell^2_\pi(\N_0)$.
-            \item $\|P\|\leq 1$: Sabemos que $\|P\|= \min\{K\geq 0: \|Pf\|_\pi^2\leq \|f\|_\pi$. Sea $e = (1,0,0,\dots)$. Como $\|e\|_\pi = 1^2 \pi_0 =1<\infty$, tenemos que $e\in\ell^2_\pi(\N_0)$. Si aplicamos $P$ a este elemento, tenemos que $Pe = (r_0, q_1, 0, 0,\dots)$, por lo que
+            donde hemos usado la desigualdad triangular, las ecuaciones de simetría \eqref{eq:ecs-simetria} y que $0 <p_n,q_{n+1},r_n,q_n,p_{n-1}<1$. Por lo que el operador $\mathcal P$ es continuo y por tanto acotado en $\ell^2_\pi(\N_0)$.
+            \item $\|\mathcal P\|\leq 1$: Sabemos que $\|\mathcal P\|= \min\{K\geq 0: \|\mathcal P f\|_\pi^2\leq K\|f\|^2_\pi \ \ \forall f\in\ell^2_\pi(\N_0) \}$. Sea $e = (1,0,0,\dots)$. Como $\|e\|^2_\pi = 1^2 \pi_0 =1<\infty$, tenemos que $e\in\ell^2_\pi(\N_0)$. Si aplicamos $\mathcal{P}$ a este elemento, tenemos que $\mathcal{P}e = (r_0, q_1, 0, 0,\dots)$, por lo que
             $$
-            \|Pe\|^2_\pi= r_0^2\pi_0 + q_1^2\pi_1 = r_0^2\pi_0 +q_1 p_0 \pi_0 \leq r_0\pi_0 + p_0\pi_0 = (r_0+p_0)\pi_0 = 1.
+            \|\mathcal{P} e\|^2_\pi= r_0^2\pi_0 + q_1^2\pi_1 = r_0^2\pi_0 +q_1 p_0 \pi_0 \leq r_0\pi_0 + p_0\pi_0 = (r_0+p_0)\pi_0 = 1.
             $$
-            Entonces $\|Pe\|_\pi=\|e\|_\pi$, de donde necesariamente $\|P\|\leq 1$.
+            Entonces $\|\mathcal{P}e\|_\pi=\|e\|_\pi$, de donde necesariamente $\|\mathcal{P}\|\leq 1$.
 
             \item Autoadjunto: Recordemos la relación de simetría \eqref{eq:ecs-simetria} ($\pi_n p_n = \pi_{n+1}q_{n+1}$). Entonces
             \begin{equation*}
                 \begin{split}
-                    \prodesc{Pf}{g}_\pi&=\sum_{n=0}^\infty(p_n f_{n+1} + r_n f_n + q_n f_{n-1})g_n\pi_n\\
+                    \prodesc{\mathcal P f}{g}_\pi&=\sum_{n=0}^\infty(p_n f_{n+1} + r_n f_n + q_n f_{n-1})g_n\pi_n\\
                     &= \sum_{n=0}^\infty p_n f_{n+1}g_n\pi_n + \sum_{n=0}^\infty r_n f_{n}g_n\pi_n + \sum_{n=0}^\infty q_n f_{n-1}g_n\pi_n \\
                     &= \sum_{n=0}^\infty q_{n+1} f_{n+1}g_n\pi_{n+1} + \sum_{n=0}^\infty r_n f_{n}g_n\pi_n + \sum_{n=0}^\infty p_{n-1} f_{n-1}g_n\pi_{n-1} \\
                     &= \sum_{n=0}^\infty q_{n} f_{n}g_{n-1}\pi_{n} + \sum_{n=0}^\infty r_n f_{n}g_n\pi_n + \sum_{n=0}^\infty p_{n} f_{n}g_{n+1}\pi_{n} \\
-                    &= \sum_{n=0}^\infty f_n(p_n g_{n+1} + r_n g_n+ q_n g_{n-1})\pi_n = \prodesc{f}{Pg}_\pi.
+                    &= \sum_{n=0}^\infty f_n(p_n g_{n+1} + r_n g_n+ q_n g_{n-1})\pi_n = \prodesc{f}{\mathcal{P}g}_\pi.
                 \end{split}  
             \end{equation*}
 
@@ -184,16 +184,16 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     \end{proof}
 
-    Con este lema nos aseguramos que el operador $P$ verifica las condiciones del teorema espectral \ref{th:espectral} aunque, como se ha comentado con anterioridad, no es $P$ el operador al que le aplicaremos el teorema espectral. Estudiaremos antes unos particulares elementos de $\ell^2_\pi(\N_0)$.
+    Con este lema nos aseguramos que el operador $\mathcal{P}$ verifica las condiciones del teorema espectral \ref{th:espectral} aunque, como se ha comentado con anterioridad, no es $\mathcal{P}$ el operador al que le aplicaremos el teorema espectral. Estudiaremos antes unos particulares elementos de $\ell^2_\pi(\N_0)$.
 
     Para $i\geq 0$, denotamos con $e^{(i)}\in\ell^2_\pi(\N_0)$ a las sucesiones tales que $(e^{(i)})_j = \delta_{ij}/\pi_i$, que expresada en forma de vector columna tendrían la forma
     $$
     e^{(i)}=(\overbrace{0,\dots,0}^{(i-1)},1/\pi_i,0,\dots)^T.
     $$
-    Si aplicamos el operador $P$ a estos elementos, obtenemos
+    Si aplicamos el operador $\mathcal{P}$ a estos elementos, obtenemos
     \begin{equation*}
         \begin{split}
-            Pe^{(i)} &= (\overbrace{0,\dots,0}^{(i-2)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T \\
+            \mathcal{P}e^{(i)} &= (\overbrace{0,\dots,0}^{(i-2)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T \\
             &= (0,\dots,0, q_i/\pi_{i-1},  r_i/\pi_i, p_i/\pi_{i+1},0,\dots)^T \ \ \ \text{(por \eqref{eq:ecs-simetria})}\\
             &= q_i e^{(i-1)} + r_i e^{(i)} + p_i e^{(i+1)}.
         \end{split}
@@ -203,7 +203,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     \begin{equation}
         \label{eq:Pen}
-        Pe^{(n)} =  q_n e^{(n-1)} + r_n  e^{(n)} + p_n e^{(n+1)} \ \ \ (n\geq 1)
+        \mathcal{P}e^{(n)} =  q_n e^{(n-1)} + r_n  e^{(n)} + p_n e^{(n+1)} \ \ \ (n\geq 1)
     \end{equation}
 
     Seguidamente introduciremos un resultado para el cual conviene recordar que, dado un polinomio cualquiera $\pi(x)= a_0 + a_1 x + \cdots + a_n x^n$ y una matriz cuadrada $A$, es posible evaluar el polinomio en $A$ sin más que considerar
@@ -216,21 +216,21 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         \label{prop:formula-e}
         Para $n\geq 0$,
         \begin{equation}
-            Q_n(P)e^{(0)} = e^{(n)}
+            Q_n(\mathcal{P})e^{(0)} = e^{(n)}
         \end{equation}
     \end{proposicion}
     \begin{proof}
         Lo probaremos por inducción.
         \begin{itemize}
-            \item Caso base $n=0$. Tenemos que $Q_0(x)=1$, luego $Q_0(P)=I$. Por tanto $Q_0(P) e^{(0)} = e^{(0)}$.
+            \item Caso base $n=0$. Tenemos que $Q_0(x)=1$, luego $Q_0(\mathcal{P})=I$. Por tanto $Q_0(\mathcal{P}) e^{(0)} = e^{(0)}$.
             \item Caso base $n=1$. En este caso, por la segunda ecuación de \eqref{eq:polinomios-pnm} y teniendo en cuenta que $Q_0(x)=1$,
             $$
             Q_1(x) = \frac{1}{p_0}(x-r_0).
             $$
-            Por tanto, $Q_1(P) = \frac{1}{p_0}(P-r_0 I)$. Si multiplicamos por $e^{(0)}=(1,0,\dots)^T$ obtenemos:
+            Por tanto, $Q_1(\mathcal{P}) = \frac{1}{p_0}(\mathcal{P}-r_0 I)$. Si multiplicamos por $e^{(0)}=(1,0,\dots)^T$ obtenemos:
             \begin{equation*}
                 \begin{split}
-                    Q_1(P)e^{(0)} &=  \frac{1}{p_0}(P-r_0 I) e^{(0)} \\
+                    Q_1(\mathcal{P})e^{(0)} &=  \frac{1}{p_0}(\mathcal{P}-r_0 I) e^{(0)} \\
                     &=  \frac{1}{p_0} \begin{pmatrix}
                         0 & p_0 & 0  & \cdots & 0 \\
                         q_1 & r_1-r_0 & p_1 & \cdots & 0 \\
@@ -247,48 +247,48 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
             $$
             Q_{n+1}(x) = \dfrac{1}{p_n}((x-r_n)Q_n(x)-q_n Q_{n-1}(x)),
             $$
-            y si evaluamos matricialmente el polinomio en $P$ y multiplicamos por $e^{(0)}$:
+            y si evaluamos matricialmente el polinomio en $\mathcal{P}$ y multiplicamos por $e^{(0)}$:
             \begin{equation*}
                 \begin{split}
-                    Q_{n+1}(P)e^{(0)} &= \dfrac{1}{p_n}((P-r_n I)Q_n(P)e^{(0)}-q_n Q_{n-1}(P)e^{(0)}) \\
-                    &= \dfrac{1}{p_n}((P-r_n I)e^{(n)}-q_n e^{(n-1)}) \ \  \ \text{(aplicando la hipótesis de inducción)} \\
-                    &= \dfrac{1}{p_n}(Pe^{(n)} -r_n e^{(n)}-q_n e^{(n-1)}) \\
+                    Q_{n+1}(\mathcal{P})e^{(0)} &= \dfrac{1}{p_n}((\mathcal{P}-r_n I)Q_n(\mathcal{P})e^{(0)}-q_n Q_{n-1}(\mathcal{P})e^{(0)}) \\
+                    &= \dfrac{1}{p_n}((\mathcal{P}-r_n I)e^{(n)}-q_n e^{(n-1)}) \ \  \ \text{(aplicando la hipótesis de inducción)} \\
+                    &= \dfrac{1}{p_n}(\mathcal{P}e^{(n)} -r_n e^{(n)}-q_n e^{(n-1)}) \\
                     &= e^{(n+1)} \ \ \ \text{(por la igualdad \eqref{eq:Pen})}.
                 \end{split}
             \end{equation*}
         \end{itemize}
     \end{proof}
 
-    A nivel intuitivo, esta proposición nos dice que los elementos $e^{(n)}$ tal como los hemos definido son la primera columna de la matriz infinita que resulta al evaluar el $n$-ésimo polinomio $Q_n(x)$ definido en \eqref{eq:polinomios-pnm} matricialmente en la matriz $P$ definida en \eqref{eq:matriz-pnm}.
+    A nivel intuitivo, esta proposición nos dice que los elementos $e^{(n)}$ tal como los hemos definido son la primera columna de la matriz infinita que resulta al evaluar el $n$-ésimo polinomio $Q_n(x)$ definido en \eqref{eq:polinomios-pnm} matricialmente en la matriz $\mathcal{P}$ definida en \eqref{eq:matriz-pnm}.
 
     Seguidamente, buscaremos expresar la probabilidad $P_{ij}^{(n)}$ en función de productos escalares a los que podamos aplicar el teorema espectral. Así, tenemos
     \begin{equation*}
         \begin{split}
-            \prodesc{P^n e^{(j)}}{e^{(i)}}_\pi &= \prodesc{\left(\dfrac{1}{\pi_j}\left(P^n_{0,j},P^n_{1,j},\dots\right)\right)^T}{\left(0,0,\dots, \dfrac{1}{\pi_i},\dots \right)^T}_\pi \\
+            \prodesc{\mathcal{P}^n e^{(j)}}{e^{(i)}}_\pi &= \prodesc{\left(\dfrac{1}{\pi_j}\left(P^n_{0,j},P^n_{1,j},\dots\right)\right)^T}{\left(0,0,\dots, \dfrac{1}{\pi_i},\dots \right)^T}_\pi \\
             &= \dfrac{1}{\pi_j} \sum_{k=0}^\infty P^n_{k,j} \dfrac{\delta_{ik}}{\pi_i}\pi_k = \dfrac{P^n_{ij}}{\pi_j}=\dfrac{P^{(n)}_{ij}}{\pi_j}.
         \end{split}
     \end{equation*}
 
     Y si despejamos $P^{(n)}_{ij}$, obtenemos
     \begin{equation*}
-        P^{(n)}_{ij} = \pi_j \prodesc{P^n e^{(j)}}{e^{(i)}}_\pi,
+        P^{(n)}_{ij} = \pi_j \prodesc{\mathcal{P}^n e^{(j)}}{e^{(i)}}_\pi,
     \end{equation*}
     que aplicando la proposición \ref{prop:formula-e} podemos escribir como
     \begin{equation*}
-        P^{(n)}_{ij} = \pi_j \prodesc{P^n Q_j(P)e^{(0)}}{Q_{i}(P)e^{(0)}}_\pi.
+        P^{(n)}_{ij} = \pi_j \prodesc{\mathcal{P}^n Q_j(\mathcal{P})e^{(0)}}{Q_{i}(\mathcal{P})e^{(0)}}_\pi.
     \end{equation*}
-    Aplicando que $P$, y por tanto $P^k$ para $k=0,\dots,i$ es un operador autoadjunto, tenemos
+    Aplicando que $\mathcal{P}$, y por tanto $\mathcal{P}^k$ para $k=0,\dots,i$ es un operador autoadjunto, tenemos
     \begin{equation*}
-        P^{(n)}_{ij} = \pi_j \prodesc{P^n Q_j(P)Q_{i}(P)e^{(0)}}{e^{(0)}}_\pi.
+        P^{(n)}_{ij} = \pi_j \prodesc{\mathcal{P}^n Q_j(\mathcal{P})Q_{i}(\mathcal{P})e^{(0)}}{e^{(0)}}_\pi.
     \end{equation*}
 
-    Atendiendo al último párrafo del apéndice \ref{appendix:teorema-espectral} y aplicando el teorema espectral \ref{th:espectral}, tomando $\mathcal{H}=\ell_\pi^2(\N_0)$, $f(x)=x^n Q_j(x)Q_i(x)$, $T=f(P)$, $x=y=e^{(0)}$, podemos afirmar que existe una medida $\psi=E_{e^{(0)},e^{(0)}}$, cuyo soporte está contenido en $[-\|P\|,\|P\|]\subseteq[-1,1]$, tal que 
+    Atendiendo al último párrafo del apéndice \ref{appendix:teorema-espectral} y aplicando el teorema espectral \ref{th:espectral}, tomando $\mathcal{H}=\ell_\pi^2(\N_0)$, $f(x)=x^n Q_j(x)Q_i(x)$, $T=f(\mathcal{P})$, $x=y=e^{(0)}$, podemos afirmar que existe una medida $\psi=E_{e^{(0)},e^{(0)}}$, cuyo soporte está contenido en $[-\|\mathcal{P}\|,\|\mathcal{P}\|]\subseteq[-1,1]$, tal que 
     \begin{equation*}
-        \int_{-1}^1 f(x)d\psi(x) = \prodesc{f(P)e^{(0)}}{e^{(0)}}_\pi,
+        \int_{-1}^1 f(x)d\psi(x) = \prodesc{f(\mathcal{P})e^{(0)}}{e^{(0)}}_\pi,
     \end{equation*}
     es decir
     \begin{equation*}
-        \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x) = \prodesc{P^n Q_j(P)Q_i(P)e^{(0)}}{e^{(0)}}_\pi = \dfrac{P_{ij}^{(n)}}{\pi_j}.
+        \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x) = \prodesc{\mathcal{P}^n Q_j(\mathcal{P})Q_i(\mathcal{P})e^{(0)}}{e^{(0)}}_\pi = \dfrac{P_{ij}^{(n)}}{\pi_j}.
     \end{equation*}
     De donde deducimos la fórmula de representación
     \begin{equation*}
@@ -298,7 +298,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     Resumimos esta deducción en el siguiente teorema.
 
     \begin{teorema}[Fórmula de Representación de Karlin-McGregor]
-        Sea $\{X_n, n\geq 0\}$ un proceso de nacimiento y muerte discreto con matriz de transición $P$ definida como en \eqref{eq:matriz-pnm}. Entonces existe una única medida $\psi$, con soporte contenido en el intervalo $[-1,1]$ tal que para cualesquiera estados $i,j$ y cualquier instante $n$ se tiene que
+        Sea $\{X_n, n\geq 0\}$ un proceso de nacimiento y muerte discreto con matriz de transición $\mathcal{P}$ definida como en \eqref{eq:matriz-pnm}. Entonces existe una única medida $\psi$, con soporte contenido en el intervalo $[-1,1]$ tal que para cualesquiera estados $i,j$ y cualquier instante $n$ se tiene que
         \begin{equation}
             \label{eq:formula-representacion}
             P_{ij}^{(n)}=\pi_j \int_{-1}^1 x^n Q_j(x)Q_i(x)d\psi(x).
@@ -314,7 +314,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         Los polinomios $\{Q_n\}$ definidos en \eqref{eq:polinomios-pnm} son ortogonales respecto a la medida $\psi$.
     \end{corolario}
     \begin{proof}
-        Si tomamos $n=0$ en la fórmula de representación \eqref{eq:formula-representacion} y recordamos que $P^{(0)}=I$, la matriz identidad, que en este caso sería infinita, obtenemos
+        Si tomamos $n=0$ en la fórmula de representación \eqref{eq:formula-representacion} y recordamos que $\mathcal{P}^{(0)}=I$, la matriz identidad, que en este caso sería infinita, obtenemos
         $$
         \int_{-1}^1 Q_j(x)Q_i(x)d\psi(x) = \frac{1}{\pi_j}\delta_{ij}.
         $$
@@ -407,18 +407,18 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
        P_{ij}(t) := P[X_{t}=j|X_0=i]  \ \ \ t>0.
     \end{equation}
     
-    De esta forma, vemos que las probabilidades de transición se expresan en función del tiempo, de forma que lo que en el caso discreto era la matriz de transición $P$ dada en \eqref{eq:matriz-trans}, ahora es una función matricial $P(t)$:
+    De esta forma, vemos que las probabilidades de transición se expresan en función del tiempo, de forma que lo que en el caso discreto era la matriz de transición $\mathcal{P}$ dada en \eqref{eq:matriz-trans}, ahora es una función matricial $\mathcal{P}(t)$:
 
     \begin{equation}
         \label{eq:matriz-trans-cont}
         \begin{array}{ccc}
-            P(t)=\begin{pmatrix}
+            \mathcal{P}(t)=\begin{pmatrix}
                 P_{00}(t) & P_{01}(t) & \cdots & P_{0N}(t) \\
                 P_{10}(t) & P_{11}(t) & \cdots & P_{1N}(t) \\
                 \vdots & \vdots & \ddots & \vdots \\
                 P_{N0}(t) & P_{N1}(t) & \cdots & P_{NN}(t)  
             \end{pmatrix} & \text{ ó } &
-            P(t)=\begin{pmatrix}
+            \mathcal{P}(t)=\begin{pmatrix}
                 P_{00}(t) & P_{01}(t) & P_{02}(t) & \cdots  \\
                 P_{10}(t) & P_{11}(t) & P_{12}(t) & \cdots  \\
                 P_{20}(t) & P_{21}(t) & P_{22}(t) & \cdots  \\
@@ -434,7 +434,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     \begin{equation}
         \label{eq:matriz-pnm-cont}
-        P(t) = \begin{pmatrix}
+        \mathcal{P}(t) = \begin{pmatrix}
             P_{00}(t) & P_{01}(t) & 0 & 0  & \cdots \\
             P_{10}(t) & P_{11}(t) & P_{12}(t) & 0  & \cdots \\
 
