@@ -118,7 +118,18 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     $$
     Obsérvese que en realidad $\mathcal P f$ es el resultado de multiplicar la matriz $\mathcal P$ por $f$ visto como un vector columna.
 
-    El objetivo es aplicar el teorema espectral a un operador que, aunque no será el propio $\mathcal P$, estará muy relacionado con él. Primero nos aseguraremos de que $\mathcal P$ verifica las hipótesis del teorema espectral.
+    El objetivo es aplicar el teorema espectral a un operador que, aunque no será el propio $\mathcal P$, estará muy relacionado con él. Primero nos aseguraremos de que $\mathcal P$ verifica las hipótesis del teorema espectral. Para ello, introduciremos antes unos particulares elementos de $\ell^2_\pi(\N_0)$.
+
+    Para $i\geq 0$, denotamos con $e^{(i)}\in\ell^2_\pi(\N_0)$ a las sucesiones tales que $(e^{(i)})_j = \delta_{ij}/\pi_i$, que expresada en forma de vector columna tendrían la forma
+    $$
+    e^{(i)}=(\overbrace{0,\dots,0}^{(i-1)},1/\pi_i,0,\dots)^T.
+    $$
+    Obsérvese que, para cualquier $f\in\ell^2_\pi(\N_0)$, es posible expresar $f$ como combinación lineal de los elementos $\{e^{(i)}\}_{i\geq 0}$:
+    \begin{equation}
+        \label{eq:f-comb-ei}
+        f = \sum_{i=0}^{\infty}a_i e^{(i)}.
+    \end{equation}
+    Con esta información en mente enunciamos el siguiente lema:
 
     \begin{lema}
         El operador $\mathcal P$ definido en \eqref{eq:operador-P} es un operador lineal, acotado y autoadjunto sobre el espacio de Hilbert $\ell^2_\pi(\N_0)$ cuya norma verifica $\|\mathcal P\|\leq 1$.
@@ -151,7 +162,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
             Por tanto, estas tres sucesiones y también $\mathcal P f$ son elementos de $\ell^2_\pi(\N_0)$.
 
             \item Lineal: Es trivial.
-            \item Acotado: Probar que un operador lineal en un espacio de Hilbert está acotado es equivalente a probar que es continuo. Es decir, que existe una constante $K\geq 0$ tal que $\|\mathcal P f\|_\pi\geq K\|f\|_\pi$. En efecto:
+            \item Acotado: Probar que un operador lineal en un espacio de Hilbert está acotado es equivalente a probar que es continuo. Es decir, que existe una constante $K\geq 0$ tal que $\|\mathcal P f\|_\pi\leq K\|f\|_\pi$. En efecto:
             \begin{equation*}
                 \begin{split}
                     \|\mathcal P f\|_\pi &= \left(\sum_{n=0}^\infty |p_n f_{n+1} + r_n f_n + q_n f_{n-1}|^2 \pi_n\right)^{1/2} \\
@@ -163,11 +174,30 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
                 \end{split}
             \end{equation*}
             donde hemos usado la desigualdad triangular, las ecuaciones de simetría \eqref{eq:ecs-simetria} y que $0 <p_n,q_{n+1},r_n,q_n,p_{n-1}<1$. Por lo que el operador $\mathcal P$ es continuo y por tanto acotado en $\ell^2_\pi(\N_0)$.
-            \item $\|\mathcal P\|\leq 1$: Sabemos que $\|\mathcal P\|= \min\{K\geq 0: \|\mathcal P f\|_\pi^2\leq K\|f\|^2_\pi \ \ \forall f\in\ell^2_\pi(\N_0) \}$. Sea $e = (1,0,0,\dots)$. Como $\|e\|^2_\pi = 1^2 \pi_0 =1<\infty$, tenemos que $e\in\ell^2_\pi(\N_0)$. Si aplicamos $\mathcal{P}$ a este elemento, tenemos que $\mathcal{P}e = (r_0, q_1, 0, 0,\dots)$, por lo que
-            $$
-            \|\mathcal{P} e\|^2_\pi= r_0^2\pi_0 + q_1^2\pi_1 = r_0^2\pi_0 +q_1 p_0 \pi_0 \leq r_0\pi_0 + p_0\pi_0 = (r_0+p_0)\pi_0 = 1.
-            $$
-            Entonces $\|\mathcal{P}e\|_\pi=\|e\|_\pi$, de donde necesariamente $\|\mathcal{P}\|\leq 1$.
+            
+            \item $\|\mathcal P\|\leq 1$: Sabemos que $\|\mathcal P\|= \min\{K\geq 0: \|\mathcal P f\|_\pi^2\leq K\|f\|^2_\pi \ \ \forall f\in\ell^2_\pi(\N_0) \}$. Si aplicamos \eqref{eq:f-comb-ei} y expresamos cualquier $f\in\ell^2_\pi(\N_0)$ como combinación lineal de los elementos $\{e^{(i)}\}_{n\geq 0}$, observamos que $f =\left(\dfrac{a_0}{\pi_0},\dfrac{a_1}{\pi_1},\dfrac{a_2}{\pi_2},\dots\right)^T$, por lo que $\|f\|_\pi=\displaystyle\sum_{i=0}^\infty\dfrac{a_i^2}{\pi_i}$. Por otro lado, demostraremos que $\|\mathcal{P}\left(a_i e^{(i)}\right)\|_\pi\leq \|a_i e^{(i)}\|_\pi, i\geq 0$.
+            
+            Fácilmente podemos deducir que $$\mathcal{P}\left(a_i e^{(i)}\right) = a_i(\overbrace{0,\dots,0}^{(i-2)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T.$$ Si calculamos la norma de este elemento y operamos se obtiene
+            \begin{equation*}
+                \begin{split}
+                    \left\|\mathcal{P}\left(a_i e^{(i)}\right)\right\|_\pi^2 &= a_i^2\left(\dfrac{p_{i-1}^2\pi_{i-1}}{\pi_i^2}+\dfrac{r_{i}^2\pi_{i}}{\pi_i^2}+\dfrac{q_{i+1}^2\pi_{i+1}}{\pi_i^2}\right) \\
+                    &= a_i^2\left(\dfrac{p_{i-1}q_i}{\pi_i}+\dfrac{r_{i}^2}{\pi_i}+\dfrac{q_{i+1}p_i}{\pi_i}\right)  \ \ \ \text{(por \eqref{eq:ecs-simetria} y simplificando)} \\
+                    &\leq  \dfrac{a_i^2}{\pi_i}(q_i+r_i+p_i) \ \ \ \ (0\leq p_{i-1},r_i, q_{i+1}\leq 1) \\
+                    &= \dfrac{a_i^2}{\pi} = \|a_i e^{(i)}\|_\pi^2
+                \end{split}
+            \end{equation*}
+
+            A partir de la desigualdad $\|\mathcal{P}\left(a_i e^{(i)}\right)\|_\pi\leq \|a_i e^{(i)}\|_\pi$ probaremos que $\|\mathcal{P} f \|_\pi \leq \|f\|_\pi$:
+
+            \begin{equation*}
+                \begin{split}
+                    \|\mathcal{P} f \|_\pi &=\left\| \mathcal{P}\left(\sum_{i=0}^\infty a_i e^{(i)}\right) \right\|_\pi = \left\| \sum_{i=0}^\infty \mathcal{P} \left(a_i e^{(i)}\right) \right\|_\pi \\
+                    &\leq \sum_{i=0}^\infty \left\|  \mathcal{P} \left(a_i e^{(i)}\right) \right\|_\pi \ \ \ \text{(desigualdad triangular)} \\
+                    &\leq \sum_{i=0}^\infty \left\|a_i e^{(i)}\right\|_\pi \\
+                    &= \sum_{i=0}^\infty \dfrac{a_i^2}{\pi_i} = \| f \|_\pi.
+                 \end{split}
+            \end{equation*}
+            Esto es, $ \|\mathcal{P} f \|_\pi \leq \|f\|_\pi \ \ \ \forall f\in\ell^2_\pi(\N_0)$, por lo que necesariamente $\|P\|\leq 1$.
 
             \item Autoadjunto: Recordemos la relación de simetría \eqref{eq:ecs-simetria} ($\pi_n p_n = \pi_{n+1}q_{n+1}$). Entonces
             \begin{equation*}
@@ -184,13 +214,9 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
 
     \end{proof}
 
-    Con este lema nos aseguramos que el operador $\mathcal{P}$ verifica las condiciones del teorema espectral \ref{th:espectral} aunque, como se ha comentado con anterioridad, no es $\mathcal{P}$ el operador al que le aplicaremos el teorema espectral. Estudiaremos antes unos particulares elementos de $\ell^2_\pi(\N_0)$.
+    Con este lema nos aseguramos que el operador $\mathcal{P}$ verifica las condiciones del teorema espectral \ref{th:espectral} aunque, como se ha comentado con anterioridad, no es $\mathcal{P}$ el operador al que le aplicaremos el teorema espectral. 
 
-    Para $i\geq 0$, denotamos con $e^{(i)}\in\ell^2_\pi(\N_0)$ a las sucesiones tales que $(e^{(i)})_j = \delta_{ij}/\pi_i$, que expresada en forma de vector columna tendrían la forma
-    $$
-    e^{(i)}=(\overbrace{0,\dots,0}^{(i-1)},1/\pi_i,0,\dots)^T.
-    $$
-    Si aplicamos el operador $\mathcal{P}$ a estos elementos, obtenemos
+    Seguidamente, obtendremos una expresión alternativa de $\mathcal{P}e^{(i)}$. Si aplicamos el operador $\mathcal{P}$ a $e^{(i)}$, obtenemos
     \begin{equation*}
         \begin{split}
             \mathcal{P}e^{(i)} &= (\overbrace{0,\dots,0}^{(i-2)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T \\
@@ -340,13 +366,13 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         \end{equation}
         
         Los polinomios de Jacobi $P^{(\alpha,\beta)}_n(x)$, particularizando al caso $\alpha=\beta$, siguen la relación de recurrencia dada por (consúltese apéndice \ref{appendix:tablas}):
-
         $$
-            (2n+2\alpha)_3\, x P^{(\alpha,\alpha)}_n(x) = 2(n+1)(n+2\alpha+1)(2n+2\alpha)P^{(\alpha,\alpha)}_{n+1}(x) + 2(n+\alpha)^2(2n+2\alpha+2)P^{(\alpha,\alpha)}_{n-1}(x)
-        $$o equivalentemente \begin{equation}
+            (2n+2\alpha)_3\, x P^{(\alpha,\alpha)}_n(x) = 2(n+1)(n+2\alpha+1)(2n+2\alpha)P^{(\alpha,\alpha)}_{n+1}(x) + 2(n+\alpha)^2(2n+2\alpha+2)P^{(\alpha,\alpha)}_{n-1}(x),
+        $$o quivalentemente\begin{equation}
             \label{eq:ecuaciones-jacobi-ejemplo}
             x P^{(\alpha,\alpha)}_n(x) = \dfrac{2(n+1)(n+2\alpha+1)}{(2n+2\alpha+1)(2n+2\alpha+2)} P^{(\alpha,\alpha)}_{n+1}(x) + \dfrac{n+\alpha}{2n+2\alpha+1}P^{(\alpha,\alpha)}_{n-1}(x)
         \end{equation}
+        
         
         Consideramos $Q_n$ como la estandarización de los polinomios de Jacobi según:
         \begin{equation}
@@ -453,7 +479,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         \item Asumimos que $\lambda_0>0$, $\lambda_i, \mu_i > 0$, $i\geq 1$.
     \end{enumerate}
 
-    Los parámetros $\lambda_i, \mu_i$ son las llamadas \textbf{tasas de nacimiento y muerte}, respectivamente. En los puntos 1 y 2 afirmamos que, si el proceso empieza en el estado $i$, en un intervalo pequeño de tiempo las probabilidades de avanar o retroceder son aproximadamente proporcionales a la longitud del intervalo, siendo $\lambda_i$ y $\mu_i$ las constantes que marcan esta proporcionalidad. En el punto 3 asumimos que no existen otras posibles transiciones que avanzar, retroceder o mantenerse en el estado $i$.
+    Los parámetros $\lambda_i, \mu_i$ son las llamadas \textbf{tasas de nacimiento y muerte}, respectivamente. En los puntos 1 y 2 afirmamos que, si el proceso empieza en el estado $i$, en un intervalo pequeño de tiempo las probabilidades de avanzar o retroceder son aproximadamente proporcionales a la longitud del intervalo, siendo $\lambda_i$ y $\mu_i$ las constantes que marcan esta proporcionalidad. En el punto 3 asumimos que no existen otras posibles transiciones que avanzar, retroceder o mantenerse en el estado $i$.
 
     Las constantes $\{\mu_i\}, \{\lambda_i\}$ determinan por completo el comportamiento del proceso. Recogemos toda esta información en una matriz concreta.
     
@@ -520,7 +546,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     \begin{equation*}
         \begin{array}{c}
             -xQ_n(x) = \lambda_n Q_{n+1}(x) - (\lambda_n+\mu_n)Q_n(x) +\mu_n Q_{n-1}(x) \Leftrightarrow \\
-            -x Q_n(x) = (n+\beta)\kappa Q_{n+1}(x) -(2n+\beta)\kappa Q_n(x) + n\kappa Q_{n-1}(x)
+            -x Q_n(x) = (n+\beta)\,\kappa\, Q_{n+1}(x) -(2n+\beta)\,\kappa\, Q_n(x) + n\,\kappa\, Q_{n-1}(x)
         \end{array}
     \end{equation*}
     Si dividimos la ecuación entre $\kappa$, obtenemos

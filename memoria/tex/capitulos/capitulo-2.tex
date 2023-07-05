@@ -138,7 +138,7 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
     Diremos que una SPO $\{P_n\}$ es \textbf{clásica respecto a una función peso} $\rho(x)$ si existen polinomios $\sigma(x),\tau(x)$ con $\deg(\sigma)\leq 2$ y $\deg(\tau)=1$ tales que, asumiendo las condiciones de frontera \eqref{eq:cond-frontera}, entonces $\rho(x)$ es solución de la ecuación diferencial \eqref{eq:Pearson-peso}.
 \end{definicion}
 
-Notemos que esta definición, gracias al lema \ref{lema:equivalencia-pearson}, es equivalente a la definición \ref{def:SPO-clasica} definiendo el funcional $\mathbf{u}$ a partir del peso $\rho$ como en \eqref{eq:funcional-peso}.
+Notemos que esta definición, siempre que se cumplan las condiciones de frontera \eqref{eq:cond-frontera}, gracias al lema \ref{lema:equivalencia-pearson}    es equivalente a la definición \ref{def:SPO-clasica} definiendo el funcional $\mathbf{u}$ a partir del peso $\rho$ como en \eqref{eq:funcional-peso}.
 
 
 \section{Deducción de las familias de polinomios ortogonales clásicos}
@@ -190,7 +190,7 @@ Por tanto, la sucesión de polinomios ortogonales con respecto al funcional
     \label{eq:func-hermite}
     \prodesc{\uu}{\pi(x)} = \int_{-\infty}^\infty \pi(x)e^{-x^2}dx
 \end{equation}
-es clásica, y sus elementos son los \textbf{polinomios de Hermite}, normalmente denotados como $\{H_n(x)\}_{n\geq 0}$. Estos polinomios reciben este nombre en honor al matemático francés \textsc{Charles Hermite} (1822--1901) , quien los investigó en el siglo XIX y los relacionó con problemas de mecánica cuántica.
+es clásica, y sus elementos son los \textbf{polinomios de Hermite}, normalmente denotados como $\{H_n(x)\}_{n\geq 0}$. Estos polinomios reciben este nombre en honor al matemático francés \textsc{Charles Hermite} (1822--1901), quien los investigó en el siglo XIX y los relacionó con problemas de mecánica cuántica.
 
 \subsection{Caso II: Polinomios de Laguerre}
 
@@ -218,7 +218,7 @@ es clásica, y sus elementos son los \textbf{polinomios de Laguerre}, que son de
 
 \subsection{Caso III: Polinomios de Jacobi}
 
-Por último, consideremos $\sigma(x) = 1-x^2$ y $\tau(x)=Ax+B$. Ahora $\sigma$ tiene raíces simples en $x=-1,1$. Por este motivo, la solución $\rho$ de la ecuación de Pearson debe estar necesariamente definida en $(-\infty,-1)$, $(-1,1)$ ó $(1,+\infty)$.
+Por último, consideremos $\sigma(x) = 1-x^2$ y $\tau(x)=Ax+B$. Ahora $\sigma$ tiene raíces simples en $x=-1,1$. Por este motivo, la solución $\rho$ de la ecuación de Pearson debe estar necesariamente definida en $(-\infty,-1)$, $(-1,1)$ o $(1,+\infty)$.
 \begin{equation*}
     \begin{split}
         \rho(x)&=\dfrac{1}{1-x^2}\exp\left\{\int_{x_0}^x\dfrac{At+B}{1-t^2}dt\right\}\\
@@ -480,7 +480,8 @@ Originalmente, \textsc{Olinde Rodrigues} (1816), \textsc{James Ivory} (1824) y \
     donde $\rho(x)$ es una solución de la ecuación de Pearson (\ref{eq:Pearson-peso}).
 \end{teorema}
 \begin{proof}
-    Por simplicidad en la notación, en esta demostración será omitida y asumida la dependencia de $x$ en las distintas funciones.
+    Por simplicidad en la notación, en esta demostración será omitida y asumida la dependencia de $x$ en las distintas funciones. Comenzaremos demostrando que las funciones $y_n$ dadas en \eqref{eq:formula-rodrigues} son, en efecto, soluciones de la ecuación hipergeométrica, para posteriormente probar que, pese a su aspecto, se trata de polinomios de grado a lo sumo $n$.
+
     Al ser $\rho$ una solución de la ecuación de Pearson (\ref{eq:Pearson-peso}), tenemos que
     \begin{equation*}
         \begin{split}
@@ -495,7 +496,7 @@ Originalmente, \textsc{Olinde Rodrigues} (1816), \textsc{James Ivory} (1824) y \
         \sigma(\rho \sigma^n)'=\rho \sigma^n ((n-1)\sigma'+\tau)
     \end{equation}
 
-    Derivamos ahora la ecuación (\ref{eq:rodrigues1}) $n+1$ veces y dividimos entre la función peso $\rho(x)$. Para derivar la ecuación (\ref{eq:rodrigues1}) $n+1$ veces aplicamos la fórmula de Leibniz\footnote{Fórmula de Leibniz: Sean $u,v:I\longrightarrow\R$ dos funciones reales $n$-veces derivables en $I\subseteq\R$, entonces se verifica en I que $(uv)^{(n)}=\nolinebreak\sum_{k=0}^n \binom{n}{k} u^{(k)}v^{(n-k)}$.} y tenemos en cuenta que, como $\sigma$ tiene grado a lo sumo 2 el miembro de la izquierda se anularía a partir de la tercera derivada. Análogamente, como $\sigma',\tau$ tienen grado a lo sumo 1 el miembro derecho se anularía a partir de la segunda derivada. Así:
+    Derivamos ahora la ecuación (\ref{eq:rodrigues1}) $n+1$ veces y dividimos entre la función peso $\rho(x)$. Para derivar la ecuación (\ref{eq:rodrigues1}) $n+1$ veces aplicamos la fórmula de Leibniz\footnote{Fórmula de Leibniz: Sean $u,v:I\longrightarrow\R$ dos funciones reales $n$-veces derivables en $I\subseteq\R$, entonces se verifica en I que $(uv)^{(n)}=\nolinebreak\sum_{k=0}^n \binom{n}{k} u^{(k)}v^{(n-k)}$.} y tenemos en cuenta que, como $\sigma$ tiene grado a lo sumo 2 la suma resultante del primer miembro tan solo tiene tres sumandos (pues al derivar por tercera vez o superior $\sigma$ el respectivo sumando se anula). Análogamente, como $\sigma',\tau$ tienen grado a lo sumo 1 el miembro derecho únicamente tiene dos sumandos. Así:
 
     $$
     \frac{d^{n+1}}{d x^{n+1}}\left(\sigma(\rho \sigma^n)'\right)= \sigma \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) + (n+1)\sigma'\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) + \frac{(n+1)n}{2}\sigma''\frac{d^{n}}{d x^{n}} \left(\rho\sigma^n \right),
@@ -529,21 +530,22 @@ Originalmente, \textsc{Olinde Rodrigues} (1816), \textsc{James Ivory} (1824) y \
     Entonces la ecuación (\ref{eq:rodrigues4}) puede reducirse a 
     \begin{equation}
         \label{eq:rodrigues5}
-        \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) = \sigma y_n'' + \frac{2(\tau-\sigma')}\rho\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\sigma'' - \tau' - \dfrac{\tau-\sigma'}\rho\right)y_n.
+        \frac{\sigma}{\rho} \frac{d^{n+2}}{d x^{n+2}} \left(\rho\sigma^n\right) = \sigma y_n'' + \frac{2(\tau-\sigma')}\rho\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\sigma'' - \tau' + \dfrac{\tau-\sigma'}\sigma\right)y_n.
     \end{equation}
 
     Si ahora sustituimos (\ref{eq:rodrigues5}) en (\ref{eq:rodrigues3}), con algunas simplificaciones obtenemos
     \begin{equation}
-        \sigma y_n'' + \frac{\tau}{\rho} \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\frac{n^2-n}{2}\sigma''+n\tau'-\frac{\tau(\tau-\sigma')}{\sigma}  \right)y_n = 0.
+        \label{eq:rodrigues5.5}
+        \sigma y_n'' + \frac{\tau}{\rho} \frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) - \left(\frac{n^2-n}{2}\sigma''+n\tau'+\frac{\tau(\tau-\sigma')}{\sigma}  \right)y_n = 0.
     \end{equation}
     El último paso es aplicar la identidad 
     \begin{equation}
         \label{eq:rodrigues6}
-        \frac{\tau}{\rho}\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) = \tau y_n'-\frac{\tau(\tau-\sigma')}{\sigma}y_n.
+        \frac{\tau}{\rho}\frac{d^{n+1}}{d x^{n+1}} \left(\rho\sigma^n \right) = \tau y_n'+\frac{\tau(\tau-\sigma')}{\sigma}y_n.
     \end{equation}
     De forma similar a la ecuación (\ref{eq:rodrigues5}), esta expresión se obtiene al derivar una sola vez el producto $\left(\dfrac 1 {\rho}\right)\cdot\nolinebreak\left(\dfrac{d^n}{dx^n} (\rho\sigma^n)\right)$, intercambiando miembros de la igualdad y teniendo en cuenta el valor de $\rho'$ deducido de la ecuación de Pearson. 
 
-    Sustituyendo (\ref{eq:rodrigues6}) en (\ref{eq:rodrigues5}) llegamos finalmente a 
+    Sustituyendo (\ref{eq:rodrigues6}) en (\ref{eq:rodrigues5.5}) llegamos finalmente a 
     \begin{equation}
         \sigma y_n'' + \tau y_n' - \left(\frac{n^2-n}{2}\sigma'' + n\tau' \right)y_n =0.
     \end{equation}
@@ -646,7 +648,7 @@ Ahora sí, utilizando la ortogonalidad comprobaremos que el grado de las solucio
     \end{equation*}
     Por el lema \ref{lema:derivadas-raras}, tenemos que
     $$
-    \dfrac{d^{n-1}}{dx^{n-1}} = \tilde P_{n-1}(x) \sigma^{n-1}(x)\rho(x),
+    \dfrac{d^{n-1}}{dx^{n-1}}(\rho(x)\sigma^n(x)) = \tilde P_{n-1}(x) \sigma(x)\rho(x),
     $$
     siendo $\tilde P_{n-1}(x)$ un polinomio de grado a lo sumo $n-1$. En definitiva, la expresión (1) se puede reducir a $\psi(x)\sigma(x)\rho(x)$ siendo $\psi(x)=\displaystyle\sum_{k=0}^{\deg(\psi)}c_k x^k$ un polinomio. Entonces, aplicando las condiciones de frontera \eqref{eq:cond-frontera}, tenemos que (1) vale $0$, por lo que
     $$
@@ -735,7 +737,7 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
     
     Y la fórmula de Rodrigues, teniendo en cuenta que se suele tomar $B_n=\frac{(-1)^n}{2^n n!}$, sería:
     $$
-    P_n^{(\alpha,\beta)}(x) = \frac{(-1)^n}{2^n n!} (1-x)^{-\alpha}(1+x)^{-\beta}\frac{d^n}{d x^n}(1-x)^{n+\alpha}(1+x)^{n+\beta}.
+    P_n^{(\alpha,\beta)}(x) = \frac{(-1)^n}{2^n n!} (1-x)^{-\alpha}(1+x)^{-\beta}\frac{d^n}{d x^n}\left[(1-x)^{n+\alpha}(1+x)^{n+\beta}\right].
     $$
 \end{ejemplo}
 
@@ -816,7 +818,7 @@ En la imagen  \ref{img:graficas-Laguerre-alpha}(c) presentamos de nuevo polinomi
     \label{img:graficas-Laguerre-alpha}
 \end{figure}
 
-Véamos ahora el efecto que tiene en las gráficas el aumento del grado $n$. Para ello, fijamos $\alpha=0$ y observamos algunas imágenes en las que se ha modificado el grado. En la imagen \ref{img:graficas-Laguerre-n}(a) podemos observar las gráficas de grados 0, 1 y 2, mientras que en la imagen (b) se representan los polinomios de grados 3, 4 y 5 y en la (c) los grados 6, 7 y 8.
+Veamos ahora el efecto que tiene en las gráficas el aumento del grado $n$. Para ello, fijamos $\alpha=0$ y observamos algunas imágenes en las que se ha modificado el grado. En la imagen \ref{img:graficas-Laguerre-n}(a) podemos observar las gráficas de grados 0, 1 y 2, mientras que en la imagen (b) se representan los polinomios de grados 3, 4 y 5 y en la (c) los grados 6, 7 y 8.
 
 \begin{figure}[h]
     \centering

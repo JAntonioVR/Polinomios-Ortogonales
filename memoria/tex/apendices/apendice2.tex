@@ -12,7 +12,7 @@
     Denotamos como $\mathcal{B}(\mathcal{H})$ al conjunto de todos los operadores lineales de $\mathcal{H}$ en sí mismo. Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal. $T$ es un operador acotado si, dado un subconjunto $A\subseteq \mathcal{H}$ acotado, $T(A)$ también es acotado. Es decir, un operador lineal acotado transforma conjuntos acotados en conjuntos acotados. Equivalentemente, un operador lineal es acotado si, y solo si es continuo, es decir, si existe una constante $K\geq 0$ tal que, para todo $x\in\mathcal H$, $\|Tx\|\leq K\|x\|$. A partir de esta equivalencia presentamos la siguiente definición.
 
     \begin{definicion}
-        Sea $\mathcal{H}$ un espacio de Hilbert y $T:\mathcal H \longrightarrow \mathcal{H}$ un perador lineal continuo ($\Leftrightarrow$ acotado). Se define la \textbf{norma del operador} $T$ como
+        Sea $\mathcal{H}$ un espacio de Hilbert y $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal continuo ($\Leftrightarrow$ acotado). Se define la \textbf{norma del operador} $T$ como
         \begin{equation}
             \label{eq:norma-operadores}
             \|T\|:= \min\{K\geq 0: \|Tx\|\leq K\|x\|\}.
@@ -29,7 +29,7 @@
         \end{equation}
     \end{definicion}
 
-    Por último, recordemos que el espectro de una matriz cuadrada $A\in\R^{N\times N}$, denotado como $\sigma(A)$ es el conjunto de sus valores propios. Es decir, los números $\lambda\in\C$ tales que el determinante de la matriz $A-\lambda I_N$ se anulaba. Dicho de otra manera, si nos planteamos el endomorfismo de $\R^N$ $x\mapsto xA$, $\sigma(A)$ es el conjunto de valores $\lambda$ tales que el endomorfismo $x\mapsto x(A-\lambda I)$ no es invertible. A partir de esta idea, podemos generalizar el concepto de espectro a cualquier operador.
+    Por último, recordemos que el espectro de una matriz cuadrada $A\in\R^{N\times N}$, denotado como $\sigma(A)$ es el conjunto de sus valores propios. Es decir, los números $\lambda\in\C$ tales que el determinante de la matriz $A-\lambda I_N$ se anula. Dicho de otra manera, si nos planteamos el endomorfismo de $\R^N$ $x\mapsto xA$, $\sigma(A)$ es el conjunto de valores $\lambda$ tales que el endomorfismo $x\mapsto x(A-\lambda I)$ no es invertible. A partir de esta idea, podemos generalizar el concepto de espectro a cualquier operador.
     
     \begin{definicion}[Conjuntos espectro y resolvente]
         Sea $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal sobre un espacio de Hilbert. 

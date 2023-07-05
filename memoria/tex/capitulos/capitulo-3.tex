@@ -8,7 +8,7 @@ Hasta este momento, en los dos primeros capítulos, nos hemos centrado totalment
 
 En concreto, analizaremos desde un punto de vista general los llamados \textit{procesos de Markov, procesos markovianos} o simplemente \textit{cadenas de Markov}. Estos modelos, basados en estados, tratan de explicar las probabilidades de los posibles cambios de estado de un sistema a partir de  un principio denominado \textit{propiedad de Markov}. Esta denominación tanto del modelo como de la propiedad se debe a \textsc{Andrey Markov}, matemático que fue el primero en estudiar, en la década de 1900, los procesos estocásticos con dicha propiedad, que posteriormente se popularizarían.
 
-Nos centraremos principalmente en procesos discretos, es decir, consideramos que el tiempo se divide en instantes $n=0,1,2,\dots$, sin olvidar que existe una formulación análoga en la que el tiempo es continuo $t\in[0,\infty)$. Denominamos \textit{estado} a cualquiera de las situaciones en las que se puede encontrar el sistema en un instante determinado. Por ejemplo, pensemos en un barrio en el que hay $N$ fruterías y dividimos el tiempo en semanas. Asumimos que un individuo siempre va a comprar a una de estas tiendas aunque hay posibilidad de que cambie de una a otra distinta cada semana. Etiquetamos cada una de las fruterías con un número: frutería $0$, frutería $1$,\dots, frutería $N$.
+Nos centraremos principalmente en procesos discretos, es decir, consideramos que el tiempo se divide en instantes $n=0,1,2,\dots$, sin olvidar que existe una formulación análoga en la que el tiempo es continuo $t\in[0,\infty)$. Denominamos \textit{estado} a cualquiera de las situaciones en las que se puede encontrar el sistema en un instante determinado. Por ejemplo, pensemos en un barrio en el que hay $N$ fruterías y dividimos el tiempo en semanas. Asumimos que un individuo siempre va a comprar a una de estas tiendas aunque hay posibilidad de que cambie de una a otra distinta cada semana. Etiquetamos cada una de las fruterías con un número, que serían los diferentes estados posibles del sistema: frutería $0$, frutería $1$,\dots, frutería $N$.
 
 Para la redacción de este capítulo se han utilizado fundamentalmente las referencias \cite[Ch. IV]{Ross}, \cite[Ch. II]{schoutens-2000}, \cite[Ch. II]{kulkarni-2012} y \cite[Ch. II, Section 2.1]{Manuel}.
 
@@ -24,15 +24,17 @@ En general, consideraremos un espacio de estados $S\subseteq \N_0$ que con frecu
     \end{equation}
 
     En caso de que $\{X_n,n\geq 0\}$ cumpla la propiedad (\ref{eq:prop-markow}) se denominará \textbf{cadena de Markov discreta}.
+\end{definicion}
 
+Es decir, la probabilidad de que en un instante $n+1$ el sistema se encuentre en el estado $j$ es independiente de lo que haya ocurrido en los instantes anteriores a $n$. Por ejemplo, aplicando esta propiedad al tiempo atmosférico podríamos afirmar que la probabilidad de que mañana llueva únicamente depende de si hoy ha llovido, sin tener en cuenta el clima de los días anteriores. En epidemiología, es como afirmar que el número de contagios de una enfermedad un día concreto puede predecirse a partir del número de contagios que haya habido el día anterior, independientemente del número de contagios de los días anteriores ni los posibles factores externos. Intuitivamente, no parece que esta suposición sea muy realista y no cabe esperar resultados precisos en predicciones futuras. Sin embargo, lo cierto es que es útil para hacernos una idea de lo que puede ocurrir a largo plazo con relativa exactitud y es muy utilizada a la hora de implementar medidas en ámbitos como la migración, la extinción de animales, uso de suelo, etc.
+
+\begin{definicion}
     Una cadena de Markov $\{X_n, n\geq 0\}$ se llamará \textbf{homogénea} si, para todo $n\in\N_0$,
     \begin{equation}
         \label{eq:cad-homogenea}
         P[X_{n+1}=j|X_n=i] = P[X_1=j|X_0=i].
     \end{equation}
 \end{definicion}
-
-Es decir, la probabilidad de que en un instante $n+1$ el sistema se encuentre en el estado $j$ es independiente de lo que haya ocurrido en los instantes anteriores a $n$. Por ejemplo, aplicando esta propiedad al tiempo atmosférico podríamos afirmar que la probabilidad de que mañana llueva únicamente depende de si hoy ha llovido, sin tener en cuenta el clima de los días anteriores. En epidemiología, es como afirmar que el número de contagios de una enfermedad un día concreto puede predecirse a partir del número de contagios que haya habido el día anterior, independientemente del número de contagios de los días anteriores ni los posibles factores externos. Intuitivamente, no parece que esta suposición sea muy realista y no cabe esperar resultados precisos en predicciones futuras. Sin embargo, lo cierto es que es útil para hacernos una idea de lo que puede ocurrir a largo plazo con relativa exactitud y es muy utilizada a la hora de implementar medidas en ámbitos como la migración, la extinción de animales, uso de suelo, etc.
 
 La probabilidad $P[X_{n+1}=j|X_n=i]$ se denomina \textbf{probabilidad de transición en un paso} de la cadena en el instante $n$. Si además la cadena es homogénea, este valor es el mismo para todo instante $n$, de ahí el término `homogénea'. En adelante, cuando utilicemos el término `cadena de Markov' nos estaremos refiriendo a una cadena de Markov homogénea. Una vez anulada la dependencia de $n$, introducimos una nueva notación:
 $$
@@ -100,7 +102,7 @@ A las matrices que cumplen estas dos propiedades se les denomina \textbf{matrice
         \item Si hoy está lloviendo, mañana será un día soleado con probabilidad $0.4$ y nublado con probabilidad $0.5$.
     \end{itemize}
 
-    Modelaremos este sistema mediante una cadena de Markov. Para ello, consideraremos la variable $X_n \equiv$ ``Tiempo atmosférico en el día $n$''. Y consideramos el espacio de estados $S = \{ 0\equiv\text{soleado}, 1\equiv\text{nublado}, 1\equiv\text{lluvioso}\}$. Atendiendo a las indicaciones anteriores y al item (2) de la proposición \ref{prop:propiedades-matrices-markov}, la matriz de transición sería por tanto
+    Modelaremos este sistema mediante una cadena de Markov. Para ello, consideraremos la variable $X_n \equiv$ ``Tiempo atmosférico en el día $n$''. Y consideramos el espacio de estados $S = \{ 0\equiv\text{soleado}, 1\equiv\text{nublado}, 2\equiv\text{lluvioso}\}$. Atendiendo a las indicaciones anteriores y al item (2) de la proposición \ref{prop:propiedades-matrices-markov}, la matriz de transición sería por tanto
     $$ \mathcal P =\begin{pmatrix}
         0.5 & 0.3 & 0.2 \\
         0.5 & 0.2 & 0.3 \\
