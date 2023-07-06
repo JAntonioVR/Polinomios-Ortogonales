@@ -4,7 +4,7 @@
 
 En el capítulo anterior hemos conocido a los procesos de Markov discretos, más frecuentemente denominados \textit{cadenas de Markov}. Por otra parte, en los dos primeros capítulos hemos visto la teoría fundamental de polinomios ortogonales, profundizando en los conocidos polinomios clásicos. Aparentemente, son dos ámbitos completamente diferentes: los polinomios ortogonales están muy relacionados con teoría de la medida, álgebra lineal y análisis funcional, mientras que las cadenas de Markov son modelos meramente probabilísticos. A pesar de ello, ambas disciplinas confluyen en un caso particular de cadena de Markov: los procesos de nacimiento y muerte (\textit{birth-and-death processes}). 
 
-Los procesos de nacimiento y muerte discretos, también llamados cadenas de nacimiento y muerte, caminatas aleatorias, o en inglés más conocidos como \textit{random walks}, son cadenas de Markov en la que desde un determinado estado $i$ tan solo es posible acceder al siguiente ($i+1$), al anterior ($i-1$), o permanecer en el mismo estado ($i$). Fueron los matemáticos \textsc{Samuel Karlin} (1924--2007) y \textsc{James McGregor} (1921--1988) quienes profundizaron en la relación de estas particulares cadenas con los polinomios ortogonales, destacando la que llamaremos fórmula de representación de Karlin y McGregor.
+Los procesos de nacimiento y muerte discretos, también llamados cadenas de nacimiento y muerte, caminatas aleatorias, o en inglés más conocidos como \textit{random walks}, son cadenas de Markov en las que desde un determinado estado $i$ tan solo es posible acceder al siguiente ($i+1$), al anterior ($i-1$), o permanecer en el mismo estado ($i$). Fueron los matemáticos \textsc{Samuel Karlin} (1924--2007) y \textsc{James McGregor} (1921--1988) quienes profundizaron en la relación de estas particulares cadenas con los polinomios ortogonales, destacando la que llamaremos fórmula de representación de Karlin y McGregor.
 
 Para la redacción de este capítulo se han usado como bibliografía fundamental las referencias \cite{differential-equations}, \cite{Linear-Growth}, \cite{random-walks}, \cite[Ch. II]{schoutens-2000}, \cite[Ch. II, III]{Manuel} entre otras.
 
@@ -24,9 +24,9 @@ Como mencionamos anteriormente, un proceso de nacimiento y muerte discreto, cade
 \end{equation}
 donde
 \begin{enumerate}
-    \item $q_i = p_{i-1,i} = P[X_{n+1}=i-1|X_n=i]$, $\ \ \ i=1,2,\dots$
-    \item $r_i = p_{i,i} = P[X_{n+1}=i|X_n=i]$, $\ \ \ i=0,1,2,\dots$
-    \item $p_i = p_{i+1,i} = P[X_{n+1}=i+1|X_n=i]$, $\ \ \ i=0,1,2,\dots$
+    \item $q_i = P_{i-1,i} = P[X_{n+1}=i-1|X_n=i]$, $\ \ \ i=1,2,\dots$
+    \item $r_i = P_{i,i} = P[X_{n+1}=i|X_n=i]$, $\ \ \ i=0,1,2,\dots$
+    \item $p_i = P_{i+1,i} = P[X_{n+1}=i+1|X_n=i]$, $\ \ \ i=0,1,2,\dots$
     \item Asumimos que $q_i > 0 \ (i\geq 1)$, $r_i\geq 0 \  (i\geq 0)$, $p_i>0 \ (i\geq 0)$, $r_0+p_0 =1$, $q_i+r_i+p_i=1 \ (i\geq 1)$.
 \end{enumerate}
 
@@ -76,7 +76,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
         \label{eq:ecs-simetria}
         \pi_n p_n = \pi_{n+1}q_{n+1} \ \ \ (n\geq 0).
     \end{equation} 
-    Por otro lado, obsérvese que, con las condiciones impuestas sobre $\mathcal P$, el vector fila infinito $\pi = (\pi_n)_{n\in\N_0}$ verifica $\pi \cdot \mathcal P =\pi$, la ecuación \eqref{eq:balance} extendida a vectores y matrices infinitos. Por tanto, $\pi$ es un vector estacionario de la cadena, que de hecho será una distribución estacionaria si $\sum_{n=0}^\infty \pi_n < \infty$.
+    Por otro lado, obsérvese que, con las condiciones impuestas sobre $\mathcal P$, el vector fila infinito $\pi = (\pi_n)_{n\in\N_0}$ verifica $\pi \cdot \mathcal P =\pi$, la ecuación \eqref{eq:balance} extendida a vectores y matrices infinitos. Por tanto, $\pi$ es un vector estacionario de la cadena, que de hecho será una distribución estacionaria si $\displaystyle\sum_{n=0}^\infty \pi_n < \infty$.
 
     Por la estructura que posee la matriz $\mathcal P$, podemos comprobar que siempre es irreducible y es aperiódica si existe algún $r_n>0$. Bajo estas hipótesis, podemos pensar que es posible aplicar el teorema \ref{th:teorema-limite} para asegurar la existencia de una distribución límite, pero recordemos que en este caso estamos tratando con cadenas de Markov infinitas. Afortunadamente, en \cite[Theorem 5.5]{Seneta} y en \cite[Theorem 2.3]{Manuel} podemos encontrar generalizaciones del teorema \ref{th:teorema-limite} que nos ayudan a deducir que el vector infinito $\pi$ representa la distribución límite del proceso de nacimiento y muerte.
 
@@ -110,7 +110,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
     Teniendo presente la matriz $\mathcal P=\left(P_{ij}\right)_{i,j\geq 0}$ dada en \eqref{eq:matriz-pnm}, en el espacio de Hilbert $\ell^2_\pi(\N_0)$, asumiendo un abuso de notación consideramos la transformación
     \begin{equation}
         \label{eq:operador-P}
-        f \longmapsto \mathcal \mathcal P f,
+        f \longmapsto \mathcal P f,
     \end{equation}
     donde
     $$
@@ -175,7 +175,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
             \end{equation*}
             donde hemos usado la desigualdad triangular, las ecuaciones de simetría \eqref{eq:ecs-simetria} y que $0 <p_n,q_{n+1},r_n,q_n,p_{n-1}<1$. Por lo que el operador $\mathcal P$ es continuo y por tanto acotado en $\ell^2_\pi(\N_0)$.
             
-            \item $\|\mathcal P\|\leq 1$: Sabemos que $\|\mathcal P\|= \min\{K\geq 0: \|\mathcal P f\|_\pi^2\leq K\|f\|^2_\pi \ \ \forall f\in\ell^2_\pi(\N_0) \}$. Si aplicamos \eqref{eq:f-comb-ei} y expresamos cualquier $f\in\ell^2_\pi(\N_0)$ como combinación lineal de los elementos $\{e^{(i)}\}_{n\geq 0}$, observamos que $f =\left(\dfrac{a_0}{\pi_0},\dfrac{a_1}{\pi_1},\dfrac{a_2}{\pi_2},\dots\right)^T$, por lo que $\|f\|_\pi=\displaystyle\sum_{i=0}^\infty\dfrac{a_i^2}{\pi_i}$. Por otro lado, demostraremos que $\|\mathcal{P}\left(a_i e^{(i)}\right)\|_\pi\leq \|a_i e^{(i)}\|_\pi, i\geq 0$.
+            \item $\|\mathcal P\|\leq 1$: Sabemos que $\|\mathcal P\|= \min\{K\geq 0: \|\mathcal P f\|_\pi\leq K\|f\|_\pi \ \ \forall f\in\ell^2_\pi(\N_0) \}$. Si aplicamos \eqref{eq:f-comb-ei} y expresamos cualquier $f\in\ell^2_\pi(\N_0)$ como combinación lineal de los elementos $\{e^{(i)}\}_{n\geq 0}$, observamos que $f =\left(\dfrac{a_0}{\pi_0},\dfrac{a_1}{\pi_1},\dfrac{a_2}{\pi_2},\dots\right)^T$, por lo que $\|f\|_\pi=\displaystyle\sum_{i=0}^\infty\dfrac{a_i^2}{\pi_i}$. Por otro lado, demostraremos que $\|\mathcal{P}\left(a_i e^{(i)}\right)\|_\pi\leq \|a_i e^{(i)}\|_\pi, i\geq 0$.
             
             Fácilmente podemos deducir que $$\mathcal{P}\left(a_i e^{(i)}\right) = a_i(\overbrace{0,\dots,0}^{(i-2)}, p_{i-1}/\pi_i, r_i/\pi_i, q_{i+1}/\pi_i,0,\dots)^T.$$ Si calculamos la norma de este elemento y operamos se obtiene
             \begin{equation*}
@@ -183,7 +183,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
                     \left\|\mathcal{P}\left(a_i e^{(i)}\right)\right\|_\pi^2 &= a_i^2\left(\dfrac{p_{i-1}^2\pi_{i-1}}{\pi_i^2}+\dfrac{r_{i}^2\pi_{i}}{\pi_i^2}+\dfrac{q_{i+1}^2\pi_{i+1}}{\pi_i^2}\right) \\
                     &= a_i^2\left(\dfrac{p_{i-1}q_i}{\pi_i}+\dfrac{r_{i}^2}{\pi_i}+\dfrac{q_{i+1}p_i}{\pi_i}\right)  \ \ \ \text{(por \eqref{eq:ecs-simetria} y simplificando)} \\
                     &\leq  \dfrac{a_i^2}{\pi_i}(q_i+r_i+p_i) \ \ \ \ (0\leq p_{i-1},r_i, q_{i+1}\leq 1) \\
-                    &= \dfrac{a_i^2}{\pi} = \|a_i e^{(i)}\|_\pi^2
+                    &= \dfrac{a_i^2}{\pi_i} = \|a_i e^{(i)}\|_\pi^2
                 \end{split}
             \end{equation*}
 
@@ -199,7 +199,7 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
             \end{equation*}
             Esto es, $ \|\mathcal{P} f \|_\pi \leq \|f\|_\pi \ \ \ \forall f\in\ell^2_\pi(\N_0)$, por lo que necesariamente $\|P\|\leq 1$.
 
-            \item Autoadjunto: Recordemos la relación de simetría \eqref{eq:ecs-simetria} ($\pi_n p_n = \pi_{n+1}q_{n+1}$). Entonces
+            \item Autoadjunto: De nuevo, aplicando la relación de simetría \eqref{eq:ecs-simetria} e intercambiando índices tenemos:
             \begin{equation*}
                 \begin{split}
                     \prodesc{\mathcal P f}{g}_\pi&=\sum_{n=0}^\infty(p_n f_{n+1} + r_n f_n + q_n f_{n-1})g_n\pi_n\\
@@ -495,7 +495,6 @@ Es decir, siempre es posible avanzar o retroceder, permitiendo que no siempre se
             \end{pmatrix}.
         \end{equation}
     \end{definicion}
-
     Más información acerca de la génesis y la importancia de esta matriz en \cite[Section 2.1]{schoutens-2000}.
 
     De forma similar al caso de procesos de nacimiento y muerte discretos, podemos definir a partir de $\{\mu_i\}$ y $\{\lambda_i\}$ los coeficientes potenciales (véase definición \ref{def:coeficientes-potenciales})

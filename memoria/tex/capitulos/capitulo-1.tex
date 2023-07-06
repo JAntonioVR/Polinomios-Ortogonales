@@ -59,7 +59,7 @@ Por lo tanto, si definimos en $\mathbb{P}[x]$ el producto escalar
 \end{equation*}
 con $\rho(x)=(1-x^2)^{-\frac 1 2}$, tenemos que las funciones (polinomios) $T_n,\ n\in\N_0$ son ortogonales entre sí en el espacio $(\mathbb{P}[x], \left\langle\cdot,\cdot\right\rangle)$ siempre que $n\not=m$.
 
-De acuerdo a este ejemplo, decimos que los polinomios $T_n$ son \textit{ortogonales}, o que la sucesión $\{T_n\}$ es una \textit{Sucesión de Polinomios Ortogonales} con respecto a la \textit{función peso} $\rho(x)=(1-x^2)^{-\frac 1 2}$ en el intervalo $(-1,1)$. Los polinomios $T_n$ recién presentados son los \textit{Polinomios de Tchebichef de tipo I}, y conforman nuestra primera familia de polinomios ortogonales conocida.
+De acuerdo a este ejemplo, decimos que los polinomios $T_n$ son \textit{ortogonales}, o que la sucesión $\{T_n\}$ es una \textit{Sucesión de Polinomios Ortogonales} con respecto a la \textit{función peso} $\rho(x)=(1-x^2)^{-\frac 1 2}$ en el intervalo $[-1,1]$. Los polinomios $T_n$ recién presentados son los \textit{Polinomios de Tchebichef de tipo I}, y conforman nuestra primera familia de polinomios ortogonales conocida.
 
 \section{Ortogonalidad y función peso}
 \label{c1section:ort-peso}
@@ -134,7 +134,7 @@ Por tanto, vemos que la propiedad de ortogonalidad (\ref{eq:defortogonalidad}) e
 \end{observacion}
 
 \begin{ejemplo}
-    $\{T_n\}$, la sucesión de polinomios de Tchebichef de tipo I, es una Sucesión de Polinomios Ortogonales respecto de la función peso $\rho(x)=(1-x^2)^{-\frac{1}{2}}$ en el intervalo $(-1,1)$. También podemos establecer la ortogonalidad de los respectivos $\{T_n\}$ no mediante un producto escalar sino a través del funcional
+    $\{T_n\}$, la sucesión de polinomios de Tchebichef de tipo I, es una Sucesión de Polinomios Ortogonales respecto de la función peso $\rho(x)=(1-x^2)^{-\frac{1}{2}}$ en el intervalo $[-1,1]$. También podemos establecer la ortogonalidad de los respectivos $\{T_n\}$ no mediante un producto escalar sino a través del funcional
     \begin{equation}
         \label{eq:funcional-tchebichef}
         \mathcal{L}[f]:= \int_{-1}^1 f(x)(1-x^2)^{-\frac{1}{2}}dx
@@ -166,7 +166,7 @@ Por lo que, de esta forma, únicamente conociendo la sucesión de momentos $\{\m
     Dada una sucesión de números complejos $\{\mu_n\}$, diremos que $\mathcal{L}$ es un \textbf{funcional de momentos} determinado por la sucesión $\{\mu_n\}$, donde $\mu_n$ se denomina \textbf{momento de orden }$\mathbf n$, si $\mathcal{L}$ es lineal en $\mathbb P$ y $\mathcal{L}[x^n]=\mu_n$, $n\in\N_0$
 \end{definicion}
 
-Daremos ahora una nueva definición de SPO, en este caso con respecto a un funcional lineal y no respecto a una función peso como hicimos en la definición \ref{def:SPOpeso}.
+Daremos ahora una nueva definición de SPO, en este caso con respecto a un funcional lineal.
 
 \begin{definicion}[Sucesión de Polinomios Ortogonales respecto a un funcional lineal]
     \label{def:SPOfuncional}
@@ -243,7 +243,7 @@ Previamente, introduciremos un resultado para la caracterización de SPO respect
 
 \begin{teorema}
     \label{th:caracterizacion}
-Sea $\mathcal{L}$ un funcional de momentos y $\{P_n\}$ una sucesión de polinomios. Las siguientes afirmaciones son equivalentes:
+Sea $\mathcal{L}$ un funcional lineal y $\{P_n\}$ una sucesión de polinomios. Las siguientes afirmaciones son equivalentes:
 \begin{enumerate}
     \item $\{P_n\}$ es una SPO respecto al funcional $\mathcal{L}$.
     \item $\mathcal{L}[\pi(x)P_n(x)]=0$ para cualquier polinomio $\pi(x)$ de grado $m<n$ y $\mathcal{L}[\pi(x)P_n(x)]\not=0$ si $\pi(x)$ tiene grado $n$.
@@ -320,13 +320,13 @@ Otra forma de estandarizar una SPO $\{P_n\}$ respecto a un funcional $\mathcal L
 $$
 p_n = (-1)^{\sgn(a_n)}\left(\mathcal L[P_n^2]\right)^{-1/2} P_n,
 $$
-siempre que $\mathcal L[P_n^2]>0$ y donde $\sgn(a_n)$ denota el signo de $a_n$. Esta normalización no siempre es posible de aplicar, ya que no todos los funcionales lineales verifican $\mathcal L[P_n^2]>0$, aunque existe una clase de funcionales, los definidos positivos (ver definición \ref{def:func-def-pos}), que aseguran esta condición.
+siempre que $\mathcal L[P_n^2]>0$ y donde $\sgn(a_n)$ denota el signo de $a_n$. Esta normalización no siempre es posible de aplicar, ya que no todos los funcionales lineales verifican $\mathcal L[P_n^2]>0$, aunque adelantamos que existe una clase de funcionales, los definidos positivos (ver definición \ref{def:func-def-pos}), que aseguran esta condición.
 
 Con esta operación conseguimos que $\mathcal L[p_n^2] = 1, \ \ \forall n\in\N_0$, es decir, la sucesión $\{p_n\}$ es una SPO ortonormal. Por tanto, dada una SPO $\{P_n\}$ para un funcional $\mathcal L$ tal que $\mathcal{L}[P_n^2]>0\ \ \forall n\in\N_0$, existe una única SPO ortonormal $\{p_n\}$ respecto a $\mathcal{L}$.
 
 Por último, es común exigirle a cada polinomio $P_n$ de la sucesión que verifique $P_n(x_0)=K_n$ para cierto $x_0\in[a,b]$. Es decir, se exige un valor concreto al evaluar $P_n$ en un punto del intervalo $[a,b]$, que en ocasiones coincide con alguno de los extremos $a,b$ cuando estos son finitos.
 
-Por ejemplo, los polinomios de Tchebichef de tipo I, ortogonales en $(-1,1)$ suelen ser presentados verificando $T_n(1)=1$. Por su parte, los polinomios de Jacobi $P_n^{(\alpha,\beta)}$, que también son ortogonales en $(-1,1)$, se busca que verifiquen $P_n^{(\alpha,\beta)}=\binom{n+\alpha}{n}$.
+Por ejemplo, los polinomios de Tchebichef de tipo I, ortogonales en $[-1,1]$ suelen ser presentados verificando $T_n(1)=1$. Por su parte, los polinomios de Jacobi $P_n^{(\alpha,\beta)}$, que también son ortogonales en $[-1,1]$ (ver sección \ref{subsection:jacobi}), se busca que verifiquen $P_n^{(\alpha,\beta)}=\binom{n+\alpha}{n}$.
 
 En conclusión, no existe una única forma de estandarizar una SPO, sino que en realidad cada familia de polinomios ortogonales acepta una, o en ocasiones varias, estandarizaciones concretas dependiendo de la aplicación que se le dé y del contexto del problema.
 
@@ -353,7 +353,7 @@ Para ello, introducimos el siguiente concepto.
 Este determinante está directamente relacionado con la existencia de una SPO.
 
 \begin{teorema}
-    Sea $\{\mu_n\}$ una sucesión de números complejos y sea $\mathcal{L}$ un funcional de momentos cuya sucesión de momentos es $\{\mu_n\}$. $\mathcal L$ admite una sucesión de polinomios ortogonales si, y solo si el determinante de momentos $\Delta_n\neq 0\ \ \ \forall n\in\N_0$. 
+    Sea $\{\mu_n\}$ una sucesión de números complejos y sea $\mathcal{L}$ un funcional lineal cuya sucesión de momentos es $\{\mu_n\}$. $\mathcal L$ admite una sucesión de polinomios ortogonales si, y solo si el determinante de momentos $\Delta_n\neq 0\ \ \ \forall n\in\N_0$. 
 \end{teorema}
 \begin{proof} Comprobamos la doble implicación.
 
@@ -430,7 +430,7 @@ $$
 Una consecuencia directa de este lema es una definición alternativa y equivalente de funcional definido positivo.
 
 \begin{corolario}
-    Un funcional de momentos $\mathcal{L}$ es definido positivo si, y solo si $\mathcal{L}[\pi^2(x)]>0$ para cualquier polinomio $\pi(x)$.
+    Un funcional de momentos $\mathcal{L}$ es definido positivo si, y solo si $\mathcal{L}[\pi^2(x)]>\nolinebreak0$ para cualquier polinomio $\pi(x)$.
 \end{corolario}
 
 Finalmente, introducimos la relación entre el concepto de funcional definido positivo y los determinantes (\ref{eq:determinante}).
@@ -499,11 +499,11 @@ Si sustituimos esta expresión en la RRTT (\ref{eq:RRTT}) e igualamos los coefic
 \end{align}
 donde de nuevo la expresión de $\alpha_n$ y la de $\beta_n$ son válidas para $n\geq 0$ y la de $\gamma_n$ para $n\geq 1$.
 
-Con las ecuaciones (\ref{eq:ctes-RRTT}) podemos construir la SPO utilizando la RR3T si conocemos el funcional, deduciendo simultáneamente los coeficientes de la RR3T y los polinomios que conforman la sucesión. Por su parte, utilizando (\ref{eq:ctes-RRTT2}) podemos calcular de una manera sencilla los coeficientes de la RR3T sin utilizar el funcional ni integrales, en ocasiones complejas. Sin embargo, en este último caso necesitamos conocer los polinomios $P_{n-1}, P_n$ y $P_{n+1}$ para obtener dichos coeficientes, no pudiendo construir la SPO como sí podíamos hacer si aplicábamos (\ref{eq:ctes-RRTT}). Comprobemos este hecho con el siguiente ejemplo.
+Con las ecuaciones (\ref{eq:ctes-RRTT}) podemos construir la SPO utilizando la RRTT si conocemos el funcional, deduciendo simultáneamente los coeficientes de la RRTT y los polinomios que conforman la sucesión. Por su parte, utilizando (\ref{eq:ctes-RRTT2}) podemos calcular de una manera sencilla los coeficientes de la RRTT sin utilizar el funcional ni integrales, en ocasiones complejas. Sin embargo, en este último caso necesitamos conocer los polinomios $P_{n-1}, P_n$ y $P_{n+1}$ para obtener dichos coeficientes, no pudiendo construir la SPO como sí podíamos hacer si aplicábamos (\ref{eq:ctes-RRTT}). Comprobemos este hecho con el siguiente ejemplo.
 
 \begin{ejemplo}
     \label{ej:hermite-rr3t}
-    Vamos a clarificar estas ideas con un ejemplo práctico. En el archivo \texttt{software/Hermite.ipynb}\footnote{Puede ser consultado en la URL \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/Hermite.ipynb}} se ha implementado, utilizando el software matemático `\href{https://www.sagemath.org/}{SageMath}', el cálculo de una SPO mediante la RR3T. También se ha realizado una estimación de los tiempos de ejecución para distintos valores de $n$. En este ejemplo únicamente se recogen los resultados arrojados por el software, pero en dicho archivo se puede consultar e incluso modificar el código fuente.
+    Vamos a clarificar estas ideas con un ejemplo práctico. En el archivo \texttt{software/Hermite.ipynb}\footnote{Puede ser consultado en la URL \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/Hermite.ipynb}} se ha implementado, utilizando el software matemático `\href{https://www.sagemath.org/}{SageMath}', el cálculo de una SPO mediante la RRTT. También se ha realizado una estimación de los tiempos de ejecución para distintos valores de $n$. En este ejemplo únicamente se recogen los resultados calculados por el software, pero en dicho archivo se puede consultar e incluso modificar el código fuente.
     
     En particular, se ha trabajado con los polinomios de Hermite, (véase sección \ref{subsection:Hermite}) que son aquellos que conforman la SPO con respecto a la función peso $\rho(x)=e^{-x^2}$ en todo $\R$. Por tanto, tenemos el funcional
     $$
@@ -535,6 +535,7 @@ Con las ecuaciones (\ref{eq:ctes-RRTT}) podemos construir la SPO utilizando la R
         Sin embargo, comprobamos que este método es lento, pues los tiempos de cálculo\footnote{Estos tiempos han sido obtenidos mediante la media de los tiempos de ejecución de 10 ejecuciones independientes.} se incrementan considerablemente con $n$. De hecho, para $n=15$, que es un valor aún bajo y cercano a $10$, el tiempo de ejecución ya es de $58.9024$ segundos, casi un minuto.
         
 \end{ejemplo}
+\vspace{0.5cm}
 
 Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este resultado es el conocido como teorema de Favard.
 
@@ -599,9 +600,9 @@ Por otro lado, existe un resultado recíproco al teorema \ref{th:RRTT}. Este res
     \end{equation}
     Por tanto, el funcional es cuasi-definido y $\{P_n\}$ es su SPOM si, y solo si $\gamma_n\neq 0$ $\forall n\in\N_0$.
     
-    Por último, véamos que $\mathcal{L}$ es definido positivo si y solo si $\gamma_n >0$ $\forall n\in \N_0$. Sea $\pi(x)$ un polinomio y $m$ su grado. Podemos entonces escribir $\pi(x)=\sum_{i=1}^m c_i P_i(x)$. De esta forma
+    Por último, véamos que $\mathcal{L}$ es definido positivo si y solo si $\gamma_n >0$ $\forall n\in \N_0$. Sea $\pi(x)$ un polinomio y $m$ su grado. Podemos entonces escribir $\pi(x)=\displaystyle\sum_{i=1}^m c_i P_i(x)$. De esta forma
     $$
-    \mathcal{L}[\pi^2(x)]=\mathcal{L}[\sum_{i=1}^m c_i^2 P_i^2(x)]= \sum_{i=1}^m  c_i^2 \mathcal{L}[P_i^2(x)],
+    \mathcal{L}[\pi^2(x)]= \sum_{i=1}^m  c_i^2 \mathcal{L}[P_i^2(x)],
     $$
     donde hemos utilizado la ortogonalidad de $\{P_n\}$. Por tanto, la condición $\mathcal{L}[\pi^2(x)]>0$ es equivalente a $\mathcal{L}[P_n^2(x)]>0 \ \ \forall n\in\N_0$. Aplicando de nuevo la ortogonalidad de la sucesión, tenemos que
     $$
@@ -629,7 +630,7 @@ Los ceros o raíces de los polinomios ortogonales tienen propiedades y comportam
     
 \end{definicion}
 
-Por ejemplo, el funcional de momentos (\ref{eq:funcional-tchebichef}) de los polinomios de Tchebichef de tipo I es definido positivo en $(-1,1)$, el de los polinomios de Charlier definido en el ejemplo \ref{ej:charlier} lo es en $\N$ y el de los polinomios de Hermite en $\R$. Respecto a este último caso, es claro que ser `definido positivo en $\R$' equivale a ser `definido positivo' según la definición \ref{def:func-def-pos}.
+Por ejemplo, el funcional de momentos (\ref{eq:funcional-tchebichef}) de los polinomios de Tchebichef de tipo I es definido positivo en $[-1,1]$, el de los polinomios de Charlier definido en el ejemplo \ref{ej:charlier} lo es en $\N$ y el de los polinomios de Hermite en $\R$. Respecto a este último caso, es claro que ser `definido positivo en $\R$' equivale a ser `definido positivo' según la definición \ref{def:func-def-pos}.
 
 \begin{comment}
 \begin{teorema}
@@ -645,7 +646,7 @@ Por ejemplo, el funcional de momentos (\ref{eq:funcional-tchebichef}) de los pol
 \end{proof}
 \end{comment}
 
-A partir de este concepto y los siguientes teoremas podremos conocer la dinámica que siguen los ceros de los polinomios ortogonales. En adelante, $\mathcal{L}$ es un funcional definido positivo y $\{P_n(x)\}$ su correspondiente SPO.
+A partir de este concepto y los siguientes teoremas podremos conocer la dinámica que siguen los ceros de los polinomios ortogonales. En adelante, $\mathcal{L}$ es un funcional definido positivo y $\{P_n\}$ una SPO respecto a $\mathcal{L}$.
 
 \begin{teorema}
     Sea $I$ un intervalo que es un soporte de $\mathcal{L}$. Entonces los ceros de $P_n$ $(n\geq 1)$ son todos simples, reales y se encuentran en el interior de $I$ (denotado en adelante como $\mathring{I}$).
@@ -667,7 +668,7 @@ $$
     Si tomamos $P_n$ con coeficiente líder positivo, entonces tenemos que 
     \begin{enumerate}
         \item $P_n(x) > 0 \ \ \forall x>x_{nn}$ y 
-        \item $\sgn P_n(x) = (-1)^{n}  \ \ \forall x<x_{n1}$.
+        \item $\sgn (P_n(x)) = (-1)^{n}  \ \ \forall x<x_{n1}$.
     \end{enumerate}
 \end{observacion}
 
@@ -675,7 +676,7 @@ $$
     $P'_n$ tiene exactamente un cero en cada intervalo $(x_{n,k},x_{n,k+1})$, por lo que $P'_n(x_{nk})$ alterna su signo con $k=1,\dots ,n$. Como el signo del coeficiente líder de $P'_n(x)$ también es positivo, concluimos que
     \begin{equation}
         \label{eq:signo-derivada}
-        \sgn P'_n(x_{nk}) =(-1)^{n-k}, \ \ k = 1,\dots, n.
+        \sgn (P'_n(x_{nk})) =(-1)^{n-k}, \ \ k = 1,\dots, n.
     \end{equation}
     
 
@@ -702,9 +703,9 @@ Esta desigualdad es una consecuencia de la conocida \textit{Identidad de Christo
 \begin{proof}
     A partir de la desigualdad (\ref{eq:desigualdad-cd}), si evaluamos en $x=x_{n+1,k}$ se tiene que
     $$
-    P'_{n+1}(x_{n+1,k})P_n(x_{n+1,k})>0, \ \ k=1,\dots n+1
+    P'_{n+1}(x_{n+1,k})P_n(x_{n+1,k})>0, \ \ k=1,\dots n+1.
     $$
-    Si aplicamos (\ref{eq:signo-derivada}), tenemos que $\sgn  P'_{n+1}(x_{n+1,k}) = (-1)^{n+1-k}$, por lo que para que se cumpla la desigualdad necesariamente $\sgn P_n(x_{n+1,k}) = (-1)^{n+1-k}$.
+    Si aplicamos (\ref{eq:signo-derivada}), tenemos que $\sgn  (P'_{n+1}(x_{n+1,k})) = (-1)^{n+1-k}$, por lo que para que se cumpla la desigualdad necesariamente $\sgn (P_n(x_{n+1,k})) = (-1)^{n+1-k}$.
     Esto es, $P_n(x)$ tiene que cambiar de signo un número de impar de veces en el intervalo $(x_{n+1,k},x_{n+1,k+1})$, y como esto ocurre para todo $k$, necesariamente $P_n$ tiene un único cero en cada uno de los $n$ intervalos $(x_{n+1,k},x_{n+1,k+1})$, $k=1,\dots, n$.
 \end{proof}
 
@@ -731,14 +732,14 @@ Este intervalo recién presentado es el intervalo cerrado más pequeño que cont
 
 En muchos casos se presenta una familia de polinomios ortogonales mediante un funcional y un intervalo $(a,b)$ en el cual se verifica la ortogonalidad. El conjunto $I$ de todos los ceros es un conjunto denso en $(a,b)$, de forma que su adherencia, $[\xi_1,\eta_1]$, coindice con el intervalo de ortogonalidad.
 
-Sin embargo, recordemos que mediante el teorema de Favard también podemos obtener funcionales definidos positivos a partir de una sucesión de polinomios $\{P_n\}$ y sucesiones de números reales $\{\beta_n\}, \{\gamma\}$ verificando ciertas condiciones. Dicho funcional no especifica el intervalo de ortogonalidad, el cual se puede obtener entonces mediante los ceros de los polinomios $\{P_n\}$.
+Sin embargo, recordemos que mediante el teorema de Favard también podemos obtener funcionales definidos positivos a partir de una sucesión de polinomios $\{P_n\}$ y sucesiones de números reales $\{\beta_n\}, \{\gamma_n\}$ verificando ciertas condiciones. Dicho funcional no especifica el intervalo de ortogonalidad, el cual se puede obtener entonces mediante los ceros de los polinomios $\{P_n\}$.
 
 \begin{ejemplo}
     Como ejemplo, véamos los ceros de los polinomios de Tchebichef de tipo I, que están todos situados en el intervalo $[-1,1]$. En la imagen \ref{img:ejemplo-ceros} hemos representado\footnote{En el archivo \texttt{software/ceros.ipynb}, también disponible en la URL \url{https://github.com/JAntonioVR/Polinomios-Ortogonales/blob/main/software/ceros.ipynb}, puede encontrarse el código con el cual se han generado las imágenes, pudiendo ser ejecutado o incluso modificado para visualizar las gráficas con grados superiores a $5$ u otras familias de polinomios.} gráficamente los polinomios de Tchebichef para $n=2,3,4,5$, asignando los colores rojo, verde, azul y negro respectivamente, señalando los ceros de cada polinomio con su color correspondiente. 
 
     Obsérvese que en efecto estos ceros están entrelazados, de forma que un cero rojo está entre dos ceros verdes; uno verde entre dos azules y uno azul entre dos negros.
 
-    Además, el primer cero de cada polinomio es cada vez menor, de forma que el primer cero negro es el más pequeño. Análogamente, el último cero es cada vez mayor, siendo el negro el más pequeño de todos. Este hecho ejemplifica el corolario \ref{cor:sucesiones-ceros} con $k=1$.
+    Además, el primer cero de cada polinomio es cada vez menor, de forma que el primer cero negro es el más pequeño. Análogamente, el último cero es cada vez mayor, siendo el negro el mayor de todos. Este hecho ejemplifica el corolario \ref{cor:sucesiones-ceros} con $k=1$.
     
     \begin{figure}[h]
         \centering

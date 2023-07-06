@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-En el capítulo \ref{chap:introduccionPO} hemos mostrado una amplia introducción a la ortogonalidad y presentado ejemplos concretos de polinomios ortogonales. En este capítulo presentaremos las familias concretas de polinomios ortogonales más importantes: los \textit{polinomios ortogonales clásicos}. Estos son los polinomios de Hermite, Laguerre, Jacobi y Bessel. Estas familias presentan la peculiaridad de ser las únicas que verifican ciertas propiedades, entre las que destaca la \textit{ecuación diferencial de Pearson}. Estos polinomios, entre otras disciplinas pueden ser encontrados en problemas de Sturm-Liouville cuando se utilizan ecuaciones diferenciales hipergeométricas.
+En el capítulo \ref{chap:introduccionPO} hemos mostrado una amplia introducción a la ortogonalidad y presentado ejemplos concretos de polinomios ortogonales. En este capítulo introduciremos las familias concretas de polinomios ortogonales más importantes: los \textit{polinomios ortogonales clásicos}. Estos son los polinomios de Hermite, Laguerre, Jacobi y Bessel. Estas familias presentan la peculiaridad de ser las únicas que verifican ciertas propiedades, entre las que destaca la \textit{ecuación diferencial de Pearson}. Estos polinomios, entre otras disciplinas pueden ser encontrados en problemas de Sturm-Liouville cuando se utilizan ecuaciones diferenciales hipergeométricas.
 
 \begin{figure}[h]
     \centering
@@ -26,7 +26,7 @@ Para empezar, introduciremos una nueva notación para los funcionales de momento
 \begin{equation}
     \label{eq:nueva-notacion-funcional}
     \begin{split}
-        \uu:\mathbb P & \longrightarrow \R \\
+        \uu:\mathbb P & \longrightarrow \C \\
         x^n & \longmapsto \left\langle \uu, x^n \right\rangle = \mu_n.
     \end{split}
 \end{equation}
@@ -39,7 +39,7 @@ Definimos a continuación dos operadores que actúan sobre los funcionales.
     Para cada polinomio $\pi$, definimos un nuevo funcional de momentos a partir de $\uu$ como
     \begin{equation}
         \begin{split}
-            \pi\uu:\mathbb P & \longrightarrow \R \\
+            \pi\uu:\mathbb P & \longrightarrow \C \\
             \phi & \longmapsto \prodesc{\pi\uu}{\phi}=\prodesc{\uu}{\pi\phi}
         \end{split}
     \end{equation}
@@ -50,7 +50,7 @@ Definimos a continuación dos operadores que actúan sobre los funcionales.
     Definimos el funcional derivada como
     \begin{equation}
         \begin{split}
-            D(\uu):\mathbb P & \longrightarrow \R \\
+            D(\uu):\mathbb P & \longrightarrow \C \\
             \phi & \longmapsto \prodesc{D(\uu)}{\phi}=-\prodesc{\uu}{\phi'}
         \end{split}
     \end{equation}
@@ -128,7 +128,7 @@ donde $(a,b)$ es cierto intervalo de la recta real donde $\rho > 0$ y $\left|\in
                 &= \int_a^b \pi(x)(\tau(x)\rho(x) - [\sigma(x)\rho(x)]' )dx
             \end{split}
         \end{equation*}
-        Si la última integral es nula para todo polinomio $\pi(x)$, necesariamente $\tau(x)\rho(x) - [\sigma(x)\rho(x)]' =0$ y tendríamos la ecuación de Pearson \eqref{eq:Pearson-peso}.
+        Si la última integral es nula para todo polinomio $\pi(x)$, necesariamente \linebreak$\tau(x)\rho(x) -[\sigma(x)\rho(x)]' =0$ y tendríamos la ecuación de Pearson \eqref{eq:Pearson-peso}.
     \end{itemize}
     
     
@@ -144,16 +144,15 @@ Notemos que esta definición, siempre que se cumplan las condiciones de frontera
 \section{Deducción de las familias de polinomios ortogonales clásicos}
 \label{section:deduccion-clasicos}
 
-A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principales familias de polinomios ortogonales. Hemos impuesto que $\tau(x)=Ax+B$ sea un polinomio de grado exactamente $1$, por lo que tenemos cinco posibles casos a partir de las posibilidades de $\sigma(x)$:
+A partir del lema \ref{lema:equivalencia-pearson} podremos obtener las principales familias clásicas de polinomios ortogonales. Hemos impuesto que $\tau(x)=Ax+B$ sea un polinomio de grado exactamente $1$, por lo que tenemos cinco posibles casos a partir de las posibilidades de $\sigma(x)$:
 
 \begin{enumerate}
     \item \textbf{Caso I}: $\sigma$ es constante. Podemos suponer, sin pérdida de generalidad, que $\sigma(x) = 1$. En este caso obtendremos los llamados polinomios de Hermite.
     \item \textbf{Caso II}: $\sigma$ es de grado $1$. Suponemos que $\sigma(x) = x-a$. Haciendo el cambio de variable lineal $x = -\frac t A+a$\footnote{Renombramos $t\equiv x$ tras el cambio de variable.} se tiene $\sigma(x) = x$ y $\tau(x)=-x+B$. Con estos valores calcularemos los polinomios de Laguerre.
-    \item \textbf{Caso III}: $\sigma$ es de grado $2$ y tiene dos raíces reales distintas. Asumimos $\sigma(x) = (x-a)(b-x)$. Con el cambio de variable $x = \frac{b-a}{2}t + \frac{a+b}{2}$ podemos escribir $\sigma(x)=1-x^2$ y $\tau(x)=Ax+B$. Y así deduciremos los polinomios de Jacobi.
+    \item \textbf{Caso III}: $\sigma$ es de grado $2$ y tiene dos raíces reales distintas. Asumimos\linebreak $\sigma(x) = (x-a)(b-x)$. Con el cambio de variable $x = \frac{b-a}{2}t + \frac{a+b}{2}$ podemos escribir $\sigma(x)=1-x^2$ y $\tau(x)=Ax+B$. Y así deduciremos los polinomios de Jacobi.
     \item \textbf{Caso IV}: $\sigma$ es de grado $2$ y tiene una única raíz real doble: $\sigma(x) = (x-a)^2$. En este caso se obtienen los polinomios de Bessel, que se corresponden con un funcional que no es definido positivo. Por ello, su estudio se complica considerablemente, por lo que será omitido. Más información en \cite{Bessel-polynomials}.  
     \item \textbf{Caso V}: $\sigma$ es un polinomio de grado $2$ y tiene dos raíces complejas conjugadas \linebreak $\sigma(x) = (x-a-bi)(x-a+bi)$. Con esta asunción la solución que se obtiene no admite momentos finitos, por lo que no puede ser considerada.
 \end{enumerate}
-
 De acuerdo al lema \ref{lema:equivalencia-pearson}, si resolvemos la ecuación diferencial (\ref{eq:Pearson-peso}) asumiendo las condiciones de frontera (\ref{eq:cond-frontera}) y comprobando que los momentos resultantes son finitos, habremos hallado las funciones peso $\rho(x)$ respecto a las cuales las SPO son clásicas. Nos centraremos principalmente en los casos I, II y III, en los cuales obtenemos un funcional definido positivo.
 
 De forma genérica, podemos comprobar de manera sencilla que una fórmula explícita para $\rho(x)$ es
@@ -322,7 +321,7 @@ La primera de estas caracterizaciones atiende a la sucesión $\{P'_n\}$ formada 
     \begin{equation*}
         \begin{split}
             0 &= \int_a^b P_n(x)x^{k-1}\tau(x)\rho(x)dx \\
-            &= \int_a^b P_n(x)x^{k-1}[\sigma(x)\rho(x)]'dx \ \ \text{(por (\ref{eq:Pearson-peso}).)}
+            &= \int_a^b P_n(x)x^{k-1}[\sigma(x)\rho(x)]'dx \ \ \text{(por (\ref{eq:Pearson-peso}))}
         \end{split}
     \end{equation*}
 
@@ -425,7 +424,7 @@ A partir de la ortogonalidad de las derivadas podemos encontrar una interesante 
     $$
     Esto es, $P_n(x)$ es solución de (\ref{eq:ec-dif-clasicos}).
 
-    Comprobemos ahora la expresión de $\lambda_n$ igualando las potencias $x^n$ en (\ref{eq:ec-dif-clasicos}). Si consideramos $\sigma(x)$ un polinomio de grado $2$ (considerando que $\mathbb P_0\subset\mathbb P_1\subset \mathbb{P}_2$), tendríamos que su coeficiente líder es $\sigma''(x)/2$. Análogamente, el coeficiente líder de $\tau(x)$ es $\tau'$. Denotamos $\sigma'' \equiv \sigma''(x), \tau'\equiv\tau'(x)$ ya que ambas son constantes. Por otro lado, si $c_n\neq 0$ es el coeficiente líder de $P_n(x)$, igualando los términos líderes de (\ref{eq:ec-dif-clasicos}) obtenemos
+    Comprobemos ahora la expresión de $\lambda_n$ igualando las potencias $x^n$ en (\ref{eq:ec-dif-clasicos}). Si consideramos $\sigma(x)$ un polinomio de grado $2$ (considerando que $\mathbb P_0\subset\mathbb P_1\subset \mathbb{P}_2$), tendríamos que su coeficiente líder es $\sigma''(x)/2$. Análogamente, el coeficiente líder de $\tau(x)$ es $\tau'(x)$. Denotamos $\sigma'' \equiv \sigma''(x), \tau'\equiv\tau'(x)$ ya que ambas son constantes. Por otro lado, si $c_n\neq 0$ es el coeficiente líder de $P_n(x)$, igualando los términos líderes de (\ref{eq:ec-dif-clasicos}) obtenemos
     $$
     \dfrac {\sigma''} 2 n (n-1) c_n + \tau' n c_n + \lambda_n c_n = 0 \Leftrightarrow \lambda_n = -n\left(\tau' + (n-1)\dfrac{\sigma''}{2}\right)
     $$
@@ -468,7 +467,7 @@ Como vemos, las soluciones de la ecuación de Pearson y las soluciones de la ecu
 \subsection{Fórmula de Rodrigues}
 \label{subsection:Rodrigues}
 
-Originalmente, \textsc{Olinde Rodrigues} (1816), \textsc{James Ivory} (1824) y \textsc{Carl Gustav Jacobi} (1827) introdujeron una fórmula inicialmente definida para los polinomios de Legendre, posteriormente extendida a todas las soluciones polinómicas de la ecuación hipergeométrica. El nombre de fórmula de Rodrigues fue propuesto por \textsc{Eduard Heine} en 1878, después de que Hermite recuperara en 1860 el trabajo original de Rodrigues y señalara que fue él el primero en descubrir esta fórmula. Ya anunciada la peculiaridad de esta fórmula, presentamos su aspecto y demostración en el siguiente resultado.
+Originalmente, \textsc{Olinde Rodrigues} (1816), \textsc{James Ivory} (1824) y \textsc{Carl Gustav Jacobi} (1827) introdujeron una fórmula inicialmente definida para los polinomios de Legendre, posteriormente extendida a todas las soluciones polinómicas de la ecuación hipergeométrica. El nombre de fórmula de Rodrigues fue propuesto por \textsc{Eduard Heine} en 1878, después de que Hermite recuperara en 1860 el trabajo original de Rodrigues y señalara que fue él el primero en descubrirla. Ya anunciada la peculiaridad de esta fórmula, presentamos su aspecto y demostración en el siguiente resultado.
 
 \begin{teorema}[\textbf{Fórmula de Rodrigues}]
     \label{th:formula-rodrigues}
@@ -703,7 +702,7 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
     
     Revisamos las implicaciones ya probadas y aclararemos las que aún no lo han sido.
     \begin{itemize}
-        \item[\fbox{$1.\Rightarrow 2.$}] Es el teorema \ref{th:ortogonalidad-derivadas}.
+        \item[\fbox{$(1)\Rightarrow (2)$}] Es el teorema \ref{th:ortogonalidad-derivadas}.
         \begin{comment} 
         \item[\fbox{$2.\Rightarrow 1.$}] Supongamos que la sucesión $\{P'_n\}$ es clásica respecto a la función peso $\rho_1(x)=\sigma(x)\rho(x)$, solución de $[\sigma(x)\rho_1(x)]'=\tau_1(x)\rho(x)$ con $\tau_1(x)=\tau(x)+\sigma'(x)$. Si derivamos el primer miembro y sustituimos la expresión de $\rho_1$ y cancelamos $\sigma(x)$, obtenemos
         $$
@@ -715,10 +714,10 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
         $$
         que es justamente la ecuación de Pearson \eqref{eq:Pearson-peso}.
         \end{comment}
-        \item[\fbox{$2.\Rightarrow 3.$}] Basta con aplicar inductivamente la implicación $(1)\Rightarrow (2)$.
-        \item[\fbox{$3.\Rightarrow 4.$}] Si nos fijamos en el teorema \ref{th:ec-hipergeometrica}, a pesar de que la hipótesis inicial es que $\{P_n\}$ es clásica, en la demostración se puede observar que basta con partir de que $\{P'_n\}$ es clásica, pues en ningún momento de la demostración usamos la ecuación de Pearson para $\rho$, sino que la utilizamos para $\rho$, es decir, partimos de (3) suponiendo $k=1$.
-        \item[\fbox{$4.\Rightarrow 5.$}] Es el teorema \ref{th:formula-rodrigues} junto con la proposición \ref{prop:grado-rodrigues}.
-        \item[\fbox{$5.\Rightarrow 1.$}] Es el teorema \ref{th:rodrigues-pearson}.
+        \item[\fbox{$(2)\Rightarrow (3)$}] Basta con aplicar inductivamente la implicación $(1)\Rightarrow (2)$.
+        \item[\fbox{$(3)\Rightarrow (4)$}] Si nos fijamos en el teorema \ref{th:ec-hipergeometrica}, a pesar de que la hipótesis inicial es que $\{P_n\}$ es clásica, en la demostración se puede observar que basta con partir de que $\{P'_n\}$ es clásica, pues en ningún momento de la demostración usamos la ecuación de Pearson para $\rho$, sino que la utilizamos para $\rho$, es decir, partimos de (3) suponiendo $k=1$.
+        \item[\fbox{$(4)\Rightarrow (5)$}] Es el teorema \ref{th:formula-rodrigues} junto con la proposición \ref{prop:grado-rodrigues}.
+        \item[\fbox{$(5)\Rightarrow (1)$}] Es el teorema \ref{th:rodrigues-pearson}.
          
     \end{itemize}
 \end{proof}
@@ -742,19 +741,19 @@ El conjunto completo de teoremas e implicaciones demostradas hasta el momento co
 \end{ejemplo}
 
 \begin{ejemplo}[Cálculo de la SPO de Hermite mediante la fórmula de Rodrigues]
-    Recordemos el ejemplo \ref{ej:hermite-rr3t}, en el cual utilizamos la versión más primitiva de la RR3T para calcular de forma explícita los polinomios mónicos de Hermite. La fórmula de Rodrigues nos proporciona un nuevo método de cálculo explícito de polinomios, que es el que pondremos en práctica en este caso. En el archivo \texttt{software/Rodrigues.ipynb} se ha implementado el código necesario para este ejemplo.
+    Recordemos el ejemplo \ref{ej:hermite-rr3t}, en el cual utilizamos la versión más primitiva de la RRTT para calcular de forma explícita los polinomios mónicos de Hermite. La fórmula de Rodrigues nos proporciona un nuevo método de cálculo explícito de polinomios, que es el que pondremos en práctica en este caso. En el archivo \texttt{software/Rodrigues.ipynb} se ha implementado el código necesario para este ejemplo.
 
     De manera análoga a lo realizado en el ejemplo \ref{ej:rodrigues-jacobi} y sabiendo que, por convenio, lo usual en los polinomios de Hermite es tomar $B_n=(-1)^n$, podemos deducir la siguiente fórmula de Rodrigues. 
     $$
     H_n(x)=(-1)^n e^{x^2}\frac{d^n}{dx^n}e^{x^{-2}}
     $$
-    Así, obtenemos los polinomios de Hermite estándar, los cuales se pueden consultar en la segunda columna de la tabla \ref{tab:hermite-rodrigues}. En este caso se ha hecho también un análisis de tiempos de ejecución siguiendo la misma metodología que en el ejemplo \ref{ej:hermite-rr3t}. Es decir, se han realizado 10 ejecuciones independientes de cada polinomio y el dato presentado en la cuarta columna de la tabla es la media de estas diez ejecuciones. Como puede observarse, el cálculo mediante la fórmula de Rodrigues mejora considerablemente los tiempos de ejecución de la RR3T, de forma que para ninguno de estos grados alcanza media décima de ejecución, mientras que la RR3T alcanzaba el orden de segundos a partir de grado 7.
+    Así, obtenemos los polinomios de Hermite estándar, los cuales se pueden consultar en la segunda columna de la tabla \ref{tab:hermite-rodrigues}. En este caso se ha hecho también un análisis de tiempos de ejecución siguiendo la misma metodología que en el ejemplo \ref{ej:hermite-rr3t}. Es decir, se han realizado 10 ejecuciones independientes de cada polinomio y el dato presentado en la cuarta columna de la tabla es la media de estas diez ejecuciones. Como puede observarse, el cálculo mediante la fórmula de Rodrigues mejora considerablemente los tiempos de ejecución de la RRTT, de forma que para ninguno de estos grados alcanza media décima de ejecución, mientras que la RRTT alcanzaba el orden de segundos a partir de grado 7.
 
-    De hecho, con la fórmula de Rodrigues se ha conseguido calcular el polinomio de Hermite de grado 500 en tan sólo 15 segundos, lo cual contrasta con los casi 60 segundos que tardó la RR3T en calcular el polinomio de grado 15.
+    De hecho, con la fórmula de Rodrigues se ha conseguido calcular el polinomio de Hermite de grado 500 en tan sólo 15 segundos, lo cual contrasta con los casi 60 segundos que tardó la RRTT en calcular el polinomio de grado 15.
 
     \begin{table}[]
         \begin{tabular}{ccccc} \hline
-        $n$ & $H_n(x)$                                                             & RR3T                    & Rodrigues & Nativa  \\ \hline\hline
+        $n$ & $H_n(x)$                                                             & RRTT                    & Rodrigues & Nativa  \\ \hline\hline
         0   & $1$                                                               & $1.1897 \times 10^{-5}$ & 0.0086    & 0.00019 \\ \hline
         1   & $2x$                                                              & 0.0133                  & 0.0104    & 0.00028 \\ \hline
         2   & $4x^2 - 2$                                                        & 0.0449                  & 0.0136    & 0.00035 \\ \hline
@@ -857,7 +856,7 @@ Por último, analizaremos los polinomios de Jacobi $\{P_n^{(\alpha,\beta)}\}$. E
 
 Comenzaremos analizando el efecto del parámetro $\alpha$. Para ello, hemos fijado $n=2$ y $\beta=0$, representando el polinomio de Jacobi $P_2^{(\alpha,0)}$ para los valores $\alpha=0,1,5,15,20,25$, véase la imagen \ref{img:graficas-Jacobi-alpha-beta}(a). Obsérvese que, de forma similar a los polinomios de Laguerre, este parámetro interviene en la velocidad a la que aumenta la cola derecha. Sin embargo, lo hace de forma inversa, ya que mientras que a mayores valores de $\alpha$ la inclinación era menor en los polinomios de Laguerre, en este caso conforme crece $\alpha$ aumenta también la misma.
 
-Respecto a $\beta$, para analizar su impacto en las gráficas fijamos $n=3$ y $\alpha=0$, presentando los polinomios $P_3^{(0,\beta)}$ para $\beta=0,1,5,15,20,25$ en la imagen \ref{img:graficas-Jacobi-alpha-beta}(b). El comportamiento de $\beta$ es análogo al de $\alpha$ pero en la cola izquierda en lugar de la derecha. Es decir, a mayor valor de $\beta$, mayor inclinación de la cola derecha, que en estas gráficas se traduce en un descenso a $-\infty$ más pronunciado.
+Respecto a $\beta$, para analizar su impacto en las gráficas fijamos $n=3$ y $\alpha=0$, presentando los polinomios $P_3^{(0,\beta)}$ para $\beta=0,1,5,15,20,25$ en la imagen \ref{img:graficas-Jacobi-alpha-beta}(b). El comportamiento de $\beta$ es análogo al de $\alpha$ pero en la cola izquierda en lugar de la derecha. Es decir, a mayor valor de $\beta$, mayor inclinación de la cola izquierda, que en estas gráficas se traduce en un descenso a $-\infty$ más pronunciado.
 
 En los casos de Hermite y Laguerre hemos discutido también la paridad y/o simetría de los gráficos. A juzgar por las imágenes \ref{img:graficas-Jacobi-alpha-beta}(a) y \ref{img:graficas-Jacobi-alpha-beta}(b), los polinomios de Jacobi no cumplen ningún tipo de simetría en general. Sin embargo, en la imagen \ref{img:graficas-Jacobi-alpha-beta}(c) puede comprobarse qué ocurre al igualar $\alpha=\beta$. En efecto, en este caso las gráficas son simétricas respecto al eje $Y$ cuando el grado es par ($P_{2n}^{(\alpha,\alpha)}$ es par). Respectivamente, $P_{2n+1}^{(\alpha,\alpha)}$ es impar. 
 

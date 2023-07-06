@@ -1,7 +1,7 @@
 % ─── EL TEOREMA ESPECTRAL ─────────────────────────────────────────────────────
 
     
-    En este apéndice introducimos una herramienta fundamental en el camino en busca de la fórmula de representación de Karlin-McGregor: el teorema espectral. Gracias a este teorema obtendremos una medida que nos proporcionará la ortogonalidad de los polinomios. Estos conceptos, al no ser tan cercanos al objetivo de este trabajo, se introducen de manera superficial, recomendando al lector que si desea profundizar en ellos consulte bibliografía relacionada con análisis funcional. Por ejemplo, se propone \cite[Ch. 1]{Manuel} o \cite[Ch. 12]{rudin}.
+    En este apéndice introducimos una herramienta fundamental en el camino en busca de la fórmula de representación de Karlin-McGregor: el teorema espectral. Gracias a este teorema obtendremos una medida que nos proporcionará la ortogonalidad de los polinomios. Estos conceptos, al no ser tan cercanos al objetivo de este trabajo, se introducen de manera superficial, recomendando al lector que si desea profundizar en ellos consulte bibliografía relacionada con análisis funcional. Por ejemplo, se propone \cite[Ch. I]{Manuel} o \cite[Ch. XII]{rudin}.
     
     Para empezar, recordamos algunos conceptos básicos de análisis funcional.
 
@@ -15,7 +15,7 @@
         Sea $\mathcal{H}$ un espacio de Hilbert y $T:\mathcal H \longrightarrow \mathcal{H}$ un operador lineal continuo ($\Leftrightarrow$ acotado). Se define la \textbf{norma del operador} $T$ como
         \begin{equation}
             \label{eq:norma-operadores}
-            \|T\|:= \min\{K\geq 0: \|Tx\|\leq K\|x\|\}.
+            \|T\|:= \min\{K\geq 0: \|Tx\|\leq K\|x\| \ \ \forall x\in \mathcal{H}\}.
         \end{equation}
     \end{definicion}
 
@@ -46,7 +46,7 @@
     
     \begin{definicion}[Resolución de la identidad]
         \label{def:resolucion-identidad}
-        Una \textbf{resolución de la identidad} $E$ en el espacio de Hilbert $\mathcal{H}$ es un operador $E:\R\longrightarrow\mathcal{B}(\mathcal{H})$ que, para cualesquiera subconjuntos Borel-medibles $A,B\subseteq \R$, verifica las siguientes condiciones:
+        Una \textbf{resolución de la identidad} $E$ en el espacio de Hilbert $\mathcal{H}$ es un operador $E:\mathcal{B}(\R)\longrightarrow\mathcal{B}(\mathcal{H})$ que, para cualesquiera subconjuntos Borel-medibles $A,B\subseteq \R$, verifica las siguientes condiciones:
         \begin{enumerate}
             \item $E(A)$ es una proyección, es decir $E(A)\circ E(A)=E(A)$.
             \item $E(A\cap B)=E(A)E(B)$.
